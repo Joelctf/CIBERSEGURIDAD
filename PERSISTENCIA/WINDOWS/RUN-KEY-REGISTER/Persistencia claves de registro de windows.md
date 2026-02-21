@@ -34,3 +34,9 @@ Por otro lado, el script de powershell lo añado a una clave de registro de wind
 
 
 <img width="842" height="93" alt="2026-02-21_02-15" src="https://github.com/user-attachments/assets/2d577e5e-d023-43c1-93bb-d07ae687593d" />
+
+
+En este caso esta hecho extremadamente mal debido a que no voy a crear un programa ofuscado para evadir antivirus, creeare otra seccion de eso aparte.
+
+Una vez hemos creado la clave, simplemente nos ponemos a la escucha por el puerto en mi caso 4444, nos deslogueamos y nos volvemos a loguear y deberiamos de recibir la shell automatiamcente:
+
