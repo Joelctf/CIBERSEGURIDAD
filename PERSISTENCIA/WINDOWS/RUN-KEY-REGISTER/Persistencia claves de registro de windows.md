@@ -14,4 +14,5 @@ Por otro lado, el script de powershell lo añado a una clave de registro de wind
 
 
 
-<img width="1920" height="1080" alt="Screenshot_2026-02-07-17-43-50_1920x1080" src="https://github.com/user-attachments/assets/963a942d-20f3-438e-b87f-a6739b7a8e92" />
+
+<img width="842" height="93" alt="2026-02-21_02-15" src="https://github.com/user-attachments/assets/2d577e5e-d023-43c1-93bb-d07ae687593d" />
