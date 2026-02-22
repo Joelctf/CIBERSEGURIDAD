@@ -34,7 +34,7 @@ Si probamos directamente a separar el comando con un `;` o `&&` o sinonimos, el 
 <img width="658" height="170" alt="image" src="https://github.com/user-attachments/assets/cbcd2e8a-f42e-49bf-9dbf-dcbb7be0e711" />
 
 
-Esto se puede llevar a comandos mas criticos, como ejecutar una shell que abra una terminal con el usuario del conteto del programa:
+Esto se puede llevar a comandos mas criticos, como ejecutar una shell que abra una terminal con el usuario del contexto del programa:
 
 <img width="689" height="575" alt="image" src="https://github.com/user-attachments/assets/299e548a-39cf-4687-942c-b98cabfda6ae" />
 
