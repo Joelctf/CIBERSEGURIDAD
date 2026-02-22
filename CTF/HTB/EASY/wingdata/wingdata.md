@@ -87,7 +87,21 @@ def exploit():
 
 exploit()
 
-``
+```
+
+Que hace este exploit?
+
+Segun la vulnerabilidad publicada en julio de 2025 con CVE: CVE-2025-47812 
+
+Si nos autenticamos con algun usuario y le añadimos el valor `NULL` que se representa con `%00` en url-encoded
+el servidor no sabe gestionarlo y podemos acceder bypaseando el login. quedaria tal que asi segun el exploit que he hecho: `anonymous%00`
+
+Wint FTP esta hecho en Lua, un lenguaje de programación.
+
+Una vez que un usuario inicia session o se registra, win FTP lo guarda en el endpoint /dir.html
+
+Este exploit cuando envia el username, añade adicionalmente codigo malicioso en LUA el cual ejecuta comandos en si visitamos /dir.html ya que win FTP esta hecho en LUA y nosotros inyectamos LUA en la pagina, por lo cual si lo visitamos se interpreta.
+
 
 
 
