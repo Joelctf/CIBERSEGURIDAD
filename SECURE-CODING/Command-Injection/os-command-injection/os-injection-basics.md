@@ -43,6 +43,35 @@ Se me abre una terminal.
 En este caso es con mi mismo usuario , pero esta vulnerabilidad suele obtener peso cuando el programa esta corriendo con permisos del usuario administrador y otro usuario de alguna forma tiene permitido ejecutarla.
 
 
+La forma segura de escribir el codigo seria o bien usando una whitelist: 
+
+``` python
+
+import os
+import re
+
+file = input("Type the path of the file: ")
+
+if re.match(r'^[\w\-.\/]+\.zip$', file):
+    os.system(f"unzip {file}")
+else:
+    print("Invalid file name")
+
+```
+
+
+Mejor aun usando subprocess sin shell:
+
+``` python
+
+import subprocess
+
+file = input("Type the path of the file: ")
+
+subprocess.run(["unzip", file])
+
+```
+
 
 
 
