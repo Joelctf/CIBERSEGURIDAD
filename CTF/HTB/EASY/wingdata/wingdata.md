@@ -100,7 +100,7 @@ Wint FTP esta hecho en Lua, un lenguaje de programación.
 
 Una vez que un usuario inicia session o se registra, win FTP lo guarda en el endpoint /dir.html
 
-Este exploit cuando envia el username, añade adicionalmente codigo malicioso en LUA el cual ejecuta comandos en si visitamos /dir.html ya que win FTP esta hecho en LUA y nosotros inyectamos LUA en la pagina, por lo cual si lo visitamos se interpreta.
+Este exploit cuando envia el username, añade adicionalmente codigo malicioso en LUA el cual ejecuta comandos  si visitamos /dir.html ya que win FTP esta hecho en LUA y nosotros inyectamos codigo LUA en la pagina, por lo cual si lo visitamos se interpreta.
 
 
 
