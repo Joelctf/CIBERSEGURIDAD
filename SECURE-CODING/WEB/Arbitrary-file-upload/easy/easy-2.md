@@ -57,6 +57,54 @@ Podemos ejecutar comandos mediante el archivo malicioso php:
 
 
 
+--------------
+
+
+EASY
+
+Sin validación ninguna (el que ya tienes)
+Blacklist de extensiones incompleta, olvida .phtml, .php5, .phar, .php7
+Validación solo por Content-Type, bypasseable en Burp
+Doble extensión shell.php.jpg con Apache mal configurado
+Null byte shell.php%00.jpg en PHP antiguo (<5.3)
+Extensión en mayúsculas shell.PHP con blacklist case-sensitive
+
+
+MEDIUM
+
+Polyglot file: imagen válida con PHP incrustado al final
+Magic bytes: valida los primeros bytes pero no el resto del archivo
+Renombra con MD5 pero mantiene extensión original
+Valida extensión y MIME pero permite .htaccess como upload
+Zip slip: descomprime un zip en el servidor con rutas ../
+SVG upload con XXE o JavaScript incrustado
+Valida en cliente (JavaScript) pero no en servidor
+
+
+HARD
+
+EXIF metadata: la imagen se redimensiona pero los metadatos con PHP sobreviven
+Second order: el archivo se guarda bien pero otro proceso lo ejecuta inseguro después
+Path traversal en el nombre del archivo para escribir fuera de uploads
+ImageMagick como procesador de imágenes con política mal configurada (ImageTragick)
+Archivo .htaccess que redefine qué extensiones ejecuta Apache
+XML upload con XXE para leer archivos del servidor
+PDF upload con JavaScript embebido
+
+
+INSANE
+
+Race condition entre subida y validación, el archivo existe milisegundos antes de ser eliminado
+SSRF combinado con upload, la validación solo acepta uploads desde localhost
+Deserialization en el procesamiento del archivo subido
+Template injection en el nombre del archivo si se renderiza en alguna plantilla
+Bypass de WAF mediante chunked encoding o codificaciones alternativas
+Log poisoning combinado con LFI después de un upload fallido
+Cadena completa: upload de SVG con SSRF para acceder al panel admin interno y desde ahí RCE
+
+
+
+
 
 
 
