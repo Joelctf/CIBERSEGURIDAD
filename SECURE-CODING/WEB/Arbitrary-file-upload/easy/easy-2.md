@@ -54,7 +54,6 @@ Podemos ejecutar comandos mediante el archivo malicioso php:
 
 <img width="548" height="134" alt="image" src="https://github.com/user-attachments/assets/510fd985-309c-4dc6-b96d-bf34b2b10bac" />
 
-Si subimos el archivo cmd.jpg y interceptamos la subida en burpsuite, luego le canviamos la exntesion de jpg a php:
 
 
 
