@@ -26,7 +26,7 @@ Para ver los permisos del servicio:
 
 <img width="370" height="344" alt="image" src="https://github.com/user-attachments/assets/3a4b23e0-5e30-4a7a-b440-682d4cc76dc3" />
 
-En este caso el servicio `daclsvc` tiene el permiso `SERVICE_CHANGE_CONFIG` y corre como administrador. Esto nos da una via potencial para escalar privilegios , ya que se podria cambiar 
+En este caso el servicio `daclsvc` tiene el permiso `SERVICE_CHANGE_CONFIG` y corre como administrador. Esto nos da una via potencial para escalar privilegios , ya que se podria cambiar:
 
 1- Cambiar la ruta del binario (binPath)
 
@@ -34,5 +34,39 @@ En este caso el servicio `daclsvc` tiene el permiso `SERVICE_CHANGE_CONFIG` y co
 
 3- Modificar parámetros de inicio
 
-En este caso haré el primer ejemplo de demostración
+En este caso haré el primer ejemplo de demostración, genero para simplemente provar una reverse shell muy basica con `msfvenom` que se conecte a mi IP y puerto y que sea ejecutable en windows:
+
+<img width="769" height="223" alt="image" src="https://github.com/user-attachments/assets/a3b1c842-2f6f-4b39-bbd2-ceaa1715819c" />
+
+Lo pasamos a la maquina windows con un servidor web por ejemplo:
+
+<img width="617" height="102" alt="image" src="https://github.com/user-attachments/assets/f32f4d33-3f0a-422e-b22e-65311c7159e3" />
+
+Lo descargamos en la maquina victima:
+
+<img width="567" height="365" alt="image" src="https://github.com/user-attachments/assets/c2a2a33b-965d-41d8-9f57-b9b9d1f58ac0" />
+
+Modificamos el PATH del servicio daclsvc que en este caso es el vulnerable y cambiamos su ruta de arranque a nuestra reverse shell maliciosa:
+
+<img width="539" height="66" alt="image" src="https://github.com/user-attachments/assets/fbf35a05-db65-4f3f-b37b-5a796a294bb8" />
+
+Nos ponemos a la escucha en nuestra maquina atackante:
+
+<img width="236" height="61" alt="image" src="https://github.com/user-attachments/assets/58e44005-bac8-4a5c-817b-5df7fa22fcc9" />
+
+Y arranquamos el servicio en WINDOWS, lo que pasara es que el sistema buscara la ruta para ejecutar el servicio, cuando la encuentre realmente ejecutara el programa malicioso porque le hemos cambiado la ruta al servicio:
+
+<img width="262" height="52" alt="image" src="https://github.com/user-attachments/assets/0b9c2a72-728c-4b60-8545-a3e61c451cd0" />
+
+con net start se arranca un servicio.
+
+Miramos nuestro listener y vemos que somos administradores:
+
+<img width="431" height="211" alt="image" src="https://github.com/user-attachments/assets/3e63c9e5-86ba-41fa-b8ec-41f9819608a2" />
+
+
+
+
+
+
 
