@@ -52,3 +52,11 @@ Service detection performed. Please report any incorrect results at https://nmap
 ╭─ ~/hacking/ctf/htb/hard/nimbus/recon                                                                             ✔ ─╮
 ╰─                                                                                                                   ─╯
 ```
+
+``` bash
+
+❯ echo "10.129.42.21 nimbus.htb" | sudo tee -a /etc/hosts
+
+10.129.42.21 nimbus.htb
+
+```
