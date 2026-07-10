@@ -176,7 +176,7 @@ while True:
 ``` bash
 
 ❯ python3 url.py
-url: http://0251.0376.0251.0376?test=test.yaml
+url: http://0251.0376.0251.0376/latest/meta-data/iam/security-credentials/?a=a.yaml
 Response:
  <!DOCTYPE html>
 <html lang="en">
@@ -201,9 +201,9 @@ a { color: #66d9ef; }
 <h1>Preview</h1>
 <div class="tag"><a href="/jobs">← submit another</a></div>
 <div class="panel">
-<div class="meta">Fetched: <code>http://0251.0376.0251.0376?test=test.yaml</code> · HTTP 200</div>
-<h3>Raw response</h3><pre>latest</pre>
-<h3>Parsed</h3><pre>latest</pre>
+<div class="meta">Fetched: <code>http://0251.0376.0251.0376/latest/meta-data/iam/security-credentials/?a=a.yaml</code> · HTTP 200</div>
+<h3>Raw response</h3><pre>nimbus-web-role</pre>
+<h3>Parsed</h3><pre>nimbus-web-role</pre>
 </div>
 
 </body>
