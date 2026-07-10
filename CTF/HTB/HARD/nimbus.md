@@ -287,3 +287,48 @@ url:
     "Account": "847219365028",
     "Arn": "arn:aws:sts::847219365028:assumed-role/nimbus-web-role/i-0a1b2c3d4e5f6789a"
 }
+
+```
+
+``` python
+
+import subprocess
+
+names = {
+    "nimbus",
+    "nimbus-job",
+    "nimbus-jobs",
+    "nimbus-web-jobs",
+    "jobs",
+}
+
+account_id = "847219365028"
+endpoint = "http://aws.nimbus.htb"
+
+for name in names:
+    queue_url = f"{endpoint}/{account_id}/{name}"
+    cmd = [
+        "aws", "sqs", "send-message",
+        "--queue-url", queue_url,
+        "--message-body", '{"test":"test"}',
+        "--endpoint-url", endpoint
+    ]
+    r = subprocess.run(cmd, capture_output=True, text=True)
+    print(name, "OK" if r.returncode == 0 else "FAIL")
+
+```
+
+
+``` bash
+
+❯ python3 aws-enum.py
+jobs FAIL
+nimbus-job FAIL
+nimbus-web-jobs FAIL
+nimbus-jobs OK
+nimbus FAIL
+╭─ ~/hacking/ctf/htb/hard/nimbus/scripts                                                                      ✔ │ 4s ─╮
+╰─                                                                                                                   ─╯
+```
+
+
