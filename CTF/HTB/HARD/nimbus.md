@@ -60,3 +60,12 @@ Service detection performed. Please report any incorrect results at https://nmap
 10.129.42.21 nimbus.htb
 
 ```
+
+
+<img width="715" height="573" alt="imagen" src="https://github.com/user-attachments/assets/c0516e1e-abd9-42dc-ad43-cd06c7a3abe9" />
+
+
+<img width="686" height="240" alt="imagen" src="https://github.com/user-attachments/assets/acbe770d-1f89-476f-8591-0fac25f49a5f" />
+
+
+
