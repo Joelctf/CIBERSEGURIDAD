@@ -280,9 +280,7 @@ url:
 ╰─                                                                                                                   ─╯
 ```
 
-``` bash
-
-``` json
+``` json 
 
 {
     "UserId": "AROAQX4PG7L2K9M3N5R8H:i-0a1b2c3d4e5f6789a",
