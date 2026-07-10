@@ -61,11 +61,57 @@ Service detection performed. Please report any incorrect results at https://nmap
 
 ```
 
+``` bash
 
+❯ ffuf -u "http://nimbus.htb/" -w /usr/share/wordlists/seclists/Discovery/DNS/subdomains-top1million-110000.txt -H "Host: FUZZ.nimbus.htb" -fs 178
+
+        /'___\  /'___\           /'___\
+       /\ \__/ /\ \__/  __  __  /\ \__/
+       \ \ ,__\\ \ ,__\/\ \/\ \ \ \ ,__\
+        \ \ \_/ \ \ \_/\ \ \_\ \ \ \ \_/
+         \ \_\   \ \_\  \ \____/  \ \_\
+          \/_/    \/_/   \/___/    \/_/
+
+       v2.1.0-dev
+________________________________________________
+
+ :: Method           : GET
+ :: URL              : http://nimbus.htb/
+ :: Wordlist         : FUZZ: /usr/share/wordlists/seclists/Discovery/DNS/subdomains-top1million-110000.txt
+ :: Header           : Host: FUZZ.nimbus.htb
+ :: Follow redirects : false
+ :: Calibration      : false
+ :: Timeout          : 10
+ :: Threads          : 40
+ :: Matcher          : Response status: 200-299,301,302,307,401,403,405,500
+ :: Filter           : Response size: 178
+________________________________________________
+
+aws                     [Status: 403, Size: 305, Words: 28, Lines: 8, Duration: 43ms]
+:: Progress: [13760/114442] :: Job [1/1] :: 1047 req/sec :: Duration: [0:00:14] :: Errors: 0 ::
+
+```
 <img width="715" height="573" alt="imagen" src="https://github.com/user-attachments/assets/c0516e1e-abd9-42dc-ad43-cd06c7a3abe9" />
 
 
 <img width="686" height="240" alt="imagen" src="https://github.com/user-attachments/assets/acbe770d-1f89-476f-8591-0fac25f49a5f" />
+
+``` bash
+❯ nc -lvnp 9090
+listening on [any] 9090 ...
+connect to [10.10.14.54] from (UNKNOWN) [10.129.42.21] 38714
+GET /test.yaml HTTP/1.1
+Host: 10.10.14.54:9090
+User-Agent: python-requests/2.34.2
+Accept-Encoding: gzip, deflate
+Accept: */*
+Connection: keep-alive
+```
+
+<img width="672" height="235" alt="imagen" src="https://github.com/user-attachments/assets/d7f05726-3a13-466d-910a-48fef0c9c931" />
+
+
+<img width="685" height="200" alt="imagen" src="https://github.com/user-attachments/assets/91626051-00de-4ca9-9230-ba39edf7f962" />
 
 
 
