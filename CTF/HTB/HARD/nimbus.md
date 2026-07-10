@@ -468,5 +468,13 @@ PING 172.18.0.1 (172.18.0.1) 56(84) bytes of data.
 rtt min/avg/max/mdev = 0.062/0.062/0.062/0.000 ms
 worker@a147090e066a:~$
 ```
+``` bash
+
+worker@a147090e066a:~$ for i in {1..254}; do ping -c 1 -W 1 172.18.0.$i >/dev/null && echo "172.18.0.$i responde"; done
+172.18.0.1 responde
+172.18.0.2 responde
+172.18.0.3 responde
+
+```
 
 
