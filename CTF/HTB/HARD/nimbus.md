@@ -445,6 +445,28 @@ worker@a147090e066a:~$ cat /proc/self/cgroup
 0::/
 worker@a147090e066a:~$
 ```
+``` bash
 
+worker@a147090e066a:~$ ip a
+bash: ip: command not found
+worker@a147090e066a:~$ ifconfig
+bash: ifconfig: command not found
+worker@a147090e066a:~$ hostname -I
+172.18.0.3
+worker@a147090e066a:~$
+
+```
+
+``` bash
+
+worker@a147090e066a:~$ ping -c 1 172.18.0.1
+PING 172.18.0.1 (172.18.0.1) 56(84) bytes of data.
+64 bytes from 172.18.0.1: icmp_seq=1 ttl=64 time=0.062 ms
+
+--- 172.18.0.1 ping statistics ---
+1 packets transmitted, 1 received, 0% packet loss, time 0ms
+rtt min/avg/max/mdev = 0.062/0.062/0.062/0.000 ms
+worker@a147090e066a:~$
+```
 
 
