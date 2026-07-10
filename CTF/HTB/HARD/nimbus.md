@@ -435,7 +435,16 @@ bash: no job control in this shell
 worker@a147090e066a:/app$
 
 ```
-
+``` bash
+worker@a147090e066a:~$ cat /proc/1/cgroup
+0::/
+worker@a147090e066a:~$ ls -la /.dockerenv 2>/dev/null && echo "Estoy en Docker"
+-rwxr-xr-x 1 root root 0 Jul 10 17:39 /.dockerenv
+Estoy en Docker
+worker@a147090e066a:~$ cat /proc/self/cgroup
+0::/
+worker@a147090e066a:~$
+```
 
 
 
