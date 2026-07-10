@@ -91,7 +91,36 @@ aws                     [Status: 403, Size: 305, Words: 28, Lines: 8, Duration: 
 :: Progress: [13760/114442] :: Job [1/1] :: 1047 req/sec :: Duration: [0:00:14] :: Errors: 0 ::
 
 ```
+
+``` bash
+
+❯ echo "10.129.42.21 aws.nimbus.htb" | sudo tee -a /etc/hosts
+
+10.129.42.21 aws.nimbus.htb
+
+```
+
+``` bash
+
+❯ curl -i aws.nimbus.htb
+HTTP/1.1 403 FORBIDDEN
+Server: nginx/1.24.0 (Ubuntu)
+Date: Fri, 10 Jul 2026 18:01:22 GMT
+Content-Type: text/xml; charset=utf-8
+Content-Length: 305
+Connection: keep-alive
+
+<ErrorResponse xmlns="https://sts.amazonaws.com/doc/2011-06-15/">
+  <Error>
+    <Type>Sender</Type>
+    <Code>InvalidClientTokenId</Code>
+    <Message>The security token included in the request is invalid.</Message>
+  </Error>
+  <RequestId>p7518495-adc4-1191-49n2-4m70d8sdf922</RequestId>
+</ErrorResponse>%      
 <img width="715" height="573" alt="imagen" src="https://github.com/user-attachments/assets/c0516e1e-abd9-42dc-ad43-cd06c7a3abe9" />
+
+```
 
 
 <img width="686" height="240" alt="imagen" src="https://github.com/user-attachments/assets/acbe770d-1f89-476f-8591-0fac25f49a5f" />
