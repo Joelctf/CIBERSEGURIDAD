@@ -470,6 +470,15 @@ worker@a147090e066a:~$
 ```
 ``` bash
 
+worker@3625ed5cc718:/app$ getent hosts 172.18.0.2
+172.18.0.2      nimbus-floci.nimbus-net
+worker@3625ed5cc718:/app$
+
+```
+
+
+``` bash
+
 worker@a147090e066a:~$ for i in {1..254}; do ping -c 1 -W 1 172.18.0.$i >/dev/null && echo "172.18.0.$i responde"; done
 172.18.0.1 responde
 172.18.0.2 responde
