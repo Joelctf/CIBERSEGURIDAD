@@ -478,3 +478,19 @@ worker@a147090e066a:~$ for i in {1..254}; do ping -c 1 -W 1 172.18.0.$i >/dev/nu
 ```
 
 
+``` bash
+
+worker@a147090e066a:~$
+worker@a147090e066a:~$ for p in {1..65000}; do timeout 1 bash -c "</dev/tcp/172.18.0.2/$p" 2>/dev/null && echo "Puerto $p abierto"; done
+Puerto 4566 abierto
+Puerto 9169 abierto
+
+```
+``` bash
+
+worker@a147090e066a:~$ curl 172.18.0.2:4566
+<?xml version="1.0" encoding="UTF-8"?><ListAllMyBucketsResult xmlns="http://s3.amazonaws.com/doc/2006-03-01/"><Owner><ID>owner</ID><DisplayName>owner</DisplayName></Owner><Buckets><Bucket><Name>nimbus-dev-artifacts</Name><CreationDate>2026-07-10T17:39:56.084782838Z</CreationDate></Bucket></Buckets></ListAllMyBucketsResult>worker@a147090e066a:~$
+worker@a147090e066a:~$
+
+```
+
