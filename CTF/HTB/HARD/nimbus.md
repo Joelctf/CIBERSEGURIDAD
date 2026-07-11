@@ -493,4 +493,11 @@ worker@a147090e066a:~$ curl 172.18.0.2:4566
 worker@a147090e066a:~$
 
 ```
+``` bash
+
+worker@a147090e066a:~$ curl 172.18.0.2:9169
+<html><body><h1>Resource not found</h1></body></html>worker@a147090e066a:~$
+
+```
+
 
