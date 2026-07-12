@@ -285,3 +285,53 @@ Mode                 LastWriteTime         Length Name
 PS Microsoft.PowerShell.Core\FileSystem::\\172.16.40.50\files\IT>
 
 ```
+
+```
+
+PS Microsoft.PowerShell.Core\FileSystem::\\172.16.40.50\files\IT> whoami /all
+whoami /all
+
+USER INFORMATION
+----------------
+
+User Name          SID
+================== ==============================================
+puppet\bruce.smith S-1-5-21-3066630505-2324057459-3046381011-1126
+
+
+GROUP INFORMATION
+-----------------
+
+Group Name                                 Type             SID                                            Attributes   
+========================================== ================ ============================================== ==================================================
+Everyone                                   Well-known group S-1-1-0                                        Mandatory group, Enabled by default, Enabled group
+BUILTIN\Users                              Alias            S-1-5-32-545                                   Mandatory group, Enabled by default, Enabled group
+NT AUTHORITY\INTERACTIVE                   Well-known group S-1-5-4                                        Mandatory group, Enabled by default, Enabled group
+CONSOLE LOGON                              Well-known group S-1-2-1                                        Mandatory group, Enabled by default, Enabled group
+NT AUTHORITY\Authenticated Users           Well-known group S-1-5-11                                       Mandatory group, Enabled by default, Enabled group
+NT AUTHORITY\This Organization             Well-known group S-1-5-15                                       Mandatory group, Enabled by default, Enabled group
+LOCAL                                      Well-known group S-1-2-0                                        Mandatory group, Enabled by default, Enabled group
+PUPPET\employees                           Group            S-1-5-21-3066630505-2324057459-3046381011-1105 Mandatory group, Enabled by default, Enabled group
+Authentication authority asserted identity Well-known group S-1-18-1                                       Mandatory group, Enabled by default, Enabled group
+Mandatory Label\Medium Mandatory Level     Label            S-1-16-8192                                                 
+
+
+PRIVILEGES INFORMATION
+----------------------
+
+Privilege Name                Description                    State
+============================= ============================== ========
+SeChangeNotifyPrivilege       Bypass traverse checking       Enabled
+SeIncreaseWorkingSetPrivilege Increase a process working set Disabled
+
+
+USER CLAIMS INFORMATION
+-----------------------
+
+User claims unknown.
+
+Kerberos support for Dynamic Access Control on this device has been disabled.
+PS Microsoft.PowerShell.Core\FileSystem::\\172.16.40.50\files\IT>
+
+```
+
