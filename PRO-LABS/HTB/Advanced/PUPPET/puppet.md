@@ -59,7 +59,16 @@ curl: (56) Recv failure: Connection reset by peer
 red_127.0.0.1.cfg  sliver  sliver-client_linux
    programas
 
+``` bash
+
+❯ curl -O ftp://10.13.38.33/sliver-client_linux --user anonymous
+Enter host password for user 'anonymous':
+  % Total    % Received % Xferd  Average Speed  Time    Time    Time   Current
+                                 Dload  Upload  Total   Spent   Left   Speed
+100 34.82M 100 34.82M   0      0  8.95M      0   00:03   00:03          9.26M
+
 ```
+
 
 ``` bash
 
@@ -68,5 +77,7 @@ red_127.0.0.1.cfg  sliver  sliver-client_linux
 ╰─                                                                                                                   ─╯
 
 ```
+
+
 
 
