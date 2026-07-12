@@ -174,4 +174,24 @@ PS C:\Windows\system32>
 
 ```
 
+``` bash
 
+PS C:\Windows\system32> ls C:\Users\bruce.smith\Desktop
+ls C:\Users\bruce.smith\Desktop
+
+
+    Directory: C:\Users\bruce.smith\Desktop
+
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-a----         4/22/2025  11:44 PM             40 flag.txt
+-a----        10/11/2024   7:07 AM           2312 Microsoft Edge.lnk
+
+
+PS C:\Windows\system32> type C:\Users\bruce.smith\Desktop\flag.txt
+type C:\Users\bruce.smith\Desktop\flag.txt
+PUPPET{REDACTED}
+PS C:\Windows\system32>
+
+```
