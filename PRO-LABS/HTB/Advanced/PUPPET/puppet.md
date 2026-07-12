@@ -196,7 +196,7 @@ PS C:\Windows\system32>
 
 ```
 
-```
+``` windows
 
 PS C:\Users> pwd
 pwd
@@ -220,6 +220,23 @@ d-----        10/11/2024   7:12 AM                Administrator.PUPPET
 d-----        10/11/2024   7:07 AM                bruce.smith
 d-r---         9/25/2024  10:23 PM                Public
 d-----        10/11/2024   6:30 AM                svc_inventory_win
+
+
+PS C:\Users>
+
+``` 
+
+
+``` windows
+PS C:\Users> Get-SmbShare
+Get-SmbShare
+
+Name   ScopeName Path       Description
+----   --------- ----       -----------
+ADMIN$ *         C:\Windows Remote Admin
+C$     *         C:\        Default share
+files  *         C:\files   company files
+IPC$   *                    Remote IPC
 
 
 PS C:\Users>
