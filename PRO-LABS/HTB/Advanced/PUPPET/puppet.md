@@ -227,7 +227,7 @@ PS C:\Users>
 ``` 
 
 
-``` windows
+``` cmd
 PS C:\Users> Get-SmbShare
 Get-SmbShare
 
@@ -243,7 +243,7 @@ PS C:\Users>
 
 ```
 
-``` windows
+``` cmd
 
 PS C:\Users> cd \\172.16.40.50\files
 cd \\172.16.40.50\files
@@ -262,5 +262,25 @@ d-----        10/12/2024   1:50 AM                IT
 d-----        10/12/2024   1:26 AM                ITSEC
 d-----        10/12/2024   1:26 AM                MGMT
 d-----        10/12/2024   1:26 AM                Transfer
+
+```
+
+``` cmd
+
+PS Microsoft.PowerShell.Core\FileSystem::\\172.16.40.50\files> cd IT
+cd IT
+PS Microsoft.PowerShell.Core\FileSystem::\\172.16.40.50\files\IT> dir
+dir
+
+
+    Directory: \\172.16.40.50\files\IT
+
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-a----        10/11/2024   5:52 AM       32794112 puppet-agent-x64-latest.msi
+
+
+PS Microsoft.PowerShell.Core\FileSystem::\\172.16.40.50\files\IT>
 
 ```
