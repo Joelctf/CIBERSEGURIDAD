@@ -6,7 +6,8 @@ La red ha sido previamente comprometida por phising a la maquina de acceso inici
 
 Imagen representativa de la red :
 
-<img width="1408" height="768" alt="Gemini_Generated_Image_niqobuniqobuniqo" src="https://github.com/user-attachments/assets/b106213f-d394-491d-8df0-7a0663033704" />
+<img width="986" height="479" alt="imagen" src="https://github.com/user-attachments/assets/d33c337b-9b8c-48e2-b04d-ff080260a634" />
+
 
 
 Reconocimiento , Acceso inicial y conexion al Command and Control:
