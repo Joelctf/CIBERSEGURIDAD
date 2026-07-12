@@ -335,3 +335,18 @@ PS Microsoft.PowerShell.Core\FileSystem::\\172.16.40.50\files\IT>
 
 ```
 
+``` powershell
+PS Microsoft.PowerShell.Core\FileSystem::\\172.16.40.50\files\IT> Get-LocalGroupMember -Group "Administrators"
+Get-LocalGroupMember -Group "Administrators"
+
+ObjectClass Name                 PrincipalSource
+----------- ----                 ---------------
+User        FILE01\adm1n         Local
+User        FILE01\Administrator Local
+Group       PUPPET\admins_t1     ActiveDirectory
+Group       PUPPET\Domain Admins ActiveDirectory
+
+
+PS Microsoft.PowerShell.Core\FileSystem::\\172.16.40.50\files\IT>
+
+```
