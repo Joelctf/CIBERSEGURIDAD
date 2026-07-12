@@ -195,3 +195,33 @@ PUPPET{REDACTED}
 PS C:\Windows\system32>
 
 ```
+
+```
+
+PS C:\Users> pwd
+pwd
+
+Path
+----
+C:\Users
+
+
+PS C:\Users> dir
+dir
+
+
+    Directory: C:\Users
+
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d-----         9/25/2024  10:23 PM                Administrator
+d-----        10/11/2024   7:12 AM                Administrator.PUPPET
+d-----        10/11/2024   7:07 AM                bruce.smith
+d-r---         9/25/2024  10:23 PM                Public
+d-----        10/11/2024   6:30 AM                svc_inventory_win
+
+
+PS C:\Users>
+
+```
