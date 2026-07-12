@@ -265,7 +265,7 @@ d-----        10/12/2024   1:26 AM                Transfer
 
 ```
 
-``` cmd
+``` powershell
 
 PS Microsoft.PowerShell.Core\FileSystem::\\172.16.40.50\files> cd IT
 cd IT
