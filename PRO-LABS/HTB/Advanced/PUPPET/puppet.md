@@ -6,9 +6,10 @@ La red ha sido previamente comprometida por phising a la maquina de acceso inici
 
 Imagen representativa de la red :
 
-<img width="1408" height="768" alt="image" src="https://github.com/user-attachments/assets/6a78a0b2-1460-4fe7-9ec8-790f52b597f3" />
+<img width="1408" height="768" alt="Gemini_Generated_Image_niqobuniqobuniqo" src="https://github.com/user-attachments/assets/b106213f-d394-491d-8df0-7a0663033704" />
 
-Reconocimiento , Acceso inicial a la maquina comprometida por Command and control:
+
+Reconocimiento , Acceso inicial y conexion al Command and Control:
 
 ``` bash
 
@@ -31,7 +32,7 @@ PORT      STATE  SERVICE        VERSION
 Service Info: OSs: Unix, Linux; CPE: cpe:/o:linux:linux_kernel
 ```
 
-El servidor FTP accepta conexion como anonymous sin contraseña y dentro tiene los archivos para poder conectarse al Command and control de la maquina victima:
+El servidor FTP accepta conexion como anonymous sin contraseña y dentro tiene los archivos para poder conectarse al Command and control:
 
 ``` bash
 
