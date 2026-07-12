@@ -242,3 +242,25 @@ IPC$   *                    Remote IPC
 PS C:\Users>
 
 ```
+
+``` windows
+
+PS C:\Users> cd \\172.16.40.50\files
+cd \\172.16.40.50\files
+PS Microsoft.PowerShell.Core\FileSystem::\\172.16.40.50\files>
+PS Microsoft.PowerShell.Core\FileSystem::\\172.16.40.50\files> dir
+dir
+
+
+    Directory: \\172.16.40.50\files
+
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d-----        10/12/2024   1:26 AM                HR
+d-----        10/12/2024   1:50 AM                IT
+d-----        10/12/2024   1:26 AM                ITSEC
+d-----        10/12/2024   1:26 AM                MGMT
+d-----        10/12/2024   1:26 AM                Transfer
+
+```
