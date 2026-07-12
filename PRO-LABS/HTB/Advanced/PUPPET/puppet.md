@@ -78,6 +78,42 @@ Enter host password for user 'anonymous':
 
 ```
 
+``` bash
+
+❯ ./sliver-client_linux
+Connecting to 10.13.38.33:31337 ...
+
+    ███████╗██╗     ██╗██╗   ██╗███████╗██████╗
+    ██╔════╝██║     ██║██║   ██║██╔════╝██╔══██╗
+    ███████╗██║     ██║██║   ██║█████╗  ██████╔╝
+    ╚════██║██║     ██║╚██╗ ██╔╝██╔══╝  ██╔══██╗
+    ███████║███████╗██║ ╚████╔╝ ███████╗██║  ██║
+    ╚══════╝╚══════╝╚═╝  ╚═══╝  ╚══════╝╚═╝  ╚═╝
+
+All hackers gain reinforce
+[*] Server v1.5.42 - 85b0e870d05ec47184958dbcb871ddee2eb9e3df
+[*] Welcome to the sliver shell, please type 'help' for options
+
+[*] Check for updates with the 'update' command
+
+```
+
+``` bash
+
+sliver > beacons
+
+ ID         Name             Transport   Hostname   Username             Operating System   Last Check-In   Next Check-In
+========== ================ =========== ========== ==================== ================== =============== ===============
+ ca4c9b16   BLUSHING_ERROR   mtls        File01     PUPPET\bruce.smith   windows/amd64      58s             24s         
+ ee9564cd   BLUSHING_ERROR   mtls        File01     PUPPET\bruce.smith   windows/amd64      45s             21s         
+ 1fcef64a   BLUSHING_ERROR   mtls        File01     PUPPET\bruce.smith   windows/amd64      57s             29s         
+ b097f151   BLUSHING_ERROR   mtls        File01     PUPPET\bruce.smith   windows/amd64      33s             49s         
+ c395c300   BLUSHING_ERROR   mtls        File01     PUPPET\bruce.smith   windows/amd64      31s             51s         
+
+sliver >
+
+```
+
 
 
 
