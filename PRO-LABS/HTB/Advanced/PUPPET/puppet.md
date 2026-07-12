@@ -350,3 +350,22 @@ Group       PUPPET\Domain Admins ActiveDirectory
 PS Microsoft.PowerShell.Core\FileSystem::\\172.16.40.50\files\IT>
 
 ```
+
+``` powershell
+
+PS Microsoft.PowerShell.Core\FileSystem::\\172.16.40.50\files\IT> net group admins_t1 /domain
+net group admins_t1 /domain
+The request will be processed at a domain controller for domain puppet.vl.
+
+Group name     admins_t1
+Comment
+
+Members
+
+-------------------------------------------------------------------------------
+svc_puppet_lin_t1        svc_puppet_win_t1
+The command completed successfully.
+
+PS Microsoft.PowerShell.Core\FileSystem::\\172.16.40.50\files\IT>
+
+```
