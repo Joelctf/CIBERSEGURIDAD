@@ -371,9 +371,40 @@ PS Microsoft.PowerShell.Core\FileSystem::\\172.16.40.50\files\IT>
 ```
 
 ``` powershell
-PS C:\Windows\system32> (Get-ItemProperty "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion").CurrentBuildNumber
-(Get-ItemProperty "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion").CurrentBuildNumber
-20348
+PS C:\Windows\system32> [System.Environment]::OSVersion.Version
+[System.Environment]::OSVersion.Version
+
+Major  Minor  Build  Revision
+-----  -----  -----  --------
+10     0      20348  0
+
+
+PS C:\Windows\system32> Get-Service Spooler
+Get-Service Spooler
+
+Status   Name               DisplayName
+------   ----               -----------
+Running  Spooler            Print Spooler
+
+
+PS C:\Windows\system32>                                                                                                                 ─╯
+```
+
+``` powershell
+
+PS C:\Windows\system32> reg query "HKLM\SOFTWARE\Policies\Microsoft\Windows NT\Printers\PointAndPrint" /v RestrictDriverInstallationToAdministrators
+reg query "HKLM\SOFTWARE\Policies\Microsoft\Windows NT\Printers\PointAndPrint" /v RestrictDriverInstallationToAdministrators
+
+HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows NT\Printers\PointAndPrint
+    RestrictDriverInstallationToAdministrators    REG_DWORD    0x0
+
+PS C:\Windows\system32> reg query "HKLM\SOFTWARE\Policies\Microsoft\Windows NT\Printers\PointAndPrint" /v NoWarningNoElevationOnInstall
+reg query "HKLM\SOFTWARE\Policies\Microsoft\Windows NT\Printers\PointAndPrint" /v NoWarningNoElevationOnInstall
+
+HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows NT\Printers\PointAndPrint
+    NoWarningNoElevationOnInstall    REG_DWORD    0x1
+
 PS C:\Windows\system32>
 
 ```
+
