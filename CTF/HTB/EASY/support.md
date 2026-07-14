@@ -403,6 +403,13 @@ UserInfo.exe: PE32 executable for MS Windows 6.00 (console), Intel i386 Mono/.Ne
 
 <img width="294" height="442" alt="image" src="https://github.com/user-attachments/assets/e9539da2-6247-4a54-8797-0f0087c17187" />
 
+``` bash
+
+❯ echo '10.129.178.26 support.htb' | sudo tee -a /etc/hosts
+10.129.178.26 support.htb
+╭─ ~                                                                                                               ✔ ─╮
+╰─                                                                                                                   ─╯
+```
 
 <img width="594" height="278" alt="image" src="https://github.com/user-attachments/assets/9bcb9c78-b7b6-4830-8e55-3bd9acc598f2" />
 
