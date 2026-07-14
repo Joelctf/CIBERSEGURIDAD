@@ -432,6 +432,27 @@ Analyzing '0Nv32PTwgYjzg9/8j5TbmvPd3e7WhtWWyuPsyO76/Y+U193E'
 
 <img width="736" height="403" alt="image" src="https://github.com/user-attachments/assets/39688914-3742-4495-86f4-4c872f84c021" />
 
+``` python
 
+import base64
 
+enc_password = "0Nv32PTwgYjzg9/8j5TbmvPd3e7WhtWWyuPsyO76/Y+U193E"
+key = b"armando"
+
+data = bytearray(base64.b64decode(enc_password))
+
+for i in range(len(data)):
+    data[i] = (data[i] ^ key[i % len(key)]) ^ 0xDF
+
+print(data.decode())
+
+```
+
+``` bash
+❯ python3 getpassword.py
+nvEfEK16^1aM4$e7AclUf8x$tRWxPWO1%lmz
+╭─ ~/hacking/ctf/htb/easy/support/scripts                                                                          ✔ ─╮
+╰─                                        
+
+```
 
