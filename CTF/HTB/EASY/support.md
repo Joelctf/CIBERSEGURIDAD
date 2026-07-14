@@ -156,3 +156,36 @@ smb: \> dir
 smb: \>
 
 ```
+
+``` bash
+
+smb: \> get UserInfo.exe.zip
+getting file \UserInfo.exe.zip of size 277499 as UserInfo.exe.zip (640.7 KiloBytes/sec) (average 640.7 KiloBytes/sec)
+smb: \> exit
+❯ ls | grep "Us*"
+UserInfo.exe.zip
+❯ file UserInfo.exe.zip
+UserInfo.exe.zip: Zip archive data, made by v2.0 UNIX, extract using at least v2.0, last modified May 27 2022 10:51:04, uncompressed size 12288, method=deflate
+╭─ ~/hacking/ctf/htb/easy/support/recon                                                                            ✔ ─╮
+╰─
+
+```
+
+``` bash
+
+❯ unzip UserInfo.exe.zip
+Archive:  UserInfo.exe.zip
+  inflating: UserInfo.exe
+  inflating: CommandLineParser.dll
+  inflating: Microsoft.Bcl.AsyncInterfaces.dll
+  inflating: Microsoft.Extensions.DependencyInjection.Abstractions.dll
+  inflating: Microsoft.Extensions.DependencyInjection.dll
+  inflating: Microsoft.Extensions.Logging.Abstractions.dll
+  inflating: System.Buffers.dll
+  inflating: System.Memory.dll
+  inflating: System.Numerics.Vectors.dll
+  inflating: System.Runtime.CompilerServices.Unsafe.dll
+  inflating: System.Threading.Tasks.Extensions.dll
+  inflating: UserInfo.exe.config
+
+```
