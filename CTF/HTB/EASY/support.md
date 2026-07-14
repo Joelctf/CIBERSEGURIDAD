@@ -403,6 +403,9 @@ UserInfo.exe: PE32 executable for MS Windows 6.00 (console), Intel i386 Mono/.Ne
 
 <img width="294" height="442" alt="image" src="https://github.com/user-attachments/assets/e9539da2-6247-4a54-8797-0f0087c17187" />
 
+
+<img width="594" height="278" alt="image" src="https://github.com/user-attachments/assets/9bcb9c78-b7b6-4830-8e55-3bd9acc598f2" />
+
 ``` bash
 
 ❯ echo '10.129.178.26 support.htb' | sudo tee -a /etc/hosts
@@ -410,9 +413,6 @@ UserInfo.exe: PE32 executable for MS Windows 6.00 (console), Intel i386 Mono/.Ne
 ╭─ ~                                                                                                               ✔ ─╮
 ╰─                                                                                                                   ─╯
 ```
-
-<img width="594" height="278" alt="image" src="https://github.com/user-attachments/assets/9bcb9c78-b7b6-4830-8e55-3bd9acc598f2" />
-
 
 <img width="538" height="273" alt="image" src="https://github.com/user-attachments/assets/783682d3-2743-45f7-a0c3-02f3715cd4c3" />
 
