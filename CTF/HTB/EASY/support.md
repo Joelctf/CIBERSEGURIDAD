@@ -456,3 +456,20 @@ nvEfEK16^1aM4$e7AclUf8x$tRWxPWO1%lmz
 
 ```
 
+``` bash
+
+❯ wine UserInfo.exe
+
+Usage: UserInfo.exe [options] [commands]
+
+Options:
+  -v|--verbose        Verbose output
+
+Commands:
+  find                Find a user
+  user                Get information about a user
+
+╭─ ~/hacking/ctf/htb/easy/support/recon                                                                            ✔ ─╮
+╰─
+
+```
