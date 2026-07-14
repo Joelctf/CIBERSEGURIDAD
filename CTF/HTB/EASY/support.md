@@ -411,5 +411,15 @@ UserInfo.exe: PE32 executable for MS Windows 6.00 (console), Intel i386 Mono/.Ne
 
 <img width="687" height="122" alt="image" src="https://github.com/user-attachments/assets/e7482c93-dbc7-46a6-adeb-b6fdf0e19167" />
 
+``` bash
 
+❯
+❯ hashid '0Nv32PTwgYjzg9/8j5TbmvPd3e7WhtWWyuPsyO76/Y+U193E'
+Analyzing '0Nv32PTwgYjzg9/8j5TbmvPd3e7WhtWWyuPsyO76/Y+U193E'
+[+] Unknown hash
+❯ echo '0Nv32PTwgYjzg9/8j5TbmvPd3e7WhtWWyuPsyO76/Y+U193E' | base64 -d
+������������ۚ����ֆՖ������������%                                                                                         ╭─ ~                                                                                                               ✔ ─╮
+╰─
+
+```
 
