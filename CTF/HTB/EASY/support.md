@@ -397,3 +397,7 @@ mscoree.dll
 UserInfo.exe: PE32 executable for MS Windows 6.00 (console), Intel i386 Mono/.Net assembly, 3 sections
 ❯
 ```
+
+<img width="758" height="576" alt="image" src="https://github.com/user-attachments/assets/528a16e8-0570-4b4d-a78f-1d491c710771" />
+
+
