@@ -545,25 +545,15 @@ LDAP        10.129.45.182   389    DC               [+] support.htb\ldap:nvEfEK1
 
 ``` bash
 
-❯ ldapdomaindump 10.129.45.182 -u 'support.htb\ldap' -p 'nvEfEK16^1aM4$e7AclUf8x$tRWxPWO1%lmz' -o ./ldap_out
-[*] Connecting to host...
-[*] Binding to host
-[+] Bind OK
-[*] Starting domain dump
-[+] Domain dump finished
-╭─ ~/hacking/ctf/htb/easy/support/recon                                                                            ✔ ─╮
+
+❯ ldapsearch -H ldap://support.htb -x -D "ldap@support.htb" -w 'nvEfEK16^1aM4$e7AclUf8x$tRWxPWO1%lmz' -b "dc=support,dc=htb" "*" > ldap_raw.txt
+❯ ls ldap_raw.txt
+ldap_raw.txt
+╭─ ~/hacking/ctf/htb/easy/support/recon/ldap_out                                                                   ✔ ─╮
 ╰─                                                                                                                   ─╯
 
+
 ```
 
-``` bash
-❯ cd ldap_out
-❯ ls
-domain_computers_by_os.html  domain_groups.grep  domain_policy.html  domain_trusts.json          domain_users.json
-domain_computers.grep        domain_groups.html  domain_policy.json  domain_users_by_group.html
-domain_computers.html        domain_groups.json  domain_trusts.grep  domain_users.grep
-domain_computers.json        domain_policy.grep  domain_trusts.html  domain_users.html
-╭─ ~/hacking/ctf/htb/easy/support/recon/ldap_out                                                                   ✔ ─╮
-╰─
-```
+
 
