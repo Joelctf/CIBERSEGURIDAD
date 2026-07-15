@@ -473,3 +473,26 @@ Commands:
 ╰─
 
 ```
+
+``` powershell
+PS Microsoft.PowerShell.Core\FileSystem::\\wsl.localhost\kali-linux\home\joel\hacking\ctf\htb\easy\support\recon> .\UserInfo.exe -v find -first "*"
+[*] LDAP query to use: (givenName=*)
+[+] Found 15 results:
+       raven.clifton
+       anderson.damian
+       monroe.david
+       cromwell.gerard
+       west.laura
+       levine.leopoldo
+       langley.lucy
+       daughtler.mabel
+       bardot.mary
+       stoll.rachelle
+       thomas.raphael
+       smith.rosario
+       wilson.shelby
+       hernandez.stanley
+       ford.victoria
+PS Microsoft.PowerShell.Core\FileSystem::\\wsl.localhost\kali-linux\home\joel\hacking\ctf\htb\easy\support\recon>
+```
+
