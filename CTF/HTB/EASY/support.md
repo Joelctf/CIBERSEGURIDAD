@@ -556,4 +556,14 @@ LDAP        10.129.45.182   389    DC               [+] support.htb\ldap:nvEfEK1
 
 ```
 
+``` bash
+❯ cd ldap_out
+❯ ls
+domain_computers_by_os.html  domain_groups.grep  domain_policy.html  domain_trusts.json          domain_users.json
+domain_computers.grep        domain_groups.html  domain_policy.json  domain_users_by_group.html
+domain_computers.html        domain_groups.json  domain_trusts.grep  domain_users.grep
+domain_computers.json        domain_policy.grep  domain_trusts.html  domain_users.html
+╭─ ~/hacking/ctf/htb/easy/support/recon/ldap_out                                                                   ✔ ─╮
+╰─
+```
 
