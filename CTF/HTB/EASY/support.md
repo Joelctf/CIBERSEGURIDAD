@@ -543,5 +543,17 @@ LDAP        10.129.45.182   389    DC               [+] support.htb\ldap:nvEfEK1
 
 ```
 
+``` bash
+
+❯ ldapdomaindump 10.129.45.182 -u 'support.htb\ldap' -p 'nvEfEK16^1aM4$e7AclUf8x$tRWxPWO1%lmz' -o ./ldap_out
+[*] Connecting to host...
+[*] Binding to host
+[+] Bind OK
+[*] Starting domain dump
+[+] Domain dump finished
+╭─ ~/hacking/ctf/htb/easy/support/recon                                                                            ✔ ─╮
+╰─                                                                                                                   ─╯
+
+```
 
 
