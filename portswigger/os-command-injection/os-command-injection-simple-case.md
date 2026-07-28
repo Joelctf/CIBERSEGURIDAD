@@ -4,9 +4,10 @@
 
 <img width="1210" height="905" alt="image" src="https://github.com/user-attachments/assets/8be33718-fe81-490e-89c5-874de48a2c5f" />
 
-![Uploading image.png…]()
 
-![Uploading image.png…]()
+<img width="1007" height="476" alt="Captura de pantalla 2026-07-29 014449" src="https://github.com/user-attachments/assets/95be5f8b-f4d5-4a04-ad5b-b34160630dbf" />
+
+<img width="1206" height="487" alt="Captura de pantalla 2026-07-29 014517" src="https://github.com/user-attachments/assets/d71da119-96ae-4efe-8d7e-f687f2aa1b20" />
 
 
 ``` python
