@@ -132,4 +132,33 @@ function makeInviteCode() {
 
 ```
 
+``` python
+
+import requests
+
+
+url = "http://2million.htb/api/v1/invite/how/to/generate"
+
+session = requests.Session()
+session.cookies.set("session" ,"qjvqi985nqh19n0nm1bkk032dh")
+
+try:
+     r = session.post(url)
+     print(r.status_code)
+     print(r.text)
+
+except Exception as e:
+       print(f"Error:{e}")
+
+```
+
+``` bash
+
+❯ python3 generate.py
+200
+{"0":200,"success":1,"data":{"data":"Va beqre gb trarengr gur vaivgr pbqr, znxr n CBFG erdhrfg gb \/ncv\/i1\/vaivgr\/trarengr","enctype":"ROT13"},"hint":"Data is encrypted ... We should probbably check the encryption type in order to decrypt it..."}
+╭─ ~/hacking/ctf/htb/easy/twomillion/scripts                                                                       ✔ ─╮
+╰─                                                                                                                   ─╯
+
+```
 
