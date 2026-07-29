@@ -5,6 +5,8 @@
 
 <img width="1199" height="528" alt="image" src="https://github.com/user-attachments/assets/69419a1f-f63d-43e3-ac0d-dfcbdeeb4ff0" />
 
+`email=x||command||`
+
 ``` python
 
 import requests, time
