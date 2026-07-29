@@ -162,3 +162,54 @@ except Exception as e:
 
 ```
 
+``` python
+
+import codecs
+
+texto = "Va beqre gb trarengr gur vaivgr pbqr, znxr n CBFG erdhrfg gb \/ncv\/i1\/vaivgr\/trarengr"
+
+print(codecs.decode(texto, "rot_13"))
+
+```
+
+``` bash
+
+❯ python3 rot13.py
+/home/joel/hacking/ctf/htb/easy/twomillion/scripts/rot13.py:3: SyntaxWarning: invalid escape sequence '\/'
+  texto = "Va beqre gb trarengr gur vaivgr pbqr, znxr n CBFG erdhrfg gb \/ncv\/i1\/vaivgr\/trarengr"
+In order to generate the invite code, make a POST request to \/api\/v1\/invite\/generate
+╭─ ~/hacking/ctf/htb/easy/twomillion/scripts                                                                       ✔ ─╮
+╰─                                                                                                                   ─╯
+
+```
+
+``` python
+
+import requests
+
+
+url = "http://2million.htb/api/v1/invite/generate"
+
+session = requests.Session()
+session.cookies.set("session" ,"qjvqi985nqh19n0nm1bkk032dh")
+
+try:
+     r = session.post(url)
+     print(r.status_code)
+     print(r.text)
+
+except Exception as e:
+       print(f"Error:{e}")
+
+```
+``` bash
+
+❯ python3 create.py
+200
+{"0":200,"success":1,"data":{"code":"U1dOV1EtWjZJMVotUU01NUctQzgyVTM=","format":"encoded"}}
+╭─ ~/hacking/ctf/htb/easy/twomillion/scripts                                                                       ✔ ─╮
+╰─                                                                                                                   ─╯
+
+```
+
+
