@@ -68,4 +68,12 @@ Nmap done: 1 IP address (1 host up) scanned in 8.57 seconds
 
 ```
 
+``` bash
+
+❯ echo '10.129.229.66 2million.htb' | sudo tee -a /etc/hosts
+10.129.229.66 2million.htb
+╭─ ~/hacking/ctf/htb/easy/twomillion/recon                                                                         ✔ ─╮
+╰─                                                                                                                   ─╯
+
+```
 
