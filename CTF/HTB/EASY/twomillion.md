@@ -212,4 +212,11 @@ except Exception as e:
 
 ```
 
+``` bash
+
+❯ echo 'U1dOV1EtWjZJMVotUU01NUctQzgyVTM=' | base64 -d
+SWNWQ-Z6I1Z-QM55G-C82U3%                                                                                                ╭─ ~/hacking/ctf/htb/easy/twomillion/scripts                                                                       ✔ ─╮
+╰─                                                                                                                   ─╯
+
+```
 
