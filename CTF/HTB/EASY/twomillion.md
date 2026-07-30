@@ -251,7 +251,7 @@ except Exception as e:
 
 ❯ python3 request.py
 200
-{'status': 'danger', 'message': 'Invalid content type.'}
+{'status': 'danger', 'message': 'Missing parameter: email'}
 ╭─ ~/hacking/ctf/htb/easy/twomillion/scripts                                                                       ✔ ─╮
 ╰─
                                                                                                                  ─╯
