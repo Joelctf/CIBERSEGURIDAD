@@ -338,5 +338,25 @@ except Exception as e:
 
 ```
 
+``` bash
+
+❯ curl -i -X GET http://2million.htb/api/v1/admin/auth --cookie "PHPSESSID=qjvqi985nqh19n0nm1bkk032dh"
+HTTP/1.1 200 OK
+Server: nginx
+Date: Thu, 30 Jul 2026 00:44:03 GMT
+Content-Type: application/json
+Transfer-Encoding: chunked
+Connection: keep-alive
+Expires: Thu, 19 Nov 1981 08:52:00 GMT
+Cache-Control: no-store, no-cache, must-revalidate
+Pragma: no-cache
+
+{"message":true}                                                                                                       ╭─ ~/hacking/ctf/htb/easy/twomillion/scripts                                                                       ✔ ─╮
+╰─                                                                                                                   ─╯
+
+```
+
+
+
 
 
