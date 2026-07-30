@@ -220,3 +220,41 @@ SWNWQ-Z6I1Z-QM55G-C82U3%                                                        
 
 ```
 
+<img width="428" height="565" alt="image" src="https://github.com/user-attachments/assets/b8868dd2-f2bf-4cb3-9de3-b187e8135829" />
+
+<img width="484" height="442" alt="image" src="https://github.com/user-attachments/assets/040991c3-6051-4230-9690-a262f0fb7598" />
+
+<img width="956" height="925" alt="image" src="https://github.com/user-attachments/assets/e003ead3-1af1-4397-8175-ad00a32d1840" />
+
+<img width="552" height="528" alt="image" src="https://github.com/user-attachments/assets/36f9c058-02e0-41de-a503-fe4eb4165a8c" />
+
+
+``` python
+
+import requests
+
+url = "http://2million.htb/api/v1/admin/auth"
+
+session = requests.Session()
+
+session.cookies.set("session", "qjvqi985nqh19n0nm1bkk032dh")
+try:
+    r = session.get(url)
+    print(r.status_code)
+    print(r.text)
+except Exception as e:
+    print(f"Error:{e}")
+
+```
+
+``` bash
+
+❯ python3 request.py
+401
+
+```
+
+``` python
+
+```
+
