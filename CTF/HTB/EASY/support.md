@@ -565,5 +565,118 @@ domain_computers.json        domain_policy.grep  domain_trusts.html  domain_user
 
 ```
 
+``` json
 
+{
+    "attributes": {
+        "accountExpires": [
+            "9999-12-31 23:59:59.999999+00:00"
+        ],
+        "badPasswordTime": [
+            "1601-01-01 00:00:00+00:00"
+        ],
+        "badPwdCount": [
+            0
+        ],
+        "c": [
+            "US"
+        ],
+        "cn": [
+            "support"
+        ],
+        "codePage": [
+            0
+        ],
+        "company": [
+            "support"
+        ],
+        "countryCode": [
+            0
+        ],
+        "dSCorePropagationData": [
+            "2022-05-28 11:12:01+00:00",
+            "1601-01-01 00:00:00+00:00"
+        ],
+        "distinguishedName": [
+            "CN=support,CN=Users,DC=support,DC=htb"
+        ],
+        "info": [
+            "Ironside47pleasure40Watchful"
+        ],
+        "instanceType": [
+            4
+        ],
+        "l": [
+            "Chapel Hill"
+        ],
+        "lastLogoff": [
+            "1601-01-01 00:00:00+00:00"
+        ],
+        "lastLogon": [
+            "1601-01-01 00:00:00+00:00"
+        ],
+        "logonCount": [
+            0
+        ],
+        "memberOf": [
+            "CN=Shared Support Accounts,CN=Users,DC=support,DC=htb",
+            "CN=Remote Management Users,CN=Builtin,DC=support,DC=htb"
+        ],
+        "name": [
+            "support"
+        ],
+        "objectCategory": [
+            "CN=Person,CN=Schema,CN=Configuration,DC=support,DC=htb"
+        ],
+        "objectClass": [
+            "top",
+            "person",
+            "organizationalPerson",
+            "user"
+        ],
+        "objectGUID": [
+            "{3139a30a-31fa-4530-9ea4-8053b396a7f1}"
+        ],
+        "objectSid": [
+            "S-1-5-21-1677581083-3380853377-188903654-1105"
+        ],
+        "postalCode": [
+            "27514"
+        ],
+        "primaryGroupID": [
+            513
+        ],
+        "pwdLastSet": [
+            "2022-05-28 11:12:00.977707+00:00"
+        ],
+        "sAMAccountName": [
+            "support"
+        ],
+        "sAMAccountType": [
+            805306368
+        ],
+        "st": [
+            "NC"
+        ],
+        "streetAddress": [
+            "Skipper Bowles Dr"
+        ],
+        "uSNChanged": [
+            12630
+        ],
+        "uSNCreated": [
+            12617
+        ],
+        "userAccountControl": [
+            66048
+        ],
+        "whenChanged": [
+            "2022-05-28 11:12:01+00:00"
+        ],
+        "whenCreated": [
+            "2022-05-28 11:12:00+00:00"
+        ]
+    }
+
+```
 
