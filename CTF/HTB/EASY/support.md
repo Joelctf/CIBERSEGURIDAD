@@ -728,3 +728,32 @@ Mode                 LastWriteTime         Length Name
 
 
 ```
+
+``` powershell
+
+*Evil-WinRM* PS C:\Users\support\Desktop> C:\Windows\Microsoft.NET\Framework64\v4.0.30319\csc.exe aclenum.cs
+Microsoft (R) Visual C# Compiler version 4.8.4161.0
+
+for C# 5
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+
+
+This compiler is provided as part of the Microsoft (R) .NET Framework, but only supports language versions up to C# 5, which is no longer the latest version. For compilers that support newer versions of the C# programming language, see http://go.microsoft.com/fwlink/?LinkID=533240
+
+*Evil-WinRM* PS C:\Users\support\Desktop> ls
+
+
+    Directory: C:\Users\support\Desktop
+
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-a----          8/6/2026  10:38 AM            446 aclenum.cs
+-a----          8/6/2026  10:40 AM           4608 aclenum.exe
+-ar---          8/6/2026   9:18 AM             34 user.txt
+
+
+*Evil-WinRM* PS C:\Users\support\Desktop>
+
+```
