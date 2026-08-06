@@ -705,55 +705,51 @@ support\support
 
 ```
 
-
 ``` powershell
 
-*Evil-WinRM* PS C:\Users\support\Desktop> upload ../../scripts/aclenum.cs
+*Evil-WinRM* PS C:\Users\support\Desktop> whoami /all
 
-Info: Uploading /home/joel/hacking/ctf/htb/easy/support/scripts/aclenum.cs to C:\Users\support\Desktop\aclenum.cs
+USER INFORMATION
+----------------
 
-Data: 592 bytes of 592 bytes copied
-
-Info: Upload successful!
-*Evil-WinRM* PS C:\Users\support\Desktop> ls
-
-
-    Directory: C:\Users\support\Desktop
+User Name       SID
+=============== =============================================
+support\support S-1-5-21-1677581083-3380853377-188903654-1105
 
 
-Mode                 LastWriteTime         Length Name
-----                 -------------         ------ ----
--a----          8/6/2026  10:38 AM            446 aclenum.cs
--ar---          8/6/2026   9:18 AM             34 user.txt
+GROUP INFORMATION
+-----------------
+
+Group Name                                 Type             SID                                           Attributes
+========================================== ================ ============================================= ==================================================
+Everyone                                   Well-known group S-1-1-0                                       Mandatory group, Enabled by default, Enabled group
+BUILTIN\Remote Management Users            Alias            S-1-5-32-580                                  Mandatory group, Enabled by default, Enabled group
+BUILTIN\Users                              Alias            S-1-5-32-545                                  Mandatory group, Enabled by default, Enabled group
+BUILTIN\Pre-Windows 2000 Compatible Access Alias            S-1-5-32-554                                  Mandatory group, Enabled by default, Enabled group
+NT AUTHORITY\NETWORK                       Well-known group S-1-5-2                                       Mandatory group, Enabled by default, Enabled group
+NT AUTHORITY\Authenticated Users           Well-known group S-1-5-11                                      Mandatory group, Enabled by default, Enabled group
+NT AUTHORITY\This Organization             Well-known group S-1-5-15                                      Mandatory group, Enabled by default, Enabled group
+SUPPORT\Shared Support Accounts            Group            S-1-5-21-1677581083-3380853377-188903654-1103 Mandatory group, Enabled by default, Enabled group
+NT AUTHORITY\NTLM Authentication           Well-known group S-1-5-64-10                                   Mandatory group, Enabled by default, Enabled group
+Mandatory Label\Medium Mandatory Level     Label            S-1-16-8192
 
 
-```
+PRIVILEGES INFORMATION
+----------------------
 
-``` powershell
-
-*Evil-WinRM* PS C:\Users\support\Desktop> C:\Windows\Microsoft.NET\Framework64\v4.0.30319\csc.exe aclenum.cs
-Microsoft (R) Visual C# Compiler version 4.8.4161.0
-
-for C# 5
-Copyright (C) Microsoft Corporation. All rights reserved.
-
+Privilege Name                Description                    State
+============================= ============================== =======
+SeMachineAccountPrivilege     Add workstations to domain     Enabled
+SeChangeNotifyPrivilege       Bypass traverse checking       Enabled
+SeIncreaseWorkingSetPrivilege Increase a process working set Enabled
 
 
-This compiler is provided as part of the Microsoft (R) .NET Framework, but only supports language versions up to C# 5, which is no longer the latest version. For compilers that support newer versions of the C# programming language, see http://go.microsoft.com/fwlink/?LinkID=533240
+USER CLAIMS INFORMATION
+-----------------------
 
-*Evil-WinRM* PS C:\Users\support\Desktop> ls
+User claims unknown.
 
-
-    Directory: C:\Users\support\Desktop
-
-
-Mode                 LastWriteTime         Length Name
-----                 -------------         ------ ----
--a----          8/6/2026  10:38 AM            446 aclenum.cs
--a----          8/6/2026  10:40 AM           4608 aclenum.exe
--ar---          8/6/2026   9:18 AM             34 user.txt
-
-
+Kerberos support for Dynamic Access Control on this device has been disabled.
 *Evil-WinRM* PS C:\Users\support\Desktop>
 
 ```
