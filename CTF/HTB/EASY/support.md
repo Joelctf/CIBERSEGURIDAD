@@ -757,3 +757,26 @@ Mode                 LastWriteTime         Length Name
 *Evil-WinRM* PS C:\Users\support\Desktop>
 
 ```
+
+``` powershell
+
+*Evil-WinRM* PS C:\Users\support\Desktop> (Get-Acl "AD:\CN=DC,OU=Domain Controllers,DC=support,DC=htb").Access |
+? IdentityReference -match "Shared Support Accounts"
+
+
+ActiveDirectoryRights : GenericAll
+InheritanceType       : All
+ObjectType            : 00000000-0000-0000-0000-000000000000
+InheritedObjectType   : 00000000-0000-0000-0000-000000000000
+ObjectFlags           : None
+AccessControlType     : Allow
+IdentityReference     : SUPPORT\Shared Support Accounts
+IsInherited           : False
+InheritanceFlags      : ContainerInherit
+PropagationFlags      : None
+
+
+
+*Evil-WinRM* PS C:\Users\support\Desktop>
+
+```
