@@ -19,7 +19,7 @@ compilacion:
 
 ``` bash
 
-gcc vuln.c -o vuln -fno-stack-protector -no-pie -m32
+gcc vuln.c -o vuln -fno-stack-protector -no-pie -m32 -Wno-implicit-function-declaration
 
 ```
 
