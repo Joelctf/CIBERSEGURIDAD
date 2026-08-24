@@ -208,3 +208,54 @@ Nmap done: 1 IP address (1 host up) scanned in 149.09 seconds
 ╰─                                                                                                                   ─╯
 
 ```
+
+
+``` bash
+
+❯ curl -I https://10.129.80.127 -k
+HTTP/2 200
+content-length: 703
+content-type: text/html
+last-modified: Thu, 26 Mar 2026 05:40:48 GMT
+accept-ranges: bytes
+etag: "b3b97519e3bcdc1:0"
+server: Microsoft-IIS/10.0
+x-powered-by: ASP.NET
+date: Tue, 25 Aug 2026 06:38:07 GMT
+
+❯ curl https://10.129.80.127 -k
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<title>IIS Windows Server</title>
+<style type="text/css">
+<!--
+body {
+        color:#000000;
+        background-color:#0072C6;
+        margin:0;
+}
+
+#container {
+        margin-left:auto;
+        margin-right:auto;
+        text-align:center;
+        }
+
+a img {
+        border:none;
+}
+
+-->
+</style>
+</head>
+<body>
+<div id="container">
+<a href="http://go.microsoft.com/fwlink/?linkid=66138&amp;clcid=0x409"><img src="iisstart.png" alt="IIS" width="960" height="600" /></a>
+</div>
+</body>
+</html>%                                                                                                                ╭─ ~/hacking/ctf/htb/medium/danglintree/recon                                                                      ✔ ─╮
+╰─                                                                                                                   ─╯
+
+```
