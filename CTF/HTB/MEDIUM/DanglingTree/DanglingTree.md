@@ -208,7 +208,15 @@ Nmap done: 1 IP address (1 host up) scanned in 149.09 seconds
 ╰─                                                                                                                   ─╯
 
 ```
+``` bash
 
+❯ echo "10.129.80.127 danglingtree.htb" | sudo tee -a /etc/hosts
+[sudo] password for joel:
+10.129.80.127 danglingtree.htb
+╭─ ~/hacking/ctf/htb/medium/danglintree/recon                                                                 ✔ │ 3s ─╮
+╰─                                                                                                                   ─╯
+
+```
 
 ``` bash
 
