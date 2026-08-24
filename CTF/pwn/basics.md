@@ -122,10 +122,18 @@ Trying 60 -> 0
 Trying 61 -> 0
 Trying 62 -> 0
 Trying 63 -> 0
-Trying 64 -> -11
-64
+Trying 64 -> 0
+Trying 65 -> 0
+Trying 66 -> 0
+Trying 67 -> 0
+Trying 68 -> 0
+Trying 69 -> 0
+Trying 70 -> 0
+Trying 71 -> 0
+Trying 72 -> -11
+72
 ╭─ ~/pwn                                                                                                           ✔ ─╮
-╰─                          
+╰─                    
 
 ```
 
