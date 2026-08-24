@@ -298,3 +298,44 @@ Unable to connect with SMB1 -- no workgroup available
 ╰─                                                                                                                   ─╯
 
 ```
+
+``` bash
+
+❯ smbclient //danglingtree.htb/NETLOGON -N
+do_connect: Connection to dc.danglingtree.htb failed (Error NT_STATUS_UNSUCCESSFUL)
+❯ smbclient //danglingtree.htb/SYSVOL -N
+do_connect: Connection to dc.danglingtree.htb failed (Error NT_STATUS_UNSUCCESSFUL)
+❯ smbclient //danglingtree.htb/IPC$ -N
+Try "help" to get a list of possible commands.
+smb: \> dir
+NT_STATUS_NO_SUCH_FILE listing \*
+smb: \> exit
+❯ smbclient //danglingtree.htb/C$ -N
+tree connect failed: NT_STATUS_ACCESS_DENIED
+❯ smbclient //danglingtree.htb/ADMIN$ -N
+tree connect failed: NT_STATUS_ACCESS_DENIED
+❯ smbclient //danglingtree.htb/IT -N
+Try "help" to get a list of possible commands.
+smb: \> dir
+  .                                   D        0  Sun Apr  5 03:05:09 2026
+  ..                                  D        0  Sun Apr  5 02:57:30 2026
+  Security                            D        0  Sun Apr  5 03:05:20 2026
+
+                7062015 blocks of size 4096. 2261723 blocks available
+
+smb: \> cd Security\
+smb: \Security\> dir
+  .                                   D        0  Sun Apr  5 03:05:20 2026
+  ..                                  D        0  Sun Apr  5 03:05:09 2026
+  DanglingTree_RoE_Assessment.pdf      A    28905  Sat Apr  4 17:50:23 2026
+
+                7062015 blocks of size 4096. 2261707 blocks available
+smb: \Security\> get DanglingTree_RoE_Assessment.pdf
+getting file \Security\DanglingTree_RoE_Assessment.pdf of size 28905 as DanglingTree_RoE_Assessment.pdf (146.3 KiloBytes/sec) (average 146.3 KiloBytes/sec)
+smb: \Security\> exit
+❯ ls
+all_ports.txt  DanglingTree_RoE_Assessment.pdf  version_ports.txt
+╭─ ~/hacking/ctf/htb/medium/danglintree/recon                                                                      ✔ ─╮
+╰─                                                                                                                   ─╯
+
+```
