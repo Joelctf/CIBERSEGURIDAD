@@ -1,5 +1,5 @@
 ``` c
-// vuln.c
+
 #include <stdio.h>
 #include <string.h>
 
@@ -7,9 +7,13 @@ void win() {
     puts("has ganado!");
 }
 
-int main() {
+void vulnerable() {
     char buffer[64];
-    gets(buffer);   // sin limite
+    gets(buffer);   // overflow aquí, en stack frame simple
+}
+
+int main() {
+    vulnerable();
     return 0;
 }
 
