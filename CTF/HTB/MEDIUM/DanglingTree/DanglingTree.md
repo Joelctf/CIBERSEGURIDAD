@@ -1,0 +1,210 @@
+``` bash
+
+❯ recon 10.129.80.127
+Starting Nmap 7.98 ( https://nmap.org ) at 2026-08-25 01:25 +0200
+Nmap scan report for 10.129.80.127
+Host is up (0.036s latency).
+Not shown: 65510 filtered tcp ports (no-response)
+PORT      STATE SERVICE
+53/tcp    open  domain
+80/tcp    open  http
+88/tcp    open  kerberos-sec
+135/tcp   open  msrpc
+139/tcp   open  netbios-ssn
+389/tcp   open  ldap
+443/tcp   open  https
+445/tcp   open  microsoft-ds
+464/tcp   open  kpasswd5
+593/tcp   open  http-rpc-epmap
+636/tcp   open  ldapssl
+3268/tcp  open  globalcatLDAP
+3269/tcp  open  globalcatLDAPssl
+3389/tcp  open  ms-wbt-server
+6600/tcp  open  mshvlm
+9389/tcp  open  adws
+49664/tcp open  unknown
+49677/tcp open  unknown
+49679/tcp open  unknown
+49681/tcp open  unknown
+49682/tcp open  unknown
+49693/tcp open  unknown
+49708/tcp open  unknown
+49722/tcp open  unknown
+49771/tcp open  unknown
+
+Nmap done: 1 IP address (1 host up) scanned in 26.92 seconds
+[*] First script done
+[*] Open ports = '53,80,88,135,139,389,443,445,464,593,636,3268,3269,3389,6600,9389,49664,49677,49679,49681,49682,49693,49708,49722,49771'
+Starting Nmap 7.98 ( https://nmap.org ) at 2026-08-25 01:26 +0200
+Nmap scan report for 10.129.80.127
+Host is up (0.038s latency).
+
+PORT      STATE SERVICE       VERSION
+53/tcp    open  domain        Simple DNS Plus
+80/tcp    open  http          Microsoft IIS httpd 10.0
+|_http-server-header: Microsoft-IIS/10.0
+|_http-title: IIS Windows Server
+| http-methods:
+|_  Potentially risky methods: TRACE
+88/tcp    open  kerberos-sec  Microsoft Windows Kerberos (server time: 2026-08-25 06:25:31Z)
+135/tcp   open  msrpc         Microsoft Windows RPC
+139/tcp   open  netbios-ssn   Microsoft Windows netbios-ssn
+389/tcp   open  ldap          Microsoft Windows Active Directory LDAP (Domain: danglingtree.htb, Site: Default-First-Site-Name)
+|_ssl-date: TLS randomness does not represent time
+| ssl-cert: Subject:
+| Subject Alternative Name: DNS:dc.danglingtree.htb, DNS:danglingtree.htb, DNS:DANGLINGTREE
+| Not valid before: 2026-08-03T16:32:53
+|_Not valid after:  2106-08-03T16:32:53
+443/tcp   open  ssl/https?
+| tls-alpn:
+|   h2
+|_  http/1.1
+|_ssl-date: TLS randomness does not represent time
+| ssl-cert: Subject: commonName=danglingtree-DC-CA
+| Not valid before: 2026-03-26T05:34:19
+|_Not valid after:  2114-03-26T05:44:18
+445/tcp   open  microsoft-ds?
+464/tcp   open  kpasswd5?
+593/tcp   open  ncacn_http    Microsoft Windows RPC over HTTP 1.0
+636/tcp   open  ssl/ldap
+| ssl-cert: Subject:
+| Subject Alternative Name: DNS:dc.danglingtree.htb, DNS:danglingtree.htb, DNS:DANGLINGTREE
+| Not valid before: 2026-08-03T16:32:53
+|_Not valid after:  2106-08-03T16:32:53
+|_ssl-date: TLS randomness does not represent time
+3268/tcp  open  ldap          Microsoft Windows Active Directory LDAP (Domain: danglingtree.htb, Site: Default-First-Site-Name)
+|_ssl-date: TLS randomness does not represent time
+| ssl-cert: Subject:
+| Subject Alternative Name: DNS:dc.danglingtree.htb, DNS:danglingtree.htb, DNS:DANGLINGTREE
+| Not valid before: 2026-08-03T16:32:53
+|_Not valid after:  2106-08-03T16:32:53
+3269/tcp  open  ssl/ldap      Microsoft Windows Active Directory LDAP (Domain: danglingtree.htb, Site: Default-First-Site-Name)
+|_ssl-date: TLS randomness does not represent time
+| ssl-cert: Subject:
+| Subject Alternative Name: DNS:dc.danglingtree.htb, DNS:danglingtree.htb, DNS:DANGLINGTREE
+| Not valid before: 2026-08-03T16:32:53
+|_Not valid after:  2106-08-03T16:32:53
+3389/tcp  open  ms-wbt-server
+|_ssl-date: TLS randomness does not represent time
+| rdp-ntlm-info:
+|   Target_Name: DANGLINGTREE
+|   NetBIOS_Domain_Name: DANGLINGTREE
+|   NetBIOS_Computer_Name: DC
+|   DNS_Domain_Name: danglingtree.htb
+|   DNS_Computer_Name: dc.danglingtree.htb
+|   DNS_Tree_Name: danglingtree.htb
+|   Product_Version: 10.0.26100
+|_  System_Time: 2026-08-25T06:27:11+00:00
+| ssl-cert: Subject: commonName=dc.danglingtree.htb
+| Not valid before: 2026-08-24T06:18:49
+|_Not valid after:  2027-02-23T06:18:49
+6600/tcp  open  ssl/mshvlm?
+| tls-alpn:
+|   h2
+|_  http/1.1
+|_ssl-date: TLS randomness does not represent time
+| ssl-cert: Subject: commonName=dc.danglingtree.htb
+| Subject Alternative Name: othername: 1.3.6.1.4.1.311.25.1:<unsupported>, DNS:dc.danglingtree.htb
+| Not valid before: 2026-03-26T05:41:20
+|_Not valid after:  2027-03-26T05:41:20
+| fingerprint-strings:
+|   GetRequest:
+|     HTTP/1.1 403 Forbidden
+|     Connection: close
+|     Date: Tue, 25 Aug 2026 06:25:48 GMT
+|     Cache-Control: no-store
+|     Cache-Control: max-age=0
+|     Pragma: no-cache
+|     Set-Cookie: .AspNetCore.Antiforgery.7Eyhia2WOxE=CfDJ8HsozULo80ZBsxvkNAKguomH23UVdad5h8GKNqVw5xY4mztJZwpMkqspxQYBAdl1CrTGsvEHVFW0rLdG7467wFytC0Mz61LDlepGp-QlAGPs3ayA_FZTgfOSB-QwpR1A_SP0P8vuIPg-o7MXbqQ37O8; path=/; secure; samesite=none; Partitioned
+|     Set-Cookie: WAC-SESSION=1b9ed195453c4c5f81b6640ba0d1e96d; expires=Wed, 26 Aug 2026 06:25:48 GMT; path=/; secure; samesite=lax; httponly
+|     Set-Cookie: WAC-TOKEN=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/
+|     Set-Cookie: WAC-AAD=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/
+|     Set-Cookie: XSRF-TOKEN=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/
+|     Strict-Transport-Security: max-age=5184000; includeSubDomains; preload
+|     <!DOCTYPE html>
+|     <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+|     <head
+|   HTTPOptions:
+|     HTTP/1.1 403 Forbidden
+|     Connection: close
+|     Date: Tue, 25 Aug 2026 06:25:48 GMT
+|     Cache-Control: no-store
+|     Cache-Control: max-age=0
+|     Pragma: no-cache
+|     Set-Cookie: .AspNetCore.Antiforgery.7Eyhia2WOxE=CfDJ8HsozULo80ZBsxvkNAKguonsq_NqZnGV0-vJLxmH0J5BzIF_5CiMqccl9Dhp8pb8VJZ1XRvGf9mRguiyjgJswULUKMTSkUOWW0ouCv95aGu7VkLdcjl0lgaAGm2gZzn5QF1YYcWEZzp5JOClTlj5i30; path=/; secure; samesite=none; Partitioned
+|     Set-Cookie: WAC-SESSION=95f7c0c0f6e34cbc870b2f17a0d9cfa0; expires=Wed, 26 Aug 2026 06:25:48 GMT; path=/; secure; samesite=lax; httponly
+|     Set-Cookie: WAC-TOKEN=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/
+|     Set-Cookie: WAC-AAD=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/
+|     Set-Cookie: XSRF-TOKEN=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/
+|     Strict-Transport-Security: max-age=5184000; includeSubDomains; preload
+|     <!DOCTYPE html>
+|     <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+|_    <head
+9389/tcp  open  mc-nmf        .NET Message Framing
+49664/tcp open  msrpc         Microsoft Windows RPC
+49677/tcp open  msrpc         Microsoft Windows RPC
+49679/tcp open  msrpc         Microsoft Windows RPC
+49681/tcp open  msrpc         Microsoft Windows RPC
+49682/tcp open  ncacn_http    Microsoft Windows RPC over HTTP 1.0
+49693/tcp open  msrpc         Microsoft Windows RPC
+49708/tcp open  msrpc         Microsoft Windows RPC
+49722/tcp open  msrpc         Microsoft Windows RPC
+49771/tcp open  msrpc         Microsoft Windows RPC
+2 services unrecognized despite returning data. If you know the service/version, please submit the following fingerprints at https://nmap.org/cgi-bin/submit.cgi?new-service :
+==============NEXT SERVICE FINGERPRINT (SUBMIT INDIVIDUALLY)==============
+SF-Port3389-TCP:V=7.98%I=7%D=8/25%Time=6A8CD322%P=x86_64-pc-linux-gnu%r(Te
+SF:rminalServerCookie,13,"\x03\0\0\x13\x0e\xd0\0\0\x124\0\x02\?\x08\0\x02\
+SF:0\0\0");
+==============NEXT SERVICE FINGERPRINT (SUBMIT INDIVIDUALLY)==============
+SF-Port6600-TCP:V=7.98%T=SSL%I=7%D=8/25%Time=6A8CD32E%P=x86_64-pc-linux-gn
+SF:u%r(GetRequest,1000,"HTTP/1\.1\x20403\x20Forbidden\r\nConnection:\x20cl
+SF:ose\r\nDate:\x20Tue,\x2025\x20Aug\x202026\x2006:25:48\x20GMT\r\nCache-C
+SF:ontrol:\x20no-store\r\nCache-Control:\x20max-age=0\r\nPragma:\x20no-cac
+SF:he\r\nSet-Cookie:\x20\.AspNetCore\.Antiforgery\.7Eyhia2WOxE=CfDJ8HsozUL
+SF:o80ZBsxvkNAKguomH23UVdad5h8GKNqVw5xY4mztJZwpMkqspxQYBAdl1CrTGsvEHVFW0rL
+SF:dG7467wFytC0Mz61LDlepGp-QlAGPs3ayA_FZTgfOSB-QwpR1A_SP0P8vuIPg-o7MXbqQ37
+SF:O8;\x20path=/;\x20secure;\x20samesite=none;\x20Partitioned\r\nSet-Cooki
+SF:e:\x20WAC-SESSION=1b9ed195453c4c5f81b6640ba0d1e96d;\x20expires=Wed,\x20
+SF:26\x20Aug\x202026\x2006:25:48\x20GMT;\x20path=/;\x20secure;\x20samesite
+SF:=lax;\x20httponly\r\nSet-Cookie:\x20WAC-TOKEN=;\x20expires=Thu,\x2001\x
+SF:20Jan\x201970\x2000:00:00\x20GMT;\x20path=/\r\nSet-Cookie:\x20WAC-AAD=;
+SF:\x20expires=Thu,\x2001\x20Jan\x201970\x2000:00:00\x20GMT;\x20path=/\r\n
+SF:Set-Cookie:\x20XSRF-TOKEN=;\x20expires=Thu,\x2001\x20Jan\x201970\x2000:
+SF:00:00\x20GMT;\x20path=/\r\nStrict-Transport-Security:\x20max-age=518400
+SF:0;\x20includeSubDomains;\x20preload\r\n\r\n<!DOCTYPE\x20html>\r\n<html\
+SF:x20lang=\"en\"\x20xmlns=\"http://www\.w3\.org/1999/xhtml\">\r\n\r\n<hea
+SF:d")%r(HTTPOptions,2000,"HTTP/1\.1\x20403\x20Forbidden\r\nConnection:\x2
+SF:0close\r\nDate:\x20Tue,\x2025\x20Aug\x202026\x2006:25:48\x20GMT\r\nCach
+SF:e-Control:\x20no-store\r\nCache-Control:\x20max-age=0\r\nPragma:\x20no-
+SF:cache\r\nSet-Cookie:\x20\.AspNetCore\.Antiforgery\.7Eyhia2WOxE=CfDJ8Hso
+SF:zULo80ZBsxvkNAKguonsq_NqZnGV0-vJLxmH0J5BzIF_5CiMqccl9Dhp8pb8VJZ1XRvGf9m
+SF:RguiyjgJswULUKMTSkUOWW0ouCv95aGu7VkLdcjl0lgaAGm2gZzn5QF1YYcWEZzp5JOClTl
+SF:j5i30;\x20path=/;\x20secure;\x20samesite=none;\x20Partitioned\r\nSet-Co
+SF:okie:\x20WAC-SESSION=95f7c0c0f6e34cbc870b2f17a0d9cfa0;\x20expires=Wed,\
+SF:x2026\x20Aug\x202026\x2006:25:48\x20GMT;\x20path=/;\x20secure;\x20sames
+SF:ite=lax;\x20httponly\r\nSet-Cookie:\x20WAC-TOKEN=;\x20expires=Thu,\x200
+SF:1\x20Jan\x201970\x2000:00:00\x20GMT;\x20path=/\r\nSet-Cookie:\x20WAC-AA
+SF:D=;\x20expires=Thu,\x2001\x20Jan\x201970\x2000:00:00\x20GMT;\x20path=/\
+SF:r\nSet-Cookie:\x20XSRF-TOKEN=;\x20expires=Thu,\x2001\x20Jan\x201970\x20
+SF:00:00:00\x20GMT;\x20path=/\r\nStrict-Transport-Security:\x20max-age=518
+SF:4000;\x20includeSubDomains;\x20preload\r\n\r\n<!DOCTYPE\x20html>\r\n<ht
+SF:ml\x20lang=\"en\"\x20xmlns=\"http://www\.w3\.org/1999/xhtml\">\r\n\r\n<
+SF:head");
+Service Info: Host: DC; OS: Windows; CPE: cpe:/o:microsoft:windows
+
+Host script results:
+|_clock-skew: mean: 6h59m08s, deviation: 0s, median: 6h59m08s
+| smb2-security-mode:
+|   3.1.1:
+|_    Message signing enabled and required
+| smb2-time:
+|   date: 2026-08-25T06:27:15
+|_  start_date: N/A
+
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 149.09 seconds
+[*] Done
+╭─ ~/hacking/ctf/htb/medium/danglintree/recon                                                              ✔ │ 3m 2s ─╮
+╰─                                                                                                                   ─╯
+
+```
