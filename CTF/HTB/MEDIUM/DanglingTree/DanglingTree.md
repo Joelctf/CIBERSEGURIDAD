@@ -212,6 +212,17 @@ Nmap done: 1 IP address (1 host up) scanned in 149.09 seconds
 
 ``` bash
 
+❯ curl -I 10.129.80.127
+HTTP/1.1 200 OK
+Content-Length: 703
+Content-Type: text/html
+Last-Modified: Thu, 26 Mar 2026 05:40:48 GMT
+Accept-Ranges: bytes
+ETag: "b3b97519e3bcdc1:0"
+Server: Microsoft-IIS/10.0
+X-Powered-By: ASP.NET
+Date: Tue, 25 Aug 2026 06:38:04 GMT
+
 ❯ curl -I https://10.129.80.127 -k
 HTTP/2 200
 content-length: 703
