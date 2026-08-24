@@ -278,3 +278,23 @@ a img {
 ╰─                                                                                                                   ─╯
 
 ```
+
+``` bash
+
+❯ smbclient -L //danglingtree.htb -N
+
+        Sharename       Type      Comment
+        ---------       ----      -------
+        ADMIN$          Disk      Remote Admin
+        C$              Disk      Default share
+        IPC$            IPC       Remote IPC
+        IT              Disk
+        NETLOGON        Disk      Logon server share
+        SYSVOL          Disk      Logon server share
+Reconnecting with SMB1 for workgroup listing.
+do_connect: Connection to danglingtree.htb failed (Error NT_STATUS_RESOURCE_NAME_NOT_FOUND)
+Unable to connect with SMB1 -- no workgroup available
+╭─ ~/hacking/ctf/htb/medium/danglintree/recon                                                                      ✔ ─╮
+╰─                                                                                                                   ─╯
+
+```
