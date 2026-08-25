@@ -811,3 +811,5 @@ SHELL> echo y | ./plink.exe -v -ssh -P 2222 -R 17017:127.0.0.1:17017 joel@10.10.
 
 
 ```
+
+![img](./img/Captura6.png)
