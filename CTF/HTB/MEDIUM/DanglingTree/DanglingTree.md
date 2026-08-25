@@ -352,4 +352,43 @@ CLOCK: time stepped by 25149.596887
 
 ```
 
+``` bash
 
+❯ rpcclient -U 'danglingtree.htb/anderson.w%R3dT3am@Acc3ss#01' 10.129.80.127
+rpcclient $> enumdomusers
+user:[anderson.w] rid:[0xa29]
+rpcclient $> ^C
+❯ nxc ldap 10.129.80.127 -d danglingtree.htb -u 'anderson.w' -p 'R3dT3am@Acc3ss#01' --users
+LDAP        10.129.80.127   389    DC               [*] Windows 11 / Server 2025 Build 26100 (name:DC) (domain:danglingtree.htb) (signing:Enforced) (channel binding:Never)
+LDAP        10.129.80.127   389    DC               [+] danglingtree.htb\anderson.w:R3dT3am@Acc3ss#01
+LDAP        10.129.80.127   389    DC               [*] Enumerated 1 domain users: danglingtree.htb
+LDAP        10.129.80.127   389    DC               -Username-                    -Last PW Set-       -BadPW-  -Description-
+LDAP        10.129.80.127   389    DC               anderson.w                    2026-04-05 02:00:40 0
+❯ bloodhound-python -u 'anderson.w' -p 'R3dT3am@Acc3ss#01' -d danglingtree.htb -ns 10.129.80.127 -c All
+INFO: BloodHound.py for BloodHound LEGACY (BloodHound 4.2 and 4.3)
+INFO: Found AD domain: danglingtree.htb
+INFO: Getting TGT for user
+INFO: Connecting to LDAP server: dc.danglingtree.htb
+INFO: Testing resolved hostname connectivity dead:beef::dba:45e7:cd70:5a73
+INFO: Trying LDAP connection to dead:beef::dba:45e7:cd70:5a73
+WARNING: LDAP Authentication is refused because LDAP signing is enabled. Trying to connect over LDAPS instead...
+INFO: Found 1 domains
+INFO: Found 1 domains in the forest
+INFO: Found 1 computers
+INFO: Connecting to LDAP server: dc.danglingtree.htb
+INFO: Testing resolved hostname connectivity dead:beef::dba:45e7:cd70:5a73
+INFO: Trying LDAP connection to dead:beef::dba:45e7:cd70:5a73
+WARNING: LDAP Authentication is refused because LDAP signing is enabled. Trying to connect over LDAPS instead...
+INFO: Found 2 users
+INFO: Found 33 groups
+INFO: Found 2 gpos
+INFO: Found 3 ous
+INFO: Found 18 containers
+INFO: Found 0 trusts
+INFO: Starting computer enumeration with 10 workers
+INFO: Querying computer: dc.danglingtree.htb
+INFO: Done in 00M 10S
+╭─ ~/hacking/ctf/htb/medium/danglintree/recon                                                                ✔ │ 11s ─╮
+╰─
+
+```
