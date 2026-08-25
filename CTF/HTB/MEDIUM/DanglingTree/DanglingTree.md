@@ -813,3 +813,32 @@ SHELL> echo y | ./plink.exe -v -ssh -P 2222 -R 17017:127.0.0.1:17017 joel@10.10.
 ```
 
 ![img](./img/Captura6.png)
+
+
+``` javascript
+
+<script>
+		var htmlCacheBustQs = "cachebust=639035056020000000";
+		var languageCacheBustQs = "cachebust=639035080220000000";
+		var angularLangList = ['ar','bn','cs','da','de','el','en-GB','en','es','fa','fi','fr','hi','id','it','ja','ko-KR','nl','pl','pt-BR','pt','sl','sv','th-TH','tr','zh-CN','zh-HK','zh-TW'];
+		var angularLangMap = {'ar': 'ar', 'bn': 'bn', 'cs': 'cs', 'da': 'da', 'de': 'de', 'el': 'el', 'en-GB': 'en-GB', 'en': 'en', 'es': 'es', 'fa': 'fa', 'fi': 'fi', 'fr': 'fr', 'hi': 'hi', 'id': 'id', 'it': 'it', 'ja': 'ja', 'ko-KR': 'ko-KR', 'nl': 'nl', 'pl': 'pl', 'pt-BR': 'pt-BR', 'pt': 'pt', 'sl': 'sl', 'sv': 'sv', 'th-TH': 'th-TH', 'tr': 'tr', 'zh-CN': 'zh-CN', 'zh-HK': 'zh-HK', 'zh-TW': 'zh-TW', 'ar*': 'ar', 'bn*': 'bn', 'cs*': 'cs', 'da*': 'da', 'de*': 'de', 'el*': 'el', 'en*': 'en', 'es*': 'es', 'fa*': 'fa', 'fi*': 'fi', 'fr*': 'fr', 'hi*': 'hi', 'id*': 'id', 'it*': 'it', 'ja*': 'ja', 'ko*': 'ko-KR', 'ko': 'ko-KR', 'nl*': 'nl', 'pl*': 'pl', 'pt*': 'pt', 'sl*': 'sl', 'sv*': 'sv', 'th*': 'th-TH', 'th': 'th-TH', 'tr*': 'tr', 'zh*': 'zh-CN', 'zh': 'zh-CN'};
+		var angularLangNames = [{v:'ar',n:'العربية'},{v:'bn',n:'বাংলা'},{v:'cs',n:'čeština'},{v:'da',n:'dansk'},{v:'de',n:'Deutsch'},{v:'el',n:'Ελληνικά'},{v:'en-GB',n:'English (United Kingdom)'},{v:'en',n:'English'},{v:'es',n:'español'},{v:'fa',n:'فارسی'},{v:'fi',n:'suomi'},{v:'fr',n:'français'},{v:'hi',n:'हिन्दी'},{v:'id',n:'Indonesia'},{v:'it',n:'italiano'},{v:'ja',n:'日本語'},{v:'ko-KR',n:'한국어(대한민국)'},{v:'nl',n:'Nederlands'},{v:'pl',n:'polski'},{v:'pt-BR',n:'português (Brasil)'},{v:'pt',n:'português'},{v:'sl',n:'slovenščina'},{v:'sv',n:'svenska'},{v:'th-TH',n:'ไทย (ไทย)'},{v:'tr',n:'Türkçe'},{v:'zh-CN',n:'中文（中国）'},{v:'zh-HK',n:'中文（香港特別行政區）'},{v:'zh-TW',n:'中文（台灣）'}];
+		var cssVersion = "639035080380000000";
+		var stProductVersion = "100.0.9504";
+		var stProductBuild = "9504 (Jan 8, 2026)";
+		var stSiteRoot = "/";
+		var stOS = "W";
+		var stHA = false;
+		var stHAID = "";
+		var stTzOff = -480;
+		var debugMode = 0;
+		var stSystemHostname = "";
+
+		function cachebust(url) {
+			if (!url) return null;
+			var separator = url.indexOf("?")==-1 ? "?" : "&";
+			return url + separator + htmlCacheBustQs;
+		}
+	</script>
+
+```
