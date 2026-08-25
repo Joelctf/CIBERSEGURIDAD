@@ -414,3 +414,25 @@ ANDERSON.W@DANGLINGTREE.HTB
 ╰─                                                                                                                   ─╯
 
 ```
+
+``` bash
+
+❯ curl -I https://danglingtree.htb:6600 -k
+HTTP/2 403
+date: Tue, 25 Aug 2026 07:29:29 GMT
+cache-control: no-store
+cache-control: max-age=0
+pragma: no-cache
+set-cookie: .AspNetCore.Antiforgery.7Eyhia2WOxE=CfDJ8HsozULo80ZBsxvkNAKguonuTI1Gb3oAWCu34qldFXf70BdrsDE_q6YFdRAWtQMOK-Ntb3vrHqUZD7_vpmEmfOMt0GErF4fU3nsK1ms5-BMzQp9hav9OqYnQojlirRtK-FgxwiZrOweeW_cyhfEJV_U; path=/; secure; samesite=none; Partitioned
+set-cookie: WAC-SESSION=1c5821565b364ae884b3b2190c3b639d; expires=Wed, 26 Aug 2026 07:29:30 GMT; path=/; secure; samesite=lax; httponly
+set-cookie: WAC-TOKEN=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/
+set-cookie: WAC-AAD=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/
+set-cookie: XSRF-TOKEN=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/
+strict-transport-security: max-age=5184000; includeSubDomains; preload
+
+╭─ ~/hacking/ctf/htb/medium/danglintree/recon/bloodhound_enum                                                      ✔ ─╮
+╰─                                                                                                                   ─╯
+
+```
+
+
