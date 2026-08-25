@@ -612,3 +612,94 @@ d-----         3/27/2026   5:53 PM                svc_mail
 SHELL>
 
 ```
+
+``` bash
+
+SHELL> netstat -ano | findstr LISTENING
+  TCP    0.0.0.0:80             0.0.0.0:0              LISTENING       4
+  TCP    0.0.0.0:88             0.0.0.0:0              LISTENING       924
+  TCP    0.0.0.0:135            0.0.0.0:0              LISTENING       948
+  TCP    0.0.0.0:389            0.0.0.0:0              LISTENING       924
+  TCP    0.0.0.0:443            0.0.0.0:0              LISTENING       4
+  TCP    0.0.0.0:445            0.0.0.0:0              LISTENING       4
+  TCP    0.0.0.0:464            0.0.0.0:0              LISTENING       924
+  TCP    0.0.0.0:593            0.0.0.0:0              LISTENING       948
+  TCP    0.0.0.0:636            0.0.0.0:0              LISTENING       924
+  TCP    0.0.0.0:3268           0.0.0.0:0              LISTENING       924
+  TCP    0.0.0.0:3269           0.0.0.0:0              LISTENING       924
+  TCP    0.0.0.0:3389           0.0.0.0:0              LISTENING       1164
+  TCP    0.0.0.0:5985           0.0.0.0:0              LISTENING       4
+  TCP    0.0.0.0:6600           0.0.0.0:0              LISTENING       4460
+  TCP    0.0.0.0:6601           0.0.0.0:0              LISTENING       3820
+  TCP    0.0.0.0:6602           0.0.0.0:0              LISTENING       6012
+  TCP    0.0.0.0:9389           0.0.0.0:0              LISTENING       3700
+  TCP    0.0.0.0:17017          0.0.0.0:0              LISTENING       900
+  TCP    0.0.0.0:47001          0.0.0.0:0              LISTENING       4
+  TCP    0.0.0.0:49193          0.0.0.0:0              LISTENING       3896
+  TCP    0.0.0.0:49664          0.0.0.0:0              LISTENING       924
+  TCP    0.0.0.0:49665          0.0.0.0:0              LISTENING       772
+  TCP    0.0.0.0:49672          0.0.0.0:0              LISTENING       1844
+  TCP    0.0.0.0:49674          0.0.0.0:0              LISTENING       2652
+  TCP    0.0.0.0:49675          0.0.0.0:0              LISTENING       2248
+  TCP    0.0.0.0:49677          0.0.0.0:0              LISTENING       924
+  TCP    0.0.0.0:49679          0.0.0.0:0              LISTENING       2232
+  TCP    0.0.0.0:49681          0.0.0.0:0              LISTENING       924
+  TCP    0.0.0.0:49682          0.0.0.0:0              LISTENING       924
+  TCP    0.0.0.0:49691          0.0.0.0:0              LISTENING       916
+  TCP    0.0.0.0:49693          0.0.0.0:0              LISTENING       924
+  TCP    0.0.0.0:49708          0.0.0.0:0              LISTENING       3672
+  TCP    0.0.0.0:49722          0.0.0.0:0              LISTENING       3664
+  TCP    0.0.0.0:49771          0.0.0.0:0              LISTENING       3584
+  TCP    10.129.80.127:53       0.0.0.0:0              LISTENING       3672
+  TCP    10.129.80.127:139      0.0.0.0:0              LISTENING       4
+  TCP    127.0.0.1:25           0.0.0.0:0              LISTENING       900
+  TCP    127.0.0.1:53           0.0.0.0:0              LISTENING       3672
+  TCP    127.0.0.1:110          0.0.0.0:0              LISTENING       900
+  TCP    127.0.0.1:143          0.0.0.0:0              LISTENING       900
+  TCP    127.0.0.1:587          0.0.0.0:0              LISTENING       900
+  TCP    127.0.0.1:5222         0.0.0.0:0              LISTENING       900
+  TCP    [::]:80                [::]:0                 LISTENING       4
+  TCP    [::]:88                [::]:0                 LISTENING       924
+  TCP    [::]:135               [::]:0                 LISTENING       948
+  TCP    [::]:389               [::]:0                 LISTENING       924
+  TCP    [::]:443               [::]:0                 LISTENING       4
+  TCP    [::]:445               [::]:0                 LISTENING       4
+  TCP    [::]:464               [::]:0                 LISTENING       924
+  TCP    [::]:593               [::]:0                 LISTENING       948
+  TCP    [::]:636               [::]:0                 LISTENING       924
+  TCP    [::]:3268              [::]:0                 LISTENING       924
+  TCP    [::]:3269              [::]:0                 LISTENING       924
+  TCP    [::]:3389              [::]:0                 LISTENING       1164
+  TCP    [::]:5985              [::]:0                 LISTENING       4
+  TCP    [::]:6600              [::]:0                 LISTENING       4460
+  TCP    [::]:6601              [::]:0                 LISTENING       3820
+  TCP    [::]:6602              [::]:0                 LISTENING       6012
+  TCP    [::]:9389              [::]:0                 LISTENING       3700
+  TCP    [::]:17017             [::]:0                 LISTENING       900
+  TCP    [::]:47001             [::]:0                 LISTENING       4
+  TCP    [::]:49193             [::]:0                 LISTENING       3896
+  TCP    [::]:49664             [::]:0                 LISTENING       924
+  TCP    [::]:49665             [::]:0                 LISTENING       772
+  TCP    [::]:49672             [::]:0                 LISTENING       1844
+  TCP    [::]:49674             [::]:0                 LISTENING       2652
+  TCP    [::]:49675             [::]:0                 LISTENING       2248
+  TCP    [::]:49677             [::]:0                 LISTENING       924
+  TCP    [::]:49679             [::]:0                 LISTENING       2232
+  TCP    [::]:49681             [::]:0                 LISTENING       924
+  TCP    [::]:49682             [::]:0                 LISTENING       924
+  TCP    [::]:49691             [::]:0                 LISTENING       916
+  TCP    [::]:49693             [::]:0                 LISTENING       924
+  TCP    [::]:49708             [::]:0                 LISTENING       3672
+  TCP    [::]:49722             [::]:0                 LISTENING       3664
+  TCP    [::]:49771             [::]:0                 LISTENING       3584
+  TCP    [::1]:25               [::]:0                 LISTENING       900
+  TCP    [::1]:53               [::]:0                 LISTENING       3672
+  TCP    [::1]:110              [::]:0                 LISTENING       900
+  TCP    [::1]:143              [::]:0                 LISTENING       900
+  TCP    [::1]:587              [::]:0                 LISTENING       900
+  TCP    [::1]:5222             [::]:0                 LISTENING       900
+  TCP    [dead:beef::dba:45e7:cd70:5a73]:53  [::]:0                 LISTENING       3672
+  TCP    [fe80::ed1e:276b:b884:920f%5]:53  [::]:0                 LISTENING       3672
+SHELL>
+
+```
