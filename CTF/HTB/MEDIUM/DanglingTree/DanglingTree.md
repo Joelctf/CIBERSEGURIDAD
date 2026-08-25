@@ -716,3 +716,23 @@ MailService
 SHELL>
 
 ```
+
+``` bash
+
+SHELL> Get-ChildItem "C:\" -Directory | Select-Object Name
+
+Name
+----
+inetpub
+PerfLogs
+Program Files
+Program Files (x86)
+Shares
+SmarterMail
+Users
+Windows
+
+
+SHELL>
+
+```
