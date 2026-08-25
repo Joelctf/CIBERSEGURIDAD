@@ -438,3 +438,5 @@ strict-transport-security: max-age=5184000; includeSubDomains; preload
 ![img](./img/Captura%20de%20pantalla%202026-08-25%20023530.png)
 
 ![img](./img/Captura%20de%20pantalla%202026-08-25%20024205.png)
+
+![img](./img/Captura3.png)
