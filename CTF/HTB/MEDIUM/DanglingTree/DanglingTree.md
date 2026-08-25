@@ -341,3 +341,15 @@ all_ports.txt  DanglingTree_RoE_Assessment.pdf  version_ports.txt
 ```
 
 [PDF](./DanglingTree_RoE_Assessment.pdf)
+
+``` bash
+
+❯ sudo ntpdate 10.129.80.127
+2026-08-25 09:16:29.378752 (+0200) +25149.596887 +/- 0.019536 10.129.80.127 s1 no-leap
+CLOCK: time stepped by 25149.596887
+╭─ ~/hacking/ctf/htb/medium/danglintree/recon                                                         ✔ │ 6h 59m 10s ─╮
+╰─                                                                                                                   ─╯
+
+```
+
+
