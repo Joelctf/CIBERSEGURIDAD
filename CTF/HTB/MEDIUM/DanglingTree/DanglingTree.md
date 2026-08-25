@@ -448,3 +448,5 @@ strict-transport-security: max-age=5184000; includeSubDomains; preload
 ```
 
 ![img](./img/Captura4.png)
+
+![img](./img/Captura5.png)
