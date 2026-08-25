@@ -392,3 +392,25 @@ INFO: Done in 00M 10S
 ╰─
 
 ```
+
+``` bash
+
+❯ ls
+20260825020930_computers.json   20260825021042_computers.json   20260825021242_computers.json
+20260825020930_containers.json  20260825021042_containers.json  20260825021242_containers.json
+20260825020930_domains.json     20260825021042_domains.json     20260825021242_domains.json
+20260825020930_gpos.json        20260825021042_gpos.json        20260825021242_gpos.json
+20260825020930_groups.json      20260825021042_groups.json      20260825021242_groups.json
+20260825020930_ous.json         20260825021042_ous.json         20260825021242_ous.json
+20260825020930_users.json       20260825021042_users.json       20260825021242_users.json
+❯ jq -r '.data[].Properties.name' *_users.json
+NT AUTHORITY@DANGLINGTREE.HTB
+ANDERSON.W@DANGLINGTREE.HTB
+NT AUTHORITY@DANGLINGTREE.HTB
+ANDERSON.W@DANGLINGTREE.HTB
+NT AUTHORITY@DANGLINGTREE.HTB
+ANDERSON.W@DANGLINGTREE.HTB
+╭─ ~/hacking/ctf/htb/medium/danglintree/recon/bloodhound_enum                                                      ✔ ─╮
+╰─                                                                                                                   ─╯
+
+```
