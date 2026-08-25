@@ -703,3 +703,16 @@ SHELL> netstat -ano | findstr LISTENING
 SHELL>
 
 ```
+
+``` bash
+
+SHELL> Get-Process -Id 900 | Select-Object Name, Path
+
+Name        Path
+----        ----
+MailService
+
+
+SHELL>
+
+```
