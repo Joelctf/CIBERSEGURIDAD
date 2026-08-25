@@ -441,40 +441,8 @@ strict-transport-security: max-age=5184000; includeSubDomains; preload
 
 ![img](./img/Captura3.png)
 
-``` bash
+``` json
 
-❯ ldapsearch -x -H ldaps://10.129.80.127:636 -D 'anderson.w@danglingtree.htb' -w 'R3dT3am@Acc3ss#01' -b 'DC=danglingtree,DC=htb' "(sAMAccountName=anderson.w)" memberOf -o tls_reqcert=never
-# extended LDIF
-#
-# LDAPv3
-# base <DC=danglingtree,DC=htb> with scope subtree
-# filter: (sAMAccountName=anderson.w)
-# requesting: memberOf
-#
-
-# anderson.w, External, Contractors, danglingtree.htb
-dn: CN=anderson.w,OU=External,OU=Contractors,DC=danglingtree,DC=htb
-memberOf: CN=Remote Management Users,CN=Builtin,DC=danglingtree,DC=htb
-
-# search reference
-ref: ldaps://ForestDnsZones.danglingtree.htb/DC=ForestDnsZones,DC=danglingtree
- ,DC=htb
-
-# search reference
-ref: ldaps://DomainDnsZones.danglingtree.htb/DC=DomainDnsZones,DC=danglingtree
- ,DC=htb
-
-# search reference
-ref: ldaps://danglingtree.htb/CN=Configuration,DC=danglingtree,DC=htb
-
-# search result
-search: 2
-result: 0 Success
-
-# numResponses: 5
-# numEntries: 1
-# numReferences: 3
-╭─ ~/hacking/ctf/htb/medium/danglintree/recon/bloodhound_enum                                                      ✔ ─╮
-╰─                                                                                                                   ─╯
+{"availableMemoryMByte":0,"gatewayWorkingSetMByte":0,"totalCpuUtilizationPercent":0,"gatewayCpuUtilizationPercent":0,"gatewayVersion":"2.6.4.11","gatewayDisplayVersion":"2511","friendlyOsName":"Microsoft Windows NT 10.0.26100.0","installedDate":"2026-03-25T07:00:00.0000000Z","logicalProcessorCount":4,"name":"dc","machineName":"DC","fullyQualifiedDNSName":"dc.danglingtree.htb","addressList":["fe80::ed1e:276b:b884:920f%5","dead:beef::dba:45e7:cd70:5a73","10.129.80.127"],"gatewayMode":"Service","allowedHostOrigins":["'self'","https://*.hosting.portal.azure.net","https://portal.azure.com","https://preview.portal.azure.com","https://ms.portal.azure.com","'self'"],"isGatewayProcessElevated":true,"isAadAuthEnabled":false,"isAzureAppCreated":false,"gatewayOperationalMode":"Production","jwk":{"kty":"RSA","alg":"RSA-OAEP","e":"AQAB","n":"6XEurE3jcmsrn3dl3SZn_qwz3ctc6D0Y4UF5L78GPLE0cXgrq8H-OZEoll6m_N_DfBMYGzNdijIjA4ykvqrb-7nD4hqIczYpwsE0RnCGIvYhFHm9nZxvAWelPLY5IEtwWj122N8Vf9RTfJqJsx7II9qzGWdXIm4Dlj7VX7tcg1EcZdiOUl7P5ayTQHm-pfnedjH3bKB4B5xEVyMgAx8gEh5t3p1KHT1YtH4Fdm02nHUwEE-tylsdYmC3cryHKBwsomEunB81usBQqipdOi0Gtc4BJEmJi4FiEGs5ew3xm47OUbgefEQ-78utVzXoIPa2iAldvZqAFh1won_SanG-4-n0sGod1tWiAYhvhEJPivy8xaHO_ZorIpXMitEJoiYqb76R0MaLBFT9vEsOS9_gDhlLznw1MRQBEPJ3Uz2-aGq6gXGhPyUASbKitIToHn_ltc6q2NGWjkJKSBCF2nkHD3KMEWVGwWsqtwqgGdOhxFequ__6740afBMmoTBY36Ts3rCZeokVk2MoKyT3a3qQO7bTv9J9aRWB7dstCF_fHOjJaoiU7B-lAV7ZXjX_8PA8yfofVdTJb-VHi66TmqX4vj0gPtEiAX-pYZ-Mcku7NtNacPX-r-dxyeEQ5tk2Coa0XLiPxB5kIPUWfMZK4Dzmb5bg1-QEFzKm_Q6dPdgDttE"},"installationType":"Standard","tokenAuthenticationMode":"FormLogin"}
 
 ```
