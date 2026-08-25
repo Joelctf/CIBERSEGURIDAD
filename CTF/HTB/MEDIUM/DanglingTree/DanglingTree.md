@@ -440,3 +440,41 @@ strict-transport-security: max-age=5184000; includeSubDomains; preload
 ![img](./img/Captura%20de%20pantalla%202026-08-25%20024205.png)
 
 ![img](./img/Captura3.png)
+
+``` bash
+
+❯ ldapsearch -x -H ldaps://10.129.80.127:636 -D 'anderson.w@danglingtree.htb' -w 'R3dT3am@Acc3ss#01' -b 'DC=danglingtree,DC=htb' "(sAMAccountName=anderson.w)" memberOf -o tls_reqcert=never
+# extended LDIF
+#
+# LDAPv3
+# base <DC=danglingtree,DC=htb> with scope subtree
+# filter: (sAMAccountName=anderson.w)
+# requesting: memberOf
+#
+
+# anderson.w, External, Contractors, danglingtree.htb
+dn: CN=anderson.w,OU=External,OU=Contractors,DC=danglingtree,DC=htb
+memberOf: CN=Remote Management Users,CN=Builtin,DC=danglingtree,DC=htb
+
+# search reference
+ref: ldaps://ForestDnsZones.danglingtree.htb/DC=ForestDnsZones,DC=danglingtree
+ ,DC=htb
+
+# search reference
+ref: ldaps://DomainDnsZones.danglingtree.htb/DC=DomainDnsZones,DC=danglingtree
+ ,DC=htb
+
+# search reference
+ref: ldaps://danglingtree.htb/CN=Configuration,DC=danglingtree,DC=htb
+
+# search result
+search: 2
+result: 0 Success
+
+# numResponses: 5
+# numEntries: 1
+# numReferences: 3
+╭─ ~/hacking/ctf/htb/medium/danglintree/recon/bloodhound_enum                                                      ✔ ─╮
+╰─                                                                                                                   ─╯
+
+```
