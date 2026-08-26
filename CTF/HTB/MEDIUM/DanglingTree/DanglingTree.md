@@ -1226,3 +1226,29 @@ C:\>
 
 
 ```
+
+``` powershell
+
+C:\>cd C:\Users\noah.b\Desktop
+cd C:\Users\noah.b\Desktop
+
+C:\Users\noah.b\Desktop>dir
+dir
+ Volume in drive C has no label.
+ Volume Serial Number is 343F-A409
+
+ Directory of C:\Users\noah.b\Desktop
+
+03/27/2026  03:09 PM    <DIR>          .
+03/26/2026  02:23 PM    <DIR>          ..
+08/26/2026  05:50 PM                34 user.txt
+               1 File(s)             34 bytes
+               2 Dir(s)   8,832,258,048 bytes free
+
+C:\Users\noah.b\Desktop>type user.txt
+type user.txt
+<REDACTED>
+
+C:\Users\noah.b\Desktop>
+
+```
