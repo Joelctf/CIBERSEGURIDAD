@@ -1252,3 +1252,64 @@ type user.txt
 C:\Users\noah.b\Desktop>
 
 ```
+
+``` powershell
+
+C:\Users\noah.b\Desktop>cmdkey /list
+cmdkey /list
+
+Currently stored credentials:
+
+    Target: Domain:target=PC01.danglingtree.htb
+    Type: Domain Password
+    User: alex.o
+
+
+C:\Users\noah.b\Desktop>dir /a C:\Users\noah.b\AppData\Roaming\Microsoft\Credentials\
+dir /a C:\Users\noah.b\AppData\Roaming\Microsoft\Credentials\dir /a C:\Users\noah.b\AppData\Roaming\Microsoft\Credentials\
+ Volume in drive C has no label.
+ Volume Serial Number is 343F-A409
+
+ Directory of C:\Users\noah.b\AppData\Roaming\Microsoft\Credentials
+
+
+ Directory of C:\Users\noah.b\AppData\Roaming\Microsoft\Credentials
+
+03/27/2026  03:03 PM    <DIR>          .
+03/26/2026  02:24 PM    <DIR>          ..
+03/27/2026  03:03 PM               490 57FFB67D684C67F09E7153B9C7CC3940
+               1 File(s)            490 bytes
+               2 Dir(s)   8,828,706,816 bytes free
+
+C:\Users\noah.b\Desktop>dir /a C:\Users\noah.b\AppData\Roaming\Microsoft\Protect\
+dir /a C:\Users\noah.b\AppData\Roaming\Microsoft\Protect\
+ Volume in drive C has no label.
+ Volume Serial Number is 343F-A409
+
+ Directory of C:\Users\noah.b\AppData\Roaming\Microsoft\Protect
+
+03/26/2026  02:23 PM    <DIR>          .
+03/26/2026  02:24 PM    <DIR>          ..
+03/26/2026  02:23 PM                24 CREDHIST
+03/26/2026  02:23 PM    <DIR>          S-1-5-21-4220238332-57023728-1129110646-1602
+03/26/2026  02:23 PM                76 SYNCHIST
+               2 File(s)            100 bytes
+               3 Dir(s)   8,827,580,416 bytes free
+
+C:\Users\noah.b\Desktop>dir /a C:\Users\noah.b\AppData\Roaming\Microsoft\Protect\S-1-5-21-4220238332-57023728-1129110646-1602\
+dir /a C:\Users\noah.b\AppData\Roaming\Microsoft\Protect\S-1-5-21-4220238332-57023728-1129110646-1602\
+ Volume in drive C has no label.
+ Volume Serial Number is 343F-A409
+
+ Directory of C:\Users\noah.b\AppData\Roaming\Microsoft\Protect\S-1-5-21-4220238332-57023728-1129110646-1602
+
+03/26/2026  02:23 PM    <DIR>          .
+03/26/2026  02:23 PM    <DIR>          ..
+03/26/2026  02:23 PM               924 BK-DANGLINGTREE
+03/26/2026  02:23 PM               876 f53fcaba-f057-48e8-8f92-0180d274bf0f
+03/26/2026  02:23 PM                24 Preferred
+               3 File(s)          1,824 bytes
+               2 Dir(s)   8,827,625,472 bytes free
+
+C:\Users\noah.b\Desktop>
+
