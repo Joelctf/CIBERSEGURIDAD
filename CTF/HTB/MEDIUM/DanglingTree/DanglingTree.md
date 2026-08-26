@@ -1001,3 +1001,88 @@ C:\Program Files (x86)\SmarterTools\SmarterMail\Service\Settings>
 
 
 ```
+
+``` bash
+
+C:\SmarterMail>cd C:\SmarterMail\Domains\danglingtree.htb\Users
+cd C:\SmarterMail\Domains\danglingtree.htb\Users
+
+C:\SmarterMail\Domains\danglingtree.htb\Users>dir
+dir
+ Volume in drive C has no label.
+ Volume Serial Number is 343F-A409
+
+ Directory of C:\SmarterMail\Domains\danglingtree.htb\Users
+
+03/27/2026  05:23 PM    <DIR>          .
+08/26/2026  06:51 PM    <DIR>          ..
+08/26/2026  05:51 PM    <DIR>          svc_mail
+               0 File(s)              0 bytes
+               3 Dir(s)   9,135,972,352 bytes free
+
+C:\SmarterMail\Domains\danglingtree.htb\Users>cd ..
+cd ..
+
+C:\SmarterMail\Domains\danglingtree.htb>cd ..
+cd ..
+
+C:\SmarterMail\Domains>dir
+dir
+ Volume in drive C has no label.
+ Volume Serial Number is 343F-A409
+
+ Directory of C:\SmarterMail\Domains
+
+03/27/2026  05:23 PM    <DIR>          .
+03/26/2026  01:59 PM    <DIR>          ..
+08/26/2026  06:51 PM    <DIR>          danglingtree.htb
+03/26/2026  02:19 PM    <DIR>          danglingtree.htb.bak
+               0 File(s)              0 bytes
+               4 Dir(s)   9,135,923,200 bytes free
+
+C:\SmarterMail\Domains>cd danglingtree.htb.bak
+cd danglingtree.htb.bak
+
+C:\SmarterMail\Domains\danglingtree.htb.bak>cd Users
+cd Users
+
+C:\SmarterMail\Domains\danglingtree.htb.bak\Users>dir
+dir
+ Volume in drive C has no label.
+ Volume Serial Number is 343F-A409
+
+ Directory of C:\SmarterMail\Domains\danglingtree.htb.bak\Users
+
+03/26/2026  02:19 PM    <DIR>          .
+03/26/2026  02:19 PM    <DIR>          ..
+03/26/2026  02:02 PM    <DIR>          amelia.r
+03/26/2026  02:00 PM    <DIR>          emma.s
+03/26/2026  02:01 PM    <DIR>          liam.m
+03/26/2026  02:20 PM    <DIR>          noah.b
+03/26/2026  02:01 PM    <DIR>          oliver.t
+03/26/2026  02:01 PM    <DIR>          sophia.k
+03/26/2026  02:00 PM    <DIR>          svc_mail
+               0 File(s)              0 bytes
+               9 Dir(s)   9,135,857,664 bytes free
+
+C:\SmarterMail\Domains\danglingtree.htb.bak\Users>dir C:\Users
+dir C:\Users
+ Volume in drive C has no label.
+ Volume Serial Number is 343F-A409
+
+ Directory of C:\Users
+
+08/26/2026  06:10 PM    <DIR>          .
+03/25/2026  10:40 PM    <DIR>          .NET v4.5
+03/25/2026  10:40 PM    <DIR>          .NET v4.5 Classic
+03/25/2026  10:19 PM    <DIR>          Administrator
+08/26/2026  06:10 PM    <DIR>          anderson.w
+03/26/2026  02:23 PM    <DIR>          noah.b
+03/25/2026  10:19 PM    <DIR>          Public
+03/27/2026  05:53 PM    <DIR>          svc_mail
+               0 File(s)              0 bytes
+               8 Dir(s)   9,135,632,384 bytes free
+
+C:\SmarterMail\Domains\danglingtree.htb.bak\Users>
+
+```
