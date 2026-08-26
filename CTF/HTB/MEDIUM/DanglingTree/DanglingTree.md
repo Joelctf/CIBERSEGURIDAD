@@ -1397,3 +1397,296 @@ Unknown     : SunsetMountainPeak@2025
 ╰─
 
 ```
+
+``` bash
+
+❯ bloodyAD -u alex.o -p 'SunsetMountainPeak@2025' -d danglingtree.htb --dc-ip 10.129.82.45 get object alex.o --attr memberOf
+
+
+distinguishedName: CN=alex.o,CN=Users,DC=danglingtree,DC=htb
+memberOf: CN=support-it,CN=Users,DC=danglingtree,DC=htb
+❯ pywerview get-objectacl -w danglingtree.htb -u alex.o -p 'SunsetMountainPeak@2025' --dc-ip 10.129.82.45 --resolve-sids | grep -i "support-it" -A 3 -B 3
+securityidentifier:    CN=Administrators,CN=Builtin,DC=danglingtree,DC=htb
+iscallbak:             False
+
+objectdn:               CN=support-it,CN=Users,DC=danglingtree,DC=htb
+objectsid:              S-1-5-21-4220238332-57023728-1129110646-1603
+acetype:                ACCESS_ALLOWED_OBJECT_ACE
+binarysize:             44
+--
+inheritedobjectacetype: {00000000-0000-0000-0000-000000000000}
+iscallbak:              False
+
+objectdn:               CN=support-it,CN=Users,DC=danglingtree,DC=htb
+objectsid:              S-1-5-21-4220238332-57023728-1129110646-1603
+acetype:                ACCESS_ALLOWED_OBJECT_ACE
+binarysize:             40
+--
+inheritedobjectacetype: {00000000-0000-0000-0000-000000000000}
+iscallbak:              False
+
+objectdn:              CN=support-it,CN=Users,DC=danglingtree,DC=htb
+objectsid:             S-1-5-21-4220238332-57023728-1129110646-1603
+acetype:               ACCESS_ALLOWED_ACE
+binarysize:            36
+--
+securityidentifier:    CN=Domain Admins,CN=Users,DC=danglingtree,DC=htb
+iscallbak:             False
+
+objectdn:              CN=support-it,CN=Users,DC=danglingtree,DC=htb
+objectsid:             S-1-5-21-4220238332-57023728-1129110646-1603
+acetype:               ACCESS_ALLOWED_ACE
+binarysize:            24
+--
+securityidentifier:    CN=Account Operators,CN=Builtin,DC=danglingtree,DC=htb
+iscallbak:             False
+
+objectdn:              CN=support-it,CN=Users,DC=danglingtree,DC=htb
+objectsid:             S-1-5-21-4220238332-57023728-1129110646-1603
+acetype:               ACCESS_ALLOWED_ACE
+binarysize:            20
+--
+securityidentifier:    Principal Self
+iscallbak:             False
+
+objectdn:              CN=support-it,CN=Users,DC=danglingtree,DC=htb
+objectsid:             S-1-5-21-4220238332-57023728-1129110646-1603
+acetype:               ACCESS_ALLOWED_ACE
+binarysize:            20
+--
+securityidentifier:    Authenticated Users
+iscallbak:             False
+
+objectdn:              CN=support-it,CN=Users,DC=danglingtree,DC=htb
+objectsid:             S-1-5-21-4220238332-57023728-1129110646-1603
+acetype:               ACCESS_ALLOWED_ACE
+binarysize:            20
+--
+securityidentifier:    Local System
+iscallbak:             False
+
+objectdn:               CN=support-it,CN=Users,DC=danglingtree,DC=htb
+objectsid:              S-1-5-21-4220238332-57023728-1129110646-1603
+acetype:                ACCESS_ALLOWED_OBJECT_ACE
+binarysize:             60
+--
+inheritedobjectacetype: {4828cc14-1437-45bc-9b07-ad6f015e5f28}
+iscallbak:              False
+
+objectdn:               CN=support-it,CN=Users,DC=danglingtree,DC=htb
+objectsid:              S-1-5-21-4220238332-57023728-1129110646-1603
+acetype:                ACCESS_ALLOWED_OBJECT_ACE
+binarysize:             60
+--
+inheritedobjectacetype: {bf967aba-0de6-11d0-a285-00aa003049e2}
+iscallbak:              False
+
+objectdn:               CN=support-it,CN=Users,DC=danglingtree,DC=htb
+objectsid:              S-1-5-21-4220238332-57023728-1129110646-1603
+acetype:                ACCESS_ALLOWED_OBJECT_ACE
+binarysize:             60
+--
+inheritedobjectacetype: {4828cc14-1437-45bc-9b07-ad6f015e5f28}
+iscallbak:              False
+
+objectdn:               CN=support-it,CN=Users,DC=danglingtree,DC=htb
+objectsid:              S-1-5-21-4220238332-57023728-1129110646-1603
+acetype:                ACCESS_ALLOWED_OBJECT_ACE
+binarysize:             60
+--
+inheritedobjectacetype: {bf967aba-0de6-11d0-a285-00aa003049e2}
+iscallbak:              False
+
+objectdn:               CN=support-it,CN=Users,DC=danglingtree,DC=htb
+objectsid:              S-1-5-21-4220238332-57023728-1129110646-1603
+acetype:                ACCESS_ALLOWED_OBJECT_ACE
+binarysize:             60
+--
+inheritedobjectacetype: {4828cc14-1437-45bc-9b07-ad6f015e5f28}
+iscallbak:              False
+
+objectdn:               CN=support-it,CN=Users,DC=danglingtree,DC=htb
+objectsid:              S-1-5-21-4220238332-57023728-1129110646-1603
+acetype:                ACCESS_ALLOWED_OBJECT_ACE
+binarysize:             60
+--
+inheritedobjectacetype: {bf967aba-0de6-11d0-a285-00aa003049e2}
+iscallbak:              False
+
+objectdn:               CN=support-it,CN=Users,DC=danglingtree,DC=htb
+objectsid:              S-1-5-21-4220238332-57023728-1129110646-1603
+acetype:                ACCESS_ALLOWED_OBJECT_ACE
+binarysize:             60
+--
+inheritedobjectacetype: {4828cc14-1437-45bc-9b07-ad6f015e5f28}
+iscallbak:              False
+
+objectdn:               CN=support-it,CN=Users,DC=danglingtree,DC=htb
+objectsid:              S-1-5-21-4220238332-57023728-1129110646-1603
+acetype:                ACCESS_ALLOWED_OBJECT_ACE
+binarysize:             60
+--
+inheritedobjectacetype: {bf967aba-0de6-11d0-a285-00aa003049e2}
+iscallbak:              False
+
+objectdn:               CN=support-it,CN=Users,DC=danglingtree,DC=htb
+objectsid:              S-1-5-21-4220238332-57023728-1129110646-1603
+acetype:                ACCESS_ALLOWED_OBJECT_ACE
+binarysize:             60
+--
+inheritedobjectacetype: {4828cc14-1437-45bc-9b07-ad6f015e5f28}
+iscallbak:              False
+
+objectdn:               CN=support-it,CN=Users,DC=danglingtree,DC=htb
+objectsid:              S-1-5-21-4220238332-57023728-1129110646-1603
+acetype:                ACCESS_ALLOWED_OBJECT_ACE
+binarysize:             60
+--
+inheritedobjectacetype: {bf967aba-0de6-11d0-a285-00aa003049e2}
+iscallbak:              False
+
+objectdn:               CN=support-it,CN=Users,DC=danglingtree,DC=htb
+objectsid:              S-1-5-21-4220238332-57023728-1129110646-1603
+acetype:                ACCESS_ALLOWED_OBJECT_ACE
+binarysize:             56
+--
+inheritedobjectacetype: {00000000-0000-0000-0000-000000000000}
+iscallbak:              False
+
+objectdn:               CN=support-it,CN=Users,DC=danglingtree,DC=htb
+objectsid:              S-1-5-21-4220238332-57023728-1129110646-1603
+acetype:                ACCESS_ALLOWED_OBJECT_ACE
+binarysize:             56
+--
+inheritedobjectacetype: {00000000-0000-0000-0000-000000000000}
+iscallbak:              False
+
+objectdn:               CN=support-it,CN=Users,DC=danglingtree,DC=htb
+objectsid:              S-1-5-21-4220238332-57023728-1129110646-1603
+acetype:                ACCESS_ALLOWED_OBJECT_ACE
+binarysize:             56
+--
+inheritedobjectacetype: {bf967a86-0de6-11d0-a285-00aa003049e2}
+iscallbak:              False
+
+objectdn:               CN=support-it,CN=Users,DC=danglingtree,DC=htb
+objectsid:              S-1-5-21-4220238332-57023728-1129110646-1603
+acetype:                ACCESS_ALLOWED_OBJECT_ACE
+binarysize:             56
+--
+inheritedobjectacetype: {bf967a86-0de6-11d0-a285-00aa003049e2}
+iscallbak:              False
+
+objectdn:               CN=support-it,CN=Users,DC=danglingtree,DC=htb
+objectsid:              S-1-5-21-4220238332-57023728-1129110646-1603
+acetype:                ACCESS_ALLOWED_OBJECT_ACE
+binarysize:             56
+--
+inheritedobjectacetype: {bf967a86-0de6-11d0-a285-00aa003049e2}
+iscallbak:              False
+
+objectdn:               CN=support-it,CN=Users,DC=danglingtree,DC=htb
+objectsid:              S-1-5-21-4220238332-57023728-1129110646-1603
+acetype:                ACCESS_ALLOWED_OBJECT_ACE
+binarysize:             56
+--
+inheritedobjectacetype: {bf967a9c-0de6-11d0-a285-00aa003049e2}
+iscallbak:              False
+
+objectdn:               CN=support-it,CN=Users,DC=danglingtree,DC=htb
+objectsid:              S-1-5-21-4220238332-57023728-1129110646-1603
+acetype:                ACCESS_ALLOWED_OBJECT_ACE
+binarysize:             56
+--
+inheritedobjectacetype: {bf967aba-0de6-11d0-a285-00aa003049e2}
+iscallbak:              False
+
+objectdn:               CN=support-it,CN=Users,DC=danglingtree,DC=htb
+objectsid:              S-1-5-21-4220238332-57023728-1129110646-1603
+acetype:                ACCESS_ALLOWED_OBJECT_ACE
+binarysize:             56
+--
+inheritedobjectacetype: {bf967a86-0de6-11d0-a285-00aa003049e2}
+iscallbak:              False
+
+objectdn:               CN=support-it,CN=Users,DC=danglingtree,DC=htb
+objectsid:              S-1-5-21-4220238332-57023728-1129110646-1603
+acetype:                ACCESS_ALLOWED_OBJECT_ACE
+binarysize:             44
+--
+inheritedobjectacetype: {4828cc14-1437-45bc-9b07-ad6f015e5f28}
+iscallbak:              False
+
+objectdn:               CN=support-it,CN=Users,DC=danglingtree,DC=htb
+objectsid:              S-1-5-21-4220238332-57023728-1129110646-1603
+acetype:                ACCESS_ALLOWED_OBJECT_ACE
+binarysize:             44
+--
+inheritedobjectacetype: {bf967a9c-0de6-11d0-a285-00aa003049e2}
+iscallbak:              False
+
+objectdn:               CN=support-it,CN=Users,DC=danglingtree,DC=htb
+objectsid:              S-1-5-21-4220238332-57023728-1129110646-1603
+acetype:                ACCESS_ALLOWED_OBJECT_ACE
+binarysize:             44
+--
+inheritedobjectacetype: {bf967aba-0de6-11d0-a285-00aa003049e2}
+iscallbak:              False
+
+objectdn:               CN=support-it,CN=Users,DC=danglingtree,DC=htb
+objectsid:              S-1-5-21-4220238332-57023728-1129110646-1603
+acetype:                ACCESS_ALLOWED_OBJECT_ACE
+binarysize:             40
+--
+inheritedobjectacetype: {00000000-0000-0000-0000-000000000000}
+iscallbak:              False
+
+objectdn:               CN=support-it,CN=Users,DC=danglingtree,DC=htb
+objectsid:              S-1-5-21-4220238332-57023728-1129110646-1603
+acetype:                ACCESS_ALLOWED_OBJECT_ACE
+binarysize:             40
+--
+inheritedobjectacetype: {00000000-0000-0000-0000-000000000000}
+iscallbak:              False
+
+objectdn:              CN=support-it,CN=Users,DC=danglingtree,DC=htb
+objectsid:             S-1-5-21-4220238332-57023728-1129110646-1603
+acetype:               ACCESS_ALLOWED_ACE
+binarysize:            36
+--
+securityidentifier:    CN=Enterprise Admins,CN=Users,DC=danglingtree,DC=htb
+iscallbak:             False
+
+objectdn:              CN=support-it,CN=Users,DC=danglingtree,DC=htb
+objectsid:             S-1-5-21-4220238332-57023728-1129110646-1603
+acetype:               ACCESS_ALLOWED_ACE
+binarysize:            24
+--
+securityidentifier:    CN=Pre-Windows 2000 Compatible Access,CN=Builtin,DC=danglingtree,DC=htb
+iscallbak:             False
+
+objectdn:              CN=support-it,CN=Users,DC=danglingtree,DC=htb
+objectsid:             S-1-5-21-4220238332-57023728-1129110646-1603
+acetype:               ACCESS_ALLOWED_ACE
+binarysize:            24
+--
+accessmask:             256
+activedirectoryrights:  extended_right
+isinherited:            False
+securityidentifier:     CN=support-it,CN=Users,DC=danglingtree,DC=htb
+objectaceflags:         object_ace_type_present
+objectacetype:          {00299570-246d-11d0-a768-00aa006e0529}
+inheritedobjectacetype: {00000000-0000-0000-0000-000000000000}
+--
+accessmask:            131092
+activedirectoryrights: generic_execute, list_children, read_property, read_control
+isinherited:           False
+securityidentifier:    CN=support-it,CN=Users,DC=danglingtree,DC=htb
+iscallbak:             False
+
+objectdn:              CN=jake.h,CN=Users,DC=danglingtree,DC=htb
+╭─ ~/hacking/ctf/htb/medium/danglintree/recon                                                                ✔ │ 5s │ ≡ ─╮
+╰─                                                                                                                      ─╯
+
+```
+
