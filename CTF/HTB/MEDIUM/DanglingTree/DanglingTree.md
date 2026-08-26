@@ -1781,3 +1781,77 @@ permission: CREATE_CHILD
 
 
 ```
+
+
+``` bash
+
+❯ certipy-ad find -u jake.h@danglingtree.htb -p 'Password123!' -dc-ip 10.129.82.45 -stdout
+Certipy v5.0.4 - by Oliver Lyak (ly4k)
+
+[*] Finding certificate templates
+[*] Found 33 certificate templates
+[*] Finding certificate authorities
+[*] Found 1 certificate authority
+[*] Found 11 enabled certificate templates
+[*] Finding issuance policies
+[*] Found 16 issuance policies
+[*] Found 0 OIDs linked to templates
+[*] Retrieving CA configuration for 'danglingtree-DC-CA' via RRP
+[!] Failed to connect to remote registry. Service should be starting now. Trying again...
+[*] Successfully retrieved CA configuration for 'danglingtree-DC-CA'
+[*] Checking web enrollment for CA 'danglingtree-DC-CA' @ 'dc.danglingtree.htb'
+[*] Enumeration output:
+
+```
+
+``` bash
+
+❯ certipy-ad find -u jake.h@danglingtree.htb -p 'Password123!' -dc-ip 10.129.82.45 -enabled
+Certipy v5.0.4 - by Oliver Lyak (ly4k)
+
+[*] Finding certificate templates
+[*] Found 33 certificate templates
+[*] Finding certificate authorities
+[*] Found 1 certificate authority
+[*] Found 11 enabled certificate templates
+[*] Finding issuance policies
+[*] Found 16 issuance policies
+[*] Found 0 OIDs linked to templates
+[*] Retrieving CA configuration for 'danglingtree-DC-CA' via RRP
+[*] Successfully retrieved CA configuration for 'danglingtree-DC-CA'
+[*] Checking web enrollment for CA 'danglingtree-DC-CA' @ 'dc.danglingtree.htb'
+[*] Saving text output to '20260827010554_Certipy.txt'
+[*] Wrote text output to '20260827010554_Certipy.txt'
+[*] Saving JSON output to '20260827010554_Certipy.json'
+[*] Wrote JSON output to '20260827010554_Certipy.json'
+╭─ ~/hacking/ctf/htb/medium/danglintree/recon                                                                    ✔ │ 4s ─╮
+╰─                                                                                                                      ─╯
+
+```
+
+``` bash
+
+❯ bloodyAD -u jake.h -p 'Password123!' -d danglingtree.htb --dc-ip 10.129.82.45 --secure get object "CN=danglingtree-DC-CA,CN=Enrollment Services,CN=Public Key Services,CN=Services,CN=Configuration,DC=danglingtree,DC=htb" --attr certificateTemplates
+
+distinguishedName: CN=danglingtree-DC-CA,CN=Enrollment Services,CN=Public Key Services,CN=Services,CN=Configuration,DC=danglingtree,DC=htb
+certificateTemplates: RemoteAccessVPN; EmployeeAuthTemplate; VPNUserTemplate; DirectoryEmailReplication; DomainControllerAuthentication; KerberosAuthentication; EFSRecovery; EFS; DomainController; WebServer; Machine; User; SubCA; Administrator
+❯ echo "RemoteAccessVPN EmployeeAuthTemplate VPNUserTemplate DirectoryEmailReplication DomainControllerAuthentication KerberosAuthentication EFSRecovery EFS DomainController WebServer Machine User SubCA Administrator"
+
+RemoteAccessVPN EmployeeAuthTemplate VPNUserTemplate DirectoryEmailReplication DomainControllerAuthentication KerberosAuthentication EFSRecovery EFS DomainController WebServer Machine User SubCA Administrator
+❯ grep "Template Name" 20260827010228_Certipy.txt
+    Template Name                       : KerberosAuthentication
+    Template Name                       : DirectoryEmailReplication
+    Template Name                       : DomainControllerAuthentication
+    Template Name                       : SubCA
+    Template Name                       : WebServer
+    Template Name                       : DomainController
+    Template Name                       : Machine
+    Template Name                       : EFSRecovery
+    Template Name                       : Administrator
+    Template Name                       : EFS
+    Template Name                       : User
+╭─ ~/hacking/ctf/htb/medium/danglintree/recon                                                                         ✔ ─╮
+╰─                                                                                                                      ─╯
+
+
+```
