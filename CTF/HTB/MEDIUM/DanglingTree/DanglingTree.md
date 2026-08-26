@@ -1690,3 +1690,27 @@ objectdn:              CN=jake.h,CN=Users,DC=danglingtree,DC=htb
 
 ```
 
+``` bash
+
+❯ pywerview get-objectacl -w danglingtree.htb -u alex.o -p 'SunsetMountainPeak@2025' --dc-ip 10.129.82.45 --resolve-sids --sam-account-name jake.h | grep -i "support-it" -A 6
+securityidentifier:     CN=support-it,CN=Users,DC=danglingtree,DC=htb
+objectaceflags:         object_ace_type_present
+objectacetype:          {00299570-246d-11d0-a768-00aa006e0529}
+inheritedobjectacetype: {00000000-0000-0000-0000-000000000000}
+iscallbak:              False
+
+objectdn:               CN=jake.h,CN=Users,DC=danglingtree,DC=htb
+--
+securityidentifier:    CN=support-it,CN=Users,DC=danglingtree,DC=htb
+iscallbak:             False
+
+objectdn:              CN=jake.h,CN=Users,DC=danglingtree,DC=htb
+objectsid:             S-1-5-21-4220238332-57023728-1129110646-1103
+acetype:               ACCESS_ALLOWED_ACE
+binarysize:            36
+❯ pywerview get-objectacl -w danglingtree.htb -u alex.o -p 'SunsetMountainPeak@2025' --dc-ip 10.129.82.45 --resolve-sids --sam-account-name anderson.w | grep -i "support-it" -A 6
+❯ pywerview get-objectacl -w danglingtree.htb -u alex.o -p 'SunsetMountainPeak@2025' --dc-ip 10.129.82.45 --resolve-sids --sam-account-name svc_mail | grep -i "support-it" -A 6
+╭─ ~/hacking/ctf/htb/medium/danglintree/recon                                                                   1 х │ ≡ ─╮
+╰─                                                                                                                      ─╯
+
+```
