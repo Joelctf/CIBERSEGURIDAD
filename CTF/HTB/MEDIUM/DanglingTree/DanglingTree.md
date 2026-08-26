@@ -1756,3 +1756,28 @@ C:\>
 
 
 ```
+
+
+``` bash
+
+❯ bloodyAD -u jake.h -p 'Password123!' -d danglingtree.htb --dc-ip 10.129.82.45 get writable --right ALL
+
+distinguishedName: CN=S-1-5-11,CN=ForeignSecurityPrincipals,DC=danglingtree,DC=htb
+permission: WRITE
+
+distinguishedName: CN=jake.h,CN=Users,DC=danglingtree,DC=htb
+permission: WRITE
+
+distinguishedName: CN=Certificate Templates,CN=Public Key Services,CN=Services,CN=Configuration,DC=danglingtree,DC=htb
+permission: CREATE_CHILD
+
+distinguishedName: CN=OID,CN=Public Key Services,CN=Services,CN=Configuration,DC=danglingtree,DC=htb
+permission: CREATE_CHILD
+
+distinguishedName: DC=_msdcs.danglingtree.htb,CN=MicrosoftDNS,DC=ForestDnsZones,DC=danglingtree,DC=htb
+permission: CREATE_CHILD
+╭─ ~/hacking/ctf/htb/medium/danglintree/recon                                                                    ✔ │ 3s ─╮
+╰─                                                                                                                      ─╯
+
+
+```
