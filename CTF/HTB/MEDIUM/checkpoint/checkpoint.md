@@ -173,7 +173,33 @@ checkpoint.htb
 ╰─                                                                                                                   ─╯
 
 ```
+``` bash
 
+❯ tree
+.
+├── {31B2F340-016D-11D2-945F-00C04FB984F9}
+│   ├── GPT.INI
+│   ├── MACHINE
+│   │   ├── Microsoft
+│   │   │   └── Windows NT
+│   │   │       └── SecEdit
+│   │   │           └── GptTmpl.inf
+│   │   └── Registry.pol
+│   └── USER
+└── {6AC1786C-016F-11D2-945F-00C04fB984F9}
+    ├── GPT.INI
+    ├── MACHINE
+    │   └── Microsoft
+    │       └── Windows NT
+    │           └── SecEdit
+    │               └── GptTmpl.inf
+    └── USER
+
+13 directories, 5 files
+╭─ ~/hacking/ctf/htb/medium/checkpoint/recon/sysvol/checkpoint.htb/Policies                                        ✔ ─╮
+╰─                                                                                                                   ─╯
+
+```
 
 
 ``` bash
@@ -223,5 +249,34 @@ group:[DevTeam] rid:[0x456]
 group:[DnsUpdateProxy] rid:[0x462]
 group:[BackupAccess] rid:[0x463]
 rpcclient $>
+
+```
+
+``` bash
+
+❯ bloodyAD --host 10.129.83.15 --dns 10.129.83.15 -d checkpoint.htb -u alex.turner -p 'Checkpoint2024!' get writable
+
+distinguishedName: CN=Deleted Objects,DC=checkpoint,DC=htb
+DACL: WRITE
+
+distinguishedName: CN=S-1-5-11,CN=ForeignSecurityPrincipals,DC=checkpoint,DC=htb
+permission: WRITE
+
+distinguishedName: OU=Employees,DC=checkpoint,DC=htb
+permission: CREATE_CHILD
+
+distinguishedName: CN=Alex Turner,OU=Employees,DC=checkpoint,DC=htb
+permission: WRITE
+
+distinguishedName: CN=Mark Davies\0ADEL:2217e877-e2a2-47d7-91d4-99ede36f367e,CN=Deleted Objects,DC=checkpoint,DC=htb
+permission: WRITE
+
+distinguishedName: DC=checkpoint.htb,CN=MicrosoftDNS,DC=DomainDnsZones,DC=checkpoint,DC=htb
+permission: CREATE_CHILD
+
+distinguishedName: DC=_msdcs.checkpoint.htb,CN=MicrosoftDNS,DC=ForestDnsZones,DC=checkpoint,DC=htb
+permission: CREATE_CHILD
+╭─ ~/hacking/ctf/htb/medium/checkpoint/recon/sysvol/checkpoint.htb/Policies                                   ✔ │ 3s ─╮
+╰─                                                                                                                   ─╯
 
 ```
