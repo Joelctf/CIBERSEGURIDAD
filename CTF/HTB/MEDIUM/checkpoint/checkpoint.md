@@ -153,3 +153,23 @@ smb: \checkpoint.htb\> dir
 smb: \checkpoint.htb\>
 
 ```
+
+
+``` bash
+
+❯ mkdir -p sysvol
+❯ smbclient //10.129.83.15/SYSVOL -U 'alex.turner' -c 'recurse ON; prompt OFF; lcd sysvol; mget *'
+Password for [WORKGROUP\alex.turner]:
+NT_STATUS_ACCESS_DENIED listing \checkpoint.htb\DfsrPrivate\*
+getting file \checkpoint.htb\Policies\{31B2F340-016D-11D2-945F-00C04FB984F9}\GPT.INI of size 22 as checkpoint.htb/Policies/{31B2F340-016D-11D2-945F-00C04FB984F9}/GPT.INI (0.1 KiloBytes/sec) (average 0.1 KiloBytes/sec)
+getting file \checkpoint.htb\Policies\{6AC1786C-016F-11D2-945F-00C04fB984F9}\GPT.INI of size 22 as checkpoint.htb/Policies/{6AC1786C-016F-11D2-945F-00C04fB984F9}/GPT.INI (0.1 KiloBytes/sec) (average 0.1 KiloBytes/sec)
+getting file \checkpoint.htb\Policies\{31B2F340-016D-11D2-945F-00C04FB984F9}\MACHINE\Registry.pol of size 2796 as checkpoint.htb/Policies/{31B2F340-016D-11D2-945F-00C04FB984F9}/MACHINE/Registry.pol (17.7 KiloBytes/sec) (average 6.1 KiloBytes/sec)
+getting file \checkpoint.htb\Policies\{31B2F340-016D-11D2-945F-00C04FB984F9}\MACHINE\Microsoft\Windows NT\SecEdit\GptTmpl.inf of size 1098 as checkpoint.htb/Policies/{31B2F340-016D-11D2-945F-00C04FB984F9}/MACHINE/Microsoft/Windows NT/SecEdit/GptTmpl.inf (7.3 KiloBytes/sec) (average 6.4 KiloBytes/sec)
+getting file \checkpoint.htb\Policies\{6AC1786C-016F-11D2-945F-00C04fB984F9}\MACHINE\Microsoft\Windows NT\SecEdit\GptTmpl.inf of size 4212 as checkpoint.htb/Policies/{6AC1786C-016F-11D2-945F-00C04fB984F9}/MACHINE/Microsoft/Windows NT/SecEdit/GptTmpl.inf (27.1 KiloBytes/sec) (average 10.6 KiloBytes/sec)
+❯ cd sysvol
+❯ ls
+checkpoint.htb
+╭─ ~/hacking/ctf/htb/medium/checkpoint/recon/sysvol                                                                ✔ ─╮
+╰─                                                                                                                   ─╯
+
+```
