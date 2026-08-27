@@ -173,3 +173,55 @@ checkpoint.htb
 ╰─                                                                                                                   ─╯
 
 ```
+
+
+
+``` bash
+
+❯ rpcclient -U 'checkpoint.htb/alex.turner%Checkpoint2024!' 10.129.83.15
+rpcclient $> enumdomusers
+user:[Administrator] rid:[0x1f4]
+user:[Guest] rid:[0x1f5]
+user:[krbtgt] rid:[0x1f6]
+user:[alex.turner] rid:[0x44d]
+user:[ryan.brooks] rid:[0x44f]
+user:[svc_deploy] rid:[0x450]
+user:[james.harper] rid:[0x457]
+user:[sarah.mitchell] rid:[0x458]
+user:[emily.carter] rid:[0x459]
+user:[david.reynolds] rid:[0x45a]
+user:[jessica.coleman] rid:[0x45b]
+user:[lauren.flores] rid:[0x45c]
+user:[michael.torres] rid:[0x45d]
+user:[kevin.patterson] rid:[0x45e]
+user:[brian.jenkins] rid:[0x45f]
+user:[megan.perry] rid:[0x460]
+user:[max.palmer] rid:[0x13ed]
+rpcclient $> enumdomgroups
+group:[Enterprise Read-only Domain Controllers] rid:[0x1f2]
+group:[Domain Admins] rid:[0x200]
+group:[Domain Users] rid:[0x201]
+group:[Domain Guests] rid:[0x202]
+group:[Domain Computers] rid:[0x203]
+group:[Domain Controllers] rid:[0x204]
+group:[Schema Admins] rid:[0x206]
+group:[Enterprise Admins] rid:[0x207]
+group:[Group Policy Creator Owners] rid:[0x208]
+group:[Read-only Domain Controllers] rid:[0x209]
+group:[Cloneable Domain Controllers] rid:[0x20a]
+group:[Protected Users] rid:[0x20d]
+group:[Key Admins] rid:[0x20e]
+group:[Enterprise Key Admins] rid:[0x20f]
+group:[Forest Trust Accounts] rid:[0x210]
+group:[External Trust Accounts] rid:[0x211]
+group:[IT-Staff] rid:[0x451]
+group:[Finance-Staff] rid:[0x452]
+group:[HR-Staff] rid:[0x453]
+group:[Engineering-Staff] rid:[0x454]
+group:[VPN-Users] rid:[0x455]
+group:[DevTeam] rid:[0x456]
+group:[DnsUpdateProxy] rid:[0x462]
+group:[BackupAccess] rid:[0x463]
+rpcclient $>
+
+```
