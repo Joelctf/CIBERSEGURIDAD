@@ -1185,7 +1185,25 @@ IV: 01 D8 AE E6 49 AD 92 27
 C:\SmarterMail\Domains\danglingtree.htb.bak\Users\noah.b>
 
 ```
-                      
+
+``` py
+
+from Crypto.Cipher import DES
+import base64
+
+key = bytes.fromhex("B43F84D110B4E991")
+iv  = bytes.fromhex("01D8AEE649AD9227")
+
+data = base64.b64decode("66e7ppLOBF7UdzDv7zK6MJ1rmyUb1Cby")
+cipher = DES.new(key, DES.MODE_CBC, iv)
+decrypted = cipher.decrypt(data)
+pwd = decrypted[:-decrypted[-1]]
+print(pwd.decode('utf-8'))
+
+
+```
+
+					  
 ``` bash
 
 ❯ python3 decrypt.py
