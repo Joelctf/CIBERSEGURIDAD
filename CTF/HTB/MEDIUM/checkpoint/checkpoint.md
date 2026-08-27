@@ -1,3 +1,6 @@
+``` bash
+
+
 ❯ recon 10.129.83.15
 Starting Nmap 7.98 ( https://nmap.org ) at 2026-08-27 19:54 +0200
 Nmap scan report for 10.129.83.15
@@ -73,3 +76,31 @@ Nmap done: 1 IP address (1 host up) scanned in 96.99 seconds
 [*] Done
 ╭─ ~/hacking/ctf/htb                                                                                      ✔ │ 2m 10s ─╮
 ╰─                                                                                                                   ─╯
+
+
+
+```
+
+
+![img](./img/Captura1.png)
+
+
+```` bash
+
+❯ netexec smb 10.129.83.15 -u 'alex.turner' -p 'Checkpoint2024!' --shares
+SMB         10.129.83.15    445    DC01             [*] Windows 11 / Server 2025 Build 26100 x64 (name:DC01) (domain:checkpoint.htb) (signing:True) (SMBv1:None)
+SMB         10.129.83.15    445    DC01             [+] checkpoint.htb\alex.turner:Checkpoint2024!
+SMB         10.129.83.15    445    DC01             [*] Enumerated shares
+SMB         10.129.83.15    445    DC01             Share           Permissions     Remark
+SMB         10.129.83.15    445    DC01             -----           -----------     ------
+SMB         10.129.83.15    445    DC01             ADMIN$                          Remote Admin
+SMB         10.129.83.15    445    DC01             C$                              Default share
+SMB         10.129.83.15    445    DC01             DevDrop         READ            VS Code extensions share for approved .vsix packages compatible with VS Code engine 1.118.0
+SMB         10.129.83.15    445    DC01             IPC$            READ            Remote IPC
+SMB         10.129.83.15    445    DC01             NETLOGON        READ            Logon server share
+SMB         10.129.83.15    445    DC01             SYSVOL          READ            Logon server share
+SMB         10.129.83.15    445    DC01             VMBackups
+╭─ ~/hacking/ctf/htb                                                                                          ✔ │ 6s ─╮
+╰─                                                                                                                   ─╯
+
+```
