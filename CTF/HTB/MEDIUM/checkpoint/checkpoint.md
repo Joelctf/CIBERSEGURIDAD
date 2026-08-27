@@ -104,3 +104,52 @@ SMB         10.129.83.15    445    DC01             VMBackups
 ╰─                                                                                                                   ─╯
 
 ```
+
+
+``` bash
+
+❯ smbclient '//10.129.83.15/DevDrop' -U 'alex.turner'
+Password for [WORKGROUP\alex.turner]:
+Try "help" to get a list of possible commands.
+smb: \> dir
+  .                                   D        0  Tue May 26 23:45:01 2026
+  ..                                  D        0  Sat May  9 16:42:27 2026
+
+                10459391 blocks of size 4096. 2465216 blocks available
+smb: \> exit
+❯ smbclient '//10.129.83.15/IPC$' -U 'alex.turner'
+Password for [WORKGROUP\alex.turner]:
+Try "help" to get a list of possible commands.
+smb: \> dir
+NT_STATUS_NO_SUCH_FILE listing \*
+smb: \> exit
+❯ smbclient '//10.129.83.15/NETLOGON' -U 'alex.turner'
+Password for [WORKGROUP\alex.turner]:
+Try "help" to get a list of possible commands.
+smb: \> dir
+  .                                   D        0  Sat May  9 10:39:17 2026
+  ..                                  D        0  Sat May  9 10:42:23 2026
+
+                10459391 blocks of size 4096. 2467797 blocks available
+smb: \> exit
+❯ smbclient '//10.129.83.15/SYSVOL' -U 'alex.turner'
+Password for [WORKGROUP\alex.turner]:
+Try "help" to get a list of possible commands.
+smb: \> dir
+  .                                   D        0  Sat May  9 10:39:17 2026
+  ..                                  D        0  Sat May  9 10:39:17 2026
+  checkpoint.htb                     Dr        0  Sat May  9 10:39:17 2026
+
+                10459391 blocks of size 4096. 2467737 blocks available
+smb: \> cd checkpoint.htb\
+smb: \checkpoint.htb\> dir
+  .                                   D        0  Sat May  9 10:42:23 2026
+  ..                                  D        0  Sat May  9 10:39:17 2026
+  DfsrPrivate                      DHSr        0  Sat May  9 10:42:23 2026
+  Policies                            D        0  Sat May  9 10:39:34 2026
+  scripts                             D        0  Sat May  9 10:39:17 2026
+
+                10459391 blocks of size 4096. 2467737 blocks available
+smb: \checkpoint.htb\>
+
+```
