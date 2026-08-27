@@ -85,7 +85,7 @@ Nmap done: 1 IP address (1 host up) scanned in 96.99 seconds
 ![img](./img/Captura1.png)
 
 
-```` bash
+``` bash
 
 ❯ netexec smb 10.129.83.15 -u 'alex.turner' -p 'Checkpoint2024!' --shares
 SMB         10.129.83.15    445    DC01             [*] Windows 11 / Server 2025 Build 26100 x64 (name:DC01) (domain:checkpoint.htb) (signing:True) (SMBv1:None)
