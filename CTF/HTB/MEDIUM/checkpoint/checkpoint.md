@@ -733,3 +733,46 @@ PS C:\Users\ryan.brooks\Desktop>
 ```
 
 
+``` bash
+
+❯ bloodyAD --host 10.129.83.74 -d checkpoint.htb -u alex.turner -p 'Checkpoint2024!' get children --direct
+
+distinguishedName: CN=Builtin,DC=checkpoint,DC=htb
+
+distinguishedName: CN=Computers,DC=checkpoint,DC=htb
+
+distinguishedName: CN=Deleted Objects,DC=checkpoint,DC=htb
+
+distinguishedName: OU=DMSAHolder,DC=checkpoint,DC=htb
+
+distinguishedName: OU=Domain Controllers,DC=checkpoint,DC=htb
+
+distinguishedName: OU=Employees,DC=checkpoint,DC=htb
+
+distinguishedName: CN=ForeignSecurityPrincipals,DC=checkpoint,DC=htb
+
+distinguishedName: CN=Infrastructure,DC=checkpoint,DC=htb
+
+distinguishedName: CN=Keys,DC=checkpoint,DC=htb
+
+distinguishedName: CN=LostAndFound,DC=checkpoint,DC=htb
+
+distinguishedName: CN=Managed Service Accounts,DC=checkpoint,DC=htb
+
+distinguishedName: CN=NTDS Quotas,DC=checkpoint,DC=htb
+
+distinguishedName: CN=Program Data,DC=checkpoint,DC=htb
+
+distinguishedName: OU=ServiceAccounts,DC=checkpoint,DC=htb
+
+distinguishedName: CN=System,DC=checkpoint,DC=htb
+
+distinguishedName: CN=TPM Devices,DC=checkpoint,DC=htb
+
+distinguishedName: CN=Users,DC=checkpoint,DC=htb
+╭─ ~/hacking/ctf/htb/medium/checkpoint/scripts                                                                     ✔ ─╮
+╰─                                                                                                                   ─╯
+
+```
+
+
