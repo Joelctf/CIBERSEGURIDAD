@@ -803,4 +803,45 @@ for i, ace in enumerate(re.findall(r'\([^)]*\)', sddl), 1):
 
 ```
 
+### 🧩 AD ACL — cómo leer un ACE
 
+Formato:
+
+`(ACE_TYPE;ACE_FLAGS;RIGHTS;OBJECT_GUID;INHERIT_OBJECT_GUID;SID)`
+
+Ejemplo:
+
+`(A;CI;CC;;;S-1-5-21-...-1103)`
+
+- `A` → **Allow**: permite la acción.
+- `D` → **Deny**: deniega la acción.
+- `CI` → **Container Inherit**: se hereda a objetos contenedor/hijos.
+- `OI` → **Object Inherit**: se hereda a objetos hijo.
+- `IO` → **Inherit Only**: solo se hereda; no aplica al objeto actual.
+- `ID` → **Inherited**: ACE heredado de un objeto superior.
+- `CC` → **Create Child**: permite crear objetos hijos.
+- `DC` → **Delete Child**: permite eliminar objetos hijos.
+- `RP` → **Read Property**.
+- `WP` → **Write Property**.
+- `SD` → **Delete / Modify security descriptor**.
+- `WD` → **Write DACL**: modificar la ACL.
+- `WO` → **Write Owner**: cambiar el propietario.
+
+El último campo es siempre el **SID al que se aplica el permiso**.
+
+Por ejemplo:
+
+`(A;CI;CC;;;S-1-5-21-...-1103)`
+
+→ El SID `...-1103` tiene permitido **crear objetos hijos (`CC`)** dentro de esta OU y el permiso se **hereda a los contenedores (`CI`)**.
+
+> ⚠️ Los campos vacíos (`;;;`) simplemente significan que ese ACE no especifica `Object GUID` ni `Inherited Object GUID`.
+
+``` bash
+
+❯ rpcclient -U 'checkpoint.htb/alex.turner%Checkpoint2024!' 10.129.83.74
+rpcclient $> lookupsids S-1-5-21-3129162710-3498938529-1807524340-1103
+S-1-5-21-3129162710-3498938529-1807524340-1103 CHECKPOINT\ryan.brooks (1)
+rpcclient $>
+
+```
