@@ -413,3 +413,16 @@ SMB         10.129.83.74    445    DC01             [+] checkpoint.htb\mark.davi
 ╰─                                                                                                                   ─╯
 
 ```
+
+``` bash
+
+❯ netexec winrm 10.129.83.74 -u 'mark.davies' -p 'Checkpoint2024!'
+WINRM       10.129.83.74    5985   DC01             [*] Windows 11 / Server 2025 Build 26100 (name:DC01) (domain:checkpoint.htb)
+WINRM       10.129.83.74    5985   DC01             [-] checkpoint.htb\mark.davies:Checkpoint2024!
+❯ netexec winrm 10.129.83.74 -u 'alex.turner' -p 'Checkpoint2024!'
+WINRM       10.129.83.74    5985   DC01             [*] Windows 11 / Server 2025 Build 26100 (name:DC01) (domain:checkpoint.htb)
+WINRM       10.129.83.74    5985   DC01             [-] checkpoint.htb\alex.turner:Checkpoint2024!
+╭─ ~/hacking/ctf/htb/medium/checkpoint/recon                                                                       ✔ ─╮
+╰─                                                                                                                   ─╯
+
+```
