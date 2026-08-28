@@ -504,3 +504,38 @@ found 0 vulnerabilities
 ╰─                                                                                                                   ─╯
 
 ```
+
+``` bash
+
+❯ ls
+extension.js  node_modules  package.json  package-lock.json
+❯ npx vsce package
+ WARNING  A 'repository' field is missing from the 'package.json' manifest file.
+Use --allow-missing-repository to bypass.
+Do you want to continue? [y/N] y
+ WARNING  Using '*' activation is usually a bad idea as it impacts performance.
+More info: https://code.visualstudio.com/api/references/activation-events#Start-up
+Use --allow-star-activation to bypass.
+Do you want to continue? [y/N] y
+ WARNING  LICENSE, LICENSE.md, or LICENSE.txt not found
+Do you want to continue? [y/N] y
+ WARNING  This extension consists of 12019 files, out of which 4020 are JavaScript files. For performance reasons, you should bundle your extension: https://aka.ms/vscode-bundle-extension. You should also exclude unnecessary files by adding them to your .vscodeignore: https://aka.ms/vscode-vscodeignore.
+
+ WARNING  Neither a .vscodeignore file nor a "files" property in package.json was found. To ensure only necessary files are included in your extension, add a .vscodeignore file or specify the "files" property in package.json. More info: https://aka.ms/vscode-vscodeignore
+
+ INFO  Files included in the VSIX:
+checkpoint-test-1.0.0.vsix
+├─ [Content_Types].xml
+├─ extension.vsixmanifest
+└─ extension/
+   ├─ extension.js [0.61 KB]
+   ├─ package.json [0.2 KB]
+   └─ node_modules/ (12015 files) [91.84 MB]
+
+=> Run vsce ls --tree to see all included files.
+
+ DONE  Packaged: /home/joel/hacking/ctf/htb/medium/checkpoint/scripts/checkpoint-vsix/checkpoint-test-1.0.0.vsix (12019 files, 31.36 MB)
+╭─ ~/hacking/ctf/htb/medium/checkpoint/scripts/checkpoint-vsix                                               ✔ │ 39s ─╮
+╰─                                                                                                                   ─╯
+
+```
