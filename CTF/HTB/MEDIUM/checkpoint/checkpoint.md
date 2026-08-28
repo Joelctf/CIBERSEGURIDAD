@@ -775,6 +775,7 @@ distinguishedName: CN=Users,DC=checkpoint,DC=htb
 
 ```
 
+tenemos Managed Service Accounts y una OU llamada DMSAHolder
 
 ``` py
 
