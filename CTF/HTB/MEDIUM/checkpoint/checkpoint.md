@@ -939,3 +939,30 @@ whenCreated: 2026-05-09 09:01:19+00:00
 
 
 ```
+
+
+``` bash
+
+❯ bloodyAD --host 10.129.83.74 -d checkpoint.htb -u alex.turner -p 'Checkpoint2024!' get membership 'svc_deploy'
+
+distinguishedName: CN=Users,CN=Builtin,DC=checkpoint,DC=htb
+objectSid: S-1-5-32-545
+sAMAccountName: Users
+
+distinguishedName: CN=Remote Management Users,CN=Builtin,DC=checkpoint,DC=htb
+objectSid: S-1-5-32-580
+sAMAccountName: Remote Management Users
+
+distinguishedName: CN=Domain Users,CN=Users,DC=checkpoint,DC=htb
+objectSid: S-1-5-21-3129162710-3498938529-1807524340-513
+sAMAccountName: Domain Users
+
+distinguishedName: CN=BackupAccess,OU=ServiceAccounts,DC=checkpoint,DC=htb
+objectSid: S-1-5-21-3129162710-3498938529-1807524340-1123
+sAMAccountName: BackupAccess
+❯ bloodyAD --host 10.129.83.74 -d checkpoint.htb -u alex.turner -p 'Checkpoint2024!' get membership 'BackupAccess'
+[!] No membership found
+╭─ ~/hacking/ctf/htb/medium/checkpoint/scripts                                                                     ✔ ─╮
+╰─                                                                                                                   ─╯
+
+```
