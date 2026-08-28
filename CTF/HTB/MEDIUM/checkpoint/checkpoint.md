@@ -861,3 +861,5 @@ S-1-5-21-3129162710-3498938529-1807524340-1103 CHECKPOINT\ryan.brooks (1)
 rpcclient $>
 
 ```
+
+ryan.brooks tiene permiso a crear hijos dentro de la OU=DMSAHolder segun la ACL
