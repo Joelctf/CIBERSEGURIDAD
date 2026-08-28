@@ -467,3 +467,40 @@ SMB         10.129.83.74    445    DC01             VMBackups
 
 
 ```
+
+``` bash
+
+❯ mkdir checkpoint-vsix
+❯ cd checkpoint-vsix
+❯ npm init -y
+
+Wrote to /home/joel/hacking/ctf/htb/medium/checkpoint/scripts/checkpoint-vsix/package.json:
+
+{
+  "name": "checkpoint-vsix",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
+
+
+❯ npm install --save-dev @vscode/vsce
+npm WARN deprecated whatwg-encoding@3.1.1: Use @exodus/bytes instead for a more spec-conformant and faster implementation
+npm WARN deprecated prebuild-install@7.1.3: No longer maintained. Please contact the author of the relevant native addon; alternatives are available.
+
+added 283 packages, and audited 284 packages in 15s
+
+85 packages are looking for funding
+  run `npm fund` for details
+
+found 0 vulnerabilities
+╭─ ~/hacking/ctf/htb/medium/checkpoint/scripts/checkpoint-vsix                                               ✔ │ 16s ─╮
+╰─                                                                                                                   ─╯
+
+```
