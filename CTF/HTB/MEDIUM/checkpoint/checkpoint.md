@@ -1009,3 +1009,21 @@ C:\Users\ryan.brooks\Desktop>
 
 
 ```
+
+``` bash
+
+PS C:\Program Files\Microsoft VS Code> [System.Environment]::OSVersion.Version
+[System.Environment]::OSVersion.Version
+
+Major  Minor  Build  Revision
+-----  -----  -----  --------
+10     0      26100  0
+
+
+PS C:\Program Files\Microsoft VS Code> Get-HotFix | Where-Object {$_.HotFixID -like "*KB5058385*" -or $_.HotFixID -like "*KB5058392*"}
+Get-HotFix | Where-Object {$_.HotFixID -like "*KB5058385*" -or $_.HotFixID -like "*KB5058392*"}
+PS C:\Program Files\Microsoft VS Code> Get-HotFix | Sort-Object InstalledOn -Descending | Select-Object -First 20
+Get-HotFix | Sort-Object InstalledOn -Descending | Select-Object -First 20
+PS C:\Program Files\Microsoft VS Code>
+
+```
