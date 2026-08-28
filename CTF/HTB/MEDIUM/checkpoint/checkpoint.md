@@ -803,39 +803,55 @@ for i, ace in enumerate(re.findall(r'\([^)]*\)', sddl), 1):
 
 ```
 
-### 🧩 AD ACL — cómo leer un ACE
+###  AD ACL — estructura de un ACE
 
-Formato:
+Un ACE tiene **6 campos fijos**:
 
-`(ACE_TYPE;ACE_FLAGS;RIGHTS;OBJECT_GUID;INHERIT_OBJECT_GUID;SID)`
+`(TYPE;FLAGS;RIGHTS;OBJECT_GUID;INHERITED_OBJECT_GUID;SID)`
 
 Ejemplo:
 
 `(A;CI;CC;;;S-1-5-21-...-1103)`
 
-- `A` → **Allow**: permite la acción.
-- `D` → **Deny**: deniega la acción.
-- `CI` → **Container Inherit**: se hereda a objetos contenedor/hijos.
-- `OI` → **Object Inherit**: se hereda a objetos hijo.
-- `IO` → **Inherit Only**: solo se hereda; no aplica al objeto actual.
-- `ID` → **Inherited**: ACE heredado de un objeto superior.
-- `CC` → **Create Child**: permite crear objetos hijos.
-- `DC` → **Delete Child**: permite eliminar objetos hijos.
-- `RP` → **Read Property**.
-- `WP` → **Write Property**.
-- `SD` → **Delete / Modify security descriptor**.
-- `WD` → **Write DACL**: modificar la ACL.
-- `WO` → **Write Owner**: cambiar el propietario.
+| Campo | Qué contiene | Valores típicos |
+|---|---|---|
+| **1. TYPE** | Tipo de permiso | `A` = Allow, `D` = Deny |
+| **2. FLAGS** | Herencia/comportamiento | `CI`, `OI`, `IO`, `ID` |
+| **3. RIGHTS** | Qué operación permite/deniega | `CC`, `DC`, `RP`, `WP`, `WD`, `WO`, `GA`, etc. |
+| **4. OBJECT_GUID** | GUID del objeto/atributo afectado | GUID o vacío |
+| **5. INHERITED_OBJECT_GUID** | Tipo de objeto al que se aplica la herencia | GUID o vacío |
+| **6. SID** | Principal al que se aplica el ACE | `S-1-5-...` |
 
-El último campo es siempre el **SID al que se aplica el permiso**.
+####  Importante
 
-Por ejemplo:
+Los códigos **NO se pueden intercambiar entre campos**:
 
-`(A;CI;CC;;;S-1-5-21-...-1103)`
+- `A` / `D` → **campo 1 (TYPE)**
+- `CI` / `OI` / `IO` / `ID` → **campo 2 (FLAGS)**
+- `CC` / `DC` / `RP` / `WP` / `WD` / `WO` / `GA`... → **campo 3 (RIGHTS)**
+- GUID → **campo 4 o 5**
+- SID → **campo 6**
 
-→ El SID `...-1103` tiene permitido **crear objetos hijos (`CC`)** dentro de esta OU y el permiso se **hereda a los contenedores (`CI`)**.
+Por tanto:
 
-> ⚠️ Los campos vacíos (`;;;`) simplemente significan que ese ACE no especifica `Object GUID` ni `Inherited Object GUID`.
+`(A;CI;CC;;;S-1-5-...-1103)`
+
+se lee:
+
+1. `A` → **Allow**
+2. `CI` → **Container Inherit**
+3. `CC` → **Create Child**
+4. vacío → sin Object GUID
+5. vacío → sin Inherited Object GUID
+6. `S-1-5-...-1103` → **quién recibe el permiso**
+
+###  Chuleta
+
+`TYPE ; FLAGS ; RIGHTS ; OBJECT_GUID ; INHERITED_OBJECT_GUID ; SID`
+
+`A    ; CI    ; CC     ;             ;                       ; SID`
+
+**Tipo → Herencia → Permiso → GUID → GUID → Quién**
 
 ``` bash
 
