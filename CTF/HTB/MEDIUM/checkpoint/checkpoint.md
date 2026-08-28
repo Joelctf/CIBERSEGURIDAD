@@ -385,3 +385,19 @@ whenCreated: 2026-05-09 09:00:48+00:00
 ╰─                                                                                                                   ─╯
 
 ```
+
+``` bash
+
+❯ bloodyAD --host 10.129.83.74 --dns 10.129.83.74 -d checkpoint.htb -u alex.turner -p 'Checkpoint2024!' get membership mark.davies
+
+distinguishedName: CN=Users,CN=Builtin,DC=checkpoint,DC=htb
+objectSid: S-1-5-32-545
+sAMAccountName: Users
+
+distinguishedName: CN=Domain Users,CN=Users,DC=checkpoint,DC=htb
+objectSid: S-1-5-21-3129162710-3498938529-1807524340-513
+sAMAccountName: Domain Users
+╭─ ~/hacking/ctf/htb/medium/checkpoint/recon                                                                       ✔ ─╮
+╰─                                                                                                                   ─╯
+
+```
