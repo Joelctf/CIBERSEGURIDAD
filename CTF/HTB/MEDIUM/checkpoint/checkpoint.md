@@ -674,4 +674,21 @@ PS C:\Program Files\Microsoft VS Code>
 
 ```
 
+``` bash
+
+PS C:\Users\ryan.brooks\Desktop> pwd
+pwd
+
+Path
+----
+C:\Users\ryan.brooks\Desktop
+
+
+PS C:\Users\ryan.brooks\Desktop> type user.txt
+type user.txt
+5f<REDACTED>46
+PS C:\Users\ryan.brooks\Desktop>
+
+```
+
 
