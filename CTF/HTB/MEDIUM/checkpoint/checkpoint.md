@@ -1032,15 +1032,19 @@ Tenemos el ataque de badsuccessor sin parchear, el cual consiste en migrar una n
 
 dMSA se utiliza para migrar cuentas de servicio, para que dejen de usar contraseña y pasen al nuevo metodo moderno implantado por AD el cual el se encarga de gestionar la contraseña y cambiarla periodicamente sin que los usuarios ni administradores sepan la contraseña directamente. Todo gestionado por AD.
 
-En este punto entra la vuln Badsuccessor, si un usuario del dominio tiene permisos para CREATE_CHILD (CC) sobre cualquier OU del dominio y la vulnerabilidad (CVE-2025-53779) no esta parcheada en la maquina, se puede crear un dMSA malicioso y luego poder pedir su ticket kerberos.
+En este punto entra la vulnerabilidad Badsuccessor, si un usuario del dominio tiene permisos para CREATE_CHILD (CC) sobre cualquier OU del dominio y existe la vulnerabilidad (CVE-2025-53779) en la maquina, se puede crear un dMSA malicioso y luego poder solicitar su ticket kerberos.
 
-Incluso si CVE-2025-53779 esta parcheado en el objetivo, se puede llegar a acontecer la vulnerabilidad con el sistema completamente actualizado. Se necesitan cumplir estas condiciones:  
-- Usuario comprometido el cual tenga permisos CREATE_CHILD (CC) en almenos 1 OU del dominio
+Tenemos estas condiciones:
+
+- Usuario comprometido el cual tenga permisos CREATE_CHILD (CC) en almenos 1 OU del dominio con CC y dMSA.
 - Usuario comprometido con permiso WRITE en el objeto de la cuenta de servicio a la que queremos comprometer.
 
 En nuestro caso, tenemos ambos casos, tenemos a alex, el cual puede crear CREATE_CHILD en "Employees" y por otro lado tenemos a ryan, el cual tiene permiso WRITE bajo el objeto de tipo user svc_deploy
 
-En este caso la vulnerabilidad badsuccessor no esta parcheada, por lo cual usaremos el metodo 1 (CVE-2025-53779) debido a que es mas sencillo , ya que solo tenemos que hacer 1 de los dos pasos que se requeririan si la vuln estuviera parcheada.
+Flujo de escalada hacia una cuenta de servicio (lateral movement):
+
+- Alex crea una cuenta con dMSA mediante su permiso CREATE_CHILD en OU=Employees subcayente de `svc_deploy`
+- Ryan al tener permiso WRITE sobre svc_deploy escribe los atributos `msDS-Superseded*` necesarios para completar la sincronizacion mutua de ambos lados: Alex crea cuenta dMSA heredada de svc_deploy > ryan escribe atributos en svc_deploy para completar la sincronicacion y ejecutar badsuccessor con exito.
 
 ``` bash
 
