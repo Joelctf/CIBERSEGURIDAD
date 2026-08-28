@@ -426,3 +426,44 @@ WINRM       10.129.83.74    5985   DC01             [-] checkpoint.htb\alex.turn
 ╰─                                                                                                                   ─╯
 
 ```
+
+``` bash
+
+❯ bloodyAD --host 10.129.83.74 --dns 10.129.83.74 -d checkpoint.htb -u mark.davies -p 'Checkpoint2024!' get writable
+
+distinguishedName: CN=S-1-5-11,CN=ForeignSecurityPrincipals,DC=checkpoint,DC=htb
+permission: WRITE
+
+distinguishedName: CN=Mark Davies,OU=Employees,DC=checkpoint,DC=htb
+permission: WRITE
+
+distinguishedName: DC=checkpoint.htb,CN=MicrosoftDNS,DC=DomainDnsZones,DC=checkpoint,DC=htb
+permission: CREATE_CHILD
+
+distinguishedName: DC=_msdcs.checkpoint.htb,CN=MicrosoftDNS,DC=ForestDnsZones,DC=checkpoint,DC=htb
+permission: CREATE_CHILD
+╭─ ~/hacking/ctf/htb/medium/checkpoint/recon                                                                       ✔ ─╮
+╰─                                                                                                                   ─╯
+
+```
+
+``` bash
+
+❯ netexec smb 10.129.83.74 -u 'mark.davies' -p 'Checkpoint2024!' --shares
+SMB         10.129.83.74    445    DC01             [*] Windows 11 / Server 2025 Build 26100 x64 (name:DC01) (domain:checkpoint.htb) (signing:True) (SMBv1:None)
+SMB         10.129.83.74    445    DC01             [+] checkpoint.htb\mark.davies:Checkpoint2024!
+SMB         10.129.83.74    445    DC01             [*] Enumerated shares
+SMB         10.129.83.74    445    DC01             Share           Permissions     Remark
+SMB         10.129.83.74    445    DC01             -----           -----------     ------
+SMB         10.129.83.74    445    DC01             ADMIN$                          Remote Admin
+SMB         10.129.83.74    445    DC01             C$                              Default share
+SMB         10.129.83.74    445    DC01             DevDrop         READ,WRITE      VS Code extensions share for approved .vsix packages compatible with VS Code engine 1.118.0
+SMB         10.129.83.74    445    DC01             IPC$            READ            Remote IPC
+SMB         10.129.83.74    445    DC01             NETLOGON        READ            Logon server share
+SMB         10.129.83.74    445    DC01             SYSVOL          READ            Logon server share
+SMB         10.129.83.74    445    DC01             VMBackups
+╭─ ~/hacking/ctf/htb/medium/checkpoint/recon                                                                  ✔ │ 6s ─╮
+╰─                                                                                                                   ─╯
+
+
+```
