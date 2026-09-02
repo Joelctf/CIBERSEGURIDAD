@@ -434,3 +434,9 @@ if __name__ == "__main__":
 
 ```
 
+Hay 2 procesos claves en la escalada de privilegio: 
+
+/opt/backup/backup.sh
+/opt/backup/restore_daemon.sh
+
+
