@@ -51,3 +51,27 @@ Nmap done: 1 IP address (1 host up) scanned in 24.76 seconds
 ╰─                                                                                                                   ─╯
 
 ```
+
+
+``` bash
+
+❯ gobuster dir -u "http://10.113.161.192:5000/" -w /usr/share/wordlists/seclists/Discovery/Web-Content/DirBuster-2007_directory-list-2.3-medium.txt -t 100
+===============================================================
+Gobuster v3.8.2
+by OJ Reeves (@TheColonial) & Christian Mehlmauer (@firefart)
+===============================================================
+[+] Url:                     http://10.113.161.192:5000/
+[+] Method:                  GET
+[+] Threads:                 100
+[+] Wordlist:                /usr/share/wordlists/seclists/Discovery/Web-Content/DirBuster-2007_directory-list-2.3-medium.txt
+[+] Negative Status codes:   404
+[+] User Agent:              gobuster/3.8.2
+[+] Timeout:                 10s
+===============================================================
+Starting gobuster in directory enumeration mode
+===============================================================
+# license, visit http://creativecommons.org/licenses/by-sa/3.0/ (Status: 301) [Size: 0] [--> /%23%20license,%20visit%20http:/creativecommons.org/licenses/by-sa/3.0/]
+v2                   (Status: 301) [Size: 39] [--> /v2/]
+Progress: 31900 / 220558 (14.46%)
+
+```
