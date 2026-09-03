@@ -392,3 +392,14 @@ Analyzing '2ac9cb7dc02b3c0083eb70898e549b63'
 [+] RAdmin v2.x
 
 ```
+
+
+``` bash
+
+❯ cat hashes.txt
+2ac9cb7dc02b3c0083eb70898e549b63
+0d107d09f5bbe40cade3de5c71e9e9b7
+d5c0607301ad5d5c1528962a83992ac8
+4a04890400b5d7bac101baace5d7e994
+
+```
