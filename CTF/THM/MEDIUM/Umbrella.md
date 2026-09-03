@@ -340,4 +340,31 @@ sha256:7843f102a2fcb44f83d52a49afaff3af44e2b59793fbd06c21d235395588a286   3 year
 ```
 
 
+``` bash
+
+❯ mysql -h 10.114.163.190 -u root -p --skip-ssl
+Enter password:
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MySQL connection id is 3
+Server version: 5.7.40 MySQL Community Server (GPL)
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MySQL [(none)]> SHOW DATABASES;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| sys                |
+| timetracking       |
++--------------------+
+5 rows in set (0.041 sec)
+
+MySQL [(none)]>
+
+```
 
