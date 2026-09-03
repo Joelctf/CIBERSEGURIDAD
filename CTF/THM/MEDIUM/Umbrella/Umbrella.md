@@ -748,4 +748,77 @@ root@de0610f51845:/usr/src/app#
 
 ```
 
+``` bash
+
+root@de0610f51845:/usr/src/app# whoami
+root
+root@de0610f51845:/usr/src/app# hostname
+de0610f51845
+root@de0610f51845:/usr/src/app# ls
+app.js  node_modules  package-lock.json  package.json  public  views
+root@de0610f51845:/usr/src/app#
+
+```
+
+Entre la carpeta que tenia en la home claire-r con docker-compose.yml y Dockerfile, y el hostname de donde estamos, es bastante claro que estamos en un contenedor docker.
+
+``` bash
+
+root@de0610f51845:/usr/src/app# ls /home/
+node
+root@de0610f51845:/usr/src/app# cat /proc/1/cgroup
+13:cpuset:/docker/de0610f5184548d54c2812fd8ced309dee88479f66167dbaae5ec1c6111f125d
+12:perf_event:/docker/de0610f5184548d54c2812fd8ced309dee88479f66167dbaae5ec1c6111f125d
+11:rdma:/docker/de0610f5184548d54c2812fd8ced309dee88479f66167dbaae5ec1c6111f125d
+10:hugetlb:/docker/de0610f5184548d54c2812fd8ced309dee88479f66167dbaae5ec1c6111f125d
+9:cpu,cpuacct:/docker/de0610f5184548d54c2812fd8ced309dee88479f66167dbaae5ec1c6111f125d
+8:blkio:/docker/de0610f5184548d54c2812fd8ced309dee88479f66167dbaae5ec1c6111f125d
+7:devices:/docker/de0610f5184548d54c2812fd8ced309dee88479f66167dbaae5ec1c6111f125d
+6:freezer:/docker/de0610f5184548d54c2812fd8ced309dee88479f66167dbaae5ec1c6111f125d
+5:pids:/docker/de0610f5184548d54c2812fd8ced309dee88479f66167dbaae5ec1c6111f125d
+4:net_cls,net_prio:/docker/de0610f5184548d54c2812fd8ced309dee88479f66167dbaae5ec1c6111f125d
+3:memory:/docker/de0610f5184548d54c2812fd8ced309dee88479f66167dbaae5ec1c6111f125d
+2:misc:/docker/de0610f5184548d54c2812fd8ced309dee88479f66167dbaae5ec1c6111f125d
+1:name=systemd:/docker/de0610f5184548d54c2812fd8ced309dee88479f66167dbaae5ec1c6111f125d
+0::/docker/de0610f5184548d54c2812fd8ced309dee88479f66167dbaae5ec1c6111f125d
+root@de0610f51845:/usr/src/app#
+
+```
+
+Es confirmado un contenedor docker y somos root.
+
+
+``` bash
+
+root@de0610f51845:/usr/src/app# ls /
+bin   dev  home  lib64  media  opt   root  sbin  sys  usr
+boot  etc  lib   logs   mnt    proc  run   srv   tmp  var
+root@de0610f51845:/usr/src/app# ls / | grep logs
+logs
+root@de0610f51845:/usr/src/app#
+
+```
+
+Tenemos parece ser la carpeta /logs de la home de `claire-r` en el contenedor montada. 
+
+Esto no es habitual, pero como tenemos acceso fuera del contenedor podemos verificarlo escribiendo desde el contenedor y mirando la carpeta desde el host.
+
+``` bash
+
+root@de0610f51845:/logs# echo "esto es un mount" > mount.txt
+root@de0610f51845:/logs#
+
+```
+
+``` bash
+
+claire-r@ip-10-114-163-190:~/timeTracker-src$ cd logs/
+claire-r@ip-10-114-163-190:~/timeTracker-src/logs$ cat mount.txt
+esto es un mount
+claire-r@ip-10-114-163-190:~/timeTracker-src/logs$ ls -la mount.txt
+-rw-r--r-- 1 root root 17 Sep  3 09:34 mount.txt
+claire-r@ip-10-114-163-190:~/timeTracker-src/logs$
+
+```
+
 
