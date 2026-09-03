@@ -75,3 +75,7 @@ v2                   (Status: 301) [Size: 39] [--> /v2/]
 Progress: 31900 / 220558 (14.46%)
 
 ```
+
+https://hacktricks.wiki/en/network-services-pentesting/5000-pentesting-docker-registry.html
+
+
