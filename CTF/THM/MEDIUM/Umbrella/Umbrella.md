@@ -695,7 +695,31 @@ app.listen(8080, () => {
 
 ```
 
+``` bash
 
+app.post('/time', function(request, response) {
+
+    if (request.session.loggedin && request.session.username) {
+
+        let timeCalc = parseInt(eval(request.body.time));
+                let time = isNaN(timeCalc) ? 0 : timeCalc;
+        let username = request.session.username;
+
+                connection.query("UPDATE users SET time = time + ? WHERE user = ?", [time, username], function(error, results, fields) {
+                        if (error) {
+                                log(error, "error")
+                        };
+
+                        log(`${username} added ${time} minutes.`, "info")
+                        response.redirect('/');
+                });
+        } else {
+        response.redirect('/');;
+    }
+
+});
+
+```
 ![img](./img/Captura1.png)
 
 \n
