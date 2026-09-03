@@ -368,3 +368,27 @@ MySQL [(none)]>
 
 ```
 
+``` bash
+
+❯ hashid '2ac9cb7dc02b3c0083eb70898e549b63'
+Analyzing '2ac9cb7dc02b3c0083eb70898e549b63'
+[+] MD2
+[+] MD5
+[+] MD4
+[+] Double MD5
+[+] LM
+[+] RIPEMD-128
+[+] Haval-128
+[+] Tiger-128
+[+] Skein-256(128)
+[+] Skein-512(128)
+[+] Lotus Notes/Domino 5
+[+] Skype
+[+] Snefru-128
+[+] NTLM
+[+] Domain Cached Credentials
+[+] Domain Cached Credentials 2
+[+] DNSSEC(NSEC3)
+[+] RAdmin v2.x
+
+```
