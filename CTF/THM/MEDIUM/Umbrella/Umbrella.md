@@ -507,7 +507,197 @@ Stopped: Thu Sep  3 11:03:48 2026
 
 ```
 
+Podemos acceder por ssh con el usuario claire-r y una de las 4 passwords que hemos encontrado:
+
+``` bash
+
+❯ ssh claire-r@10.114.163.190
+** WARNING: connection is not using a post-quantum key exchange algorithm.
+** This session may be vulnerable to "store now, decrypt later" attacks.
+** The server may need to be upgraded. See https://openssh.com/pq.html
+claire-r@10.114.163.190's password:
+Welcome to Ubuntu 20.04.6 LTS (GNU/Linux 5.15.0-138-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/pro
+
+ System information as of Thu 03 Sep 2026 09:18:57 AM UTC
+
+  System load:  0.0               Processes:             113
+  Usage of /:   80.6% of 6.06GB   Users logged in:       0
+  Memory usage: 58%               IPv4 address for eth0: 10.114.163.190
+  Swap usage:   0%
+
+ * Strictly confined Kubernetes makes edge and IoT secure. Learn how MicroK8s
+   just raised the bar for easy, resilient and secure K8s cluster deployment.
+
+   https://ubuntu.com/engage/secure-kubernetes-at-the-edge
+
+Expanded Security Maintenance for Applications is not enabled.
+
+0 updates can be applied immediately.
+
+Enable ESM Apps to receive additional future security updates.
+See https://ubuntu.com/esm or run: sudo pro status
+
+
+The list of available updates is more than a week old.
+To check for new updates run: sudo apt update
+Failed to connect to https://changelogs.ubuntu.com/meta-release-lts. Check your Internet connection or proxy settings
+
+Your Hardware Enablement Stack (HWE) is supported until April 2025.
+
+Last login: Thu Sep  3 09:19:13 2026 from 192.168.136.105
+claire-r@ip-10-114-163-190:~$
+
+```
+
+``` bash
+
+claire-r@ip-10-114-163-190:~$ ls
+timeTracker-src  user.txt
+claire-r@ip-10-114-163-190:~$ cd timeTracker-src/
+claire-r@ip-10-114-163-190:~/timeTracker-src$ ls
+app.js  db  docker-compose.yml  Dockerfile  logs  package.json  package-lock.json  public  views
+claire-r@ip-10-114-163-190:~/timeTracker-src$
+
+```
+
+
+``` js
+
+const mysql = require('mysql');
+const express = require('express');
+const session = require('express-session');
+const path = require('path');
+const crypto = require('crypto')
+const cookieParser = require('cookie-parser');
+const fs = require('fs');
+
+const connection = mysql.createConnection({
+        host     : process.env.DB_HOST,
+        user     : process.env.DB_USER,
+        password : process.env.DB_PASS,
+        database : process.env.DB_DATABASE
+});
+
+const app = express();
+app.set('view engine' , 'ejs')
+app.set('views', './views')
+app.use(express.static(__dirname + '/public'));
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+app.use(cookieParser());
+app.use(session({secret: "Your secret key", cookie : {secure : false}}));
+
+var logfile = fs.createWriteStream(process.env.LOG_FILE, {flags: 'a'});
+
+var log = (message, level) => {
+        format_message = `[${level.toUpperCase()}] ${message}`;
+        logfile.write(format_message + "\n")
+        if (level == "warn") console.warn(message)
+        else if (level == "error") console.error(message)
+        else if (level == "info") console.info(message)
+        else console.log(message)
+}
+
+// http://localhost:8080/
+app.get('/', function(request, response) {
+
+        if (request.session.username) {
+
+                connection.query('SELECT user,time FROM users', function(error, results) {
+                        var users = []
+                        if (error) {
+                                log(error, "error")
+                        };
+
+                        for (let row in results){
+
+                                let min = results[row].time % 60;
+                                let padded_min = `${min}`.length == 1 ? `0${min}` : `${min}`
+                                let time = `${(results[row].time - min) / 60}:${padded_min} h`;
+                                users.push({name : results[row].user, time : time});
+                        }
+                        response.render('home', {users : users});
+                });
+
+        } else{
+                response.render('login');
+        }
+
+});
+
+
+
+// http://localhost:8080/time
+app.post('/time', function(request, response) {
+
+    if (request.session.loggedin && request.session.username) {
+
+        let timeCalc = parseInt(eval(request.body.time));
+                let time = isNaN(timeCalc) ? 0 : timeCalc;
+        let username = request.session.username;
+
+                connection.query("UPDATE users SET time = time + ? WHERE user = ?", [time, username], function(error, results, fields) {
+                        if (error) {
+                                log(error, "error")
+                        };
+
+                        log(`${username} added ${time} minutes.`, "info")
+                        response.redirect('/');
+                });
+        } else {
+        response.redirect('/');;
+    }
+
+});
+
+// http://localhost:8080/auth
+app.post('/auth', function(request, response) {
+
+        let username = request.body.username;
+        let password = request.body.password;
+
+        if (username && password) {
+
+                let hash = crypto.createHash('md5').update(password).digest("hex");
+
+                connection.query('SELECT * FROM users WHERE user = ? AND pass = ?', [username, hash], function(error, results, fields) {
+
+                        if (error) {
+                                log(error, "error")
+                        };
+
+                        if (results.length > 0) {
+
+                                request.session.loggedin = true;
+                                request.session.username = username;
+                                log(`User ${username} logged in`, "info");
+                                response.redirect('/');
+                        } else {
+                                log(`User ${username} tried to log in with pass ${password}`, "warn")
+                                response.redirect('/');
+                        }
+                });
+        } else {
+                response.redirect('/');
+        }
+
+});
+
+app.listen(8080, () => {
+        console.log("App listening on port 8080")
+});
+
+
+```
+
+
 ![img](./img/Captura1.png)
 
+\n
 ![img](./img/Captura2.png)
 
