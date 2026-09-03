@@ -507,6 +507,7 @@ Stopped: Thu Sep  3 11:03:48 2026
 
 ```
 
+![img](./img/Captura1.png)
 
-
+![img](./img/Captura2.png)
 
