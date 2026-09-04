@@ -17,6 +17,8 @@ Otra técnica consiste en pedirle al bot que repita o explique lo que acaba de d
 
 Un tercer método consiste en engañar al modelo para que trate el mensaje del sistema como si fuera una entrada del usuario: al pedirle que formatee la conversación como si el mensaje del sistema fuera un mensaje enviado por el usuario, el atacante le pide efectivamente al modelo que regurgite contenido oculto bajo un marco diferente
 
+![img](./img/llm.png)
+
 
 ### Ejemplos de Promt Injection
 
