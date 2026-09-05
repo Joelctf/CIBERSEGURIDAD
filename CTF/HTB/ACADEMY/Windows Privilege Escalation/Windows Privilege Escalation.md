@@ -19,3 +19,5 @@ There are many tools available to us to assist with enumerating Windows systems 
 
 
 We can also find pre-compiled binaries of Seatbelt and SharpUp [here](https://github.com/r3motecontrol/Ghostpack-CompiledBinaries), and standalone binaries of LaZagne [here](https://github.com/AlessandroZ/LaZagne/releases/). It is recommended that we always compile our tools from the source if using them in a client environment
+
+Cabe recalcar que, estas son algunas de las herramientas mas conocidas de automatización en la enumeracion de privesc, por lo cual ejecutarlo directo en un sistema alertaría al antivirus al momento. En este modulo no se toca los temas de AV. Por lo que obviaremos esta parte.
