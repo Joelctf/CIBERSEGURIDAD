@@ -73,13 +73,13 @@ Campos importantes:
 
 Ejemplo:
 
-AntivirusEnabled              : True
-AntispywareEnabled            : True
-RealTimeProtectionEnabled    : False
-BehaviorMonitorEnabled       : False
-OnAccessProtectionEnabled    : False
-IoavProtectionEnabled        : False
-NISEnabled                   : False
+- AntivirusEnabled              : True
+- AntispywareEnabled            : True
+- RealTimeProtectionEnabled    : False
+- BehaviorMonitorEnabled       : False
+- OnAccessProtectionEnabled    : False
+- IoavProtectionEnabled        : False
+- NISEnabled                   : False
 
 En este ejemplo defender está instalado/activo, pero varias protecciones importantes
 están deshabilitadas.
