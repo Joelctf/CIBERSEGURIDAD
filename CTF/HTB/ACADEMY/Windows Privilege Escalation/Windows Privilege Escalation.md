@@ -53,3 +53,17 @@ C:\htb> route print
 
 
 ```
+
+### Enumerating Protections
+
+La mayoría de los entornos modernos cuentan con algún tipo de antivirus o servicio de detección y respuesta de endpoints (EDR) en funcionamiento para monitorizar, alertar y bloquear proactivamente las amenazas. Estas herramientas pueden interferir con el proceso de enumeración. Es muy probable que presenten algún tipo de dificultad durante el proceso de escalada de privilegios, especialmente si utilizamos algún exploit o herramienta de prueba de concepto (PoC) pública. Enumerar las protecciones implementadas nos ayudará a garantizar que utilizamos métodos que no están siendo bloqueados ni detectados, y nos será útil si necesitamos crear payloads personalizados o modificar herramientas antes de compilarlas.
+
+
+##### Comprobar el estado de Windows Defender
+
+``` powershell
+
+PS C:\htb> Get-MpComputerStatus
+
+
+```
