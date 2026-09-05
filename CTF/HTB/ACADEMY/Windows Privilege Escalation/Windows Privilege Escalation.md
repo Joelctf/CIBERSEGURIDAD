@@ -125,6 +125,9 @@ PS C:\htb> Get-AppLockerPolicy -Local | Test-AppLockerPolicy -path C:\Windows\Sy
 
 Por ejemeplo , en este caso se está bloqueando cmd.exe y powershell.exe
 
+<details>
+<summary>PowerShell</summary>
+  
 ``` powershell
 
 PS C:\Users\htb-student> Get-AppLockerPolicy -Effective | select -ExpandProperty RuleCollections
