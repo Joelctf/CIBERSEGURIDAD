@@ -29,12 +29,18 @@ Cabe recalcar que, estas son algunas de las herramientas mas conocidas de automa
 
 C:\htb> ipconfig /all
 
+```
+
+
+``` powershell
+
+C:\htb> arp -a
 
 ```
 
 ``` powershell
 
-C:\htb> arp -a
+C:\htb> route print
 
 
 ```
