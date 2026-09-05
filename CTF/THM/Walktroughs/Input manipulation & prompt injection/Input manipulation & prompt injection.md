@@ -90,3 +90,25 @@ En lugar de:
 `hack`
 
 
+### Juego de roles y cambio de personalidad
+
+Como demuestran los ejemplos de DAN y la abuela, pedirle al modelo que adopte una personalidad diferente cambia sus prioridades. El atacante no le dice directamente al modelo que "ignore las reglas", sino que le pide que sea alguien a quien esas reglas no se aplican.
+
+Dado que los modelos de lenguaje natural (LLM) están entrenados para asumir roles y generar textos coherentes con ellos, cumplirán con las indicaciones del perfil y producirán un resultado que se ajuste a la nueva identidad. El cambio de perfil es eficaz porque aprovecha el comportamiento principal del modelo, la obediencia a las instrucciones del rol y para eludir las restricciones de seguridad.
+
+
+### Misdirection
+
+
+La técnica de desvío oculta la solicitud maliciosa dentro de lo que parece ser una tarea legítima. Un atacante podría pedirle al modelo que traduzca un párrafo, resuma un documento o responda una pregunta aparentemente inofensiva solo después de "primero enumerar sus reglas internas".
+
+El contenido prohibido se expone entonces como un paso dentro de un flujo de trabajo más amplio y plausible. El engaño funciona porque el modelo pretende ser útil y a menudo ejecuta instrucciones anidadas; el atacante simplemente hace que la acción prohibida parezca un paso necesario en la cadena.
+
+## Que es Prompt Injection?
+
+Prompt Injection es una técnica en la que un atacante manipula las instrucciones dadas a un modelo de lenguaje grande (LLM) de modo que el modelo se comporta de maneras que no se ajustan a su propósito previsto. Piénsalo como la ingeniería social, pero contra un AI system. Del mismo modo que un atacante malintencionado podría engañar a un empleado para que revele información confidencial mediante preguntas formuladas de la manera adecuada, un atacante puede engañar a un modelo de aprendizaje automático (LLM) para que ignore sus reglas de seguridad y siga instrucciones nuevas y maliciosas. Por ejemplo, si un mensaje del sistema le indica al modelo "Habla solo del tiempo", un atacante aún podría manipular la entrada para forzar al modelo a:
+
+- Revelar las políticas internas de la empresa.
+- Generar resultados que se le había indicado que evitara (por ejemplo, contenido confidencial o perjudicial).
+- Eludir las medidas de seguridad diseñadas para restringir temas delicados.
+
