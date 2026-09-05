@@ -61,6 +61,29 @@ La mayoría de los entornos modernos cuentan con algún tipo de antivirus o serv
 
 #### Comprobar el estado de Windows Defender
 
+Campos importantes:
+- AMServiceEnabled          → ¿Servicio de Defender activo?
+- AntivirusEnabled          → ¿Antivirus habilitado?
+- AntispywareEnabled        → ¿Antispyware habilitado?
+- RealTimeProtectionEnabled → ¿Protección en tiempo real?
+- BehaviorMonitorEnabled    → ¿Monitorización de comportamiento?
+- OnAccessProtectionEnabled → ¿Protección al acceder a archivos?
+- IoavProtectionEnabled     → ¿Protección de archivos descargados?
+- NISEnabled                → ¿Network Inspection System?
+
+Ejemplo:
+
+AntivirusEnabled              : True
+AntispywareEnabled            : True
+RealTimeProtectionEnabled    : False
+BehaviorMonitorEnabled       : False
+OnAccessProtectionEnabled    : False
+IoavProtectionEnabled        : False
+NISEnabled                   : False
+
+En este ejemplo defender está instalado/activo, pero varias protecciones importantes
+están deshabilitadas.
+
 ``` powershell
 
 PS C:\htb> Get-MpComputerStatus
