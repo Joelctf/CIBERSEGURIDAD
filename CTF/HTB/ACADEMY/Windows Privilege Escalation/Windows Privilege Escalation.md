@@ -112,3 +112,15 @@ PS C:\htb> Get-AppLockerPolicy -Effective | select -ExpandProperty RuleCollectio
 
 ```
 
+#### Probar la política de AppLocker
+
+###### Imagina que queremos comprobar si applocker bloquea cmd.exe
+
+``` powershell
+
+PS C:\htb> Get-AppLockerPolicy -Local | Test-AppLockerPolicy -path C:\Windows\System32\cmd.exe -User Everyone
+
+
+```
+
+
