@@ -25,18 +25,27 @@ Cabe recalcar que, estas son algunas de las herramientas mas conocidas de automa
 
 ### Network Information
 
+La enumeración es de red es de las partes mas importantes. Podemos descubrir que el host tiene doble conexión y que comprometerlo nos permitirá acceder lateralmente a otra parte de la red a la que antes no podíamos acceder.
+
+##### Comandos utiles
+
+Ver IP, interfazes de red, MAC, DNS, etc:
+
 ``` powershell
 
 C:\htb> ipconfig /all
 
 ```
 
+Ver información de la tabla ARP:
 
 ``` powershell
 
 C:\htb> arp -a
 
 ```
+
+Ver las rutas configuradas en el Host:
 
 ``` powershell
 
