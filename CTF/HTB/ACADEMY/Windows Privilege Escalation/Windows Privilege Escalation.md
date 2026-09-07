@@ -332,4 +332,12 @@ C:\htb> wmic qfe
 
 ```
 
+##### También podemos hacerlo con PowerShell utilizando el cmdlet [Get-Hotfix](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.management/get-hotfix?view=powershell-7.6&viewFallbackFrom=powershell-7.1) .
+
+``` powershell
+
+PS C:\htb> Get-HotFix | ft -AutoSize
+
+
+```
 
