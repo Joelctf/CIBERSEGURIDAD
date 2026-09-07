@@ -277,3 +277,17 @@ Durante una evaluación, podemos obtener acceso a una consola con privilegios li
 
 
 Aqui dejo un enlace de una gran parte documentada de comandos de windows (cmd.exe): [windows-commands](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/windows-commands)
+Esta referencia de comandos de Windows resulta muy útil para realizar tareas de enumeración manual.
+
+
+### System Information
+
+
+Podemos ver que servicios y procesos estan corriendo actualmente en el host con este comando:
+
+``` cmd
+
+C:\htb> tasklist /svc
+
+
+```
