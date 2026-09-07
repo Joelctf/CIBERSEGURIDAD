@@ -413,3 +413,82 @@ C:\htb> echo %USERNAME%
 
 
 ```
+
+
+### Privilegios del usuario actual
+
+
+Como ya se mencionó, conocer los privilegios de nuestro usuario puede ser de gran ayuda para escalarlos
+
+``` powershell
+
+C:\htb> whoami /priv
+
+```
+
+
+#### Información del grupo de usuarios actual
+
+¿Nuestro usuario ha heredado algún derecho a través de su pertenencia a un grupo? ¿Tiene privilegios en el entorno del dominio de Active Directory que podrían aprovecharse para obtener acceso a más sistemas?
+
+``` powershell
+
+
+C:\htb> whoami /groups
+
+
+```
+
+
+### Obtener todos los usuarios
+
+
+También es importante saber qué otros usuarios hay en el sistema. Si obtuvimos acceso RDP a un host usando las credenciales que capturamos para un usuario 'boby' vemos a ese usuario bob_adm en el grupo de administradores locales, conviene comprobar si se están reutilizando las credenciales
+
+Ver todos los usuarios en el HOST
+
+``` powershell
+
+C:\htb> net user
+
+
+```
+
+
+### Obtener todos los grupos
+
+
+Saber qué grupos no estándar están presentes en el host puede ayudarnos a determinar para qué se utiliza el host, con qué frecuencia se accede a él, o incluso puede llevarnos a descubrir una configuración incorrecta.
+
+Ver todos los grupos locales
+
+``` powershell
+
+C:\htb> net localgroup
+
+
+```
+
+
+#### Detalles sobre un grupo
+
+Para ver detalles de un grupo concreto
+
+``` powershell
+
+C:\htb> net localgroup administrators
+
+```
+
+Donde `administrators` podria ser cualquier grupo que queramos ver los detalles
+
+
+### Obtenga la política de contraseñas y otra información de la cuenta.
+
+``` powershell
+
+
+C:\htb> net accounts
+
+
+```
