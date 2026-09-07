@@ -554,3 +554,42 @@ Después de obtener un listado de `named pipes`, podemos usar [Accesschk](https:
 
 ```
 
+
+Revisar los Permisos de la `named pipe` de LSASS (como ejemplo)
+
+``` powershell
+
+C:\htb> accesschk.exe /accepteula \\.\Pipe\lsass -v
+
+```
+
+### Ejemplo de Ataque a `Named Pipes`
+
+Veamos un ejemplo de cómo aprovechar un `Named Pipe` expuesta para escalar privilegios. Esta Escalada de Privilegios en el `Named Pipe` de `WindscribeService` es un gran ejemplo. Usando `accesschk` podemos buscar todos los `Named Pipes` que permitan acceso de escritura con un comando como `accesschk.exe -w \pipe\* -v` y notar que el `Named Pipe` `WindscribeService` permite acceso `READ y WRITE al grupo Everyone`, es decir, a todos los usuarios autenticados
+
+
+#### Comprobar los Permisos del Named Pipe de WindscribeService
+
+Confirmando con `accesschk` vemos que el grupo `Everyone` efectivamente tiene `FILE_ALL_ACCESS` (Todos los derechos de acceso posibles) sobre el pipe:
+
+(Ejemplo conecptual)
+
+``` powershell
+
+C:\htb> accesschk.exe -accepteula -w \pipe\WindscribeService -v
+
+Accesschk v6.13 - Reports effective permissions for securable objects
+Copyright ⌐ 2006-2020 Mark Russinovich
+Sysinternals - www.sysinternals.com
+
+\\.\Pipe\WindscribeService
+  Medium Mandatory Level (Default) [No-Write-Up]
+  RW Everyone
+        FILE_ALL_ACCESS
+
+```
+
+
+A partir de aquí, podríamos aprovechar estos permisos laxos para escalar privilegios en el host a SYSTEM
+
+
