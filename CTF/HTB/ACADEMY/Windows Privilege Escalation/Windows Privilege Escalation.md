@@ -285,7 +285,7 @@ Esta referencia de comandos de Windows resulta muy útil para realizar tareas de
 
 Podemos ver que servicios y procesos estan corriendo actualmente en el host con este comando:
 
-``` cmd
+``` powershell
 
 C:\htb> tasklist /svc
 
