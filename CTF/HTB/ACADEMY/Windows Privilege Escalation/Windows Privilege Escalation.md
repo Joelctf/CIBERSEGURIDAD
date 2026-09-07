@@ -307,3 +307,29 @@ Las variables de entorno explican mucho sobre la configuración del host. Para o
 C:\htb> set
 
 ```
+
+
+### Ver información detallada de configuración
+
+El comando `systeminfo` mostrará si el equipo se ha actualizado recientemente y si se trata de una máquina virtual. Si no se ha actualizado recientemente, obtener acceso de administrador puede ser tan sencillo como ejecutar una vulnerabilidad conocida. Busque en Google las actualizaciones instaladas en [HotFixes](https://www.catalog.update.microsoft.com/Search.aspx?q=hotfix) para tener una idea de cuándo se actualizó el equipo. Esta información no siempre está disponible, ya que es posible ocultar el software de actualizaciones a los usuarios que no son administradores. `System Boot Time` También `OS Version` se puede consultar para tener una idea del nivel de parche. Si el equipo no se ha reiniciado en más de seis meses, es probable que tampoco se esté actualizando.
+
+``` powershell
+
+C:\htb> systeminfo
+
+```
+
+
+### Parches y actualizaciones
+
+Si `systeminfo` no muestra las correcciones urgentes, puede consultarlas con [WMI](https://learn.microsoft.com/en-us/windows/win32/wmisdk/wmi-start-page) utilizando el binario `WMI-Command` con [QFE (Quick Fix Engineering)](https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/win32-quickfixengineering) para mostrar los parches.
+
+
+``` powershell
+
+C:\htb> wmic qfe
+
+
+```
+
+
