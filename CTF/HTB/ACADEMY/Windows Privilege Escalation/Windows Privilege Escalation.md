@@ -260,3 +260,18 @@ Action              : Allow
 PS C:\Users\htb-student>
 ```
 </details>
+
+
+### Initial Enumeration
+
+
+Durante una evaluación, podemos obtener acceso a una consola con privilegios limitados en un host Windows (perteneciente o no a un dominio) y necesitar realizar una escalada de privilegios para ampliar nuestro acceso. Comprometer completamente el host puede darnos acceso a archivos/recursos compartidos confidenciales, permitirnos capturar tráfico para obtener más credenciales u obtener credenciales que nos ayuden a ampliar nuestro acceso o incluso a escalar directamente a Administrador de dominio en un entorno de Active Directory. Podemos escalar privilegios a uno de los siguientes niveles, dependiendo de la configuración del sistema y del tipo de datos que encontremos:
+
+| Cuenta / Rol | Descripción |
+| :--- | :--- |
+| **NT AUTHORITY\SYSTEM** | The highly privileged `NT AUTHORITY\SYSTEM` account, or `LocalSystem` account which is a highly privileged account with more privileges than a local administrator account and is used to run most Windows services. |
+| **Built-in Local Administrator** | The built-in local `administrator` account. Some organizations disable this account, but many do not. It is not uncommon to see this account reused across multiple systems in a client environment. |
+| **Local Administrators Member** | Another local account that is a member of the local `Administrators` group. Any account in this group will have the same privileges as the built-in `administrator` account. |
+| **Domain User in Administrators Group** | A standard (non-privileged) domain user who is part of the local `Administrators` group. |
+| **Domain Admin in Administrators Group** | A domain admin (highly privileged in the Active Directory environment) that is part of the local `Administrators` group. |
+
