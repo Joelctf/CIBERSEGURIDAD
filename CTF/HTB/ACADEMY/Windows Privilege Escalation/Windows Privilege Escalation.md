@@ -275,3 +275,5 @@ Durante una evaluación, podemos obtener acceso a una consola con privilegios li
 | **Domain User in Administrators Group** | A standard (non-privileged) domain user who is part of the local `Administrators` group. |
 | **Domain Admin in Administrators Group** | A domain admin (highly privileged in the Active Directory environment) that is part of the local `Administrators` group. |
 
+
+Aqui dejo un enlace de una gran parte documentada de comandos de windows (cmd.exe) `[windows-commands](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/windows-commands)`
