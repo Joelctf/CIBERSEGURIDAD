@@ -529,5 +529,28 @@ Podemos usar la herramienta [PipeList](https://learn.microsoft.com/en-us/sysinte
 ### Listar `named pipes` con `Pipelist`
 
 
+``` powershell
 
+C:\htb> pipelist.exe /accepteula
+
+
+```
+
+Adicionalmente, podemos usar `PowerShell` para listar `named pipes` usando `gci (Get-ChildItem)`
+
+
+``` powershell
+
+PS C:\htb>  gci \\.\pipe\
+
+
+```
+
+Después de obtener un listado de `named pipes`, podemos usar [Accesschk](https://learn.microsoft.com/en-us/sysinternals/downloads/accesschk) para enumerar los permisos asignados a una canalización con nombre específica revisando la Lista de Control de Acceso Discrecional (DACL), que nos muestra quién tiene los permisos para modificar, escribir, leer o ejecutar un recurso. También podemos revisar las DACL de todas las `named pipes` usando el comando: 
+
+``` powershell
+
+.\accesschk.exe /accepteula \pipe\
+
+```
 
