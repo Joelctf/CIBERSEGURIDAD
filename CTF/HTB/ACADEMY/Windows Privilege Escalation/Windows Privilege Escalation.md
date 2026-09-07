@@ -497,3 +497,37 @@ C:\htb> net accounts
 Ademas de todos estos comandos, hay muchas otras guias que nos pueden ayudar en el proceso de enumeración en un sistema windows: [winprivesc-guia](https://github.com/swisskyrepo/PayloadsAllTheThings/blob/master/Methodology%20and%20Resources/Windows%20-%20Privilege%20Escalation.md) o [winprivesc](https://swisskyrepo.github.io/InternalAllTheThings/redteam/escalation/windows-privilege-escalation/)
 
 
+### Comunicación con Procesos
+
+
+Uno de los mejores lugares para buscar una escalada de privilegios (privilege escalation) son los procesos que se están ejecutando en el sistema. Incluso si un proceso no se está ejecutando como administrador, puede conducir a privilegios adicionales. El ejemplo más común es descubrir un servidor web como `IIS` o `XAMPP` ejecutándose en la máquina, colocar una shell aspx/php en la máquina y obtener una shell como el usuario que ejecuta el servidor web. Generalmente, este no es un administrador, pero a menudo tendrá el token `SeImpersonate`, lo que permite que `Rogue/Juicy/Lonely Potato` proporcionen permisos de `SYSTEM`
+
+### Tokens de Acceso
+
+En Windows, los [tokens de acceso](https://learn.microsoft.com/en-us/windows/win32/secauthz/access-tokens) se utilizan para describir el contexto de seguridad (atributos o reglas de seguridad) de un proceso o hilo (thread). El token incluye información sobre la identidad y los privilegios de la cuenta de usuario relacionados con un proceso o hilo específico. Cuando un usuario se autentica en un sistema, su contraseña se verifica contra una base de datos de seguridad y, si se autentica correctamente, se le asignará un token de acceso. Cada vez que un usuario interactúa con un proceso, se presentará una copia de este token para determinar su nivel de privilegios
+
+con el comando comentado anteriormente `netstat -ano` vemos los procesos que tienen conexiones en la red activas.
+
+Lo principal a buscar con las Conexiones de Red Activas son las entradas que escuchan en direcciones de loopback (127.0.0.1 y ::1) que no están escuchando en la dirección IP (10.129.43.8) o en broadcast (0.0.0.0, ::/0). La razón de esto es que los sockets de red en localhost suelen ser inseguros debido a la idea de que "no son accesibles desde la red".
+
+### Canalizaciones con Nombre (Named Pipes)
+
+La otra forma en que los procesos se comunican entre sí es a través de Canalizaciones con Nombre (Named Pipes). Las canalizaciones son esencialmente archivos almacenados en memoria que se borran después de ser leídos. Cobalt Strike utiliza Canalizaciones con Nombre para cada comando (excluyendo BOF). Esencialmente, el flujo de trabajo se ve así:
+
+- El beacon inicia una canalización con nombre de \.\pipe\msagent_12
+- El beacon inicia un nuevo proceso e inyecta el comando en ese proceso, dirigiendo la salida a \.\pipe\msagent_12
+- El servidor muestra lo que se escribió en \.\pipe\msagent_12
+
+Cobalt Strike hizo esto porque si el comando que se ejecutaba era marcado por el antivirus o se bloqueaba, no afectaría al beacon (el proceso que ejecuta el comando). A menudo, los usuarios de Cobalt Strike cambiarán sus canalizaciones con nombre para enmascararse como otro programa
+
+#### Más sobre las Canalizaciones con Nombre
+
+Las canalizaciones se utilizan para la comunicación entre dos aplicaciones o procesos utilizando memoria compartida. Hay dos tipos de canalizaciones, [canalizaciones con nombre](https://learn.microsoft.com/en-us/windows/win32/ipc/named-pipes) y canalizaciones anónimas (anonymous pipes). Un ejemplo de una canalización con nombre es `\\.\PipeName\\ExampleNamedPipeServer`. Los sistemas Windows utilizan una implementación cliente-servidor para la comunicación por canalización. En este tipo de implementación, el proceso que crea una canalización con nombre es el servidor, y el proceso que se comunica con la canalización con nombre es el cliente. Las canalizaciones con nombre pueden comunicarse usando half-duplex, o un canal unidireccional donde el cliente solo puede escribir datos en el servidor, o duplex, que es un canal de comunicación bidireccional que permite al cliente escribir datos a través de la canalización y al servidor responder con datos a través de esa canalización. Cada conexión activa a un servidor de canalización con nombre da como resultado la creación de una nueva canalización con nombre. Todas estas comparten el mismo nombre de canalización pero se comunican utilizando un búfer de datos diferente.
+
+Podemos usar la herramienta [PipeList](https://learn.microsoft.com/en-us/sysinternals/downloads/pipelist) de la Suite Sysinternals para enumerar instancias de canalizaciones con nombre
+
+### Listar `named pipes` con `Pipelist`
+
+
+
+
