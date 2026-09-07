@@ -367,3 +367,49 @@ PS C:\htb> Get-WmiObject -Class Win32_Product |  select Name, Version
 
 El comando [netstat](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/netstat) mostrará las conexiones TCP y UDP activas, lo que nos permitirá comprender mejor qué servicios están escuchando en qué puertos, tanto a nivel local como en puertos accesibles desde el exterior. Es posible que encontremos un servicio vulnerable, accesible únicamente desde el host local (cuando se inicia sesión en él), que podamos explotar para escalar privilegios.
 
+``` powershell
+
+PS C:\htb> netstat -ano
+
+
+```
+
+-a → muestra todas las conexiones y también los puertos que están escuchando (LISTENING).
+-n → muestra las direcciones y puertos numéricamente, sin intentar resolver nombres DNS.
+-o → muestra el PID del proceso que está usando cada conexión/puerto
+
+
+### Información del usuario y del grupo
+
+Los usuarios suelen ser el eslabón más débil de una organización, especialmente cuando los sistemas están correctamente configurados y actualizados. Por ello, es fundamental analizar los usuarios y grupos del sistema, identificar a los miembros de grupos que puedan proporcionarnos privilegios administrativos, revisar los permisos del usuario actual, conocer la política de contraseñas y detectar posibles usuarios conectados que puedan ser objetivos de ataque.
+
+Incluso cuando un sistema está bien actualizado, pueden existir otras vías para obtener información sensible. Por ejemplo, si tenemos acceso al directorio personal de un usuario que pertenece al grupo de administradores locales, podemos encontrar archivos que contengan credenciales, como un archivo de contraseñas llamado `logins.xlsx`. Esto puede facilitar considerablemente la obtención de información confidencial.
+
+
+#### Usuarios registrados
+
+Para ver cuantas sessiones hay en un mismo equipo (Por ejemplo: RDP, Consola local, etc.)
+
+``` powershell
+
+C:\htb> query user
+
+
+```
+
+Ojo: No enumera conexiones de red como SSH, SMB, HTTP, etc. Muestra las sesiones de inicio de sesión de Windows existentes en el host donde ejecutamos el comando, incluyendo sesiones locales y RDP
+
+
+### Usuario actual
+
+Cuando accedemos a un host, siempre debemos verificar primero con qué contexto de usuario se ejecuta nuestra cuenta. ¡A veces, ya somos SYSTEM o equivalente! Supongamos que accedemos como una cuenta de servicio. En ese caso, podemos tener privilegios como `SeImpersonatePrivilege`, que a menudo se pueden aprovechar fácilmente para escalar privilegios usando una herramienta como [Juicy Potato](https://github.com/ohpe/juicy-potato)
+
+Ver usuario actual
+
+``` powershell
+
+
+C:\htb> echo %USERNAME%
+
+
+```
