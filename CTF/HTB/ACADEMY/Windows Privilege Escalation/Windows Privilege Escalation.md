@@ -492,3 +492,7 @@ C:\htb> net accounts
 
 
 ```
+
+Ademas de todos estos comandos, hay muchas otras guias que nos pueden ayudar en el proceso de enumeración en un sistema windows: [winprivesc-guia](https://github.com/swisskyrepo/PayloadsAllTheThings/blob/master/Methodology%20and%20Resources/Windows%20-%20Privilege%20Escalation.md) o [winprivesc](https://swisskyrepo.github.io/InternalAllTheThings/redteam/escalation/windows-privilege-escalation/)
+
+
