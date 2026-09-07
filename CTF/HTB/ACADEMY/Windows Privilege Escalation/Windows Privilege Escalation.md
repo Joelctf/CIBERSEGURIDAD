@@ -410,6 +410,7 @@ Ver usuario actual
 
 
 C:\htb> echo %USERNAME%
+C:\htb> whoami
 
 
 ```
