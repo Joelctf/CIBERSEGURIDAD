@@ -374,9 +374,9 @@ PS C:\htb> netstat -ano
 
 ```
 
--a → muestra todas las conexiones y también los puertos que están escuchando (LISTENING).
--n → muestra las direcciones y puertos numéricamente, sin intentar resolver nombres DNS.
--o → muestra el PID del proceso que está usando cada conexión/puerto
+- a → muestra todas las conexiones y también los puertos que están escuchando (LISTENING).
+- n → muestra las direcciones y puertos numéricamente, sin intentar resolver nombres DNS.
+- o → muestra el PID del proceso que está usando cada conexión/puerto
 
 
 ### Información del usuario y del grupo
