@@ -295,3 +295,14 @@ C:\htb> tasklist /svc
 Es fundamental familiarizarse con los procesos estándar de Windows. Como por ejemplo:
 
 [Session Manager Subsystem (smss.exe)](https://en.wikipedia.org/wiki/Session_Manager_Subsystem), [Client Server Runtime Subsystem (csrss.exe)](https://en.wikipedia.org/wiki/Client/Server_Runtime_Subsystem), [WinLogon (winlogon.exe)](https://en.wikipedia.org/wiki/Winlogon), [Local Security Authority Subsystem Service (LSASS)](https://en.wikipedia.org/wiki/Local_Security_Authority_Subsystem_Service), [and Service Host (svchost.exe)](https://en.wikipedia.org/wiki/Svchost.exe)
+
+
+#### Mostrar todas las variables de entorno
+
+Las variables de entorno explican mucho sobre la configuración del host. Para obtener una impresión de ellas, Windows proporciona el comando `set`
+
+``` powershell
+
+C:\htb> set
+
+```
