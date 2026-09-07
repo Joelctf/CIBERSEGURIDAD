@@ -22,6 +22,7 @@ We can also find pre-compiled binaries of Seatbelt and SharpUp [here](https://gi
 
 Cabe recalcar que, estas son algunas de las herramientas mas conocidas de automatización en la enumeracion de privesc, por lo cual ejecutarlo directo en un sistema alertaría al antivirus al momento. En este modulo no se toca los temas de AV. Por lo que obviaremos esta parte.
 
+# ENUMERATION
 
 ### Network Information
 
