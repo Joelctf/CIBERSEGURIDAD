@@ -341,3 +341,29 @@ PS C:\htb> Get-HotFix | ft -AutoSize
 
 ```
 
+### Programas instalados
+
+`WMI` también puede utilizarse para mostrar el software instalado. Esta información suele orientarnos hacia vulnerabilidades difíciles de detectar, versiones vulnerables en programas, etc.
+
+Ejecute la herramienta `LaZagne` para comprobar si se encuentran credenciales almacenadas para dichas aplicaciones. Además, algunos programas pueden estar instalados y ejecutándose como un servicio vulnerable.
+
+``` powershell
+
+C:\htb> wmic product get name
+
+```
+
+##### Por supuesto, también podemos hacerlo con PowerShell utilizando el cmdlet [Get-WmiObject](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.management/get-wmiobject?view=powershell-5.1) .
+
+``` powershell
+
+PS C:\htb> Get-WmiObject -Class Win32_Product |  select Name, Version
+
+
+```
+
+
+### Mostrar procesos en ejecución (En red)
+
+El comando [netstat](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/netstat) mostrará las conexiones TCP y UDP activas, lo que nos permitirá comprender mejor qué servicios están escuchando en qué puertos, tanto a nivel local como en puertos accesibles desde el exterior. Es posible que encontremos un servicio vulnerable, accesible únicamente desde el host local (cuando se inicia sesión en él), que podamos explotar para escalar privilegios.
+
