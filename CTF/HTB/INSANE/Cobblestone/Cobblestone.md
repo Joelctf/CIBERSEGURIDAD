@@ -51,3 +51,46 @@ Nmap done: 1 IP address (1 host up) scanned in 8.65 seconds
 ╰─                                                                                                                   ─╯
 
 ```
+
+``` bash
+
+❯ ffuf -u http://cobblestone.htb/ -w /usr/share/seclists/Discovery/DNS/subdomains-top1million-110000.txt -H "Host: FUZZ.cobblestone.htb" -fw 18
+
+        /'___\  /'___\           /'___\
+       /\ \__/ /\ \__/  __  __  /\ \__/
+       \ \ ,__\\ \ ,__\/\ \/\ \ \ \ ,__\
+        \ \ \_/ \ \ \_/\ \ \_\ \ \ \ \_/
+         \ \_\   \ \_\  \ \____/  \ \_\
+          \/_/    \/_/   \/___/    \/_/
+
+       v2.1.0-dev
+________________________________________________
+
+ :: Method           : GET
+ :: URL              : http://cobblestone.htb/
+ :: Wordlist         : FUZZ: /usr/share/seclists/Discovery/DNS/subdomains-top1million-110000.txt
+ :: Header           : Host: FUZZ.cobblestone.htb
+ :: Follow redirects : false
+ :: Calibration      : false
+ :: Timeout          : 10
+ :: Threads          : 40
+ :: Matcher          : Response status: 200-299,301,302,307,401,403,405,500
+ :: Filter           : Response words: 18
+________________________________________________
+
+vote                    [Status: 302, Size: 81, Words: 10, Lines: 4, Duration: 42ms]
+deploy                  [Status: 200, Size: 1745, Words: 121, Lines: 52, Duration: 37ms]
+:: Progress: [114442/114442] :: Job [1/1] :: 826 req/sec :: Duration: [0:01:51] :: Errors: 0 ::
+╭─ ~/hacking/ctf/htb/insane/Cobblestone/recon                                                             ✔ │ 1m 51s ─╮
+╰─                                                                                                                   ─╯
+
+```
+
+``` bash
+
+❯ echo "$ip cobblestone.htb vote.cobblestone.htb deploy.cobblestone.htb" | sudo tee -a /etc/hosts
+10.129.232.170 cobblestone.htb vote.cobblestone.htb deploy.cobblestone.htb
+╭─ ~/hacking/ctf/htb/insane/Cobblestone/recon                                                                      ✔ ─╮
+╰─                                                                                                                   ─╯
+
+```
