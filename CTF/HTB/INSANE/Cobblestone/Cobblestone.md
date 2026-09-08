@@ -43,5 +43,11 @@ Nmap done: 1 IP address (1 host up) scanned in 8.65 seconds
 
 ```
 
+``` bash
 
+❯ echo "$ip cobblestone.htb" | sudo tee -a /etc/hosts
+10.129.232.170 cobblestone.htb
+╭─ ~/hacking/ctf/htb/insane/Cobblestone/recon                                                                      ✔ ─╮
+╰─                                                                                                                   ─╯
 
+```
