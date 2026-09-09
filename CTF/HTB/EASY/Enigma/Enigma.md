@@ -109,6 +109,14 @@ Nmap done: 1 IP address (1 host up) scanned in 16.88 seconds
 
 ```
 
+``` bash
+
+❯ echo "$ip enigma.htb" | sudo tee -a /etc/hosts
+10.129.92.129 enigma.htb
+╭─ ~/hacking/ctf/htb/easy/enigma/recon                                                                             ✔ ─╮
+╰─                                                                                                                   ─╯
+
+```
 
 
 ``` bash
@@ -124,14 +132,6 @@ Export list for 10.129.92.129:
 
 ```
 
-``` bash
-
-❯ echo '$ip enigma.htb' | sudo tee -a /etc/host
-$ip enigma.htb
-╭─ ∅ /tmp/nfs_local                                                                                                ✔ ─╮
-╰─                                                                                                                   ─╯
-
-```
 
 
 ``` bash
@@ -149,3 +149,55 @@ New_Employee_Access.pdf
 
 
 [New_Employee_Access.pdf](./New_Employee_Access.pdf)
+
+
+``` bash
+
+❯ cat password.txt
+kevin
+Enigma2024!
+
+```
+
+
+``` bash
+
+❯ ffuf -u http://enigma.htb/ -w /usr/share/seclists/Discovery/DNS/subdomains-top1million-110000.txt -H "Host: FUZZ.enigma.htb" -fs 154
+
+        /'___\  /'___\           /'___\
+       /\ \__/ /\ \__/  __  __  /\ \__/
+       \ \ ,__\\ \ ,__\/\ \/\ \ \ \ ,__\
+        \ \ \_/ \ \ \_/\ \ \_\ \ \ \ \_/
+         \ \_\   \ \_\  \ \____/  \ \_\
+          \/_/    \/_/   \/___/    \/_/
+
+       v2.1.0-dev
+________________________________________________
+
+ :: Method           : GET
+ :: URL              : http://enigma.htb/
+ :: Wordlist         : FUZZ: /usr/share/seclists/Discovery/DNS/subdomains-top1million-110000.txt
+ :: Header           : Host: FUZZ.enigma.htb
+ :: Follow redirects : false
+ :: Calibration      : false
+ :: Timeout          : 10
+ :: Threads          : 40
+ :: Matcher          : Response status: 200-299,301,302,307,401,403,405,500
+ :: Filter           : Response size: 154
+________________________________________________
+
+mail001                 [Status: 200, Size: 5327, Words: 366, Lines: 97, Duration: 758ms]
+:: Progress: [48356/114442] :: Job [1/1] :: 1117 req/sec :: Duration: [0:00:45] :: Errors: 0 ::
+
+
+```
+
+
+``` bash
+
+❯ echo "$ip mail001.enigma.htb" | sudo tee -a /etc/hosts
+10.129.92.129 mail001.enigma.htb
+╭─ ~/hacking/ctf/htb/easy/enigma/recon                                                                             ✔ ─╮
+╰─                                                                                                                   ─╯
+
+```
