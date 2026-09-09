@@ -74,3 +74,16 @@ staging                 [Status: 200, Size: 3142, Words: 789, Lines: 70, Duratio
 
 
 ```
+
+
+``` bash
+
+❯ echo "$ip staging.silentium.htb" | sudo tee -a /etc/hosts
+10.129.92.31 staging.silentium.htb
+╭─ ~/hacking/ctf/htb/easy/silenium/recon                                                                           ✔ ─╮
+╰─                                                                                                                   ─╯
+
+
+```
+
+
