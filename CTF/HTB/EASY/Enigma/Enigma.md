@@ -207,5 +207,27 @@ mail001                 [Status: 200, Size: 5327, Words: 366, Lines: 97, Duratio
 
 ![img](./img/Captura2.png)
 
+Credential reuse kevin > sarah
+
+![img](./img/Captura3.png)
+
+
+![img](./img/Captura4.png)
+
+
+``` bash
+
+❯ echo "$ip support_001.enigma.htb" | sudo tee -a /etc/hosts
+[sudo] password for joel:
+10.129.92.129 support_001.enigma.htb
+╭─ ~/hacking/ctf/htb/easy/enigma                                                                                   ✔ ─╮
+╰─                                                                                                                   ─╯
+
+```
+
+![img](./img/Captura5.png)
+
+![img](./img/Captura6.png)
+
 
 
