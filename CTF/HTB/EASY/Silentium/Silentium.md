@@ -40,3 +40,37 @@ Nmap done: 1 IP address (1 host up) scanned in 8.14 seconds
 ╰─                                                                                                                   ─╯
 
 ```
+
+
+``` bash
+
+
+❯ ffuf -u http://silentium.htb/ -w /usr/share/seclists/Discovery/DNS/subdomains-top1million-110000.txt -H "Host: FUZZ.silentium.htb" -fs 178
+
+        /'___\  /'___\           /'___\
+       /\ \__/ /\ \__/  __  __  /\ \__/
+       \ \ ,__\\ \ ,__\/\ \/\ \ \ \ ,__\
+        \ \ \_/ \ \ \_/\ \ \_\ \ \ \ \_/
+         \ \_\   \ \_\  \ \____/  \ \_\
+          \/_/    \/_/   \/___/    \/_/
+
+       v2.1.0-dev
+________________________________________________
+
+ :: Method           : GET
+ :: URL              : http://silentium.htb/
+ :: Wordlist         : FUZZ: /usr/share/seclists/Discovery/DNS/subdomains-top1million-110000.txt
+ :: Header           : Host: FUZZ.silentium.htb
+ :: Follow redirects : false
+ :: Calibration      : false
+ :: Timeout          : 10
+ :: Threads          : 40
+ :: Matcher          : Response status: 200-299,301,302,307,401,403,405,500
+ :: Filter           : Response size: 178
+________________________________________________
+
+staging                 [Status: 200, Size: 3142, Words: 789, Lines: 70, Duration: 46ms]
+:: Progress: [10335/114442] :: Job [1/1] :: 1169 req/sec :: Duration: [0:00:09] :: Errors: 0 ::
+
+
+```
