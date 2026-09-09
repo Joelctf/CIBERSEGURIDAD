@@ -87,3 +87,9 @@ staging                 [Status: 200, Size: 3142, Words: 789, Lines: 70, Duratio
 ```
 
 
+``` bash
+
+❯ curl -X GET "http://staging.silentium.htb/api/v1/version"
+{"version":"3.0.5"}
+
+```    
