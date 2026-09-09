@@ -285,3 +285,61 @@ SMTP_USER=test
 / #
 
 ```
+
+``` bash
+
+ben@silentium:~$ ss -tuln
+Netid      State       Recv-Q      Send-Q           Local Address:Port              Peer Address:Port      Process
+udp        UNCONN      0           0                   127.0.0.54:53                     0.0.0.0:*
+udp        UNCONN      0           0                127.0.0.53%lo:53                     0.0.0.0:*
+udp        UNCONN      0           0                      0.0.0.0:68                     0.0.0.0:*
+tcp        LISTEN      0           4096                 127.0.0.1:3001                   0.0.0.0:*
+tcp        LISTEN      0           4096                 127.0.0.1:3000                   0.0.0.0:*
+tcp        LISTEN      0           4096                   0.0.0.0:22                     0.0.0.0:*
+tcp        LISTEN      0           511                    0.0.0.0:80                     0.0.0.0:*
+tcp        LISTEN      0           4096                 127.0.0.1:8025                   0.0.0.0:*
+tcp        LISTEN      0           4096                 127.0.0.1:34255                  0.0.0.0:*
+tcp        LISTEN      0           4096                127.0.0.54:53                     0.0.0.0:*
+tcp        LISTEN      0           4096             127.0.0.53%lo:53                     0.0.0.0:*
+tcp        LISTEN      0           4096                 127.0.0.1:1025                   0.0.0.0:*
+tcp        LISTEN      0           4096                      [::]:22                        [::]:*
+tcp        LISTEN      0           511                       [::]:80                        [::]:*
+ben@silentium:~$
+
+
+```
+
+
+
+
+``` bash
+
+
+ben@silentium:~$ find / -name "gogs" -type f 2>/dev/null
+/opt/gogs/gogs/gogs
+/opt/gogs/gogs/scripts/init/openbsd/gogs
+/opt/gogs/gogs/scripts/init/debian/gogs
+/opt/gogs/gogs/scripts/init/suse/gogs
+/opt/gogs/gogs/scripts/init/freebsd/gogs
+/opt/gogs/gogs/scripts/init/gentoo/gogs
+/opt/gogs/gogs/scripts/init/centos/gogs
+/opt/gogs/gogs/scripts/supervisor/gogs
+^C
+ben@silentium:~$ systemctl status gogs
+● gogs.service - Gogs Git Service
+     Loaded: loaded (/etc/systemd/system/gogs.service; enabled; preset: enabled)
+     Active: active (running) since Wed 2026-09-09 02:38:11 UTC; 34min ago
+   Main PID: 1476 (gogs)
+      Tasks: 8 (limit: 4603)
+     Memory: 89.5M (peak: 100.9M)
+        CPU: 1.597s
+     CGroup: /system.slice/gogs.service
+             └─1476 /opt/gogs/gogs/gogs web
+
+Warning: some journal files were not opened due to insufficient permissions.
+ben@silentium:~$ /opt/gogs/gogs/gogs --version
+Gogs version 0.13.3
+ben@silentium:~$
+
+
+```
